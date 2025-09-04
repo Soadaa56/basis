@@ -6,7 +6,7 @@
       <h1>Welcome To Basis</h1>
       <FaIcon class="basis-icon" :icon="['fas', 'cube']" size="5x" />
     </div>
-    <div class="welcome-button">
+    <div class="welcome-buttons">
       <button>Dark Mode</button>
       <button>New Game</button>
     </div>
@@ -38,6 +38,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.welcome-buttons {
+  button {
+    min-width: 100px;
+    min-height: 60px;
+    margin: 0rem 4rem 1rem 4rem;
+  }
 }
 
 .basis-header {
