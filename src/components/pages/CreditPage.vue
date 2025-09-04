@@ -20,6 +20,9 @@
       <li>
         <a href="https://fontawesome.com/icons/shield?f=classic&s=solid">Shield</a>
       </li>
+      <li>
+        <a href="https://fontawesome.com/icons/gears?f=classic&s=solid">Gears</a>
+      </li>
     </ul>
   </div>
 </template>
