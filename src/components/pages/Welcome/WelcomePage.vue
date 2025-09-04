@@ -2,7 +2,10 @@
 
 <template>
   <section id="welcome">
-    <h1>Welcome To Basis</h1>
+    <div class="basis-header">
+      <h1>Welcome To Basis</h1>
+      <FaIcon class="basis-icon" :icon="['fas', 'cube']" size="5x" />
+    </div>
     <div class="welcome-button">
       <button>Dark Mode</button>
       <button>New Game</button>
@@ -20,7 +23,7 @@
   </footer>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #welcome {
   display: flex;
   flex-direction: column;
@@ -28,11 +31,24 @@
   align-items: center;
   min-height: 75vh;
   text-align: center;
+  margin: 1rem;
 }
 #footer-copyright {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.basis-header {
+  display: flex;
+  align-items: center;
+  margin: 2rem;
+  margin: 10rem;
+  .basis-icon {
+    padding: 1rem;
+    margin: 1rem;
+    min-height: 64px;
+  }
 }
 </style>
