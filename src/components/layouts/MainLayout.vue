@@ -1,7 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+</script>
 
 <template>
-  <header>
+  <header v-if="route.meta.hideHeader !== true">
     <nav id="navbar">
       <ul>
         <li>Town</li>
