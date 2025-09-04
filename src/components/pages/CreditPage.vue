@@ -5,6 +5,19 @@
   <div class="font-awesome-credit">
     <p>Credit for all icons (including favicon - tab of your tab)</p>
     <a href="https://fontawesome.com/">Font Awesome</a>
+    <ul>
+      <li>
+        <a href="https://fontawesome.com/icons/cube?f=classic&s=solid">Cube</a>
+      </li>
+      <li>
+        <a href="https://fontawesome.com/icons/bars?f=classic&s=solid">Bars</a>
+      </li>
+      <li>
+        <a href="https://fontawesome.com/icons/window-maximize?f=classic&s=regular"
+          >Window-maximize:
+        </a>
+      </li>
+    </ul>
   </div>
 </template>
 
