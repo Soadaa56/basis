@@ -9,7 +9,7 @@ const route = useRoute()
     <nav id="navbar">
       <ul>
         <li>Town</li>
-        <li>Idk</li>
+        <li>Magic</li>
         <li>Settings</li>
       </ul>
     </nav>
