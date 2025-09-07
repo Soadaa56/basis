@@ -24,3 +24,7 @@ export function loadSaveFile(): SaveFile | null {
 export function saveGame(saveFile: SaveFile): void {
   localStorage.setItem('saveFile', JSON.stringify(saveFile))
 }
+
+export function hasSaveGame(): boolean {
+  return !!localStorage.getItem('saveFile')
+}
