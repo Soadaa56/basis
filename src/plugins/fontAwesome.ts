@@ -2,11 +2,11 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { faCube, faBars, faShield, faGears } from '@fortawesome/free-solid-svg-icons'
+import { faCube, faBars, faShield, faGears, faMugSaucer } from '@fortawesome/free-solid-svg-icons'
 import { faWindowMaximize } from '@fortawesome/free-regular-svg-icons'
 
 // Solid
-library.add(faCube, faBars, faShield, faGears)
+library.add(faCube, faBars, faShield, faGears, faMugSaucer)
 // Regular
 library.add(faWindowMaximize)
 
