@@ -13,6 +13,11 @@ const routes = [
     component: WelcomePage,
     meta: { hideHeader: true },
   },
+  // Catch-all for missing route
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFound,
+  },
 ]
 
 const router = createRouter({
