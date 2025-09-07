@@ -6,19 +6,21 @@ export interface SaveFile {
 }
 
 export function newGame(villageName: string) {
-  const basisSaveFile: SaveFile = {
+  const newSaveFile: SaveFile = {
     createdAt: new Date().toISOString(),
     date: Date.now(),
     villageName: villageName || 'Basis Village',
     gameData: '', // Will keep track of the game dataas JSON, but blank for now.
   }
 
-  localStorage.setItem('saveFile', JSON.stringify(basisSaveFile))
+  localStorage.setItem('saveFile', JSON.stringify(newSaveFile))
 }
-
-export function saveGame(): SaveFile {}
 
 export function loadSaveFile(): SaveFile | null {
   const rawSaveFile = localStorage.getItem('saveFile')
   return rawSaveFile ? (JSON.parse(rawSaveFile) as SaveFile) : null
+}
+
+export function saveGame(saveFile: SaveFile): void {
+  localStorage.setItem('saveFile', JSON.stringify(saveFile))
 }
