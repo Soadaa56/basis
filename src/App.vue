@@ -5,7 +5,7 @@ import MainLayout from './components/layouts/MainLayout.vue'
 
 <template>
   <MainLayout>
-    <WelcomePage />
+    <router-view />
   </MainLayout>
 </template>
 

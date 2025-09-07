@@ -7,6 +7,9 @@ const routes = [
   {
     path: '/',
     component: TownPage,
+    beforeEnter: () => {
+      if (!localStorage.getItem('saveFile')) return '/welcome'
+    },
   },
   {
     path: '/welcome',

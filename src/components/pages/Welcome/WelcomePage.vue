@@ -1,4 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const villageName = ref('')
+
+function formSubmitted() {
+  console.log(villageName.value)
+}
+</script>
 
 <template>
   <section id="welcome">
@@ -6,9 +14,17 @@
       <h1>Welcome To Basis</h1>
       <FaIcon class="basis-icon" :icon="['fas', 'cube']" size="5x" />
     </div>
+    <div class="form-village-name">
+      <form @submit.prevent="formSubmitted">
+        <label>
+          Village Name?
+          <input v-model="villageName" name="villageName" />
+        </label>
+      </form>
+    </div>
     <div class="welcome-buttons">
       <button>Dark Mode</button>
-      <button>New Game</button>
+      <router-link to="/"><button @click="formSubmitted">New Game</button></router-link>
     </div>
     <div class="load-save-file">
       <h2>Already have a safe file?</h2>
@@ -40,11 +56,15 @@
   align-items: center;
 }
 
+.form-village-name {
+  margin-bottom: 2rem;
+}
 .welcome-buttons {
   button {
     min-width: 100px;
-    min-height: 60px;
+    min-height: 100px;
     margin: 0rem 4rem 1rem 4rem;
+    outline: 5px solid black;
   }
 }
 
