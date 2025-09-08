@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import WelcomePage from '@/components/pages/Welcome/WelcomePage.vue'
 import TownPage from '@/components/pages/Village/VillagePage.vue'
-import NotFound from '@/components/pages/NotFound/NotFound.vue'
+import NotFound from '@/components/pages/NotFound.vue'
 import { hasSaveFile } from '@/utils/saveFile'
 
 const routes = [
