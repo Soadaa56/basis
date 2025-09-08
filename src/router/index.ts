@@ -2,13 +2,16 @@ import { createRouter, createWebHistory } from 'vue-router'
 import WelcomePage from '@/components/pages/Welcome/WelcomePage.vue'
 import TownPage from '@/components/pages/Village/VillagePage.vue'
 import NotFound from '@/components/pages/NotFound/NotFound.vue'
+import { hasSaveFile } from '@/utils/saveFile'
 
 const routes = [
   {
     path: '/',
     component: TownPage,
     beforeEnter: () => {
-      if (!localStorage.getItem('saveFile')) return '/welcome'
+      if (!hasSaveFile()) {
+        return { path: '/welcome' }
+      }
     },
   },
   {

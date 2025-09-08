@@ -14,12 +14,3 @@ app.use(createPinia())
 app.use(router)
 
 app.mount('#app')
-
-// Logic for detecting saved game
-const saveFile = false
-
-if (!saveFile) {
-  router.push('/welcome')
-} else {
-  router.push('/')
-}

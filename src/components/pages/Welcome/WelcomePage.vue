@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { newGame } from '@/utils/saveFile'
 
+const router = useRouter()
 const villageName = ref('')
 
 function formSubmitted() {
-  console.log(villageName.value)
+  if (villageName.value) {
+    newGame(villageName.value.trim())
+
+    console.log(villageName.value)
+    router.push('/')
+  }
 }
 </script>
 

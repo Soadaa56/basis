@@ -25,6 +25,9 @@ export function saveGame(saveFile: SaveFile): void {
   localStorage.setItem('saveFile', JSON.stringify(saveFile))
 }
 
-export function hasSaveGame(): boolean {
+export function hasSaveFile(): boolean {
+  // returns true if saveFile detected
+  const exists = !!localStorage.getItem('saveFile')
+  console.log('hasSaveFile?', exists)
   return !!localStorage.getItem('saveFile')
 }
