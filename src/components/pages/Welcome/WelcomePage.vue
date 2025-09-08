@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { newGame } from '@/utils/saveFile'
+import FooterLayout from '@/components/layouts/FooterLayout.vue'
 
 const router = useRouter()
 const villageName = ref('')
@@ -39,12 +40,7 @@ function formSubmitted() {
       <p>Load file <a href="#">here</a></p>
     </div>
   </section>
-  <footer>
-    <div id="footer-copyright">
-      <p>Created by Kevin Duffy - © 2025</p>
-      <p><a href="https://kevin.duffy.dev">KevinDuffy.dev</a></p>
-    </div>
-  </footer>
+  <FooterLayout />
 </template>
 
 <style scoped lang="scss">
@@ -56,12 +52,6 @@ function formSubmitted() {
   min-height: 75vh;
   text-align: center;
   margin: 1rem;
-}
-#footer-copyright {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .form-village-name {
