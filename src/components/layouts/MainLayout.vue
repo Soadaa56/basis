@@ -6,8 +6,8 @@ const route = useRoute()
 
 <template>
   <header v-if="route.meta.hideHeader !== true">
-    <nav id="navbar">
-      <ul>
+    <nav>
+      <ul id="navbar">
         <li>Town</li>
         <li>Magic</li>
         <li>Settings</li>
@@ -24,5 +24,11 @@ const route = useRoute()
 #navbar {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  gap: 1rem;
+
+  li {
+    list-style: none;
+  }
 }
 </style>
