@@ -2,9 +2,9 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { loadSaveFile } from '@/utils/saveFile'
-import VillagePage from '@/components/pages/Village/VillagePage.vue'
-import MagicPage from '@/components/pages/Magic/MagicPage.vue'
-import SettingsPage from '@/components/pages/Settings/SettingsPage.vue'
+import VillagePage from '@//pages/Village/VillagePage.vue'
+import MagicPage from '@//pages/Magic/MagicPage.vue'
+import SettingsPage from '@//pages/Settings/SettingsPage.vue'
 
 const route = useRoute()
 const currentSaveFile = loadSaveFile()
