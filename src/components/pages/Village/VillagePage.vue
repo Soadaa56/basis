@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { loadSaveFile } from '@/utils/saveFile'
 import ResourcesPanel from './components/resources/ResourcesPanel.vue'
 import WorkersPanel from './components/workers/WorkersPanel.vue'
 import BuildingsPanel from './components/buildings/BuildingsPanel.vue'
-
-const currentSaveFile = loadSaveFile()
-const villageName = currentSaveFile?.villageName
 </script>
 
 <template>
