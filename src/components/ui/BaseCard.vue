@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <button>Progress Bar</button>
+  <h1>Card</h1>
 </template>
 
 <style scoped></style>
