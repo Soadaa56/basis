@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <p>Buildings Panel</p>
+  <h3>Buildings Panel</h3>
 </template>
 
 <style scoped></style>

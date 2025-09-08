@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <p>Resources Panel</p>
+  <h3>Resources Panel</h3>
 </template>
 
 <style scoped></style>
