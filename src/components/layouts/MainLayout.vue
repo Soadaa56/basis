@@ -1,35 +1,38 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { loadSaveFile } from '@/utils/saveFile'
+import VillagePage from '@/components/pages/Village/VillagePage.vue'
+import MagicPage from '@/components/pages/Magic/MagicPage.vue'
+import SettingPage from '@/components/pages/Settings/SettingsPage.vue'
 
 const route = useRoute()
 const currentSaveFile = loadSaveFile()
 const villageName = currentSaveFile?.villageName
+const activePage = ref(VillagePage)
 </script>
 
 <template>
   <header v-if="route.meta.hideHeader !== true">
     <nav>
-      <ul id="navbar">
-        <li>{{ villageName }} Village</li>
-        <li>Magic</li>
-        <li>Settings</li>
-      </ul>
+      <button @click="activePage = VillagePage">{{ villageName }} Village</button>
+      <button @click="activePage = MagicPage">Magic</button>
+      <button @click="activePage = SettingPage">Settings</button>
     </nav>
   </header>
   <main>
-    <slot />
+    <component :is="activePage" />
   </main>
 </template>
 
 <style scoped>
-#navbar {
+nav {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   outline: 3px solid black;
   padding: 4px;
-  li {
+  button {
     list-style: none;
     padding: 1rem;
     outline: 2px solid black;

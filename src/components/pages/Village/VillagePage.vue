@@ -7,6 +7,7 @@ const villageName = currentSaveFile?.villageName
 
 <template>
   <h1 class="village-name-header">{{ villageName }}</h1>
+  <p>Test</p>
 </template>
 
 <style scoped>
