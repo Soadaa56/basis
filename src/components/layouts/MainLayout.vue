@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
+import { loadSaveFile } from '@/utils/saveFile'
 
 const route = useRoute()
+const currentSaveFile = loadSaveFile()
+const villageName = currentSaveFile?.villageName
 </script>
 
 <template>
   <header v-if="route.meta.hideHeader !== true">
     <nav>
       <ul id="navbar">
-        <li>Village</li>
+        <li>{{ villageName }} Village</li>
         <li>Magic</li>
         <li>Settings</li>
       </ul>
