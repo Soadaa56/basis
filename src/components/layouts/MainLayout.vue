@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router'
 import { loadSaveFile } from '@/utils/saveFile'
 import VillagePage from '@/components/pages/Village/VillagePage.vue'
 import MagicPage from '@/components/pages/Magic/MagicPage.vue'
-import SettingPage from '@/components/pages/Settings/SettingsPage.vue'
+import SettingsPage from '@/components/pages/Settings/SettingsPage.vue'
 
 const route = useRoute()
 const currentSaveFile = loadSaveFile()
@@ -17,7 +17,7 @@ const activePage = ref(VillagePage)
     <nav>
       <button @click="activePage = VillagePage">{{ villageName }} Village</button>
       <button @click="activePage = MagicPage">Magic</button>
-      <button @click="activePage = SettingPage">Settings</button>
+      <button @click="activePage = SettingsPage">Settings</button>
     </nav>
   </header>
   <main>
