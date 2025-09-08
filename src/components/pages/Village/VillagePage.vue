@@ -9,7 +9,6 @@ const villageName = currentSaveFile?.villageName
 </script>
 
 <template>
-  <h1 class="village-name-header">{{ villageName }}</h1>
   <div class="panel-container">
     <resources-panel></resources-panel>
     <workers-panel></workers-panel>
