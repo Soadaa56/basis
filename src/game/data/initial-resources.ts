@@ -15,8 +15,8 @@ export const initialResources: Resource[] = [
     lastUpdated: Date.now(),
   },
   {
-    id: 'wood',
-    name: 'Wood',
+    id: 'food',
+    name: 'Food',
     currentAmount: 10,
     baseStorage: 100,
     baseStorageModifiers: [],
@@ -27,8 +27,8 @@ export const initialResources: Resource[] = [
     lastUpdated: Date.now(),
   },
   {
-    id: 'food',
-    name: 'Food',
+    id: 'wood',
+    name: 'Wood',
     currentAmount: 10,
     baseStorage: 100,
     baseStorageModifiers: [],
