@@ -1,0 +1,26 @@
+import type { Resource } from '@/game/models/Resource'
+
+interface ResourceCost {
+  id: string
+  amount: number
+}
+
+export class ResourceSystem {
+  private resources: Resource[] = []
+
+  constructor(resources: Resource[]) {
+    this.resources = resources
+  }
+
+  getResource(targetId: string) {
+    return this.resources.find((resource) => resource.id === targetId)
+  }
+
+  canAfford(costs: ResourceCost[]): boolean {
+    return costs.every((cost) => {
+      const resource = this.getResource(cost.id)
+      if (!resource) return false
+      return resource.currentAmount >= cost.amount
+    })
+  }
+}
