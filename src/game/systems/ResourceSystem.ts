@@ -24,6 +24,15 @@ export class ResourceSystem {
     })
   }
 
+  spendResources(costs: ResourceCost[]) {
+    costs.forEach((cost) => {
+      const resource = this.getResource(cost.id)
+      if (!resource) return
+
+      resource.currentAmount -= cost.amount
+    })
+  }
+
   updateCalculatedStorage(resource: Resource) {
     const baseStorage = resource.baseStorage
     const baseStorageModifiers = resource.baseStorageModifiers
