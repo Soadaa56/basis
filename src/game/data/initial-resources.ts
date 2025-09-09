@@ -1,7 +1,7 @@
-// src/game/data/initialResources.ts
+// src/game/data/initialGameState.ts
 import type { Resource } from '../models/Resource'
 
-export const initialResources: Resource[] = [
+export const initialGameState: Resource[] = [
   {
     id: 'gold',
     name: 'Gold',
