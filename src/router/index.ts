@@ -9,6 +9,7 @@ const routes = [
     path: '/',
     component: TownPage,
     beforeEnter: () => {
+      // no save file detected
       if (!hasSaveFile()) {
         return { path: '/welcome' }
       }
