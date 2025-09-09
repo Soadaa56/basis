@@ -7,7 +7,7 @@ import FooterLayout from '@/components/layouts/FooterLayout.vue'
 const router = useRouter()
 const villageName = ref('')
 
-function formSubmitted() {
+function newGameFormSubmitted() {
   if (villageName.value) {
     newGame(villageName.value.trim())
 
@@ -24,7 +24,7 @@ function formSubmitted() {
       <FaIcon class="basis-icon" :icon="['fas', 'cube']" size="5x" />
     </div>
     <div class="form-village-name">
-      <form @submit.prevent="formSubmitted">
+      <form @submit.prevent="newGameFormSubmitted">
         <label>
           Village Name?
           <input v-model="villageName" name="villageName" />
@@ -33,7 +33,7 @@ function formSubmitted() {
     </div>
     <div class="welcome-buttons">
       <button>Dark Mode</button>
-      <router-link to="/"><button @click="formSubmitted">New Game</button></router-link>
+      <router-link to="/"><button @click="newGameFormSubmitted">New Game</button></router-link>
     </div>
     <div class="load-save-file">
       <h2>Already have a safe file?</h2>
