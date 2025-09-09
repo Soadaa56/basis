@@ -23,4 +23,28 @@ export class ResourceSystem {
       return resource.currentAmount >= cost.amount
     })
   }
+
+  updateCalculatedStorage(resource: Resource) {
+    const baseStorage = resource.baseStorage
+    const baseStorageModifiers = resource.baseStorageModifiers
+
+    const calculatedStorage = baseStorageModifiers.reduce(
+      (sum, currentValue) => sum * currentValue,
+      baseStorage,
+    )
+
+    resource.calculatedStorage = calculatedStorage
+  }
+
+  updateCalculatedIncome(resource: Resource) {
+    const baseIncome = resource.baseIncome
+    const baseIncomeModifiers = resource.baseIncomeModifiers
+
+    const calculatedIncome = baseIncomeModifiers.reduce(
+      (sum, currentValue) => sum * currentValue,
+      baseIncome,
+    )
+
+    resource.calculatedIncome = calculatedIncome
+  }
 }
