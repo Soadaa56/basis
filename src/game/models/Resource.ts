@@ -1,5 +1,14 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const ResourceIds = {
+  Gold: 'gold',
+  Food: 'food',
+  Wood: 'wood',
+} as const
+
+type ResourceId = (typeof ResourceIds)[keyof typeof ResourceIds]
+
 export interface Resource {
-  id: string
+  id: ResourceId
   name: string
   currentAmount: number
   baseStorage: number
