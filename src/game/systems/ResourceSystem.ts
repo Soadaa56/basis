@@ -45,6 +45,10 @@ export class ResourceSystem {
     resource.calculatedStorage = calculatedStorage
   }
 
+  updateBaseIncome(resource: Resource, incomeAdjustment: number) {
+    return (resource.baseIncome += incomeAdjustment)
+  }
+
   updateCalculatedIncome(resource: Resource) {
     const baseIncome = resource.baseIncome
     const baseIncomeModifiers = resource.baseIncomeModifiers
