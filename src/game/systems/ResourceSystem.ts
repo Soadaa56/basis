@@ -42,7 +42,7 @@ export class ResourceSystem {
       baseStorage,
     )
 
-    resource.calculatedStorage = calculatedStorage
+    return (resource.calculatedStorage = calculatedStorage)
   }
 
   updateBaseIncome(resource: Resource, incomeAdjustment: number) {
@@ -58,6 +58,6 @@ export class ResourceSystem {
       baseIncome,
     )
 
-    resource.calculatedIncome = calculatedIncome
+    return (resource.calculatedIncome = calculatedIncome)
   }
 }
