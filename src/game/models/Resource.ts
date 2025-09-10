@@ -19,5 +19,4 @@ export interface Resource {
   baseIncome: number
   baseIncomeModifiers: number[]
   calculatedIncome: number
-  lastUpdated?: number // will track time offline
 }
