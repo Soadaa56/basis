@@ -9,6 +9,7 @@ export const BuildingIds = {
   StorageShed: 'storageShed',
   Granary: 'granery',
   Mine: 'mine',
+  Sawmill: 'sawmill',
   Well: 'well',
   TownHall: 'townHall',
   /* I'm unsure if I want both BlackSmith & Workshop
