@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ResourceIds = {
+export const ResourceIds = {
   Gold: 'gold',
   Food: 'food',
   Wood: 'wood',

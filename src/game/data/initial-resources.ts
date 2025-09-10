@@ -1,9 +1,10 @@
 // src/game/data/initialGameState.ts
 import type { Resource } from '../models/Resource'
+import { ResourceIds } from '../models/Resource'
 
 export const initialGameState: Resource[] = [
   {
-    id: 'gold',
+    id: ResourceIds.Gold,
     name: 'Gold',
     currentAmount: 10,
     baseStorage: 100,
@@ -15,7 +16,7 @@ export const initialGameState: Resource[] = [
     lastUpdated: Date.now(),
   },
   {
-    id: 'food',
+    id: ResourceIds.Food,
     name: 'Food',
     currentAmount: 10,
     baseStorage: 100,
@@ -27,7 +28,7 @@ export const initialGameState: Resource[] = [
     lastUpdated: Date.now(),
   },
   {
-    id: 'wood',
+    id: ResourceIds.Wood,
     name: 'Wood',
     currentAmount: 10,
     baseStorage: 100,
