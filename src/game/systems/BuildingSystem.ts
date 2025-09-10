@@ -7,4 +7,8 @@ export class BuildingSystem {
   constructor(buildings: Building[]) {
     this.buildings = buildings
   }
+
+  getBuilding(id: string) {
+    this.buildings.find((building) => building.id === id)
+  }
 }

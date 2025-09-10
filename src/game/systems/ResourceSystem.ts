@@ -8,8 +8,8 @@ export class ResourceSystem {
     this.resources = resources
   }
 
-  getResource(targetId: string) {
-    return this.resources.find((resource) => resource.id === targetId)
+  getResource(id: string) {
+    return this.resources.find((resource) => resource.id === id)
   }
 
   canAfford(costs: ResourceCost[]): boolean {
