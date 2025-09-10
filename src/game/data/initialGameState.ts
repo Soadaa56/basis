@@ -9,8 +9,8 @@ export const initialResources: Resource[] = [
   {
     id: ResourceIds.Gold,
     name: 'Gold',
-    currentAmount: 50,
-    baseStorage: 1000,
+    currentAmount: 25,
+    baseStorage: 500,
     baseStorageModifiers: [],
     calculatedStorage: 100,
     baseIncome: 0,

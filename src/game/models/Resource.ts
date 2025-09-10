@@ -1,6 +1,6 @@
 export const ResourceIds = {
   Gold: 'gold',
-  Food: 'food',
+  Food: 'food', // might seperate into grain, fish, ect
   Wood: 'wood',
   Water: 'water',
   Copper: 'copper',
