@@ -16,6 +16,7 @@ export const BuildingIds = {
      perhaps they will work on different type of upgrades */
   BlackSmith: 'blackSmith',
   WorkShop: 'workShip',
+  WizardTower: 'wizardTower',
 } as const
 
 type BuildingId = (typeof BuildingIds)[keyof typeof BuildingIds]
