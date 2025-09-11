@@ -9,6 +9,20 @@ export class BuildingSystem {
   }
 
   getBuilding(id: string) {
-    this.buildings.find((building) => building.id === id)
+    return this.buildings.find((building) => building.id === id)
+  }
+
+  hasBuilding(buildingId: string) {
+    const building = this.getBuilding(buildingId)
+    return building ? true : false
+  }
+
+  incrementBuilding(buildingId: string) {
+    const building = this.getBuilding(buildingId)
+    if (building) {
+      building.count++
+    } else {
+      console.log(`Could not run incrementBuilding: ${buildingId} does not exist`)
+    }
   }
 }
