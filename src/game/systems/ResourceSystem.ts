@@ -29,14 +29,19 @@ export class ResourceSystem {
     })
   }
 
-  // need to add logic for flat bonus storage
   updateCalculatedStorage(resource: Resource) {
     const baseStorage = resource.baseStorage
+    const baseStorageFlatBonus = resource.baseStorageFlatBonus
     const baseStorageModifiers = resource.baseStorageModifiers
 
-    const calculatedStorage = baseStorageModifiers.reduce(
-      (sum, currentValue) => sum * currentValue,
+    let calculatedStorage = baseStorageFlatBonus.reduce(
+      (sum, currentValue) => sum + currentValue,
       baseStorage,
+    )
+
+    calculatedStorage = baseStorageModifiers.reduce(
+      (sum, currentValue) => sum + currentValue,
+      calculatedStorage,
     )
 
     return (resource.calculatedStorage = calculatedStorage)
