@@ -9,4 +9,8 @@ export class workerSystem {
       this.workerCount++
     }
   }
+
+  getWorkerCount(): number {
+    return this.workerCount
+  }
 }
