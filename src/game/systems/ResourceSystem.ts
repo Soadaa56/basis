@@ -29,6 +29,7 @@ export class ResourceSystem {
     })
   }
 
+  // need to add logic for flat bonus storage
   updateCalculatedStorage(resource: Resource) {
     const baseStorage = resource.baseStorage
     const baseStorageModifiers = resource.baseStorageModifiers
