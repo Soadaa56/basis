@@ -14,6 +14,7 @@ export interface Resource {
   name: string
   currentAmount: number
   baseStorage: number
+  baseStorageFlatBonus: number[]
   baseStorageModifiers: number[]
   calculatedStorage: number
   baseIncome: number

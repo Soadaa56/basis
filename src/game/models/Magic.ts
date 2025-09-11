@@ -11,6 +11,7 @@ export interface Magic {
   name: string
   currentAmount: number
   baseStorage: number
+  baseStorageFlatBonus: number[]
   baseStorageModifiers: number[]
   calculatedStorage: number
   baseIncome: number
