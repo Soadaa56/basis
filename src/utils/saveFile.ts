@@ -8,7 +8,7 @@ export interface SaveFile {
   gameState: GameState
 }
 
-export function newGame(villageName: string) {
+export function newGameFile(villageName: string) {
   const newSaveFile: SaveFile = {
     createdAt: new Date().toISOString(),
     date: Date.now(),
@@ -20,13 +20,13 @@ export function newGame(villageName: string) {
   return newSaveFile
 }
 
+export function saveGameFile(saveFile: SaveFile): void {
+  localStorage.setItem('saveFile', JSON.stringify(saveFile))
+}
+
 export function loadSaveFile(): SaveFile | null {
   const rawSaveFile = localStorage.getItem('saveFile')
   return rawSaveFile ? (JSON.parse(rawSaveFile) as SaveFile) : null
-}
-
-export function saveGame(saveFile: SaveFile): void {
-  localStorage.setItem('saveFile', JSON.stringify(saveFile))
 }
 
 export function hasSaveFile(): boolean {
