@@ -1,3 +1,5 @@
+import type { Unlockable } from '@/game/models/Unlockable'
+
 export const ResourceIds = {
   Gold: 'gold',
   Food: 'food', // might seperate into grain, fish, ect
@@ -9,7 +11,7 @@ export const ResourceIds = {
 
 type ResourceId = (typeof ResourceIds)[keyof typeof ResourceIds]
 
-export interface Resource {
+export interface Resource extends Unlockable {
   id: ResourceId
   name: string
   currentAmount: number
