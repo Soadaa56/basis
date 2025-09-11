@@ -9,7 +9,7 @@ export const ResourceIds = {
   Iron: 'iron',
 } as const
 
-type ResourceId = (typeof ResourceIds)[keyof typeof ResourceIds]
+export type ResourceId = (typeof ResourceIds)[keyof typeof ResourceIds]
 
 export interface Resource extends Unlockable {
   id: ResourceId
