@@ -27,4 +27,20 @@ export class MagicSystem {
       magic.currentAmount -= cost.amount
     })
   }
+
+  updateBaseIncome(magic: Magic, incomdeAdjustment: number) {
+    return (magic.baseIncome += incomdeAdjustment)
+  }
+
+  updateCalculatedIncome(magic: Magic) {
+    const baseIncome = magic.baseIncome
+    const baseIncomeModifiers = magic.baseIncomeModifiers
+
+    const calculatedIncome = baseIncomeModifiers.reduce(
+      (sum, currentValue) => sum * currentValue,
+      baseIncome,
+    )
+
+    return (magic.calculatedIncome = calculatedIncome)
+  }
 }
