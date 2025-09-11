@@ -1,11 +1,12 @@
 // src/game/data/initialGameState.ts
+import type { GameState } from '@/game/systems/GameStateManager'
 import type { Resource } from '@/game/models/Resource'
 import type { Building } from '@/game/models/Buildings'
 
 import { ResourceIds } from '@/game/models/Resource'
 import { BuildingIds } from '@/game/models/Buildings'
 
-export const initialResources: Resource[] = [
+const initialResources: Resource[] = [
   {
     id: ResourceIds.Gold,
     name: 'Gold',
@@ -41,7 +42,7 @@ export const initialResources: Resource[] = [
   },
 ]
 
-export const initialBuildings: Building[] = [
+const initialBuildings: Building[] = [
   {
     id: BuildingIds.Farm,
     name: 'Farm',
@@ -49,3 +50,9 @@ export const initialBuildings: Building[] = [
     count: 1,
   },
 ]
+
+export const initialGameState: GameState = {
+  resources: initialResources,
+  buildings: initialBuildings,
+  workers: 1,
+}
