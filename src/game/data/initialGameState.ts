@@ -12,6 +12,7 @@ const initialResources: Resource[] = [
     name: 'Gold',
     currentAmount: 25,
     baseStorage: 500,
+    baseStorageFlatBonus: [],
     baseStorageModifiers: [],
     calculatedStorage: 100,
     baseIncome: 0,
@@ -23,6 +24,7 @@ const initialResources: Resource[] = [
     name: 'Food',
     currentAmount: 10,
     baseStorage: 100,
+    baseStorageFlatBonus: [],
     baseStorageModifiers: [],
     calculatedStorage: 100,
     baseIncome: 0,
@@ -34,6 +36,7 @@ const initialResources: Resource[] = [
     name: 'Wood',
     currentAmount: 0,
     baseStorage: 20,
+    baseStorageFlatBonus: [],
     baseStorageModifiers: [],
     calculatedStorage: 20,
     baseIncome: 0,
@@ -54,5 +57,6 @@ const initialBuildings: Building[] = [
 export const initialGameState: GameState = {
   resources: initialResources,
   buildings: initialBuildings,
+  magic: [],
   workers: 1,
 }
