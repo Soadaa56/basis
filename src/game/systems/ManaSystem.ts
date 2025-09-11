@@ -28,6 +28,23 @@ export class MagicSystem {
     })
   }
 
+  updateCalculatedStorage(magic: Magic) {
+    const baseStorage = magic.baseStorage
+    const baseStorageFlatBonus = magic.baseStorageFlatBonus
+    const baseStorageModifiers = magic.baseStorageModifiers
+
+    let calculatedStorage = baseStorageFlatBonus.reduce(
+      (sum, currentValue) => sum + currentValue,
+      baseStorage,
+    )
+    calculatedStorage = baseStorageModifiers.reduce(
+      (sum, currentValue) => sum * currentValue,
+      calculatedStorage,
+    )
+
+    return (magic.calculatedStorage = calculatedStorage)
+  }
+
   updateBaseIncome(magic: Magic, incomdeAdjustment: number) {
     return (magic.baseIncome += incomdeAdjustment)
   }
