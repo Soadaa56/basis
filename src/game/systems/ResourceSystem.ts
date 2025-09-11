@@ -1,5 +1,5 @@
 import type { Resource } from '@/game/models/Resource'
-import type { ResourceCost } from '@/game/models/ResourceCost'
+import type { ResourceCost } from '@/game/models/Costs'
 
 export class ResourceSystem {
   private resources: Resource[] = []

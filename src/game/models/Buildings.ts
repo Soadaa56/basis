@@ -1,4 +1,4 @@
-import type { ResourceCost } from '@/game/models/ResourceCost'
+import type { ResourceCost } from '@/game/models/Costs'
 
 export const BuildingIds = {
   Farm: 'farm',
