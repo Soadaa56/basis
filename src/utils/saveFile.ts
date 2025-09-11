@@ -1,8 +1,11 @@
+import type { GameState } from '@/game/systems/GameStateManager'
+import { initialGameState } from '@/game/data/initialGameState'
+
 export interface SaveFile {
   createdAt: string
   date: number
   villageName: string
-  gameData: string
+  gameState: GameState
 }
 
 export function newGame(villageName: string) {
@@ -10,10 +13,11 @@ export function newGame(villageName: string) {
     createdAt: new Date().toISOString(),
     date: Date.now(),
     villageName: villageName || 'Basis Village',
-    gameData: '', // Will keep track of the game dataas JSON, but blank for now.
+    gameState: initialGameState,
   }
 
   localStorage.setItem('saveFile', JSON.stringify(newSaveFile))
+  return newSaveFile
 }
 
 export function loadSaveFile(): SaveFile | null {
