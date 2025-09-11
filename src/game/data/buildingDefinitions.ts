@@ -11,6 +11,7 @@ export type BuildingInfo =
   | {
       type: 'jobProducer'
       jobType: JobId
+      addOpenJobs: number
     }
   | {
       type: 'unlocker'
