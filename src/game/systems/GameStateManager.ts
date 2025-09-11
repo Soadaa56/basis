@@ -4,7 +4,7 @@ import { MagicSystem } from '@/game/systems/MagicSystem'
 import { WorkerSystem } from '@/game/systems/WorkerSystem'
 
 import type { Resource } from '@/game/models/Resource'
-// import type { ResourceCost } from '@/game/models/Costs'
+import type { ResourceCost } from '@/game/models/Costs'
 import type { Building } from '@/game/models/Buildings'
 import type { Magic } from '@/game/models/Magic'
 
@@ -28,5 +28,11 @@ export class GameStateManager {
     this.buildingSystem = new BuildingSystem(gameState.buildings)
     this.magicSystem = new MagicSystem(gameState.magic)
     this.workerSystem = new WorkerSystem(gameState.workers)
+  }
+
+  purchaseBuilding(buildingId: string, buildingCosts: ResourceCost[]) {
+    if (!this.resourceSystem.canAfford(buildingCosts)) return
+    this.resourceSystem.spendResources(buildingCosts)
+    this.buildingSystem.incrementBuilding(buildingId)
   }
 }
