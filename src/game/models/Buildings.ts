@@ -20,7 +20,7 @@ export const BuildingIds = {
   WizardTower: 'wizardTower',
 } as const
 
-type BuildingId = (typeof BuildingIds)[keyof typeof BuildingIds]
+export type BuildingId = (typeof BuildingIds)[keyof typeof BuildingIds]
 
 export interface Building extends Unlockable {
   id: BuildingId
