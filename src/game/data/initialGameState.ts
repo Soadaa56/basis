@@ -51,6 +51,7 @@ const initialBuildings: Building[] = [
     name: 'Farm',
     cost: [],
     count: 1,
+    workerSlots: 1,
   },
 ]
 

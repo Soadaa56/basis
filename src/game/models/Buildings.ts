@@ -29,4 +29,5 @@ export interface Building extends Unlockable {
   count: number
   maxCount?: number
   costMultiplier?: number
+  workerSlots?: number
 }
