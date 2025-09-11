@@ -1,5 +1,4 @@
 import type { Building } from '@/game/models/Buildings'
-import type { ResourceCost } from '@/game/models/ResourceCost'
 
 export class BuildingSystem {
   private buildings: Building[] = []
