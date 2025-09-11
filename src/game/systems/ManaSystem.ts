@@ -6,4 +6,16 @@ export class MagicSystem {
   constructor(magic: Magic[]) {
     this.magic = magic
   }
+
+  getMagic(id: string) {
+    return this.magic.find((magic) => magic.id === id)
+  }
+
+  canAfford(costs: MagicCost[]): boolean {
+    return costs.every((cost) => {
+      const magic = this.getMagic(cost.id)
+      if (!magic) return false
+      return magic.currentAmount >= cost.amount
+    })
+  }
 }
