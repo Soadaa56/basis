@@ -1,4 +1,4 @@
-export class workerSystem {
+export class WorkerSystem {
   workerCount: number
   constructor(workerCount: number = 1) {
     this.workerCount = workerCount
