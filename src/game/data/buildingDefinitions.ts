@@ -17,3 +17,5 @@ export type BuildingInfo =
       type: 'unlocker'
       unlocks: string
     }
+
+export const buildingDefinitions: Record<BuildingId, BuildingInfo> = {}
