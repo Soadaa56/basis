@@ -18,4 +18,13 @@ export class MagicSystem {
       return magic.currentAmount >= cost.amount
     })
   }
+
+  spendMagic(costs: MagicCost[]) {
+    costs.forEach((cost) => {
+      const magic = this.getMagic(cost.id)
+      if (!magic) return
+
+      magic.currentAmount -= cost.amount
+    })
+  }
 }
