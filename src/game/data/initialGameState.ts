@@ -16,7 +16,6 @@ export const initialResources: Resource[] = [
     baseIncome: 0,
     baseIncomeModifiers: [],
     calculatedIncome: 0,
-    lastUpdated: Date.now(),
   },
   {
     id: ResourceIds.Food,
@@ -28,7 +27,6 @@ export const initialResources: Resource[] = [
     baseIncome: 0,
     baseIncomeModifiers: [],
     calculatedIncome: 0,
-    lastUpdated: Date.now(),
   },
   {
     id: ResourceIds.Wood,
@@ -40,7 +38,6 @@ export const initialResources: Resource[] = [
     baseIncome: 0,
     baseIncomeModifiers: [],
     calculatedIncome: 0,
-    lastUpdated: Date.now(),
   },
 ]
 
