@@ -26,4 +26,4 @@ export type BuildingInfo =
       unlocks: string
     }
 
-export const buildingDefinitions: Record<BuildingId, BuildingInfo> = {}
+export const buildingDefinitions: Partial<Record<BuildingId, BuildingInfo>> = {}
