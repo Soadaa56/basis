@@ -3,8 +3,9 @@ import type { ResourceId } from '@/game/models/Resource'
 import type { JobId } from '@/game/models/Jobs'
 
 export const BuildingTypes = {
-  JobProducer: 'jobProducer',
   ResourceProducer: 'resourceProducer',
+  JobProducer: 'jobProducer',
+  WorkerProducer: 'workerProducer',
   Unlocker: 'unlocker',
 } as const
 
@@ -12,17 +13,21 @@ export type BuildingType = (typeof BuildingTypes)[keyof typeof BuildingTypes]
 
 export type BuildingInfo =
   | {
-      type: BuildingType
+      type: typeof BuildingTypes.ResourceProducer
       resource: ResourceId
       rate: number
     }
   | {
-      type: BuildingType
+      type: typeof BuildingTypes.JobProducer
       jobType: JobId
       addOpenJobs: number
     }
   | {
-      type: BuildingType
+      type: typeof BuildingTypes.WorkerProducer
+      addWorkers: number
+    }
+  | {
+      type: typeof BuildingTypes.Unlocker
       unlocks: string
     }
 
