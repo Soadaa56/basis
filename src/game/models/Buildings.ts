@@ -18,6 +18,7 @@ export const BuildingIds = {
   BlackSmith: 'blackSmith',
   WorkShop: 'workShip',
   WizardTower: 'wizardTower',
+  Bakehouse: 'bakehouse',
 } as const
 
 export type BuildingId = (typeof BuildingIds)[keyof typeof BuildingIds]
