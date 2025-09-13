@@ -8,6 +8,7 @@ export const ResourceIds = {
   Water: 'water',
   Copper: 'copper',
   Iron: 'iron',
+  Research: 'research',
 } as const
 
 export type ResourceId = (typeof ResourceIds)[keyof typeof ResourceIds]
