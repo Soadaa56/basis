@@ -20,6 +20,11 @@ export class WorkerSystem {
     this.workerCount--
   }
 
+  increaseMaxWorkerCount(newWorkers: number) {
+    this.workerCount += newWorkers
+    this.maxWorkerCount += newWorkers
+  }
+
   getWorkerCount(): number {
     return this.workerCount
   }
