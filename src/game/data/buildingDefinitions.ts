@@ -1,4 +1,3 @@
-import type { BuildingId } from '@/game/models/Buildings'
 import type { ResourceId } from '@/game/models/Resource'
 import type { JobId } from '@/game/models/Jobs'
 
@@ -57,5 +56,3 @@ export type BuildingInfo =
       addWorkers?: number
       unlocks?: string // will be changed for type safety
     }
-
-export const buildingDefinitions: Partial<Record<BuildingId, BuildingInfo>> = {}
