@@ -12,7 +12,7 @@ export class WorkerSystem {
     this.maxWorkerCount = maxWorkerCount
   }
 
-  increaseWorkerCount(number: number) {
+  incrementWorkerCount(number: number) {
     for (let i = 0; i < number; i++) {
       this.workerCount++
     }
