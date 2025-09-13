@@ -12,11 +12,11 @@ export class WorkerSystem {
     this.maxWorkerCount = maxWorkerCount
   }
 
-  incrementWorkerCount() {
+  incrementUnassignedWorkerCount() {
     this.unassignedWorkerCount++
   }
 
-  decrementWorkerCount() {
+  decrementUnassignedWorkerCount() {
     this.unassignedWorkerCount--
   }
 
