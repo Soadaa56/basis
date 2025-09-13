@@ -1,4 +1,4 @@
-import { BuildingTypes, type BuildingInfo } from '@/game/data/buildingInfo'
+import { BuildingTypes, type BuildingInfo } from '@/game/data/buildingsInfo'
 import { ResourceIds } from '@/game/models/Resource'
 
 export const Well: BuildingInfo = {
