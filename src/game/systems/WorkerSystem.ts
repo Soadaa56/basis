@@ -1,31 +1,31 @@
 export class WorkerSystem {
-  workerCount: number
+  unassignedWorkerCount: number
   maxWorkerCount: number
   constructor(workerCount: number = 1, maxWorkerCount: number = 1) {
-    this.workerCount = workerCount
+    this.unassignedWorkerCount = workerCount
     this.maxWorkerCount = maxWorkerCount
   }
 
   // For Game Resets
   resetWorkerCount(workerCount: number, maxWorkerCount: number) {
-    this.workerCount = workerCount
+    this.unassignedWorkerCount = workerCount
     this.maxWorkerCount = maxWorkerCount
   }
 
   incrementWorkerCount() {
-    this.workerCount++
+    this.unassignedWorkerCount++
   }
 
   decrementWorkerCount() {
-    this.workerCount--
+    this.unassignedWorkerCount--
   }
 
   increaseMaxWorkerCount(newWorkers: number) {
-    this.workerCount += newWorkers
+    this.unassignedWorkerCount += newWorkers
     this.maxWorkerCount += newWorkers
   }
 
   getWorkerCount(): number {
-    return this.workerCount
+    return this.unassignedWorkerCount
   }
 }
