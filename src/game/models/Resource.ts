@@ -4,6 +4,7 @@ export const ResourceIds = {
   Gold: 'gold',
   Food: 'food', // might seperate into grain, fish, ect
   Wood: 'wood',
+  Plank: 'plank',
   Water: 'water',
   Copper: 'copper',
   Iron: 'iron',
