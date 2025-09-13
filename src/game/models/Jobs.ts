@@ -3,6 +3,7 @@ import type { Unlockable } from '@/game/models/Unlockable'
 export const JobIds = {
   Farmer: 'farmer',
   Miner: 'miner',
+  Logger: 'logger',
   Blacksmith: 'blacksmith',
   Fisher: 'fisher',
   Merchant: 'merchant',
