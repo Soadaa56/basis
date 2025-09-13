@@ -4,6 +4,11 @@ export class WorkerSystem {
     this.workerCount = workerCount
   }
 
+  // For Game Resets
+  setWorkerCount(workerCount: number) {
+    this.workerCount = workerCount
+  }
+
   increaseWorkerCount(number: number) {
     for (let i = 0; i < number; i++) {
       this.workerCount++
