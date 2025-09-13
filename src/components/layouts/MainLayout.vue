@@ -1,23 +1,29 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { markRaw, shallowRef } from 'vue'
 import { useRoute } from 'vue-router'
 import { loadSaveFile } from '@/utils/saveFile'
-import VillagePage from '@//pages/Village/VillagePage.vue'
-import MagicPage from '@//pages/Magic/MagicPage.vue'
-import SettingsPage from '@//pages/Settings/SettingsPage.vue'
+import VillagePage from '@/pages/Village/VillagePage.vue'
+import MagicPage from '@/pages/Magic/MagicPage.vue'
+import SettingsPage from '@/pages/Settings/SettingsPage.vue'
 
 const route = useRoute()
 const currentSaveFile = loadSaveFile()
 const villageName = currentSaveFile?.villageName
-const activePage = ref(VillagePage)
+
+// Use shallowRed/markRaw for Vue performance warning
+const activePage = shallowRef(markRaw(VillagePage))
+// eslint-disable-next-line
+function switchPage(page: any) {
+  activePage.value = markRaw(page)
+}
 </script>
 
 <template>
   <header v-if="route.meta.hideHeader !== true">
     <nav>
-      <button @click="activePage = VillagePage">{{ villageName }} Village</button>
-      <button @click="activePage = MagicPage">Magic</button>
-      <button @click="activePage = SettingsPage">Settings</button>
+      <button @click="switchPage(VillagePage)">{{ villageName }} Village</button>
+      <button @click="switchPage(MagicPage)">Magic</button>
+      <button @click="switchPage(SettingsPage)">Settings</button>
     </nav>
   </header>
   <main>

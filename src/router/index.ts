@@ -1,13 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import WelcomePage from '@/pages/Welcome/WelcomePage.vue'
-import TownPage from '@/pages/Village/VillagePage.vue'
+import MainLayout from '@/components/layouts/MainLayout.vue'
+import VillagePage from '@/pages/Village/VillagePage.vue'
+import MagicPage from '@/pages/Magic/MagicPage.vue'
+import SettingsPage from '@/pages/Settings/SettingsPage.vue'
 import NotFound from '@/pages/NotFound.vue'
 import { hasSaveFile } from '@/utils/saveFile'
 
 const routes = [
   {
     path: '/',
-    component: TownPage,
+    component: MainLayout,
+    children: [
+      { path: '', component: VillagePage },
+      { path: 'magic', component: MagicPage },
+      { path: 'settings', component: SettingsPage },
+    ],
     beforeEnter: () => {
       // no save file detected
       if (!hasSaveFile()) {

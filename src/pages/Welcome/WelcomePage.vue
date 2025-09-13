@@ -1,19 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { newGame } from '@/utils/saveFile'
+import { newGameFile } from '@/utils/saveFile'
 import FooterLayout from '@/components/layouts/FooterLayout.vue'
 
 const router = useRouter()
-const villageName = ref('')
 
-function newGameFormSubmitted() {
-  if (villageName.value) {
-    newGame(villageName.value.trim())
-
-    console.log(villageName.value)
-    router.push('/')
-  }
+function newGameButton() {
+  newGameFile('Basis')
+  router.push('/')
 }
 </script>
 
@@ -23,17 +17,9 @@ function newGameFormSubmitted() {
       <h1>Welcome To Basis</h1>
       <FaIcon class="basis-icon" :icon="['fas', 'cube']" size="5x" />
     </div>
-    <div class="form-village-name">
-      <form @submit.prevent="newGameFormSubmitted">
-        <label>
-          Village Name?
-          <input v-model="villageName" name="villageName" />
-        </label>
-      </form>
-    </div>
     <div class="welcome-buttons">
       <button>Dark Mode</button>
-      <router-link to="/"><button @click="newGameFormSubmitted">New Game</button></router-link>
+      <router-link to="/"><button @click="newGameButton">New Game</button></router-link>
     </div>
     <div class="load-save-file">
       <h2>Already have a safe file?</h2>
@@ -54,9 +40,6 @@ function newGameFormSubmitted() {
   margin: 1rem;
 }
 
-.form-village-name {
-  margin-bottom: 2rem;
-}
 .welcome-buttons {
   button {
     min-width: 100px;
@@ -65,7 +48,6 @@ function newGameFormSubmitted() {
     outline: 5px solid black;
   }
 }
-
 .basis-header {
   display: flex;
   align-items: center;
