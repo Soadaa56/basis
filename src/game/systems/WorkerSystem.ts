@@ -1,12 +1,15 @@
 export class WorkerSystem {
   workerCount: number
-  constructor(workerCount: number = 1) {
+  maxWorkerCount: number
+  constructor(workerCount: number = 1, maxWorkerCount: number = 1) {
     this.workerCount = workerCount
+    this.maxWorkerCount = maxWorkerCount
   }
 
   // For Game Resets
-  setWorkerCount(workerCount: number) {
+  resetWorkerCount(workerCount: number, maxWorkerCount: number) {
     this.workerCount = workerCount
+    this.maxWorkerCount = maxWorkerCount
   }
 
   increaseWorkerCount(number: number) {
