@@ -7,6 +7,6 @@ export const Sawmill: BuildingInfo = {
   rate: 1,
   consume: {
     resource: ResourceIds.Wood,
-    amount: 2,
+    rate: 2,
   },
 }

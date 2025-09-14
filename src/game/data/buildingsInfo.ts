@@ -19,7 +19,7 @@ export type BuildingInfo =
       rate: number
       consume?: {
         resource: ResourceId
-        amount: number // Should this be rate as well? or purposely different?
+        rate: number // Should this be rate as well? or purposely different?
       }
     }
   | {
@@ -48,7 +48,7 @@ export type BuildingInfo =
       rate?: number
       consume?: {
         resource: ResourceId
-        amount: number // Should this be rate as well? or purposely different?
+        rate: number // Should this be rate as well? or purposely different?
       }
       multiplier?: number
       jobType?: JobId
