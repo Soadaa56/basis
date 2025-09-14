@@ -3,6 +3,7 @@ import { BuildingTypes } from '@/game/data/buildingsInfo'
 
 import type { Building, BuildingId } from '@/game/models/Buildings'
 import type { ResourceSystem } from './ResourceSystem'
+import type { WorkerSystem } from './WorkerSystem'
 
 export class BuildingSystem {
   private buildings: Building[] = []
@@ -37,7 +38,11 @@ export class BuildingSystem {
     }
   }
 
-  triggerBuilding(buildingId: BuildingId, resourceSystem: ResourceSystem) {
+  triggerBuilding(
+    buildingId: BuildingId,
+    resourceSystem: ResourceSystem,
+    workerSystem: WorkerSystem,
+  ) {
     const BuildingInfo = buildingDefinitions[buildingId]
     if (!BuildingInfo) return console.log(`triggerBuilding failed. no BuildingInfo ${BuildingInfo}`)
     switch (BuildingInfo?.type) {
@@ -61,12 +66,16 @@ export class BuildingSystem {
         break
 
       case BuildingTypes.WorkerProducer:
+        const newWorkers = BuildingInfo.addWorkers
+
+        workerSystem.increaseMaxWorkerCount(newWorkers)
         break
 
       case BuildingTypes.Unlocker:
         break
 
       case BuildingTypes.Hybrid:
+        console.log(`BuildingInfo => case: Hybrid is being run. BuildingId: ${buildingId}`)
         break
       default:
         console.log(`triggerBuilding failed with buildingId: ${buildingId}`)
