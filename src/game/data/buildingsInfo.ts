@@ -29,6 +29,7 @@ export type BuildingInfo =
     }
   | {
       type: typeof BuildingTypes.JobProducer
+      // bad variable name?
       jobType: JobId
       addOpenJobs: number
     }
