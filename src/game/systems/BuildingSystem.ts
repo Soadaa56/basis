@@ -3,7 +3,7 @@ import { BuildingTypes } from '@/game/data/buildingsInfo'
 
 import type { Building, BuildingId } from '@/game/models/Buildings'
 import type { ResourceSystem } from './ResourceSystem'
-import type { WorkerSystem } from './WorkerSystem'
+import { WorkerSystem } from './WorkerSystem'
 
 export class BuildingSystem {
   private buildings: Building[] = []
@@ -63,6 +63,10 @@ export class BuildingSystem {
         break
 
       case BuildingTypes.JobProducer:
+        const jobId = BuildingInfo.jobType
+        const numberofJobs = BuildingInfo.addOpenJobs
+
+        WorkerSystem.addJobSlots(jobId, numberofJobs)
         break
 
       case BuildingTypes.WorkerProducer:
