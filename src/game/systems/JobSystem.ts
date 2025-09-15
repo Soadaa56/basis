@@ -1,12 +1,23 @@
-import { WorkerSystem } from '@/game/systems/WorkerSystem'
-import { JobId } from '@/game/data/jobsInfo'
+import { jobDefinitions } from '@/game/data/jobs'
+import type { JobId } from '@/game/models/Jobs'
+
+interface JobState {
+  assignedWorkers: number
+  MaxJobSlots: number
+}
 
 export class JobSystem {
-  workerSystem: WorkerSystem
+  private jobs: Record<JobId, JobState> = {}
 
-  constructor(workerSystem: WorkerSystem) {
-    this.workerSystem = workerSystem
+  isJobUnlocked(jobId: JobId) {
+    const jobInfo = jobDefinitions[jobId]
+
+    return jobInfo?.unlocked
   }
 
-  addJobSlots(jobId: JobId, numberOfJobSlots: number) {}
+  addJobSlots(jobId: JobId, numberOfJobSlots: number) {
+    if (this.isJobUnlocked(jobId)) {
+    } else {
+    }
+  }
 }
