@@ -25,6 +25,7 @@ export class GameStateManager {
   magicSystem: MagicSystem
   workerSystem: WorkerSystem
   jobSystem: JobSystem
+  tickInterval: number = 1000
 
   constructor(gameState: GameState) {
     this.gameState = gameState
@@ -34,6 +35,12 @@ export class GameStateManager {
     this.workerSystem = new WorkerSystem(gameState.workers)
     this.jobSystem = new JobSystem()
   }
+
+  setTickInterval(tickInterval: number) {
+    this.tickInterval = tickInterval
+  }
+
+  startTick(tickInterval: number) {}
 
   purchaseBuilding(buildingId: BuildingId, buildingCosts: ResourceCost[]) {
     if (!this.resourceSystem.canAfford(buildingCosts)) return
