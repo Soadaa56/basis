@@ -19,9 +19,19 @@ export class JobSystem {
     return jobInfo?.unlocked
   }
 
+  unlockJob(jobId: JobId) {
+    const jobInfo = jobDefinitions[jobId]
+    if (!jobInfo) {
+      return console.log(`Error unlocking job - JobSystem=>unlockJob=>jobInfo${jobInfo}`)
+    }
+    jobInfo.unlocked = true
+  }
+
   addJobSlots(jobId: JobId, numberOfJobSlots: number) {
     const jobState = this.getJob(jobId)
     if (!jobState) return console.log(`Error: JobSystem => addMaxJobSlots => jobState: ${jobState}`)
+
+    if (!this.isJobUnlocked(jobId)) return this.unlockJob(jobId)
 
     jobState.assignedWorkers += numberOfJobSlots
   }
