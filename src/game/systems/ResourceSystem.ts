@@ -1,5 +1,6 @@
 import type { Resource } from '@/game/models/Resource'
 import type { ResourceCost } from '@/game/models/Costs'
+import { softCap } from '@/game/config/softCaps'
 
 export class ResourceSystem {
   private resources: Resource[] = []
@@ -61,5 +62,21 @@ export class ResourceSystem {
     )
 
     return (resource.calculatedIncome = calculatedIncome)
+  }
+
+  // Ran on gameTick update
+  updateAllResources() {
+    this.resources.forEach((resource) => {
+      const income = resource.calculatedIncome
+      if (resource.currentAmount > resource.calculatedStorage) {
+        this.enforceResourceSoftCaps(resource)
+      } else {
+        resource.currentAmount += income
+      }
+    })
+  }
+
+  enforceResourceSoftCaps(resource: Resource) {
+    // consider lighter or heavier softcaps for resources with resourceDefinitions record
   }
 }
