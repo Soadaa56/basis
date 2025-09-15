@@ -7,7 +7,11 @@ interface JobState {
 }
 
 export class JobSystem {
-  private jobs: Record<JobId, JobState> = {}
+  private jobs: Partial<Record<JobId, JobState>> = {}
+
+  getJob(jobId: JobId) {
+    return this.jobs[jobId]
+  }
 
   isJobUnlocked(jobId: JobId) {
     const jobInfo = jobDefinitions[jobId]
