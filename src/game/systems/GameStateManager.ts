@@ -40,7 +40,13 @@ export class GameStateManager {
     this.tickInterval = tickInterval
   }
 
-  startTick(tickInterval: number) {}
+  startTick(tickInterval: number) {
+    setInterval(() => this.gameTick(), tickInterval)
+  }
+
+  gameTick() {
+    this.resourceSystem.updateAllResources()
+  }
 
   purchaseBuilding(buildingId: BuildingId, buildingCosts: ResourceCost[]) {
     if (!this.resourceSystem.canAfford(buildingCosts)) return
