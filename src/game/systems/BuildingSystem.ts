@@ -1,9 +1,10 @@
 import { buildingDefinitions } from '@/game/data/buildings'
 import { BuildingTypes } from '@/game/data/buildingsInfo'
+import { JobSystem } from './JobSystem'
+import { WorkerSystem } from './WorkerSystem'
+import { ResourceSystem } from './ResourceSystem'
 
 import type { Building, BuildingId } from '@/game/models/Buildings'
-import type { ResourceSystem } from './ResourceSystem'
-import { WorkerSystem } from './WorkerSystem'
 
 export class BuildingSystem {
   private buildings: Building[] = []
@@ -28,7 +29,7 @@ export class BuildingSystem {
     })
   }
 
-  incrementBuilding(buildingId: string) {
+  incrementBuilding(buildingId: BuildingId) {
     const building = this.getBuilding(buildingId)
     if (building) {
       building.count++
@@ -41,6 +42,7 @@ export class BuildingSystem {
   triggerBuilding(
     buildingId: BuildingId,
     resourceSystem: ResourceSystem,
+    jobSystem: JobSystem,
     workerSystem: WorkerSystem,
   ) {
     const BuildingInfo = buildingDefinitions[buildingId]
@@ -66,7 +68,7 @@ export class BuildingSystem {
         const jobId = BuildingInfo.jobType
         const numberofJobs = BuildingInfo.addOpenJobs
 
-        WorkerSystem.addJobSlots(jobId, numberofJobs)
+        jobSystem.addJobSlots(jobId, numberofJobs)
         break
 
       case BuildingTypes.WorkerProducer:
@@ -76,6 +78,7 @@ export class BuildingSystem {
         break
 
       case BuildingTypes.Unlocker:
+        console.log(`triggerBuilding => case:BuildingTypes.unlocker: ${BuildingTypes.Unlocker}`)
         break
 
       case BuildingTypes.Hybrid:
