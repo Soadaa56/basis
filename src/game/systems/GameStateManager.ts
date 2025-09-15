@@ -3,6 +3,7 @@ import { BuildingSystem } from '@/game/systems/BuildingSystem'
 import { MagicSystem } from '@/game/systems/MagicSystem'
 import { WorkerSystem } from '@/game/systems/WorkerSystem'
 import { JobSystem } from './JobSystem'
+import { TICK_INTERVAL } from '@/game/config/config'
 
 import type { Resource } from '@/game/models/Resource'
 import type { ResourceCost } from '@/game/models/Costs'
@@ -25,7 +26,7 @@ export class GameStateManager {
   magicSystem: MagicSystem
   workerSystem: WorkerSystem
   jobSystem: JobSystem
-  tickInterval: number = 1000
+  private tickInterval: number = TICK_INTERVAL
 
   constructor(gameState: GameState) {
     this.gameState = gameState
