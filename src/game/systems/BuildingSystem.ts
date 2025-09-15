@@ -47,6 +47,7 @@ export class BuildingSystem {
   ) {
     const BuildingInfo = buildingDefinitions[buildingId]
     if (!BuildingInfo) return console.log(`triggerBuilding failed. no BuildingInfo ${BuildingInfo}`)
+
     switch (BuildingInfo?.type) {
       case BuildingTypes.ResourceProducer:
         break
