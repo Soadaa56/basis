@@ -1,7 +1,7 @@
 import { jobDefinitions } from '@/game/data/jobs'
 import type { JobId } from '@/game/models/Jobs'
 
-interface JobState {
+export interface JobState {
   assignedWorkers: number
   MaxJobSlots: number
 }
