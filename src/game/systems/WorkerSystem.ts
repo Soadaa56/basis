@@ -1,3 +1,5 @@
+import type { JobState } from './JobSystem'
+
 export class WorkerSystem {
   unassignedWorkerCount: number
   maxWorkerCount: number
@@ -13,11 +15,15 @@ export class WorkerSystem {
   }
 
   incrementUnassignedWorkerCount() {
-    this.unassignedWorkerCount++
+    if (this.unassignedWorkerCount < this.maxWorkerCount) {
+      this.unassignedWorkerCount++
+    }
   }
 
   decrementUnassignedWorkerCount() {
-    this.unassignedWorkerCount--
+    if (this.unassignedWorkerCount > 0) {
+      this.unassignedWorkerCount--
+    }
   }
 
   increaseMaxWorkerCount(newWorkers: number) {
