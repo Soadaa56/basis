@@ -69,14 +69,27 @@ export class ResourceSystem {
     this.resources.forEach((resource) => {
       const income = resource.calculatedIncome
       if (resource.currentAmount > resource.calculatedStorage) {
-        this.enforceResourceSoftCaps(resource)
+        const softCapReductionPercentage = this.enforceResourceSoftCaps(resource)
+        resource.currentAmount += income * softCapReductionPercentage
       } else {
         resource.currentAmount += income
       }
     })
   }
 
-  enforceResourceSoftCaps(resource: Resource) {
-    // consider lighter or heavier softcaps for resources with resourceDefinitions record
+  // consider lighter or heavier softcaps for resources with resourceDefinitions record
+  enforceResourceSoftCaps(resource: Resource): number {
+    const resourceFactor: number = resource.currentAmount / resource.calculatedStorage
+    let reduction: number = 0
+    let factor: number = 1
+    let i: number = 0
+
+    while (factor <= resourceFactor && i < softCap.length) {
+      factor = softCap[i].factor
+      reduction = softCap[i].reduction
+      i++
+    }
+
+    return 1 - reduction
   }
 }
