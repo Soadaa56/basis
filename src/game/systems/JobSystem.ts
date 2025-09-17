@@ -9,7 +9,7 @@ export interface JobState {
 export class JobSystem {
   private jobs: Partial<Record<JobId, JobState>> = {}
 
-  getJob(jobId: JobId) {
+  getJobById(jobId: JobId) {
     return this.jobs[jobId]
   }
 
