@@ -44,4 +44,15 @@ export class WorkerSystem {
     job.assignedWorkers--
     this.incrementUnassignedWorkerCount()
   }
+
+  assignAllWorkers(job: JobState) {
+    const openWorkerSlots = job.MaxJobSlots - job.assignedWorkers
+
+    if (this.unassignedWorkerCount >= openWorkerSlots) {
+      this.unassignedWorkerCount = -openWorkerSlots
+    } else {
+      job.assignedWorkers += this.unassignedWorkerCount
+      this.unassignedWorkerCount = 0
+    }
+  }
 }
