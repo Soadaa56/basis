@@ -4,6 +4,7 @@ import type { JobId } from '@/game/models/Jobs'
 export class WorkerSystem {
   unassignedWorkerCount: number
   maxWorkerCount: number
+
   constructor(
     private jobSystem: JobSystem,
     workerCount: number = 1,

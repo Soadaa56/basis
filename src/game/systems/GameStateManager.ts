@@ -33,8 +33,8 @@ export class GameStateManager {
     this.resourceSystem = new ResourceSystem(gameState.resources)
     this.buildingSystem = new BuildingSystem(gameState.buildings)
     this.magicSystem = new MagicSystem(gameState.magic)
-    this.workerSystem = new WorkerSystem(gameState.workers)
     this.jobSystem = new JobSystem()
+    this.workerSystem = new WorkerSystem(this.jobSystem, gameState.workers)
   }
 
   setTickInterval(tickInterval: number) {
