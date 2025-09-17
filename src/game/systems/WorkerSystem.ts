@@ -66,4 +66,12 @@ export class WorkerSystem {
       this.unassignedWorkerCount = 0
     }
   }
+
+  unassignAllWorkers(jobId: JobId) {
+    const job = this.jobSystem.getJobById(jobId)
+    if (!job) return console.log(`Error at WorkerSystem: unassignAllWorkers: Job: ${job}`)
+
+    this.unassignedWorkerCount += job.assignedWorkers
+    job.assignedWorkers = 0
+  }
 }
