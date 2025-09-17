@@ -39,4 +39,9 @@ export class WorkerSystem {
     job.assignedWorkers++
     this.decrementUnassignedWorkerCount()
   }
+
+  unassignWorker(job: JobState) {
+    job.assignedWorkers--
+    this.incrementUnassignedWorkerCount()
+  }
 }
