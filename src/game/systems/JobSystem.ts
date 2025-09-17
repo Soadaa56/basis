@@ -31,7 +31,9 @@ export class JobSystem {
     const jobState = this.getJob(jobId)
     if (!jobState) return console.log(`Error: JobSystem => addMaxJobSlots => jobState: ${jobState}`)
 
-    if (!this.isJobUnlocked(jobId)) return this.unlockJob(jobId)
+    if (!this.isJobUnlocked(jobId)) {
+      this.unlockJob(jobId)
+    }
 
     jobState.assignedWorkers += numberOfJobSlots
   }
