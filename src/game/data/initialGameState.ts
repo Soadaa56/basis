@@ -2,9 +2,11 @@
 import type { GameState } from '@/game/systems/GameStateManager'
 import type { Resource } from '@/game/models/Resource'
 import type { Building } from '@/game/models/Buildings'
+import type { Job } from '@/game/models/Jobs'
 
 import { ResourceIds } from '@/game/models/Resource'
 import { BuildingIds } from '@/game/models/Buildings'
+import { JobIds } from '@/game/models/Jobs'
 
 const initialResources: Resource[] = [
   {
@@ -15,7 +17,7 @@ const initialResources: Resource[] = [
     baseStorageFlatBonus: [],
     baseStorageModifiers: [],
     calculatedStorage: 100,
-    baseIncome: 1,
+    baseIncome: 0,
     baseIncomeModifiers: [],
     calculatedIncome: 0,
   },
@@ -55,9 +57,19 @@ const initialBuildings: Building[] = [
   },
 ]
 
+const initialJobs: Job[] = [
+  {
+    id: JobIds.Farmer,
+    name: 'Farmer',
+    totalJobs: 1,
+    assignedWorkers: 0,
+  },
+]
+
 export const initialGameState: GameState = {
   resources: initialResources,
   buildings: initialBuildings,
+  jobs: initialJobs,
   magic: [],
   workers: 1,
 }
