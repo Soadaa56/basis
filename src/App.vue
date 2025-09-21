@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useGameStore } from '@/stores/game'
+
+const gameState = useGameStore().manager
+
+onMounted(() => {
+  // ms, default 1000
+  gameState.startTick()
+})
 </script>
 
 <template>

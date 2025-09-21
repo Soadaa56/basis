@@ -41,7 +41,7 @@ export class GameStateManager {
     this.tickInterval = tickInterval
   }
 
-  startTick(tickInterval: number) {
+  startTick(tickInterval: number = this.tickInterval) {
     setInterval(() => this.gameTick(), tickInterval)
   }
 
