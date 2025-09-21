@@ -14,7 +14,10 @@ export class WorkerSystem {
     this.maxWorkerCount = maxWorkerCount
   }
 
-  loadWorkers() {}
+  loadWorkers(unassignedWorkerCount: number, maxWorkerCount: number) {
+    this.unassignedWorkerCount = unassignedWorkerCount
+    this.maxWorkerCount = maxWorkerCount
+  }
 
   // For Game Resets
   resetWorkerCount(workerCount: number, maxWorkerCount: number) {

@@ -13,6 +13,10 @@ export class BuildingSystem {
     this.buildings = buildings
   }
 
+  loadBuildings(buildings: Building[]) {
+    this.buildings = buildings
+  }
+
   getBuilding(id: string) {
     return this.buildings.find((building) => building.id === id)
   }

@@ -9,6 +9,10 @@ export interface JobState {
 export class JobSystem {
   private jobs: Partial<Record<JobId, JobState>> = {}
 
+  loadJobs(savedJobs: Record<JobId, JobState>) {
+    this.jobs = savedJobs
+  }
+
   getJobById(jobId: JobId) {
     return this.jobs[jobId]
   }

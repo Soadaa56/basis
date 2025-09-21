@@ -9,6 +9,10 @@ export class ResourceSystem {
     this.resources = resources
   }
 
+  loadResources(resources: Resource[]) {
+    this.resources = resources
+  }
+
   getResource(id: string) {
     return this.resources.find((resource) => resource.id === id)
   }

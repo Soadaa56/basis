@@ -3,7 +3,12 @@ import type { MagicCost } from '../models/Costs'
 
 export class MagicSystem {
   private magic: Magic[] = []
+
   constructor(magic: Magic[]) {
+    this.magic = magic
+  }
+
+  loadMagic(magic: Magic[]) {
     this.magic = magic
   }
 
