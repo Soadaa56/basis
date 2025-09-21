@@ -26,7 +26,7 @@ export class GameStateManager {
   magicSystem: MagicSystem
   workerSystem: WorkerSystem
   jobSystem: JobSystem
-  private tickInterval: number = TICK_INTERVAL
+  private tickInterval: number = TICK_INTERVAL //ms
 
   constructor(gameState: GameState) {
     this.gameState = gameState
@@ -37,8 +37,8 @@ export class GameStateManager {
     this.workerSystem = new WorkerSystem(this.jobSystem, gameState.workers)
   }
 
-  setTickInterval(tickInterval: number) {
-    this.tickInterval = tickInterval
+  loadGameState(gameState: GameState) {
+    this.gameState = gameState
   }
 
   startTick(tickInterval: number = this.tickInterval) {
@@ -47,6 +47,10 @@ export class GameStateManager {
 
   gameTick() {
     this.resourceSystem.updateAllResources()
+  }
+
+  setTickInterval(tickInterval: number) {
+    this.tickInterval = tickInterval
   }
 
   purchaseBuilding(buildingId: BuildingId, buildingCosts: ResourceCost[]) {
