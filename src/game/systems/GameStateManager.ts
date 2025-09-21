@@ -9,14 +9,14 @@ import type { Resource } from '@/game/models/Resource'
 import type { ResourceCost } from '@/game/models/Costs'
 import type { Building, BuildingId } from '@/game/models/Buildings'
 import type { Magic } from '@/game/models/Magic'
-import type { Job } from '@/game/models/Jobs'
+import type { WorkerState } from '@/game/systems/WorkerSystem'
 
 export interface GameState {
   resources: Resource[]
   buildings: Building[]
   magic: Magic[]
-  workers: number
-  jobs: Job[]
+  jobs: object
+  workers: WorkerState
 }
 
 export class GameStateManager {
@@ -24,8 +24,8 @@ export class GameStateManager {
   resourceSystem: ResourceSystem
   buildingSystem: BuildingSystem
   magicSystem: MagicSystem
-  workerSystem: WorkerSystem
   jobSystem: JobSystem
+  workerSystem: WorkerSystem
   private tickInterval: number = TICK_INTERVAL //ms
 
   constructor(gameState: GameState) {
@@ -39,6 +39,11 @@ export class GameStateManager {
 
   loadGameState(gameState: GameState) {
     this.gameState = gameState
+    this.resourceSystem.loadResources(gameState.resources)
+    this.buildingSystem.loadBuildings(gameState.buildings)
+    this.magicSystem.loadMagic(gameState.magic)
+    this.jobSystem.loadJobs(gameState.jobs)
+    this.workerSystem.loadWorkers(gameState.workers)
   }
 
   startTick(tickInterval: number = this.tickInterval) {
