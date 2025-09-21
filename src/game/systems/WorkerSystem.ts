@@ -1,28 +1,32 @@
 import { JobSystem } from './JobSystem'
 import type { JobId } from '@/game/models/Jobs'
 
+export interface WorkerState {
+  unassignedWorkerCount: number
+  maxWorkerCount: number
+}
+
 export class WorkerSystem {
   unassignedWorkerCount: number
   maxWorkerCount: number
 
   constructor(
     private jobSystem: JobSystem,
-    unassignedworkerCount: number = 1,
-    maxWorkerCount: number = 1,
+    workerState: WorkerState,
   ) {
-    this.unassignedWorkerCount = unassignedworkerCount
-    this.maxWorkerCount = maxWorkerCount
+    this.unassignedWorkerCount = workerState.unassignedWorkerCount
+    this.maxWorkerCount = workerState.maxWorkerCount
   }
 
-  loadWorkers(unassignedWorkerCount: number, maxWorkerCount: number) {
-    this.unassignedWorkerCount = unassignedWorkerCount
-    this.maxWorkerCount = maxWorkerCount
+  loadWorkers(workerState: WorkerState) {
+    this.unassignedWorkerCount = workerState.unassignedWorkerCount
+    this.maxWorkerCount = workerState.maxWorkerCount
   }
 
   // For Game Resets
-  resetWorkerCount(workerCount: number, maxWorkerCount: number) {
-    this.unassignedWorkerCount = workerCount
-    this.maxWorkerCount = maxWorkerCount
+  resetWorkerCount(workerState: WorkerState) {
+    this.unassignedWorkerCount = workerState.unassignedWorkerCount
+    this.maxWorkerCount = workerState.maxWorkerCount
   }
 
   incrementUnassignedWorkerCount() {
