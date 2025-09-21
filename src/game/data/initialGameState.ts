@@ -3,6 +3,7 @@ import type { GameState } from '@/game/systems/GameStateManager'
 import type { Resource } from '@/game/models/Resource'
 import type { Building } from '@/game/models/Buildings'
 import type { Job } from '@/game/models/Jobs'
+import type { WorkerState } from '@/game/systems/WorkerSystem'
 
 import { ResourceIds } from '@/game/models/Resource'
 import { BuildingIds } from '@/game/models/Buildings'
@@ -66,10 +67,15 @@ const initialJobs: Job[] = [
   },
 ]
 
+const initialWorkers: WorkerState = {
+  unassignedWorkerCount: 1,
+  maxWorkerCount: 1,
+}
+
 export const initialGameState: GameState = {
   resources: initialResources,
   buildings: initialBuildings,
   jobs: initialJobs,
   magic: [],
-  workers: 1,
+  workers: initialWorkers,
 }
