@@ -2,14 +2,23 @@
 import { onMounted } from 'vue'
 import { useGameStore } from '@/stores/game'
 
-const gameStore = useGameStore().manager
+const gameStore = useGameStore()
+const saveFileString = localStorage.getItem('saveFile')
+
+// access to save file for debugging in console
+if (saveFileString) {
+  const saveFileJson = JSON.parse(saveFileString)
+  console.log(saveFileJson)
+}
 
 // @ts-expect-error expose gameState for debugging
 window.gameStore = gameStore
 
 onMounted(() => {
   // ms, default 1000
-  gameStore.startTick()
+  if (gameStore.manager) {
+    gameStore.manager.startTick()
+  }
 })
 </script>
 

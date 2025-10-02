@@ -1,9 +1,6 @@
-import { newGameFile, loadSaveFile } from '@/utils/saveFile'
+import { loadSaveFile } from '@/utils/saveFile'
 import { GameStateManager } from '@/game/systems/GameStateManager'
 
-let saveFile = loadSaveFile()
-if (!saveFile) {
-  saveFile = newGameFile('Basis')
-}
+const saveFile = loadSaveFile()
 
-export const gameStateManager = new GameStateManager(saveFile.gameState)
+export const gameStateManager = saveFile ? new GameStateManager(saveFile.gameState) : null

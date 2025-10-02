@@ -6,8 +6,28 @@ import MagicPage from '@/pages/Magic/MagicPage.vue'
 import SettingsPage from '@/pages/Settings/SettingsPage.vue'
 import NotFound from '@/pages/NotFound.vue'
 import { hasSaveFile } from '@/utils/saveFile'
+import LoadingPage from '@/pages/LoadingPage.vue'
+import { gameStateManager } from '@/game/bootstrap'
 
 const routes = [
+  {
+    path: '/welcome',
+    component: WelcomePage,
+    meta: { hideHeader: true },
+  },
+  {
+    path: '/loading',
+    component: LoadingPage,
+    meta: { headHeader: true },
+    beforeEnter: () => {
+      // no save file detected
+      if (!hasSaveFile()) {
+        return { path: '/welcome' }
+      } else if (gameStateManager) {
+        return { path: '/' }
+      }
+    },
+  },
   {
     path: '/',
     component: MainLayout,
@@ -16,17 +36,6 @@ const routes = [
       { path: 'magic', component: MagicPage },
       { path: 'settings', component: SettingsPage },
     ],
-    beforeEnter: () => {
-      // no save file detected
-      if (!hasSaveFile()) {
-        return { path: '/welcome' }
-      }
-    },
-  },
-  {
-    path: '/welcome',
-    component: WelcomePage,
-    meta: { hideHeader: true },
   },
   // Catch-all for missing route
   {
