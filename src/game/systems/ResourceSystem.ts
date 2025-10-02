@@ -17,6 +17,10 @@ export class ResourceSystem {
     return this.resources.find((resource) => resource.id === id)
   }
 
+  getAllResources(): Resource[] {
+    return this.resources
+  }
+
   canAfford(costs: ResourceCost[]): boolean {
     return costs.every((cost) => {
       const resource = this.getResource(cost.id)
