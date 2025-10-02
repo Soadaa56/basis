@@ -7,7 +7,7 @@ export const JobIds = {
   Blacksmith: 'blacksmith',
   Fishermen: 'fishermen',
   Merchant: 'merchant',
-  Unemployed: 'unemployed',
+  Beggar: 'beggar',
 } as const
 
 export type JobId = (typeof JobIds)[keyof typeof JobIds]

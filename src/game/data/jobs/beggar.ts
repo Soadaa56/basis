@@ -1,7 +1,7 @@
 import { ResourceIds } from '@/game/models/Resource'
 import type { JobInfo } from '@/game/data/jobsInfo'
 
-export const Unemployed: JobInfo = {
+export const Beggar: JobInfo = {
   unlocked: true,
   output: [
     {
