@@ -2,14 +2,14 @@
 import { onMounted } from 'vue'
 import { useGameStore } from '@/stores/game'
 
-const gameState = useGameStore().manager
+const gameStore = useGameStore().manager
 
 // @ts-expect-error expose gameState for debugging
-window.gameState = gameState
+window.gameStore = gameStore
 
 onMounted(() => {
   // ms, default 1000
-  gameState.startTick()
+  gameStore.startTick()
 })
 </script>
 
