@@ -10,6 +10,7 @@ import type { ResourceCost } from '@/game/models/Costs'
 import type { Building, BuildingId } from '@/game/models/Buildings'
 import type { Magic } from '@/game/models/Magic'
 import type { WorkerState } from '@/game/systems/WorkerSystem'
+import { reactive } from 'vue'
 
 export interface GameState {
   resources: Resource[]
@@ -29,7 +30,8 @@ export class GameStateManager {
   private tickInterval: number = TICK_INTERVAL //ms
 
   constructor(gameState: GameState) {
-    this.gameState = gameState
+    this.gameState = reactive(gameState)
+
     this.resourceSystem = new ResourceSystem(gameState.resources)
     this.buildingSystem = new BuildingSystem(gameState.buildings)
     this.magicSystem = new MagicSystem(gameState.magic)
