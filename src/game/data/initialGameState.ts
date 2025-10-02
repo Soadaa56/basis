@@ -65,6 +65,12 @@ const initialJobs: Job[] = [
     totalJobs: 1,
     assignedWorkers: 0,
   },
+  {
+    id: JobIds.Beggar,
+    name: 'Beggar',
+    totalJobs: Infinity,
+    assignedWorkers: 0,
+  },
 ]
 
 const initialWorkers: WorkerState = {
