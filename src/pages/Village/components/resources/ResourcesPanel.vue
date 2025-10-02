@@ -1,13 +1,21 @@
 <script setup lang="ts">
+import { useGameStore } from '@/stores/game'
 import BaseResourceText from '@/components/ui/BaseResourceText.vue'
+
+const gameStore = useGameStore().manager
 </script>
 
 <template>
   <div class="resource-panel-container">
     <h2>Resources Panel</h2>
-    <base-resource-text name="gold" :value="0" :max="100" :income="1"></base-resource-text>
-    <base-resource-text name="wood" :value="0" :max="100" :income="1"></base-resource-text>
-    <base-resource-text name="food" :value="0" :max="100" :income="1"></base-resource-text>
+    <base-resource-text
+      v-for="resource in gameStore.resourceSystem.getAllResources()"
+      :key="resource.id"
+      :name="resource.name"
+      :value="resource.currentAmount"
+      :max="resource.calculatedStorage"
+      :income="resource.calculatedIncome"
+    />
   </div>
 </template>
 
