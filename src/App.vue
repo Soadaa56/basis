@@ -4,6 +4,9 @@ import { useGameStore } from '@/stores/game'
 
 const gameState = useGameStore().manager
 
+// @ts-expect-error expose gameState for debugging
+window.gameState = gameState
+
 onMounted(() => {
   // ms, default 1000
   gameState.startTick()
