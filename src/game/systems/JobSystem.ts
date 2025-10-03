@@ -1,16 +1,32 @@
 import { jobDefinitions } from '@/game/data/jobs'
 import type { JobId } from '@/game/models/Jobs'
+import type { Job } from '@/game/models/Jobs'
 
 export interface JobState {
   assignedWorkers: number
-  MaxJobSlots: number
+  maxJobSlots: number
 }
 
 export class JobSystem {
   private jobs: Partial<Record<JobId, JobState>> = {}
 
-  loadJobs(savedJobs: Partial<Record<JobId, JobState>>) {
-    this.jobs = savedJobs
+  loadJobs(savedJobs: Job[] | Partial<Record<JobId, JobState>>) {
+    console.log(savedJobs)
+    console.log('hi')
+    if (Array.isArray(savedJobs)) {
+      savedJobs.forEach((job) => {
+        this.jobs[job.id] = {
+          assignedWorkers: job.assignedWorkers,
+          maxJobSlots: job.totalJobs,
+        }
+      })
+    } else {
+      this.jobs = savedJobs
+    }
+  }
+
+  getAllJobs(): Partial<Record<JobId, JobState>> {
+    return this.jobs
   }
 
   getJobById(jobId: JobId) {
