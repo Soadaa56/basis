@@ -68,7 +68,7 @@ const initialJobs: Job[] = [
   {
     id: JobIds.Beggar,
     name: 'Beggar',
-    totalJobs: Infinity,
+    totalJobs: 1,
     assignedWorkers: 0,
   },
 ]
