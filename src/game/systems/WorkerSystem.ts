@@ -53,15 +53,19 @@ export class WorkerSystem {
   assignWorker(jobId: JobId) {
     const job = this.jobSystem.getJobById(jobId)
     if (!job) return console.log(`Error at WorkerSystem: assignWorker: Job: ${job}`)
-    job.assignedWorkers++
-    this.decrementUnassignedWorkerCount()
+    if (this.unassignedWorkerCount > 0) {
+      job.assignedWorkers++
+      this.decrementUnassignedWorkerCount()
+    }
   }
 
   unassignWorker(jobId: JobId) {
     const job = this.jobSystem.getJobById(jobId)
     if (!job) return console.log(`Error at WorkerSystem: unassignWorker: Job: ${job}`)
-    job.assignedWorkers--
-    this.incrementUnassignedWorkerCount()
+    if (job.assignedWorkers > 0) {
+      job.assignedWorkers--
+      this.incrementUnassignedWorkerCount()
+    }
   }
 
   assignAllWorkers(jobId: JobId) {
