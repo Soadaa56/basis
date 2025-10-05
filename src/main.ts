@@ -7,7 +7,8 @@ import router from './router'
 import FontAwesomeIcon from './plugins/fontAwesome'
 
 // Custom CSS
-import '@/assets/reset.css'
+// import '@/assets/reset.css'
+import '@/assets/main.scss'
 
 const app = createApp(App)
 app.component('FaIcon', FontAwesomeIcon)

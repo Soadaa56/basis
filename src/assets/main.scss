@@ -1,0 +1,22 @@
+:root {
+  --bg-color: #222524; // eerie black
+  --text-color: #63ccca; // robin egg blue
+  --secondary-color: #42858c; // dark cyan
+  --tertiary-color: #5da399; // keppel
+  --accent-color: #3066be; // true blue
+  --button-text-color: black; // black
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+button {
+  background-color: var(--secondary-color);
+  color: var(--button-text-color);
+
+  &:hover {
+    background-color: red;
+  }
+}
