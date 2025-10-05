@@ -20,6 +20,7 @@ defineProps<{
   display: flex;
   justify-content: flex-start;
   gap: 1rem;
+  padding: 0.2rem;
 }
 
 .income {
