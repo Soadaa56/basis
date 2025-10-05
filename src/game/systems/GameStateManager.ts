@@ -9,6 +9,7 @@ import type { Resource } from '@/game/models/Resource'
 import type { ResourceCost } from '@/game/models/Costs'
 import type { Building, BuildingId } from '@/game/models/Buildings'
 import type { Magic } from '@/game/models/Magic'
+import type { Job } from '@/game/models/Jobs'
 import type { WorkerState } from '@/game/systems/WorkerSystem'
 import { reactive } from 'vue'
 
@@ -16,7 +17,7 @@ export interface GameState {
   resources: Resource[]
   buildings: Building[]
   magic: Magic[]
-  jobs: object
+  jobs: Job[]
   workers: WorkerState
 }
 
