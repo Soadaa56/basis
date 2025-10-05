@@ -7,8 +7,8 @@ import BuildingsPanel from './components/buildings/BuildingsPanel.vue'
 <template>
   <div class="panel-container">
     <resources-panel></resources-panel>
-    <workers-panel></workers-panel>
     <buildings-panel></buildings-panel>
+    <workers-panel></workers-panel>
   </div>
 </template>
 
