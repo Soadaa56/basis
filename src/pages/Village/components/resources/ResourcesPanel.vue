@@ -2,7 +2,7 @@
 import { useGameStore } from '@/stores/game'
 import BaseResourceText from '@/components/ui/BaseResourceText.vue'
 
-const gameStore = useGameStore().manager
+const gameStore = useGameStore().manager!
 </script>
 
 <template>
