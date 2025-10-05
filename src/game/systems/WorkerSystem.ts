@@ -67,7 +67,7 @@ export class WorkerSystem {
   assignAllWorkers(jobId: JobId) {
     const job = this.jobSystem.getJobById(jobId)
     if (!job) return console.log(`Error at WorkerSystem: assignAllWorkers: Job: ${job}`)
-    const openWorkerSlots = job.MaxJobSlots - job.assignedWorkers
+    const openWorkerSlots = job.totalJobs - job.assignedWorkers
 
     if (this.unassignedWorkerCount >= openWorkerSlots) {
       this.unassignedWorkerCount -= openWorkerSlots
