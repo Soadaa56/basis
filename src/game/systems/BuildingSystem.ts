@@ -17,6 +17,10 @@ export class BuildingSystem {
     this.buildings = buildings
   }
 
+  getAllBuildings() {
+    return this.buildings
+  }
+
   getBuilding(id: string) {
     return this.buildings.find((building) => building.id === id)
   }
