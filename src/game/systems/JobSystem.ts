@@ -1,36 +1,24 @@
 import { jobDefinitions } from '@/game/data/jobs'
-import type { JobId } from '@/game/models/Jobs'
-import type { Job } from '@/game/models/Jobs'
-
-export interface JobState {
-  assignedWorkers: number
-  maxJobSlots: number
-}
+import type { Job, JobId } from '@/game/models/Jobs'
 
 export class JobSystem {
-  private jobs: Partial<Record<JobId, JobState>> = {}
+  private jobs: Job[] = []
 
-  loadJobs(savedJobs: Job[] | Partial<Record<JobId, JobState>>) {
-    console.log(savedJobs)
-    console.log('hi')
-    if (Array.isArray(savedJobs)) {
-      savedJobs.forEach((job) => {
-        this.jobs[job.id] = {
-          assignedWorkers: job.assignedWorkers,
-          maxJobSlots: job.totalJobs,
-        }
-      })
-    } else {
-      this.jobs = savedJobs
-    }
+  loadJobs(savedJobs: Job[]) {
+    this.jobs = savedJobs.map((job) => ({
+      ...job,
+      assignedWorkers: job.assignedWorkers ?? 0,
+      totalJobs: job.totalJobs ?? 0,
+      unlocked: job.isUnlocked ?? false,
+    }))
   }
 
-  getAllJobs(): Partial<Record<JobId, JobState>> {
+  getAllJobs() {
     return this.jobs
   }
 
-  getJobById(jobId: JobId) {
-    return this.jobs[jobId]
+  getJobById(id: JobId) {
+    return this.jobs.find((job) => job.id === id)
   }
 
   isJobUnlocked(jobId: JobId) {
