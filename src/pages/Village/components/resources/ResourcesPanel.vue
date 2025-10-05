@@ -2,11 +2,11 @@
 import { useGameStore } from '@/stores/game'
 import BaseResourceText from '@/components/ui/BaseResourceText.vue'
 
-const gameStore = useGameStore().manager!
+const gameStore = useGameStore().manager
 </script>
 
 <template>
-  <div class="resource-panel-container">
+  <div v-if="gameStore" class="resource-panel-container">
     <h2>Resources Panel</h2>
     <base-resource-text
       v-for="resource in gameStore.resourceSystem.getAllResources()"

@@ -8,14 +8,14 @@ console.log(gameStore?.gameState.jobs)
 </script>
 
 <template>
-  <div class="worker-panel-container">
+  <div v-if="gameStore" class="worker-panel-container">
     <h2>Workers Panel</h2>
     <h4>
       {{ gameStore?.gameState.workers.unassignedWorkerCount }} /
       {{ gameStore?.gameState.workers.maxWorkerCount }} Worker Unassigned
     </h4>
     <base-worker-text
-      v-for="job in gameStore?.gameState.jobs"
+      v-for="job in gameStore.gameState.jobs"
       :key="job.id"
       :name="job.name"
       :assigned-workers="job?.assignedWorkers"
