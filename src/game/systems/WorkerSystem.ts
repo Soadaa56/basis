@@ -52,7 +52,7 @@ export class WorkerSystem {
 
   assignWorker(jobId: JobId) {
     const job = this.jobSystem.getJobById(jobId)
-    if (!job) return console.log(`Error at WorkerSystem: assignWorker: Job: ${job}`)
+    if (!job) return console.log(`Error at WorkerSystem => assignWorker => job: ${job}`)
     if (this.unassignedWorkerCount > 0) {
       job.assignedWorkers++
       this.decrementUnassignedWorkerCount()

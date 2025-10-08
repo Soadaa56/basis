@@ -3,8 +3,6 @@ import { useGameStore } from '@/stores/game'
 import BaseWorkerText from '@/components/ui/BaseWorkerText.vue'
 
 const gameStore = useGameStore().manager
-
-console.log(gameStore?.gameState.jobs)
 </script>
 
 <template>
@@ -15,14 +13,15 @@ console.log(gameStore?.gameState.jobs)
       {{ gameStore?.gameState.workers.maxWorkerCount }} Worker Unassigned
     </h4>
     <base-worker-text
-      v-for="job in gameStore.jobSystem.getAllJobs()"
+      v-for="job in gameStore.gameState.jobs"
       :key="job.id"
+      :id="job.id"
       :name="job.name"
       :assigned-workers="job?.assignedWorkers"
       :max-job-slots="job?.totalJobs"
+      @assign="gameStore.addWorkerToJob(job.id)"
+      @unassign="gameStore.removeWorkerFromJob(job.id)"
     />
-
-    <base-worker-text name="Farmer" :assigned-workers="0" :max-job-slots="0"></base-worker-text>
   </div>
 </template>
 
