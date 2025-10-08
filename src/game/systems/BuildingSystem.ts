@@ -1,5 +1,5 @@
 import { buildingDefinitions } from '@/game/data/buildings'
-import { BuildingTypes } from '@/game/data/buildingsInfo'
+import { BuildingTypes } from '@/game/data/info/buildingsInfo'
 import { JobSystem } from './JobSystem'
 import { WorkerSystem } from './WorkerSystem'
 import { ResourceSystem } from './ResourceSystem'
