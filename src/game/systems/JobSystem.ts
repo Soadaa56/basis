@@ -4,13 +4,13 @@ import type { Job, JobId } from '@/game/models/Jobs'
 export class JobSystem {
   private jobs: Job[] = []
 
-  loadJobs(savedJobs: Job[]) {
-    this.jobs = savedJobs.map((job) => ({
-      ...job,
-      assignedWorkers: job.assignedWorkers ?? 0,
-      totalJobs: job.totalJobs ?? 0,
-      unlocked: job.isUnlocked ?? false,
-    }))
+  constructor(jobs: Job[]) {
+    this.jobs = jobs
+  }
+
+  loadJobs(jobs: Job[]) {
+    console.log(jobs)
+    this.jobs = jobs
   }
 
   getAllJobs() {

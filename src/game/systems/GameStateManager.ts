@@ -9,7 +9,7 @@ import type { Resource } from '@/game/models/Resource'
 import type { ResourceCost } from '@/game/models/Costs'
 import type { Building, BuildingId } from '@/game/models/Buildings'
 import type { Magic } from '@/game/models/Magic'
-import type { Job } from '@/game/models/Jobs'
+import type { Job, JobId } from '@/game/models/Jobs'
 import type { WorkerState } from '@/game/systems/WorkerSystem'
 import { reactive } from 'vue'
 
@@ -36,7 +36,7 @@ export class GameStateManager {
     this.resourceSystem = new ResourceSystem(gameState.resources)
     this.buildingSystem = new BuildingSystem(gameState.buildings)
     this.magicSystem = new MagicSystem(gameState.magic)
-    this.jobSystem = new JobSystem()
+    this.jobSystem = new JobSystem(gameState.jobs)
     this.workerSystem = new WorkerSystem(this.jobSystem, gameState.workers)
   }
 
@@ -71,5 +71,15 @@ export class GameStateManager {
       this.jobSystem,
       this.workerSystem,
     )
+  }
+
+  addWorkerToJob(jobId: JobId) {
+    const job = this.jobSystem.getJobById(jobId)
+    console.log(job)
+    this.workerSystem.assignWorker(jobId)
+  }
+
+  removeWorkerFromJob(jobId: JobId) {
+    this.workerSystem.unassignWorker(jobId)
   }
 }
