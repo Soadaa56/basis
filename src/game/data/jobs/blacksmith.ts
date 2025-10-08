@@ -1,12 +1,13 @@
 import { ResourceIds } from '@/game/models/Resource'
-import type { JobInfo } from '@/game/data/info/jobsInfo'
+import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const Blacksmith: JobInfo = {
   unlocked: false,
   output: [
     {
-      resource: ResourceIds.Research,
+      resourceId: ResourceIds.Research,
       rate: 0.001,
+      multipliers: [],
     },
   ],
 }

@@ -1,4 +1,4 @@
-import { BuildingTypes, type BuildingInfo } from '@/game/data/info/buildingsInfo'
+import { BuildingTypes, type BuildingInfo } from '@/game/data/buildingsInfo'
 import { JobIds } from '@/game/models/Jobs'
 
 export const Farm: BuildingInfo = {

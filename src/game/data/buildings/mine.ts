@@ -1,4 +1,4 @@
-import { BuildingTypes, type BuildingInfo } from '../info/buildingsInfo'
+import { BuildingTypes, type BuildingInfo } from '../buildingsInfo'
 import { JobIds } from '@/game/models/Jobs'
 
 export const Mine: BuildingInfo = {

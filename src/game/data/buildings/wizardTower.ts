@@ -1,4 +1,4 @@
-import { BuildingTypes, type BuildingInfo } from '@/game/data/info/buildingsInfo'
+import { BuildingTypes, type BuildingInfo } from '@/game/data/buildingsInfo'
 
 export const WizardTower: BuildingInfo = {
   type: BuildingTypes.Unlocker,

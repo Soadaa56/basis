@@ -1,18 +1,20 @@
 import { ResourceIds } from '@/game/models/Resource'
-import type { JobInfo } from '@/game/data/info/jobsInfo'
+import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const Fishermen: JobInfo = {
   unlocked: false,
   output: [
     {
-      resource: ResourceIds.Food,
+      resourceId: ResourceIds.Food,
       rate: 10,
+      multipliers: [],
     },
   ],
   input: [
     {
-      resource: ResourceIds.Wood,
+      resourceId: ResourceIds.Wood,
       rate: 1,
+      multipliers: [],
     },
   ],
 }

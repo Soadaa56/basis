@@ -1,12 +1,13 @@
 import { ResourceIds } from '@/game/models/Resource'
-import type { JobInfo } from '@/game/data/info/jobsInfo'
+import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const Beggar: JobInfo = {
   unlocked: true,
   output: [
     {
-      resource: ResourceIds.Gold,
+      resourceId: ResourceIds.Gold,
       rate: 0.1,
+      multipliers: [],
     },
   ],
 }

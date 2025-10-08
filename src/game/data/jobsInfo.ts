@@ -1,13 +1,15 @@
 import { type ResourceId } from '@/game/models/Resource'
 
 export interface JobOutput {
-  resource: ResourceId
+  resourceId: ResourceId
   rate: number
+  multipliers?: number[]
 }
 
 export interface JobInput {
-  resource: ResourceId
+  resourceId: ResourceId
   rate: number
+  multipliers?: number[]
 }
 
 // Not sure if any job will do anything besides produce resources

@@ -1,4 +1,4 @@
-import { BuildingTypes, type BuildingInfo } from '@/game/data/info/buildingsInfo'
+import { BuildingTypes, type BuildingInfo } from '@/game/data/buildingsInfo'
 import { ResourceIds } from '@/game/models/Resource'
 
 export const Sawmill: BuildingInfo = {

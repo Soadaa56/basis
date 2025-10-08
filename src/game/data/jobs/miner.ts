@@ -1,12 +1,13 @@
 import { ResourceIds } from '@/game/models/Resource'
-import type { JobInfo } from '@/game/data/info/jobsInfo'
+import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const Miner: JobInfo = {
   unlocked: false,
   output: [
     {
-      resource: ResourceIds.Copper,
+      resourceId: ResourceIds.Copper,
       rate: 0.2,
+      multipliers: [],
     },
   ],
 }

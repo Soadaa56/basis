@@ -8,7 +8,7 @@ import { Well } from './Well'
 import { WizardTower } from './wizardTower'
 
 import type { BuildingId } from '@/game/models/Buildings'
-import type { BuildingInfo } from '@/game/data/info/buildingsInfo'
+import type { BuildingInfo } from '@/game/data/buildingsInfo'
 
 export const buildingDefinitions: Partial<Record<BuildingId, BuildingInfo>> = {
   bakehouse: Bakehouse,

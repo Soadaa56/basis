@@ -6,7 +6,7 @@ import { Miner } from './miner'
 import { Beggar } from './beggar'
 
 import type { JobId } from '@/game/models/Jobs'
-import type { JobInfo } from '@/game/data/info/jobsInfo'
+import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const jobDefinitions: Partial<Record<JobId, JobInfo>> = {
   blacksmith: Blacksmith,
