@@ -62,14 +62,18 @@ export class ResourceSystem {
 
   updateCalculatedIncome(resource: Resource) {
     const baseIncome = resource.baseIncome
-    const baseIncomeModifiers = resource.baseIncomeModifiers
-
-    const calculatedIncome = baseIncomeModifiers.reduce(
-      (sum, currentValue) => sum * currentValue,
-      baseIncome,
+    const baseIncomeMultipliers = resource.baseIncomeMultipliers.reduce(
+      (sum, value) => sum * value,
+      1,
+    )
+    const incomeSources = Object.values(resource.incomeSources).reduce(
+      (sum, value) => sum + value,
+      0,
     )
 
-    return (resource.calculatedIncome = calculatedIncome)
+    const flatIncome = baseIncome + incomeSources
+
+    resource.totalIncome = flatIncome * baseIncomeMultipliers
   }
 
   // Ran on gameTick update
