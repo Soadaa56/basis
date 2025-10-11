@@ -13,6 +13,11 @@ export const ResourceIds = {
 
 export type ResourceId = (typeof ResourceIds)[keyof typeof ResourceIds]
 
+export interface IncomeSources {
+  jobs: number
+  buildings: number
+}
+
 export interface Resource extends Unlockable {
   id: ResourceId
   name: string
@@ -21,7 +26,8 @@ export interface Resource extends Unlockable {
   baseStorageFlatBonus: number[]
   baseStorageModifiers: number[]
   calculatedStorage: number
-  baseIncome: number
-  baseIncomeModifiers: number[]
-  calculatedIncome: number
+  baseIncome: number // probably zero for almost all?
+  incomeSources: IncomeSources
+  baseIncomeMultipliers: number[]
+  totalIncome: number
 }

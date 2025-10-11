@@ -75,7 +75,7 @@ export class ResourceSystem {
   // Ran on gameTick update
   updateAllResources() {
     this.resources.forEach((resource) => {
-      const income = resource.calculatedIncome
+      const income = resource.totalIncome
       if (resource.currentAmount > resource.calculatedStorage) {
         const softCapReductionPercentage = this.enforceResourceSoftCaps(resource)
         resource.currentAmount += income * softCapReductionPercentage
