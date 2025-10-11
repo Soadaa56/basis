@@ -57,7 +57,7 @@ export class ResourceSystem {
   }
 
   updateBaseIncome(resource: Resource, incomeAdjustment: number) {
-    return (resource.baseIncome += incomeAdjustment)
+    resource.baseIncome += incomeAdjustment
   }
 
   updateCalculatedIncome(resource: Resource) {
