@@ -1,5 +1,5 @@
 import { JobSystem } from './JobSystem'
-import type { JobId } from '@/game/models/Jobs'
+import type { Job, JobId } from '@/game/models/Jobs'
 
 export interface WorkerState {
   unassignedWorkerCount: number
@@ -41,8 +41,8 @@ export class WorkerSystem {
   }
 
   assignWorker(jobId: JobId) {
-    const job = this.jobSystem.getJobById(jobId)
-    if (!job) return console.log(`Error at WorkerSystem => assignWorker => job: ${job}`)
+    const job = this.getJobOrError(jobId)
+
     if (this.workerState.unassignedWorkerCount > 0) {
       job.assignedWorkers++
       this.decrementUnassignedWorkerCount()
@@ -50,8 +50,8 @@ export class WorkerSystem {
   }
 
   unassignWorker(jobId: JobId) {
-    const job = this.jobSystem.getJobById(jobId)
-    if (!job) return console.log(`Error at WorkerSystem: unassignWorker: Job: ${job}`)
+    const job = this.getJobOrError(jobId)
+
     if (job.assignedWorkers > 0) {
       job.assignedWorkers--
       this.incrementUnassignedWorkerCount()
@@ -59,8 +59,7 @@ export class WorkerSystem {
   }
 
   assignAllWorkers(jobId: JobId) {
-    const job = this.jobSystem.getJobById(jobId)
-    if (!job) return console.log(`Error at WorkerSystem: assignAllWorkers: Job: ${job}`)
+    const job = this.getJobOrError(jobId)
     const openWorkerSlots = job.totalJobs - job.assignedWorkers
 
     if (this.workerState.unassignedWorkerCount >= openWorkerSlots) {
@@ -72,10 +71,21 @@ export class WorkerSystem {
   }
 
   unassignAllWorkers(jobId: JobId) {
-    const job = this.jobSystem.getJobById(jobId)
-    if (!job) return console.log(`Error at WorkerSystem: unassignAllWorkers: Job: ${job}`)
+    const job = this.getJobOrError(jobId)
 
     this.workerState.unassignedWorkerCount += job.assignedWorkers
     job.assignedWorkers = 0
+  }
+
+  updateResourceContribution(jobId: JobId) {
+    const job = this.getJobOrError(jobId)
+  }
+
+  private getJobOrError(jobId: JobId): Job {
+    const job = this.jobSystem.getJobById(jobId)
+    if (!job) {
+      throw new Error(`Error at WorkerSystem: job not found: ${jobId}`)
+    }
+    return job
   }
 }
