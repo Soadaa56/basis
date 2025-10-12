@@ -77,10 +77,6 @@ export class WorkerSystem {
     job.assignedWorkers = 0
   }
 
-  updateResourceContribution(jobId: JobId) {
-    const job = this.getJobOrError(jobId)
-  }
-
   private getJobOrError(jobId: JobId): Job {
     const job = this.jobSystem.getJobById(jobId)
     if (!job) {
