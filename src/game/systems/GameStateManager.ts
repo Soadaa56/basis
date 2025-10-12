@@ -36,7 +36,7 @@ export class GameStateManager {
     this.resourceSystem = new ResourceSystem(gameState.resources)
     this.buildingSystem = new BuildingSystem(gameState.buildings)
     this.magicSystem = new MagicSystem(gameState.magic)
-    this.jobSystem = new JobSystem(gameState.jobs)
+    this.jobSystem = new JobSystem(gameState.jobs, this.resourceSystem)
     this.workerSystem = new WorkerSystem(this.jobSystem, gameState.workers)
   }
 
@@ -74,8 +74,6 @@ export class GameStateManager {
   }
 
   addWorkerToJob(jobId: JobId) {
-    const job = this.jobSystem.getJobById(jobId)
-    console.log(job)
     this.workerSystem.assignWorker(jobId)
   }
 
