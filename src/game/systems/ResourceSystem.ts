@@ -56,6 +56,7 @@ export class ResourceSystem {
     return (resource.calculatedStorage = calculatedStorage)
   }
 
+  // possibly goes unused, unless meta upgrade gives flat amount? idk
   updateBaseIncome(resource: Resource, incomeAdjustment: number) {
     resource.baseIncome += incomeAdjustment
   }
@@ -76,7 +77,11 @@ export class ResourceSystem {
     resource.totalIncome = flatIncome * baseIncomeMultipliers
   }
 
-  addJobContribution(resourceId: ResourceId, amount: number) {}
+  addJobContribution(resourceId: ResourceId, amount: number) {
+    const resource = this.getResourceOrError(resourceId)
+    resource.incomeSources.jobs = amount
+    this.updateCalculatedIncome(resource)
+  }
 
   // Ran on gameTick update
   updateAllResources() {
