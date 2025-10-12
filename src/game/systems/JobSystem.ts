@@ -50,31 +50,35 @@ export class JobSystem {
     jobState.assignedWorkers += numberOfJobSlots
   }
 
-  updateResourceContribution(jobId: JobId) {
-    const job = this.getJobOrError(jobId)
-    const jobInfo = jobDefinitions[jobId]
-    const assignedWorkers = job.assignedWorkers
-    const jobOutputs = jobInfo?.output
-    const jobInputs = jobInfo?.input
-
-    jobOutputs?.forEach((output) => {
-      const resourceId = output.resourceId
-      const totalMults = (output.multipliers ?? [1]).reduce((sum, value) => sum * value, 1)
-      const outputRateWithMults = totalMults * output.rate
-      const totalOutput = outputRateWithMults * assignedWorkers
-
-      this.resourceSystem.addJobContribution(resourceId, totalOutput)
+  // Seems safer to recalc each time to avoid possible double add bugs or decimal rounding bugs
+  updateResourceContribution() {
+    this.resourceSystem.getAllResources().forEach((resource) => {
+      resource.incomeSources.jobs = 0
     })
 
-    // need additional logic to handle if not enough of a resource for input
-    jobInputs?.forEach((input) => {
-      const resourceId = input.resourceId
-      const totalMults = (input.multipliers ?? [1]).reduce((sum, value) => sum * value, 1)
-      const inputRateWithMults = totalMults * input.rate
-      // negate to simulate a decrease of resources
-      const totalInput = inputRateWithMults * assignedWorkers * -1
+    this.jobs.forEach((job) => {
+      const jobInfo = jobDefinitions[job.id]
+      if (!jobInfo) return
+      const assignedWorkers = job.assignedWorkers
 
-      this.resourceSystem.addJobContribution(resourceId, totalInput)
+      // Outputs
+      jobInfo.output?.forEach((output) => {
+        const totalMults = (output.multipliers ?? [1]).reduce((sum, value) => sum * value, 1)
+        const outputRateWithMults = totalMults * output.rate
+        const totalOutput = outputRateWithMults * assignedWorkers
+
+        this.resourceSystem.addJobContribution(output.resourceId, totalOutput)
+      })
+
+      // Inputs
+      jobInfo.input?.forEach((input) => {
+        const totalMults = (input.multipliers ?? [1]).reduce((sum, value) => sum * value, 1)
+        const inputRateWithMults = totalMults * input.rate
+        // negate to simulate a decrease of resources
+        const totalInput = inputRateWithMults * assignedWorkers * -1
+
+        this.resourceSystem.addJobContribution(input.resourceId, totalInput)
+      })
     })
   }
 

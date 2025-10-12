@@ -75,9 +75,11 @@ export class GameStateManager {
 
   addWorkerToJob(jobId: JobId) {
     this.workerSystem.assignWorker(jobId)
+    this.jobSystem.updateResourceContribution()
   }
 
   removeWorkerFromJob(jobId: JobId) {
     this.workerSystem.unassignWorker(jobId)
+    this.jobSystem.updateResourceContribution()
   }
 }

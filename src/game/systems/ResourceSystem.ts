@@ -61,6 +61,12 @@ export class ResourceSystem {
     resource.baseIncome += incomeAdjustment
   }
 
+  addJobContribution(resourceId: ResourceId, amount: number) {
+    const resource = this.getResourceOrError(resourceId)
+    resource.incomeSources.jobs += amount
+    this.updateCalculatedIncome(resource)
+  }
+
   updateCalculatedIncome(resource: Resource) {
     const baseIncome = resource.baseIncome
     const baseIncomeMultipliers = resource.baseIncomeMultipliers.reduce(
@@ -75,12 +81,6 @@ export class ResourceSystem {
     const flatIncome = baseIncome + incomeSources
 
     resource.totalIncome = flatIncome * baseIncomeMultipliers
-  }
-
-  addJobContribution(resourceId: ResourceId, amount: number) {
-    const resource = this.getResourceOrError(resourceId)
-    resource.incomeSources.jobs = amount
-    this.updateCalculatedIncome(resource)
   }
 
   // Ran on gameTick update
