@@ -45,4 +45,12 @@ export class JobSystem {
 
     jobState.assignedWorkers += numberOfJobSlots
   }
+
+  private getJobOrError(jobId: JobId): Job {
+    const job = this.getJobById(jobId)
+    if (!job) {
+      throw new Error(`Error at WorkerSystem: job not found: ${jobId}`)
+    }
+    return job
+  }
 }
