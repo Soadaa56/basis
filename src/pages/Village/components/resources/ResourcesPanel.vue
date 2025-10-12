@@ -14,7 +14,7 @@ const gameStore = useGameStore().manager
       :name="resource.name"
       :value="resource.currentAmount"
       :max="resource.calculatedStorage"
-      :income="resource.calculatedIncome"
+      :income="resource.totalIncome"
     />
   </div>
 </template>
