@@ -1,4 +1,4 @@
-import type { Resource } from '@/game/models/Resource'
+import type { Resource, ResourceId } from '@/game/models/Resource'
 import type { ResourceCost } from '@/game/models/Costs'
 import { softCap } from '@/game/config/softCaps'
 
@@ -13,7 +13,7 @@ export class ResourceSystem {
     this.resources = resources
   }
 
-  getResource(id: string) {
+  getResourceById(id: string) {
     return this.resources.find((resource) => resource.id === id)
   }
 
@@ -23,7 +23,7 @@ export class ResourceSystem {
 
   canAfford(costs: ResourceCost[]): boolean {
     return costs.every((cost) => {
-      const resource = this.getResource(cost.id)
+      const resource = this.getResourceById(cost.id)
       if (!resource) return false
       return resource.currentAmount >= cost.amount
     })
@@ -31,7 +31,7 @@ export class ResourceSystem {
 
   spendResources(costs: ResourceCost[]) {
     costs.forEach((cost) => {
-      const resource = this.getResource(cost.id)
+      const resource = this.getResourceById(cost.id)
       if (!resource) return
 
       resource.currentAmount -= cost.amount
@@ -76,6 +76,8 @@ export class ResourceSystem {
     resource.totalIncome = flatIncome * baseIncomeMultipliers
   }
 
+  addJobContribution(resourceId: ResourceId, amount: number) {}
+
   // Ran on gameTick update
   updateAllResources() {
     this.resources.forEach((resource) => {
@@ -103,5 +105,13 @@ export class ResourceSystem {
     }
 
     return 1 - reduction
+  }
+
+  private getResourceOrError(resourceId: ResourceId) {
+    const resource = this.getResourceById(resourceId)
+    if (!resource) {
+      throw new Error(`Error at ResourceSystem: resource not found: ${resourceId}`)
+    }
+    return resource
   }
 }
