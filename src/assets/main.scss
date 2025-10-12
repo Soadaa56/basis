@@ -17,6 +17,14 @@ button {
   color: var(--button-text-color);
 
   &:hover {
-    background-color: red;
+    background-color: var(--tertiary-color);
+  }
+}
+
+a {
+  color: var(--accent-color);
+
+  &:hover {
+    color: var(--tertiary-color);
   }
 }

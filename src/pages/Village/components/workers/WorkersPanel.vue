@@ -8,10 +8,10 @@ const gameStore = useGameStore()
 <template>
   <div v-if="gameStore" class="worker-panel-container">
     <h2>Workers Panel</h2>
-    <h4>
+    <h3>
       {{ gameStore.manager.gameState.workers.unassignedWorkerCount }} /
       {{ gameStore.manager.gameState.workers.maxWorkerCount }} Worker Unassigned
-    </h4>
+    </h3>
     <base-worker-text
       v-for="job in gameStore.manager.gameState.jobs"
       :key="job.id"
