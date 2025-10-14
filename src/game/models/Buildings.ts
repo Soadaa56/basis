@@ -33,6 +33,6 @@ export interface Building extends Unlockable {
   type: BuildingType
   cost: BuildingCost[]
   count: number
-  maxCount: number
+  maxCount?: number
   costMultiplier: number
 }
