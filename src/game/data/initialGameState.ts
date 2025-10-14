@@ -1,4 +1,3 @@
-// src/game/data/initialGameState.ts
 import type { GameState } from '@/game/systems/GameStateManager'
 import type { Resource } from '@/game/models/Resource'
 import type { Building } from '@/game/models/Buildings'
@@ -63,18 +62,36 @@ const initialResources: Resource[] = [
 
 const initialBuildings: Building[] = [
   {
+    id: BuildingIds.Hut,
+    name: 'Hut',
+    type: BuildingTypes.WorkerProducer,
+    cost: [
+      {
+        resource: ResourceIds.Food,
+        amount: 20,
+      },
+      {
+        resource: ResourceIds.Gold,
+        amount: 20,
+      },
+    ],
+    count: 1,
+    maxCount: 25,
+    costMultiplier: 1.21,
+  },
+  {
     id: BuildingIds.Farm,
     name: 'Farm',
+    type: BuildingTypes.JobProducer,
     cost: [
       {
         resource: ResourceIds.Food,
         amount: 50,
       },
     ],
-    type: BuildingTypes.JobProducer,
     count: 1,
-    maxCount: 20,
-    costMultiplier: 1.3,
+    maxCount: 10,
+    costMultiplier: 1.4,
   },
 ]
 
