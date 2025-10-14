@@ -1,5 +1,6 @@
 import type { Unlockable } from '@/game/models/Unlockable'
 import type { ResourceId } from '@/game/models/Resource'
+import type { BuildingType } from '@/game/data/buildingsInfo'
 
 export const BuildingIds = {
   Farm: 'farm',
@@ -13,8 +14,6 @@ export const BuildingIds = {
   Sawmill: 'sawmill',
   Well: 'well',
   TownHall: 'townHall',
-  /* I'm unsure if I want both BlackSmith & Workshop
-     perhaps they will work on different type of upgrades */
   BlackSmith: 'blackSmith',
   WorkShop: 'workShip',
   WizardTower: 'wizardTower',
@@ -24,16 +23,16 @@ export const BuildingIds = {
 export type BuildingId = (typeof BuildingIds)[keyof typeof BuildingIds]
 
 export interface BuildingCost {
-  resourceId: ResourceId
-  resourceAmount: number
+  resource: ResourceId
+  amount: number
 }
 
 export interface Building extends Unlockable {
   id: BuildingId
   name: string
+  type: BuildingType
   cost: BuildingCost[]
   count: number
-  maxCount?: number
-  costMultiplier?: number
-  workerSlots?: number
+  maxCount: number
+  costMultiplier: number
 }
