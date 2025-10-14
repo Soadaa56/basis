@@ -89,10 +89,6 @@ export class BuildingSystem {
       case BuildingTypes.Unlocker:
         console.log(`triggerBuilding => case:BuildingTypes.unlocker: ${BuildingTypes.Unlocker}`)
         break
-
-      case BuildingTypes.Hybrid:
-        console.log(`BuildingInfo => case: Hybrid is being run. BuildingId: ${buildingId}`)
-        break
       default:
         console.log(`triggerBuilding failed with buildingId: ${buildingId}`)
         break

@@ -7,7 +7,6 @@ export const BuildingTypes = {
   JobProducer: 'jobProducer',
   WorkerProducer: 'workerProducer',
   Unlocker: 'unlocker',
-  Hybrid: 'hybrid',
 } as const
 
 export type BuildingType = (typeof BuildingTypes)[keyof typeof BuildingTypes]
@@ -41,19 +40,9 @@ export type BuildingInfo =
       type: typeof BuildingTypes.Unlocker
       unlocks: string // will be changed for type safety
     }
-  // Idea of a hybrid building seems cool, but not sure  it will make things messy
-  // or if in gameplay each building should really just have one purpose
-  | {
-      type: typeof BuildingTypes.Hybrid
-      resource?: ResourceId
-      rate?: number
-      consume?: {
-        resource: ResourceId
-        rate: number // Should this be rate as well? or purposely different?
-      }
-      multiplier?: number
-      jobType?: JobId
-      addOpenJobs?: number
-      addWorkers?: number
-      unlocks?: string // will be changed for type safety
-    }
+/*
+Hybrid building idea seems cool and makes sense, seems harder to implement
+First, I'm unsure for a gameplay perspective purely if this is a 'good' idea. Make each building have a very specfifc purpose
+Second, I can implement this building but just having all the above types with question marks (to make non-mandatory),
+which feels wrong? I will consider this more in the future, but focus on MVP and minimal bugs is priority.
+*/
