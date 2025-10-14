@@ -12,7 +12,7 @@ const gameStore = useGameStore()
       {{ gameStore.manager.gameState.workers.unassignedWorkerCount }} /
       {{ gameStore.manager.gameState.workers.maxWorkerCount }} Worker Unassigned
     </h3>
-    <base-worker-text
+    <BaseWorkerText
       v-for="job in gameStore.manager.gameState.jobs"
       :key="job.id"
       :id="job.id"
