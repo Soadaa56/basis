@@ -8,6 +8,7 @@ import type { WorkerState } from '@/game/systems/WorkerSystem'
 import { ResourceIds } from '@/game/models/Resource'
 import { BuildingIds } from '@/game/models/Buildings'
 import { JobIds } from '@/game/models/Jobs'
+import { BuildingTypes } from './buildingsInfo'
 
 const initialResources: Resource[] = [
   {
@@ -64,9 +65,16 @@ const initialBuildings: Building[] = [
   {
     id: BuildingIds.Farm,
     name: 'Farm',
-    cost: [],
+    cost: [
+      {
+        resource: ResourceIds.Food,
+        amount: 50,
+      },
+    ],
+    type: BuildingTypes.JobProducer,
     count: 1,
-    workerSlots: 1,
+    maxCount: 20,
+    costMultiplier: 1.3,
   },
 ]
 
