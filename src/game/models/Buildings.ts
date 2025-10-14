@@ -1,5 +1,5 @@
-import type { ResourceCost } from '@/game/models/Costs'
 import type { Unlockable } from '@/game/models/Unlockable'
+import type { ResourceId } from '@/game/models/Resource'
 
 export const BuildingIds = {
   Farm: 'farm',
@@ -23,10 +23,15 @@ export const BuildingIds = {
 
 export type BuildingId = (typeof BuildingIds)[keyof typeof BuildingIds]
 
+export interface BuildingCost {
+  resourceId: ResourceId
+  resourceAmount: number
+}
+
 export interface Building extends Unlockable {
   id: BuildingId
   name: string
-  cost: ResourceCost[]
+  cost: BuildingCost[]
   count: number
   maxCount?: number
   costMultiplier?: number
