@@ -78,6 +78,8 @@ const initialBuildings: Building[] = [
     count: 1,
     maxCount: 25,
     costMultiplier: 1.21,
+    purchaseEffectText: '+1 worker',
+    flavorText: 'Better than nothing',
   },
   {
     id: BuildingIds.Farm,
@@ -92,6 +94,8 @@ const initialBuildings: Building[] = [
     count: 1,
     maxCount: 10,
     costMultiplier: 1.4,
+    purchaseEffectText: '+1 farmer job',
+    flavorText: 'How do you expect one person to do all this work!?',
   },
 ]
 

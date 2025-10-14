@@ -35,4 +35,6 @@ export interface Building extends Unlockable {
   count: number
   maxCount?: number
   costMultiplier: number
+  purchaseEffectText: string
+  flavorText?: string
 }
