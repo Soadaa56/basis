@@ -7,7 +7,7 @@ import type { WorkerState } from '@/game/systems/WorkerSystem'
 import { ResourceIds } from '@/game/models/Resource'
 import { BuildingIds } from '@/game/models/Buildings'
 import { JobIds } from '@/game/models/Jobs'
-import { BuildingTypes } from './buildingsInfo'
+import { BuildingTypes } from '../models/buildings/buildingsInfo'
 
 const initialResources: Resource[] = [
   {

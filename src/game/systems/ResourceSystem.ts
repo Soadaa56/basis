@@ -1,5 +1,5 @@
 import type { Resource, ResourceId } from '@/game/models/Resource'
-import type { ResourceCost } from '@/game/models/Costs'
+import type { ResourceCost } from '@/game/models/Resource'
 import { softCap } from '@/game/config/softCaps'
 
 export class ResourceSystem {

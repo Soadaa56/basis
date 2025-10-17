@@ -1,22 +1,16 @@
-import { Bakehouse } from './bakehouse'
-import { Farm } from './farm'
-import { Hut } from './hut'
-import { LoggingCamp } from './loggingCamp'
-import { Mine } from './mine'
-import { Sawmill } from './sawmill'
-import { Well } from './Well'
-import { WizardTower } from './wizardTower'
+import { Bakehouse } from '../../data/buildings/bakehouse'
+import { Farm } from '../../data/buildings/farm'
+import { Hut } from '../../data/buildings/hut'
+import { LoggingCamp } from '../../data/buildings/loggingCamp'
+import { Mine } from '../../data/buildings/mine'
+import { Sawmill } from '../../data/buildings/sawmill'
+import { Well } from '../../data/buildings/Well'
+import { WizardTower } from '../../data/buildings/wizardTower'
 
-import type { BuildingId } from '@/game/models/Buildings'
-import type { BuildingInfo } from '@/game/data/buildingsInfo'
+import type { BuildingId } from '@/game/data/buildingsId'
+import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
-export const buildingDefinitions: Partial<Record<BuildingId, BuildingInfo>> = {
-  bakehouse: Bakehouse,
+export const buildingDefinitions: Partial<Record<BuildingId, BuildingDefinition>> = {
   farm: Farm,
   hut: Hut,
-  loggingCamp: LoggingCamp,
-  mine: Mine,
-  sawmill: Sawmill,
-  well: Well,
-  wizardTower: WizardTower,
 }

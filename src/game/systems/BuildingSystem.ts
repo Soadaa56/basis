@@ -1,10 +1,11 @@
-import { buildingDefinitions } from '@/game/data/buildings'
-import { BuildingTypes } from '@/game/data/buildingsInfo'
+import { buildingDefinitions } from '@/game/models/buildings/buildingsDefinitions'
+import { BuildingTypes } from '@/game/models/buildings/buildingsInfo'
 import { JobSystem } from './JobSystem'
 import { WorkerSystem } from './WorkerSystem'
 import { ResourceSystem } from './ResourceSystem'
 
-import type { Building, BuildingId } from '@/game/models/Buildings'
+import type { Building } from '@/game/models/Buildings'
+import type { BuildingId } from '@/game/data/buildingsId'
 
 export class BuildingSystem {
   private buildings: Building[] = []

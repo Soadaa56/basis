@@ -1,3 +1,4 @@
+import { reactive } from 'vue'
 import { ResourceSystem } from '@/game/systems/ResourceSystem'
 import { BuildingSystem } from '@/game/systems/BuildingSystem'
 import { MagicSystem } from '@/game/systems/MagicSystem'
@@ -6,11 +7,12 @@ import { JobSystem } from './JobSystem'
 import { TICK_INTERVAL } from '@/game/config/config'
 
 import type { Resource } from '@/game/models/Resource'
-import type { Building, BuildingCost, BuildingId } from '@/game/models/Buildings'
+import type { Building } from '@/game/models/Buildings'
+import type { BuildingId } from '@/game/data/buildingsId'
 import type { Magic } from '@/game/models/Magic'
 import type { Job, JobId } from '@/game/models/Jobs'
 import type { WorkerState } from '@/game/systems/WorkerSystem'
-import { reactive } from 'vue'
+import type { BuildingCost } from '@/game/models/buildings/buildingsDefinitions'
 
 export interface GameState {
   resources: Resource[]

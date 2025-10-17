@@ -1,40 +1,13 @@
-import type { Unlockable } from '@/game/models/Unlockable'
-import type { ResourceId } from '@/game/models/Resource'
-import type { BuildingType } from '@/game/data/buildingsInfo'
+import type { BuildingDefinition } from './buildings/buildingsDefinitions'
 
-export const BuildingIds = {
-  Farm: 'farm',
-  Hut: 'hut',
-  Market: 'market',
-  LoggingCamp: 'loggingCamp',
-  FishingCamp: 'fishingCamp',
-  StorageShed: 'storageShed',
-  Granary: 'granery',
-  Mine: 'mine',
-  Sawmill: 'sawmill',
-  Well: 'well',
-  TownHall: 'townHall',
-  BlackSmith: 'blackSmith',
-  WorkShop: 'workShip',
-  WizardTower: 'wizardTower',
-  Bakehouse: 'bakehouse',
-} as const
+export class Building {
+  definition: BuildingDefinition
+  count: number = 0
+  isUnlocked: boolean = false
 
-export type BuildingId = (typeof BuildingIds)[keyof typeof BuildingIds]
-
-export interface BuildingCost {
-  resource: ResourceId
-  amount: number
-}
-
-export interface Building extends Unlockable {
-  id: BuildingId
-  name: string
-  type: BuildingType
-  cost: BuildingCost[]
-  count: number
-  maxCount?: number
-  costMultiplier: number
-  purchaseEffectText: string
-  flavorText?: string
+  constructor(definition: BuildingDefinition, count = 0, isUnlocked = false) {
+    this.definition = definition
+    this.count = count
+    this.isUnlocked = isUnlocked
+  }
 }

@@ -13,6 +13,11 @@ export const ResourceIds = {
 
 export type ResourceId = (typeof ResourceIds)[keyof typeof ResourceIds]
 
+export interface ResourceCost {
+  id: ResourceId
+  amount: number
+}
+
 export interface IncomeSources {
   jobs: number
   buildings: number

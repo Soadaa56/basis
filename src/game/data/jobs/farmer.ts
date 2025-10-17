@@ -6,7 +6,7 @@ export const Farmer: JobInfo = {
   output: [
     {
       resourceId: ResourceIds.Food,
-      rate: 3,
+      rate: 1,
       multipliers: [],
     },
   ],
