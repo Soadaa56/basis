@@ -7,12 +7,12 @@ import { JobSystem } from './JobSystem'
 import { TICK_INTERVAL } from '@/game/config/config'
 
 import type { Resource } from '@/game/models/Resource'
+import type { ResourceCost } from '@/game/models/Resource'
 import type { Building } from '@/game/models/Buildings'
 import type { BuildingId } from '@/game/data/buildingsId'
 import type { Magic } from '@/game/models/Magic'
 import type { Job, JobId } from '@/game/models/Jobs'
 import type { WorkerState } from '@/game/systems/WorkerSystem'
-import type { BuildingCost } from '@/game/models/buildings/buildingsDefinitions'
 
 export interface GameState {
   resources: Resource[]
@@ -62,9 +62,9 @@ export class GameStateManager {
     this.tickInterval = tickInterval
   }
 
-  purchaseBuilding(buildingId: BuildingId, buildingCosts: BuildingCost[]) {
-    if (!this.resourceSystem.canAfford(buildingCosts)) return
-    this.resourceSystem.spendResources(buildingCosts)
+  purchaseBuilding(buildingId: BuildingId, resourceCost: ResourceCost[]) {
+    if (!this.resourceSystem.canAfford(resourceCost)) return
+    this.resourceSystem.spendResources(resourceCost)
     this.buildingSystem.incrementBuilding(buildingId)
     this.buildingSystem.triggerBuilding(
       buildingId,

@@ -10,4 +10,19 @@ export class Building {
     this.count = count
     this.isUnlocked = isUnlocked
   }
+
+  addBuildingCount() {
+    this.count += 1
+  }
+
+  getCurrentCost() {
+    return this.definition.cost.map((cost) => ({
+      resource: cost.resource,
+      amount: Math.floor(cost.amount * Math.pow(this.definition.costMultiplier, this.count)),
+    }))
+  }
+
+  unlockBuilding() {
+    this.isUnlocked = true
+  }
 }

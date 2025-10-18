@@ -7,11 +7,11 @@ export const Hut = {
   name: 'Hut',
   cost: [
     {
-      resource: ResourceIds.Food,
+      id: ResourceIds.Food,
       amount: 20,
     },
     {
-      resource: ResourceIds.Gold,
+      id: ResourceIds.Gold,
       amount: 15,
     },
   ],

@@ -8,7 +8,7 @@ export const Farm = {
   name: 'Farm',
   cost: [
     {
-      resource: ResourceIds.Food,
+      id: ResourceIds.Food,
       amount: 30,
     },
   ],
