@@ -17,7 +17,7 @@ export class Building {
 
   getCurrentCost() {
     return this.definition.cost.map((cost) => ({
-      resource: cost.resource,
+      resourceId: cost.resourceId,
       amount: Math.floor(cost.amount * Math.pow(this.definition.costMultiplier, this.count)),
     }))
   }

@@ -23,7 +23,7 @@ export class ResourceSystem {
 
   canAfford(costs: ResourceCost[]): boolean {
     return costs.every((cost) => {
-      const resource = this.getResourceById(cost.id)
+      const resource = this.getResourceById(cost.resourceId)
       if (!resource) return false
       return resource.currentAmount >= cost.amount
     })
@@ -31,7 +31,7 @@ export class ResourceSystem {
 
   spendResources(costs: ResourceCost[]) {
     costs.forEach((cost) => {
-      const resource = this.getResourceById(cost.id)
+      const resource = this.getResourceById(cost.resourceId)
       if (!resource) return
 
       resource.currentAmount -= cost.amount

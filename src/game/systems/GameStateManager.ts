@@ -7,7 +7,6 @@ import { JobSystem } from './JobSystem'
 import { TICK_INTERVAL } from '@/game/config/config'
 
 import type { Resource } from '@/game/models/Resource'
-import type { ResourceCost } from '@/game/models/Resource'
 import type { Building } from '@/game/models/Buildings'
 import type { BuildingId } from '@/game/data/buildingsId'
 import type { Magic } from '@/game/models/Magic'
@@ -62,10 +61,15 @@ export class GameStateManager {
     this.tickInterval = tickInterval
   }
 
-  purchaseBuilding(buildingId: BuildingId, resourceCost: ResourceCost[]) {
-    if (!this.resourceSystem.canAfford(resourceCost)) return
-    this.resourceSystem.spendResources(resourceCost)
-    this.buildingSystem.incrementBuilding(buildingId)
+  purchaseBuilding(buildingId: BuildingId) {
+    const building = this.buildingSystem.getBuilding(buildingId)
+    const cost = building?.getCurrentCost()
+
+    if (!cost) return
+    if (!this.resourceSystem.canAfford(cost)) return
+
+    this.resourceSystem.spendResources(cost)
+    building?.addBuildingCount()
     this.buildingSystem.triggerBuilding(
       buildingId,
       this.resourceSystem,

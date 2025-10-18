@@ -14,7 +14,7 @@ export const ResourceIds = {
 export type ResourceId = (typeof ResourceIds)[keyof typeof ResourceIds]
 
 export interface ResourceCost {
-  id: ResourceId
+  resourceId: ResourceId
   amount: number
 }
 
