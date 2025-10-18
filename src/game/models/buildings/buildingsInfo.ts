@@ -52,9 +52,3 @@ export type BuildingInfo =
       type: typeof BuildingTypes.Unlocker
       unlocks: string // will be changed for type safety
     }
-/*
-Hybrid building idea seems cool and makes sense, seems harder to implement
-First, I'm unsure for a gameplay perspective purely if this is a 'good' idea. Make each building have a very specfifc purpose
-Second, I can implement this building but just having all the above types with question marks (to make non-mandatory),
-which feels wrong? I will consider this more in the future, but focus on MVP and minimal bugs is priority.
-*/
