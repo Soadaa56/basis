@@ -5,24 +5,23 @@ import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
-export const Mine: BuildingDefinition = {
-  id: BuildingIds.Mine,
-  name: 'Mine',
+export const Mill: BuildingDefinition = {
+  id: BuildingIds.Mill,
+  name: 'Mill',
   cost: [
-    { resourceId: ResourceIds.Gold, amount: 200 },
     {
-      resourceId: ResourceIds.Wood,
-      amount: 50,
+      resourceId: ResourceIds.Food,
+      amount: 80,
     },
   ] satisfies ResourceCost[],
-  costMultiplier: 1.55,
-  purchaseEffectText: '+3 Miner Jobs',
-  flavorText: "Heigh-ho, it's home from work we go.",
+  costMultiplier: 1.75,
+  purchaseEffectText: '+15% Farm Output',
+  flavorText: 'Lorem Ipsum.',
   info: [
     {
-      type: BuildingTypes.JobProducer,
-      jobId: JobIds.Miner,
-      addOpenJobs: 3,
+      type: BuildingTypes.JobMultiplier,
+      jobId: JobIds.Farmer,
+      multiplier: 1.15,
     },
   ] satisfies BuildingInfo[],
 }

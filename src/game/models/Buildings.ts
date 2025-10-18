@@ -4,11 +4,13 @@ export class Building {
   definition: BuildingDefinition
   count: number = 0
   isUnlocked: boolean = false
+  maxCount?: number
 
   constructor(definition: BuildingDefinition, count = 0, isUnlocked = false) {
     this.definition = definition
     this.count = count
     this.isUnlocked = isUnlocked
+    this.maxCount = this.definition.maxCount
   }
 
   addBuildingCount() {

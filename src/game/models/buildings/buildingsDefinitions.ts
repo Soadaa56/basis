@@ -9,5 +9,6 @@ export interface BuildingDefinition {
   costMultiplier: number
   purchaseEffectText: string
   flavorText: string
-  info: BuildingInfo
+  info: BuildingInfo[]
+  maxCount?: number
 }

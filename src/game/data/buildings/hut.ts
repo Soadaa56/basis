@@ -1,8 +1,10 @@
 import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildingsInfo'
 import { BuildingIds } from '@/game/data/buildingsId'
-import { ResourceIds } from '@/game/models/Resource'
+import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 
-export const Hut = {
+import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
+
+export const Hut: BuildingDefinition = {
   id: BuildingIds.Hut,
   name: 'Hut',
   cost: [
@@ -12,14 +14,16 @@ export const Hut = {
     },
     {
       resourceId: ResourceIds.Gold,
-      amount: 15,
+      amount: 10,
     },
-  ],
+  ] satisfies ResourceCost[],
   costMultiplier: 1.2,
   purchaseEffectText: '+1 Worker',
-  flavorText: 'Better than nothing',
-  info: {
-    type: BuildingTypes.WorkerProducer,
-    addWorkers: 1,
-  } satisfies BuildingInfo,
+  flavorText: 'Better than nothing.',
+  info: [
+    {
+      type: BuildingTypes.WorkerProducer,
+      addWorkers: 1,
+    },
+  ] satisfies BuildingInfo[],
 } // as const // still considering this

@@ -5,6 +5,7 @@ export const BuildingTypes = {
   ResourceProducer: 'resourceProducer',
   ResourceMultiplier: 'resourceMultiplier',
   ResourceStorage: 'resourceStorage',
+  JobMultiplier: 'jobMultiplier',
   JobProducer: 'jobProducer',
   WorkerProducer: 'workerProducer',
   Unlocker: 'unlocker',
@@ -15,7 +16,7 @@ export type BuildingType = (typeof BuildingTypes)[keyof typeof BuildingTypes]
 export type BuildingInfo =
   | {
       type: typeof BuildingTypes.ResourceProducer
-      resource: ResourceId
+      resourceId: ResourceId
       rate: number
       consume?: {
         resourceId: ResourceId
@@ -30,7 +31,13 @@ export type BuildingInfo =
   | {
       type: typeof BuildingTypes.ResourceStorage
       resourceId: ResourceId
-      amount: number
+      flatStorageAmount?: number
+      modifierStorageAmount?: number
+    }
+  | {
+      type: typeof BuildingTypes.JobMultiplier
+      jobId: JobId
+      multiplier: number
     }
   | {
       type: typeof BuildingTypes.JobProducer

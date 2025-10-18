@@ -1,13 +1,12 @@
 import type { GameState } from '@/game/systems/GameStateManager'
 import type { Resource } from '@/game/models/Resource'
-import type { Building } from '@/game/models/Buildings'
 import type { Job } from '@/game/models/Jobs'
 import type { WorkerState } from '@/game/systems/WorkerSystem'
 
+import { Building } from '@/game/models/Buildings'
 import { ResourceIds } from '@/game/models/Resource'
-import { BuildingIds } from '@/game/models/Buildings'
 import { JobIds } from '@/game/models/Jobs'
-import { BuildingTypes } from '../models/buildings/buildingsInfo'
+import { buildingDefinitions } from './buildings'
 
 const initialResources: Resource[] = [
   {
@@ -15,15 +14,15 @@ const initialResources: Resource[] = [
     name: 'Gold',
     currentAmount: 5,
     baseStorage: 500,
-    baseStorageFlatBonus: [],
-    baseStorageModifiers: [],
+    baseStorageFlatBonus: {},
+    baseStorageModifiers: {},
     calculatedStorage: 100,
     baseIncome: 0,
     incomeSources: {
-      jobs: 0,
-      buildings: 0,
+      jobs: {},
+      buildings: {},
     },
-    baseIncomeMultipliers: [],
+    IncomeMultipliers: {},
     totalIncome: 0,
   },
   {
@@ -31,15 +30,15 @@ const initialResources: Resource[] = [
     name: 'Food',
     currentAmount: 20,
     baseStorage: 100,
-    baseStorageFlatBonus: [],
-    baseStorageModifiers: [],
+    baseStorageFlatBonus: {},
+    baseStorageModifiers: {},
     calculatedStorage: 100,
     baseIncome: 0,
     incomeSources: {
-      jobs: 0,
-      buildings: 0,
+      jobs: {},
+      buildings: {},
     },
-    baseIncomeMultipliers: [],
+    IncomeMultipliers: {},
     totalIncome: 0,
   },
   {
@@ -47,56 +46,22 @@ const initialResources: Resource[] = [
     name: 'Wood',
     currentAmount: 0,
     baseStorage: 20,
-    baseStorageFlatBonus: [],
-    baseStorageModifiers: [],
+    baseStorageFlatBonus: {},
+    baseStorageModifiers: {},
     calculatedStorage: 20,
     baseIncome: 0,
     incomeSources: {
-      jobs: 0,
-      buildings: 0,
+      jobs: {},
+      buildings: {},
     },
-    baseIncomeMultipliers: [],
+    IncomeMultipliers: {},
     totalIncome: 0,
   },
 ]
 
 const initialBuildings: Building[] = [
-  {
-    id: BuildingIds.Hut,
-    name: 'Hut',
-    type: BuildingTypes.WorkerProducer,
-    cost: [
-      {
-        resource: ResourceIds.Food,
-        amount: 20,
-      },
-      {
-        resource: ResourceIds.Gold,
-        amount: 20,
-      },
-    ],
-    count: 1,
-    maxCount: 25,
-    costMultiplier: 1.21,
-    purchaseEffectText: '+1 worker',
-    flavorText: 'Better than nothing',
-  },
-  {
-    id: BuildingIds.Farm,
-    name: 'Farm',
-    type: BuildingTypes.JobProducer,
-    cost: [
-      {
-        resource: ResourceIds.Food,
-        amount: 50,
-      },
-    ],
-    count: 1,
-    maxCount: 10,
-    costMultiplier: 1.4,
-    purchaseEffectText: '+1 farmer job',
-    flavorText: 'How do you expect one person to do all this work!?',
-  },
+  new Building(buildingDefinitions.farm, 1, true),
+  new Building(buildingDefinitions.hut, 1, true),
 ]
 
 const initialJobs: Job[] = [
