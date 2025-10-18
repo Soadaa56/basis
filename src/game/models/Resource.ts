@@ -28,11 +28,11 @@ export interface Resource extends Unlockable {
   name: string
   currentAmount: number
   baseStorage: number
-  baseStorageFlatBonus: number[]
-  baseStorageModifiers: number[]
+  baseStorageFlatBonus: Record<string, number>
+  baseStorageModifiers: Record<string, number>
   calculatedStorage: number
   baseIncome: number // probably zero for almost all?
   incomeSources: IncomeSources
-  baseIncomeMultipliers: number[]
+  baseIncomeMultipliers: Record<string, number>
   totalIncome: number
 }
