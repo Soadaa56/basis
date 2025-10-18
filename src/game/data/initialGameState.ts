@@ -16,7 +16,7 @@ const initialResources: Resource[] = [
     baseStorage: 500,
     baseStorageFlatBonus: {},
     baseStorageModifiers: {},
-    calculatedStorage: 100,
+    calculatedStorage: 500,
     baseIncome: 0,
     incomeSources: {
       jobs: {},
