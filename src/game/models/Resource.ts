@@ -1,14 +1,15 @@
 import type { Unlockable } from '@/game/models/Unlockable'
 
 export const ResourceIds = {
-  Gold: 'gold',
-  Food: 'food', // might seperate into grain, fish, ect
-  Wood: 'wood',
-  Plank: 'plank',
-  Water: 'water',
   Copper: 'copper',
+  Food: 'food', // might seperate into grain, fish, ect
+  Gold: 'gold',
   Iron: 'iron',
+  Plank: 'plank',
   Research: 'research',
+  Stone: 'stone',
+  Water: 'water',
+  Wood: 'wood',
 } as const
 
 export type ResourceId = (typeof ResourceIds)[keyof typeof ResourceIds]
@@ -19,8 +20,8 @@ export interface ResourceCost {
 }
 
 export interface IncomeSources {
-  jobs: number
-  buildings: number
+  jobs: Record<string, number>
+  buildings: Record<string, number>
 }
 
 export interface Resource extends Unlockable {
@@ -33,6 +34,6 @@ export interface Resource extends Unlockable {
   calculatedStorage: number
   baseIncome: number // probably zero for almost all?
   incomeSources: IncomeSources
-  baseIncomeMultipliers: Record<string, number>
+  IncomeMultipliers: Record<string, number>
   totalIncome: number
 }
