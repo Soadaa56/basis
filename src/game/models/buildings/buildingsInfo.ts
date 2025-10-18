@@ -4,6 +4,7 @@ import type { JobId } from '@/game/models/Jobs'
 export const BuildingTypes = {
   ResourceProducer: 'resourceProducer',
   ResourceMultiplier: 'resourceMultiplier',
+  ResourceStorage: 'resourceStorage',
   JobProducer: 'jobProducer',
   WorkerProducer: 'workerProducer',
   Unlocker: 'unlocker',
@@ -17,19 +18,23 @@ export type BuildingInfo =
       resource: ResourceId
       rate: number
       consume?: {
-        resource: ResourceId
-        rate: number // Should this be rate as well? or purposely different?
+        resourceId: ResourceId
+        rate: number
       }
     }
   | {
       type: typeof BuildingTypes.ResourceMultiplier
-      resource: ResourceId
+      resourceId: ResourceId
       multiplier: number
     }
   | {
+      type: typeof BuildingTypes.ResourceStorage
+      resourceId: ResourceId
+      amount: number
+    }
+  | {
       type: typeof BuildingTypes.JobProducer
-      // bad variable name?
-      jobType: JobId
+      jobId: JobId
       addOpenJobs: number
     }
   | {
