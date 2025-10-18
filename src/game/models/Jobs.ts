@@ -1,13 +1,14 @@
 import type { Unlockable } from '@/game/models/Unlockable'
 
 export const JobIds = {
-  Farmer: 'farmer',
-  Miner: 'miner',
-  Logger: 'logger',
-  Blacksmith: 'blacksmith',
-  Fishermen: 'fishermen',
-  Merchant: 'merchant',
+  Baker: 'baker',
   Beggar: 'beggar',
+  Blacksmith: 'blacksmith',
+  Farmer: 'farmer',
+  Fishermen: 'fishermen',
+  Logger: 'logger',
+  Miner: 'miner',
+  Merchant: 'merchant',
 } as const
 
 export type JobId = (typeof JobIds)[keyof typeof JobIds]
