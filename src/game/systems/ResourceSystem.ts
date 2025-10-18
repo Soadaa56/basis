@@ -1,6 +1,8 @@
+import { softCap } from '@/game/config/softCaps'
+
+import type { JobId } from '../models/Jobs'
 import type { Resource, ResourceId } from '@/game/models/Resource'
 import type { ResourceCost } from '@/game/models/Resource'
-import { softCap } from '@/game/config/softCaps'
 
 export class ResourceSystem {
   private resources: Resource[] = []
@@ -61,26 +63,31 @@ export class ResourceSystem {
     resource.baseIncome += incomeAdjustment
   }
 
-  addJobContribution(resourceId: ResourceId, amount: number) {
+  addJobContribution(resourceId: ResourceId, jobId: JobId, value: number) {
     const resource = this.getResourceOrError(resourceId)
-    resource.incomeSources.jobs += amount
+
+    resource.incomeSources.jobs[jobId] = value
     this.updateCalculatedIncome(resource)
   }
 
   updateCalculatedIncome(resource: Resource) {
     const baseIncome = resource.baseIncome
-    const baseIncomeMultipliers = resource.baseIncomeMultipliers.reduce(
+    const incomeMultipliers = Object.values(resource.IncomeMultipliers).reduce(
       (sum, value) => sum * value,
       1,
     )
-    const incomeSources = Object.values(resource.incomeSources).reduce(
+    const incomeSourceJob = Object.values(resource.incomeSources.jobs).reduce(
       (sum, value) => sum + value,
       0,
     )
-
+    const incomeSourceBuilding = Object.values(resource.incomeSources.buildings).reduce(
+      (sum, value) => sum + value,
+      0,
+    )
+    const incomeSources = incomeSourceJob + incomeSourceBuilding
     const flatIncome = baseIncome + incomeSources
 
-    resource.totalIncome = flatIncome * baseIncomeMultipliers
+    resource.totalIncome = flatIncome * incomeMultipliers
   }
 
   // Ran on gameTick update
