@@ -45,15 +45,9 @@ export class ResourceSystem {
     const baseStorageFlatBonus = resource.baseStorageFlatBonus
     const baseStorageModifiers = resource.baseStorageModifiers
 
-    let calculatedStorage = baseStorageFlatBonus.reduce(
-      (sum, currentValue) => sum + currentValue,
-      baseStorage,
-    )
+    let calculatedStorage = baseStorageFlatBonus.reduce((sum, currentValue) => sum + currentValue, baseStorage)
 
-    calculatedStorage = baseStorageModifiers.reduce(
-      (sum, currentValue) => sum + currentValue,
-      calculatedStorage,
-    )
+    calculatedStorage = baseStorageModifiers.reduce((sum, currentValue) => sum + currentValue, calculatedStorage)
 
     return (resource.calculatedStorage = calculatedStorage)
   }
@@ -72,18 +66,9 @@ export class ResourceSystem {
 
   updateCalculatedIncome(resource: Resource) {
     const baseIncome = resource.baseIncome
-    const incomeMultipliers = Object.values(resource.IncomeMultipliers).reduce(
-      (sum, value) => sum * value,
-      1,
-    )
-    const incomeSourceJob = Object.values(resource.incomeSources.jobs).reduce(
-      (sum, value) => sum + value,
-      0,
-    )
-    const incomeSourceBuilding = Object.values(resource.incomeSources.buildings).reduce(
-      (sum, value) => sum + value,
-      0,
-    )
+    const incomeMultipliers = Object.values(resource.IncomeMultipliers).reduce((sum, value) => sum * value, 1)
+    const incomeSourceJob = Object.values(resource.incomeSources.jobs).reduce((sum, value) => sum + value, 0)
+    const incomeSourceBuilding = Object.values(resource.incomeSources.buildings).reduce((sum, value) => sum + value, 0)
     const incomeSources = incomeSourceJob + incomeSourceBuilding
     const flatIncome = baseIncome + incomeSources
 
