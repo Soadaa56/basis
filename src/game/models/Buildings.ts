@@ -1,4 +1,5 @@
 import type { BuildingDefinition } from './buildings/buildingsDefinitions'
+import type { ResourceCost } from './Resource'
 
 export class Building {
   definition: BuildingDefinition
@@ -17,7 +18,7 @@ export class Building {
     this.count += 1
   }
 
-  getCurrentCost() {
+  getCurrentCost(): ResourceCost[] {
     return this.definition.cost.map((cost) => ({
       resourceId: cost.resourceId,
       amount: Math.floor(cost.amount * Math.pow(this.definition.costMultiplier, this.count)),
