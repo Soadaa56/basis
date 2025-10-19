@@ -4,10 +4,7 @@ import { WorkerSystem } from './WorkerSystem'
 import { ResourceSystem } from './ResourceSystem'
 
 import type { Building } from '@/game/models/Buildings'
-import type { BuildingId } from '@/game/data/buildingsId'
-import type { BuildingType } from '@/game/models/buildings/buildingsInfo'
 import { jobDefinitions } from '../data/jobs'
-import { JobIds } from '../models/Jobs'
 
 export class BuildingSystem {
   private buildings: Building[] = []
@@ -122,7 +119,7 @@ export class BuildingSystem {
           console.log(`BuildingSystem => triggerBuilding => unlocker: (change this) ${effect.type}`)
           break
         default:
-          console.log(`BuildingSystem => triggerBuilding default case triggered: effect.type: ${effect.type}`)
+          console.log('BuildingSystem => triggerBuilding default case triggered')
           break
       }
     })
