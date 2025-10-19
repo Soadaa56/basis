@@ -24,6 +24,9 @@ const emit = defineEmits<{
 </template>
 
 <style scoped>
+.awesome-icon:hover {
+  cursor: pointer;
+}
 .worker-text {
   display: flex;
   align-items: center;
