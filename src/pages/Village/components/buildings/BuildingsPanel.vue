@@ -7,16 +7,18 @@ const gameStore = useGameStore()
 
 <template>
   <h2>Buildings Panel</h2>
-  <BaseBuildingCard
-    v-for="building in gameStore.manager.gameState.buildings"
-    :key="building.id"
-    :id="building.id"
-    :name="building.name"
-    :cost="building.cost"
-    :count="building.count"
-    :purchase-effect-text="building.purchaseEffectText"
-    :flavor-text="building.flavorText"
-  />
+  <div class="container">
+    <BaseBuildingCard
+      v-for="building in gameStore.manager.gameState.buildings"
+      :key="building.definition.id"
+      :id="building.definition.id"
+      :name="building.definition.name"
+      :cost="building.getCurrentCost()"
+      :count="building.count"
+      :purchase-effect-text="building.definition.purchaseEffectText"
+      :flavor-text="building.definition.flavorText"
+    />
+  </div>
 </template>
 
 <style scoped></style>
