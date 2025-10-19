@@ -45,10 +45,10 @@ const initialResources: Resource[] = [
     id: ResourceIds.Wood,
     name: 'Wood',
     currentAmount: 0,
-    baseStorage: 20,
+    baseStorage: 40,
     baseStorageFlatBonus: {},
     baseStorageModifiers: {},
-    calculatedStorage: 20,
+    calculatedStorage: 40,
     baseIncome: 0,
     incomeSources: {
       jobs: {},
