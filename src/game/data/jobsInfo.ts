@@ -12,7 +12,6 @@ export interface JobInput {
   multipliers?: number[]
 }
 
-// Not sure if any job will do anything besides produce resources
 export type JobInfo = {
   unlocked: boolean
   output: JobOutput[]
