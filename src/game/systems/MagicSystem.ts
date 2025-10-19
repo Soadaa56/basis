@@ -1,5 +1,4 @@
 import type { Magic } from '@/game/models/Magic'
-import type { MagicCost } from '../models/Costs'
 
 export class MagicSystem {
   private magic: Magic[] = []
@@ -16,36 +15,13 @@ export class MagicSystem {
     return this.magic.find((magic) => magic.id === id)
   }
 
-  canAfford(costs: MagicCost[]): boolean {
-    return costs.every((cost) => {
-      const magic = this.getMagic(cost.id)
-      if (!magic) return false
-      return magic.currentAmount >= cost.amount
-    })
-  }
-
-  spendMagic(costs: MagicCost[]) {
-    costs.forEach((cost) => {
-      const magic = this.getMagic(cost.id)
-      if (!magic) return
-
-      magic.currentAmount -= cost.amount
-    })
-  }
-
   updateCalculatedStorage(magic: Magic) {
     const baseStorage = magic.baseStorage
     const baseStorageFlatBonus = magic.baseStorageFlatBonus
     const baseStorageModifiers = magic.baseStorageModifiers
 
-    let calculatedStorage = baseStorageFlatBonus.reduce(
-      (sum, currentValue) => sum + currentValue,
-      baseStorage,
-    )
-    calculatedStorage = baseStorageModifiers.reduce(
-      (sum, currentValue) => sum * currentValue,
-      calculatedStorage,
-    )
+    let calculatedStorage = baseStorageFlatBonus.reduce((sum, currentValue) => sum + currentValue, baseStorage)
+    calculatedStorage = baseStorageModifiers.reduce((sum, currentValue) => sum * currentValue, calculatedStorage)
 
     return (magic.calculatedStorage = calculatedStorage)
   }
@@ -58,10 +34,7 @@ export class MagicSystem {
     const baseIncome = magic.baseIncome
     const baseIncomeModifiers = magic.baseIncomeModifiers
 
-    const calculatedIncome = baseIncomeModifiers.reduce(
-      (sum, currentValue) => sum * currentValue,
-      baseIncome,
-    )
+    const calculatedIncome = baseIncomeModifiers.reduce((sum, currentValue) => sum * currentValue, baseIncome)
 
     return (magic.calculatedIncome = calculatedIncome)
   }
