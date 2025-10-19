@@ -3,7 +3,7 @@ import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const Blacksmith: JobInfo = {
   unlocked: false,
-  output: [
+  outputs: [
     {
       resourceId: ResourceIds.Research,
       rate: 0.001,

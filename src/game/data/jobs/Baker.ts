@@ -3,14 +3,14 @@ import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const Baker: JobInfo = {
   unlocked: false,
-  output: [
+  outputs: [
     {
       resourceId: ResourceIds.Gold,
       rate: 3,
       multipliers: [],
     },
   ],
-  input: [
+  inputs: [
     {
       resourceId: ResourceIds.Food,
       rate: 5,

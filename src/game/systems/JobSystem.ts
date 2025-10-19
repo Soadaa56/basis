@@ -40,26 +40,24 @@ export class JobSystem {
   }
 
   addJobSlots(jobId: JobId, numberOfJobSlots: number) {
-    const jobState = this.getJobById(jobId)
-    if (!jobState) return console.log(`Error: JobSystem => addMaxJobSlots => jobState: ${jobState}`)
+    const job = this.getJobOrError(jobId)
 
     if (!this.isJobUnlocked(jobId)) {
       this.unlockJob(jobId)
     }
 
-    jobState.assignedWorkers += numberOfJobSlots
+    job.assignedWorkers += numberOfJobSlots
   }
 
   jobResourceContribution(jobId: JobId) {
-    const job = this.getJobById(jobId)
-    if (!job) return
+    const job = this.getJobOrError(jobId)
     const assignedWorkers = job.assignedWorkers
     const jobInfo = jobDefinitions[jobId]
 
-    if (!assignedWorkers || !jobInfo) return
+    if (!jobInfo) return
 
     // outputs
-    jobInfo.output?.forEach((output) => {
+    jobInfo.outputs?.forEach((output) => {
       const totalMults = (output.multipliers ?? [1]).reduce((sum, value) => sum * value, 1)
       const outputRateWithMults = totalMults * output.rate
       const totalOutput = outputRateWithMults * assignedWorkers
@@ -68,7 +66,7 @@ export class JobSystem {
     })
 
     // inputs
-    jobInfo.input?.forEach((input) => {
+    jobInfo.inputs?.forEach((input) => {
       const totalMults = (input.multipliers ?? [1]).reduce((sum, value) => sum * value, 1)
       const inputRateWithMults = totalMults * input.rate
       // negate to simulate a decrease of resources

@@ -3,14 +3,14 @@ import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const Fishermen: JobInfo = {
   unlocked: false,
-  output: [
+  outputs: [
     {
       resourceId: ResourceIds.Food,
       rate: 10,
       multipliers: [],
     },
   ],
-  input: [
+  inputs: [
     {
       resourceId: ResourceIds.Wood,
       rate: 1,

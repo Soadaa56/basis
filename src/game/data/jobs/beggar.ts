@@ -3,7 +3,7 @@ import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const Beggar: JobInfo = {
   unlocked: true,
-  output: [
+  outputs: [
     {
       resourceId: ResourceIds.Gold,
       rate: 0.1,

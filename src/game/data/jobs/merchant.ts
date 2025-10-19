@@ -3,14 +3,14 @@ import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const Merchant: JobInfo = {
   unlocked: true,
-  output: [
+  outputs: [
     {
       resourceId: ResourceIds.Gold,
       rate: 4,
       multipliers: [],
     },
   ],
-  input: [
+  inputs: [
     {
       resourceId: ResourceIds.Food,
       rate: 5,

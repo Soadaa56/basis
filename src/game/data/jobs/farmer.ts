@@ -3,7 +3,7 @@ import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const Farmer: JobInfo = {
   unlocked: true,
-  output: [
+  outputs: [
     {
       resourceId: ResourceIds.Food,
       rate: 1,

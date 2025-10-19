@@ -3,7 +3,7 @@ import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const Miner: JobInfo = {
   unlocked: false,
-  output: [
+  outputs: [
     {
       resourceId: ResourceIds.Copper,
       rate: 0.2,
