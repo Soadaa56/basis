@@ -25,4 +25,4 @@ const gameStore = useGameStore()
   </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss"></style>
