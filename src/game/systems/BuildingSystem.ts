@@ -5,6 +5,9 @@ import { ResourceSystem } from './ResourceSystem'
 
 import type { Building } from '@/game/models/Buildings'
 import type { BuildingId } from '@/game/data/buildingsId'
+import type { BuildingType } from '@/game/models/buildings/buildingsInfo'
+import { jobDefinitions } from '../data/jobs'
+import { JobIds } from '../models/Jobs'
 
 export class BuildingSystem {
   private buildings: Building[] = []
@@ -33,50 +36,95 @@ export class BuildingSystem {
   }
 
   triggerBuilding(
-    buildingId: BuildingId,
+    building: Building,
     resourceSystem: ResourceSystem,
     jobSystem: JobSystem,
     workerSystem: WorkerSystem,
   ) {
-    const BuildingInfo = buildingDefinitions[buildingId]
-    if (!BuildingInfo) return console.log(`triggerBuilding failed. no BuildingInfo ${BuildingInfo}`)
+    building.definition.info.forEach((effect) => {
+      switch (effect.type) {
+        case BuildingTypes.ResourceProducer: {
+          const resource = resourceSystem.getResourceById(effect.resourceId)
+          const buildingId = building.definition.id
+          const rate = effect.rate * building.count
 
-    switch (BuildingInfo?.type) {
-      case BuildingTypes.ResourceProducer:
-        break
+          if (!resource) return
+          resource.incomeSources.buildings[buildingId] = rate
+          break
+        }
+        case BuildingTypes.ResourceMultiplier: {
+          const resource = resourceSystem.getResourceById(effect.resourceId)
+          const buildingId = building.definition.id
+          const count = building.count
+          const totalMult = Math.pow(effect.multiplier, count)
 
-      case BuildingTypes.ResourceMultiplier:
-        const resourceId = BuildingInfo.resource
-        const multiplier = BuildingInfo.multiplier
-        const resource = resourceSystem.getResource(resourceId)
+          if (!resource) return
 
-        resource?.baseIncomeModifiers.push(multiplier)
-        if (!resource)
-          return console.log(
-            `triggerBuilding => case: ResourceMultipler problem with !resource ${resource}`,
-          )
-        resourceSystem.updateCalculatedIncome(resource)
-        break
+          resource.IncomeMultipliers[buildingId] = totalMult
+          break
+        }
 
-      case BuildingTypes.JobProducer:
-        const jobId = BuildingInfo.jobType
-        const numberofJobs = BuildingInfo.addOpenJobs
+        case BuildingTypes.ResourceStorage: {
+          const resource = resourceSystem.getResourceById(effect.resourceId)
+          const buildingId = building.definition.id
 
-        jobSystem.addJobSlots(jobId, numberofJobs)
-        break
+          if (!resource) {
+            console.warn(`triggerBuilding error => resourceStorage Resource: ${resource}`)
+            return
+          }
 
-      case BuildingTypes.WorkerProducer:
-        const newWorkers = BuildingInfo.addWorkers
+          if (effect.flatStorageAmount) {
+            resource.baseStorageFlatBonus[buildingId] = effect.flatStorageAmount * building.count
+          }
+          if (effect.modifierStorageAmount) {
+            resource.baseStorageModifiers[buildingId] = effect.modifierStorageAmount * building.count
+          }
+          break
+        }
+        case BuildingTypes.JobMultiplierOutput: {
+          const jobInfo = jobDefinitions[effect.jobId]
+          const jobMult = effect.multiplier
 
-        workerSystem.increaseMaxWorkerCount(newWorkers)
-        break
+          jobInfo?.outputs.forEach((output) => {
+            if (!output.multipliers) {
+              output.multipliers = []
+            }
+            output.multipliers.push(jobMult)
+          })
+          break
+        }
+        case BuildingTypes.JobMultiplierInput: {
+          const jobInfo = jobDefinitions[effect.jobId]
+          const jobMult = effect.multiplier
 
-      case BuildingTypes.Unlocker:
-        console.log(`triggerBuilding => case:BuildingTypes.unlocker: ${BuildingTypes.Unlocker}`)
-        break
-      default:
-        console.log(`triggerBuilding failed with buildingId: ${buildingId}`)
-        break
-    }
+          jobInfo?.inputs?.forEach((input) => {
+            if (!input.multipliers) {
+              input.multipliers = []
+            }
+            input.multipliers.push(jobMult)
+          })
+          break
+        }
+        case BuildingTypes.JobProducer: {
+          const jobId = effect.jobId
+          const addOpenJobs = effect.addOpenJobs
+
+          jobSystem.addJobSlots(jobId, addOpenJobs)
+          break
+        }
+        case BuildingTypes.WorkerProducer: {
+          const newWorkers = effect.addWorkers * building.count
+
+          workerSystem.increaseMaxWorkerCount(newWorkers)
+          break
+        }
+        case BuildingTypes.Unlocker:
+          console.log(`BuildingSystem => triggerBuilding => unlocker: (change this) ${effect.type}`)
+          break
+        default:
+          console.log(`BuildingSystem => triggerBuilding default case triggered: effect.type: ${effect.type}`)
+          break
+      }
+    })
   }
 }
