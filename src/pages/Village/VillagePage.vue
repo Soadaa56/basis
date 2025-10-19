@@ -5,10 +5,16 @@ import BuildingsPanel from './components/buildings/BuildingsPanel.vue'
 </script>
 
 <template>
-  <div class="panel-container">
-    <resources-panel></resources-panel>
-    <buildings-panel></buildings-panel>
-    <workers-panel></workers-panel>
+  <div class="village-container">
+    <div class="resource-panel">
+      <resources-panel></resources-panel>
+    </div>
+    <div class="building-panel">
+      <buildings-panel></buildings-panel>
+    </div>
+    <div class="worker-panel">
+      <workers-panel></workers-panel>
+    </div>
   </div>
 </template>
 
@@ -17,11 +23,16 @@ import BuildingsPanel from './components/buildings/BuildingsPanel.vue'
   text-align: center;
 }
 
-.panel-container {
+.village-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 1rem;
   height: 75vh;
+}
+
+.building-panel {
+  flex-grow: 1;
+  margin: 0 5rem 0 5rem;
 }
 </style>
