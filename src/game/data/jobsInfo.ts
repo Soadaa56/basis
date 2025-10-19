@@ -14,6 +14,6 @@ export interface JobInput {
 
 export type JobInfo = {
   unlocked: boolean
-  output: JobOutput[]
-  input?: JobInput[]
+  outputs: JobOutput[]
+  inputs?: JobInput[]
 }

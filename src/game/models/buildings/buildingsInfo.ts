@@ -5,7 +5,8 @@ export const BuildingTypes = {
   ResourceProducer: 'resourceProducer',
   ResourceMultiplier: 'resourceMultiplier',
   ResourceStorage: 'resourceStorage',
-  JobMultiplier: 'jobMultiplier',
+  JobMultiplierOutput: 'jobMultiplierOutput',
+  JobMultiplierInput: 'jobMultiplierInput',
   JobProducer: 'jobProducer',
   WorkerProducer: 'workerProducer',
   Unlocker: 'unlocker',
@@ -35,7 +36,12 @@ export type BuildingInfo =
       modifierStorageAmount?: number
     }
   | {
-      type: typeof BuildingTypes.JobMultiplier
+      type: typeof BuildingTypes.JobMultiplierOutput
+      jobId: JobId
+      multiplier: number
+    }
+  | {
+      type: typeof BuildingTypes.JobMultiplierInput
       jobId: JobId
       multiplier: number
     }
