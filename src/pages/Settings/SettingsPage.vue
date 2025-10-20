@@ -11,7 +11,7 @@ function resetGameData() {
 <template>
   <h1>Settings</h1>
 
-  <button @click="resetGameData">Reset Game Data</button>
+  <button id="reset-button" @click="resetGameData">Reset Game Data</button>
 
   <footer-layout />
 </template>
@@ -20,6 +20,9 @@ function resetGameData() {
 button {
   margin: 16px;
   padding: 16px;
+}
+
+#reset-button {
   border: 4px dashed darkred;
 }
 </style>
