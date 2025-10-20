@@ -26,14 +26,34 @@ const emit = defineEmits<{
 
 <style scoped>
 .building-card {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  height: 40px;
+  background-color: var(--bg-color);
+  border-radius: 4px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  /* border-radius: 5px; */
 
   &:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    filter: brightness(1.5);
+    filter: brightness(1.25);
     cursor: pointer;
   }
+}
+
+.building-name {
+  margin: auto;
+  font-size: 1.1rem;
+}
+
+.building-count {
+  position: absolute;
+  align-self: flex-end;
+  background-color: var(--bg-color);
+  filter: brightness(1.5);
+  padding: 0.1rem;
 }
 </style>

@@ -6,13 +6,13 @@ import BuildingsPanel from './components/buildings/BuildingsPanel.vue'
 
 <template>
   <div class="village-container">
-    <div class="resource-panel">
+    <div class="resource-panel bg-grey">
       <resources-panel></resources-panel>
     </div>
     <div class="building-panel">
       <buildings-panel></buildings-panel>
     </div>
-    <div class="worker-panel">
+    <div class="worker-panel bg-grey">
       <workers-panel></workers-panel>
     </div>
   </div>
@@ -28,7 +28,7 @@ import BuildingsPanel from './components/buildings/BuildingsPanel.vue'
   flex-direction: row;
   justify-content: space-between;
   margin: 1rem;
-  height: 75vh;
+  /* height: 75vh; */
 }
 
 .building-panel {
