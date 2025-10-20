@@ -31,20 +31,24 @@ function switchPage(page: any) {
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 nav {
+  background-color: var(--bg-color);
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   outline: 3px solid black;
   padding: 4px;
   button {
+    background-color: var(--accent-color);
     list-style: none;
     padding: 1rem;
     outline: 2px solid black;
+    transition: 0.4s ease;
 
     &:hover {
-      background: lightgray;
+      filter: brightness(1.5);
+      // background: lightgray;
     }
   }
 }
