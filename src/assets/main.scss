@@ -1,14 +1,5 @@
-:root {
-  --bg-color: #222524; // eerie black
-  --text-color: #63ccca; // robin egg blue
-  --secondary-color: #42858c; // dark cyan
-  --tertiary-color: #5da399; // keppel
-  --accent-color: #3066be; // true blue
-  --button-text-color: black; // black
-}
-
 body {
-  background-color: var(--bg-color);
+  background-color: #121212;
   color: var(--text-color);
 }
 
@@ -28,4 +19,11 @@ a {
   &:hover {
     color: var(--tertiary-color);
   }
+}
+
+.bg-grey {
+  background-color: var(--bg-color);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

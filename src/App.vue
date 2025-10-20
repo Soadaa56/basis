@@ -26,4 +26,6 @@ onMounted(() => {
   <router-view />
 </template>
 
-<style scoped></style>
+<style>
+@import './assets/colors.scss';
+</style>
