@@ -17,6 +17,7 @@ const gameStore = useGameStore()
       :count="building.count"
       :purchase-effect-text="building.definition.purchaseEffectText"
       :flavor-text="building.definition.flavorText"
+      @purchase="gameStore.manager.purchaseBuilding(building.definition.id)"
     />
   </div>
 </template>
@@ -24,7 +25,7 @@ const gameStore = useGameStore()
 <style scoped lang="scss">
 .building-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
 </style>
