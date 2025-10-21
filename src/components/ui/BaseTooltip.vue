@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-interface Props {
-  text: string
-}
+// interface Props {
+//   text: string
+// }
 
-const props = defineProps<Props>()
+// const props = defineProps<Props>()
 const hover = ref(false)
 </script>
 
