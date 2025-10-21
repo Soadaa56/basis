@@ -24,7 +24,7 @@ const emit = defineEmits<{
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .building-card {
   display: flex;
   position: relative;
