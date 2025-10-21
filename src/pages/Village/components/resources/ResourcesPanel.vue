@@ -2,14 +2,15 @@
 import { useGameStore } from '@/stores/game'
 import BaseResourceText from '@/components/ui/BaseResourceText.vue'
 
-const gameStore = useGameStore().manager
+const gameStore = useGameStore()
 </script>
 
 <template>
+  <button @click="gameStore.manager.fillResources">Fill Resources</button>
   <div v-if="gameStore" class="resource-panel-container">
     <h2>Resources Panel</h2>
     <base-resource-text
-      v-for="resource in gameStore.resourceSystem.getAllResources()"
+      v-for="resource in gameStore.manager.resourceSystem.getAllResources()"
       :key="resource.id"
       :name="resource.name"
       :value="resource.currentAmount"

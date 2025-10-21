@@ -71,12 +71,7 @@ export class GameStateManager {
 
     this.resourceSystem.spendResources(cost)
     building?.addBuildingCount()
-    this.buildingSystem.triggerBuilding(
-      building,
-      this.resourceSystem,
-      this.jobSystem,
-      this.workerSystem,
-    )
+    this.buildingSystem.triggerBuilding(building, this.resourceSystem, this.jobSystem, this.workerSystem)
   }
 
   addWorkerToJob(jobId: JobId) {
@@ -87,5 +82,13 @@ export class GameStateManager {
   removeWorkerFromJob(jobId: JobId) {
     this.workerSystem.unassignWorker(jobId)
     this.jobSystem.jobResourceContribution(jobId)
+  }
+
+  fillResources() {
+    const resources = this.resourceSystem.getAllResources()
+
+    resources.forEach((resource) => {
+      resource.currentAmount = resource.calculatedStorage
+    })
   }
 }
