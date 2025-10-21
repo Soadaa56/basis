@@ -46,7 +46,7 @@ export class JobSystem {
       this.unlockJob(jobId)
     }
 
-    job.assignedWorkers += numberOfJobSlots
+    job.totalJobs += numberOfJobSlots
   }
 
   jobResourceContribution(jobId: JobId) {
