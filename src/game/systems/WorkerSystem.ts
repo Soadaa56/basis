@@ -43,8 +43,10 @@ export class WorkerSystem {
   assignWorker(jobId: JobId) {
     const job = this.getJobOrError(jobId)
 
-    if (this.workerState.unassignedWorkerCount > 0) {
+    if (this.workerState.unassignedWorkerCount > 0 && job.assignedWorkers < job.totalJobs) {
       job.assignedWorkers++
+      console.log(job)
+      console.log(this.workerState.unassignedWorkerCount)
       this.decrementUnassignedWorkerCount()
     }
   }
