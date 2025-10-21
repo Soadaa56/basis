@@ -15,8 +15,8 @@ export const Mine: BuildingDefinition = {
       amount: 50,
     },
   ] satisfies ResourceCost[],
-  costMultiplier: 1.55,
-  purchaseEffectText: '+3 Miner Jobs',
+  costMultiplier: 1.3,
+  purchaseEffectText: '+2 Miner Jobs',
   flavorText: "Heigh-ho, it's home from work we go.",
   info: [
     {

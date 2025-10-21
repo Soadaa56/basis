@@ -14,7 +14,7 @@ export const LoggingCamp: BuildingDefinition = {
       amount: 100,
     },
   ] satisfies ResourceCost[],
-  costMultiplier: 1.4,
+  costMultiplier: 1.3,
   purchaseEffectText: '+4 Loggers',
   flavorText: 'Dont forget to edit this.',
   info: [

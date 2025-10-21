@@ -18,7 +18,7 @@ export const Bakehouse: BuildingDefinition = {
       amount: 50,
     },
   ] satisfies ResourceCost[],
-  costMultiplier: 1.55,
+  costMultiplier: 1.3,
   purchaseEffectText: '+1 Baker',
   flavorText: 'The whaff of freshly baked bread attracts all who wander nearby.',
   info: [

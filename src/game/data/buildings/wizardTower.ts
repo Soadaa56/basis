@@ -14,7 +14,7 @@ export const WizardTower: BuildingDefinition = {
     { resourceId: ResourceIds.Iron, amount: 100 },
     { resourceId: ResourceIds.Water, amount: 10000 },
   ] satisfies ResourceCost[],
-  costMultiplier: 10,
+  costMultiplier: 5,
   purchaseEffectText: 'Unlocks Magic',
   flavorText: "You'll defintely want to save up for this one!",
   info: [

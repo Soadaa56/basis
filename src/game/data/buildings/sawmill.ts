@@ -18,7 +18,7 @@ export const Sawmill: BuildingDefinition = {
       amount: 10,
     },
   ] satisfies ResourceCost[],
-  costMultiplier: 1.6,
+  costMultiplier: 1.4,
   purchaseEffectText: '+20% Logger Output',
   flavorText: 'Placeholder text.',
   info: [

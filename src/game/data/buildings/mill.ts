@@ -14,7 +14,7 @@ export const Mill: BuildingDefinition = {
       amount: 80,
     },
   ] satisfies ResourceCost[],
-  costMultiplier: 1.75,
+  costMultiplier: 1.4,
   purchaseEffectText: '+15% Farm Output',
   flavorText: 'Lorem Ipsum.',
   info: [

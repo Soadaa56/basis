@@ -17,7 +17,7 @@ export const Well: BuildingDefinition = {
       amount: 500,
     },
   ] satisfies ResourceCost[],
-  costMultiplier: 1.4,
+  costMultiplier: 1.35,
   purchaseEffectText: '+1 Water\n+1,000 Water Storage',
   flavorText: 'The second most important resource',
   info: [

@@ -14,7 +14,7 @@ export const Farm: BuildingDefinition = {
       amount: 30,
     },
   ] satisfies ResourceCost[],
-  costMultiplier: 1.35,
+  costMultiplier: 1.25,
   purchaseEffectText: '+1 Farmer Job',
   flavorText: 'Seems like a lot of work for 1 person!',
   info: [

@@ -11,7 +11,7 @@ export const StorageShed: BuildingDefinition = {
     { resourceId: ResourceIds.Stone, amount: 200 },
     { resourceId: ResourceIds.Wood, amount: 50 },
   ] satisfies ResourceCost[],
-  costMultiplier: 1.45,
+  costMultiplier: 1.25,
   purchaseEffectText: '+250 Stone\n+100 Wood\n+20 Copper',
   flavorText: "Stuff isn't organized here, just shoved into a giant pile.",
   info: [
