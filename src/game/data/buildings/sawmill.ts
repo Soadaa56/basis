@@ -23,7 +23,7 @@ export const Sawmill: BuildingDefinition = {
   flavorText: 'Placeholder text.',
   info: [
     {
-      type: BuildingTypes.JobMultiplier,
+      type: BuildingTypes.JobMultiplierInput,
       jobId: JobIds.Logger,
       multiplier: 1.2,
     },

@@ -19,7 +19,7 @@ export const Mill: BuildingDefinition = {
   flavorText: 'Lorem Ipsum.',
   info: [
     {
-      type: BuildingTypes.JobMultiplier,
+      type: BuildingTypes.JobMultiplierInput,
       jobId: JobIds.Farmer,
       multiplier: 1.15,
     },
