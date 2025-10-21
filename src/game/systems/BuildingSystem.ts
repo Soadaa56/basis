@@ -110,7 +110,7 @@ export class BuildingSystem {
           break
         }
         case BuildingTypes.WorkerProducer: {
-          const newWorkers = effect.addWorkers * building.count
+          const newWorkers = effect.addWorkers
 
           workerSystem.increaseMaxWorkerCount(newWorkers)
           break
