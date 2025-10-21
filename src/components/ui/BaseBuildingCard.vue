@@ -2,6 +2,8 @@
 import type { BuildingId } from '@/game/data/buildingsId'
 import type { ResourceCost } from '@/game/models/Resource'
 
+import BaseTooltip from './BaseTooltip.vue'
+
 defineProps<{
   id: BuildingId
   name: string
@@ -21,6 +23,7 @@ const emit = defineEmits<{
   <div class="building-card" @click="emit('purchase', id)">
     <p class="building-name">{{ name }}</p>
     <span class="building-count">{{ count }}</span>
+    <BaseTooltip />
   </div>
 </template>
 
