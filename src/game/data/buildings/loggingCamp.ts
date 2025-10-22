@@ -11,7 +11,7 @@ export const LoggingCamp: BuildingDefinition = {
   cost: [
     {
       resourceId: ResourceIds.Gold,
-      amount: 100,
+      amount: 30,
     },
   ] satisfies ResourceCost[],
   costMultiplier: 1.3,
