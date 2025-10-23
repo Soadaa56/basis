@@ -45,8 +45,6 @@ export class WorkerSystem {
 
     if (this.workerState.unassignedWorkerCount > 0 && job.assignedWorkers < job.totalJobs) {
       job.assignedWorkers++
-      console.log(job)
-      console.log(this.workerState.unassignedWorkerCount)
       this.decrementUnassignedWorkerCount()
     }
   }
