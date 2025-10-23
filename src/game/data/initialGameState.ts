@@ -68,14 +68,14 @@ const initialBuildings: Building[] = [
 
 const initialJobs: Job[] = [
   {
-    id: JobIds.Farmer,
-    name: 'Farmer',
-    totalJobs: 1,
+    id: JobIds.Beggar,
+    name: 'Beggar',
+    totalJobs: 10,
     assignedWorkers: 0,
   },
   {
-    id: JobIds.Beggar,
-    name: 'Beggar',
+    id: JobIds.Farmer,
+    name: 'Farmer',
     totalJobs: 1,
     assignedWorkers: 0,
   },
