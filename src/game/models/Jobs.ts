@@ -6,7 +6,7 @@ export const JobIds = {
   Blacksmith: 'blacksmith',
   Farmer: 'farmer',
   Fishermen: 'fishermen',
-  Logger: 'logger',
+  LumberJack: 'lumberjack',
   Miner: 'miner',
   Merchant: 'merchant',
 } as const

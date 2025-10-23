@@ -39,6 +39,8 @@ export class JobSystem {
     jobInfo.unlocked = true
   }
 
+  createJob() {}
+
   addJobSlots(jobId: JobId, numberOfJobSlots: number) {
     const job = this.getJobOrError(jobId)
 

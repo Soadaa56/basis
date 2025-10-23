@@ -3,6 +3,7 @@ import { Blacksmith } from './blacksmith'
 import { Beggar } from './beggar'
 import { Farmer } from './farmer'
 import { Fishermen } from './fisherman'
+import { Lumberjack } from './lumberjack'
 import { Merchant } from './merchant'
 import { Miner } from './miner'
 
@@ -15,6 +16,7 @@ export const jobDefinitions: Partial<Record<JobId, JobInfo>> = {
   blacksmith: Blacksmith,
   farmer: Farmer,
   fishermen: Fishermen,
+  lumberjack: Lumberjack,
   merchant: Merchant,
   miner: Miner,
 }
