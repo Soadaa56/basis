@@ -105,6 +105,9 @@ export class BuildingSystem {
         case BuildingTypes.JobProducer: {
           const jobId = effect.jobId
           const addOpenJobs = effect.addOpenJobs
+          if (building.count == 1) {
+            jobSystem.createNewJob(jobId)
+          }
 
           jobSystem.addJobSlots(jobId, addOpenJobs)
           break

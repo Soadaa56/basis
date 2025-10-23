@@ -1,6 +1,7 @@
 import { jobDefinitions } from '@/game/data/jobs'
 import type { Job, JobId } from '@/game/models/Jobs'
 import type { ResourceSystem } from './ResourceSystem'
+import type { JobInfo } from '../data/jobsInfo'
 
 export class JobSystem {
   private jobs: Job[] = []
@@ -21,8 +22,14 @@ export class JobSystem {
     return this.jobs
   }
 
-  getJobById(id: JobId) {
-    return this.jobs.find((job) => job.id === id)
+  getJobById(jobId: JobId) {
+    return this.jobs.find((job) => job.id === jobId)
+  }
+
+  doesJobExist(jobId: JobId) {
+    const job = this.jobs.find((job) => job.id === jobId)
+    if (!job) return false
+    return true
   }
 
   isJobUnlocked(jobId: JobId) {
@@ -32,14 +39,26 @@ export class JobSystem {
   }
 
   unlockJob(jobId: JobId) {
-    const jobInfo = jobDefinitions[jobId]
-    if (!jobInfo) {
-      return console.log(`Error unlocking job - JobSystem=>unlockJob=>jobInfo${jobInfo}`)
-    }
+    const jobInfo = this.getJobInfoOrError(jobId)
+
     jobInfo.unlocked = true
   }
 
-  createJob() {}
+  createNewJob(jobId: JobId) {
+    if (this.doesJobExist(jobId)) {
+      return
+    }
+
+    const newJob: Job = {
+      id: jobId,
+      name: jobId.charAt(0).toLocaleUpperCase() + jobId.slice(1),
+      totalJobs: 0,
+      assignedWorkers: 0,
+      isUnlocked: false,
+    }
+
+    this.jobs.push(newJob)
+  }
 
   addJobSlots(jobId: JobId, numberOfJobSlots: number) {
     const job = this.getJobOrError(jobId)
@@ -84,5 +103,14 @@ export class JobSystem {
       throw new Error(`Error at WorkerSystem: job not found: ${jobId}`)
     }
     return job
+  }
+
+  private getJobInfoOrError(jobId: JobId): JobInfo {
+    const jobInfo = jobDefinitions[jobId]
+    if (!jobInfo) {
+      console.log(`jobId: ${jobId} for jobInfo not found: ${jobInfo}`)
+      throw new Error('Error at JobSystem')
+    }
+    return jobInfo
   }
 }
