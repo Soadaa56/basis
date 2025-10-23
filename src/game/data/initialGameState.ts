@@ -44,7 +44,7 @@ const initialResources: Resource[] = [
   {
     id: ResourceIds.Wood,
     name: 'Wood',
-    currentAmount: 0,
+    currentAmount: 20,
     baseStorage: 40,
     baseStorageFlatBonus: {},
     baseStorageModifiers: {},
