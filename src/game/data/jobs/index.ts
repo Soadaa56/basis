@@ -1,4 +1,4 @@
-import { Baker } from './Baker'
+import { Baker } from './baker'
 import { Blacksmith } from './blacksmith'
 import { Beggar } from './beggar'
 import { Farmer } from './farmer'
