@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { ref, defineProps } from 'vue'
+import { ref } from 'vue'
 
-const props = defineProps<{
-  text: string
-}>()
 const hover = ref(false)
 </script>
 
@@ -11,7 +8,7 @@ const hover = ref(false)
   <div class="tooltip-container" @mouseover="hover = true" @mouseleave="hover = false">
     <slot />
     <div class="tooltip-info" v-if="hover">
-      {{ props.text }}
+      <slot name="tooltip" />
     </div>
   </div>
 </template>
@@ -21,10 +18,13 @@ const hover = ref(false)
   text-align: center;
 }
 
-.toptip-info {
+.tooltip-info {
+  white-space: pre-wrap;
   position: absolute;
-  border: 2px solid blue;
-  background-color: white;
-  color: black;
+  padding: 0.5rem;
+  border: 2px solid black;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-width: 200px;
 }
 </style>
