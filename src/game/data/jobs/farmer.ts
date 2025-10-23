@@ -1,5 +1,5 @@
 import { ResourceIds } from '@/game/models/Resource'
-import type { JobInfo } from '@/game/data/jobsInfo'
+import type { JobInfo, JobOutput } from '@/game/data/jobsInfo'
 
 export const Farmer: JobInfo = {
   unlocked: true,
@@ -9,5 +9,5 @@ export const Farmer: JobInfo = {
       rate: 1,
       multipliers: [],
     },
-  ],
+  ] satisfies JobOutput[],
 }
