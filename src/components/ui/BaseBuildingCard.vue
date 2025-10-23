@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BuildingTooltip from './tooltips/BuildingTooltip.vue'
 import type { BuildingId } from '@/game/data/buildingsId'
 import type { ResourceCost } from '@/game/models/Resource'
 
@@ -9,7 +10,7 @@ defineProps<{
   count: number
   maxCount?: number
   purchaseEffectText: string
-  flavorText: string
+  flavorText?: string
 }>()
 
 const emit = defineEmits<{
@@ -18,10 +19,12 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="building-card" @click="emit('purchase', id)">
-    <p class="building-name">{{ name }}</p>
-    <span class="building-count">{{ count }}</span>
-  </div>
+  <building-tooltip :name="name" :cost="cost" :purchase-effect-text="purchaseEffectText" :flavor-text="flavorText">
+    <div class="building-card" @click="emit('purchase', id)">
+      <p class="building-name">{{ name }}</p>
+      <span class="building-count">{{ count }}</span>
+    </div>
+  </building-tooltip>
 </template>
 
 <style scoped lang="scss">

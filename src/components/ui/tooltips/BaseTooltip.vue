@@ -18,14 +18,12 @@ const hover = ref(false)
 
 <style scoped lang="scss">
 .tooltip-container {
-  display: inline-block;
-  position: relative;
-  margin: 1rem;
   text-align: center;
 }
 
 .toptip-info {
   position: absolute;
+  border: 2px solid blue;
   background-color: white;
   color: black;
 }
