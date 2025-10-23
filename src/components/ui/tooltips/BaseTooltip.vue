@@ -24,7 +24,7 @@ const hover = ref(false)
   padding: 0.5rem;
   border: 2px solid black;
   background-color: var(--bg-color);
-  color: var(--text-color);
+  color: var(--basic-text-color);
   min-width: 200px;
 }
 </style>

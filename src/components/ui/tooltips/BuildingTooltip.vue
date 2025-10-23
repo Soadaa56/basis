@@ -39,9 +39,11 @@ function formatCost(costs: ResourceCost[]) {
 .cost {
   text-transform: capitalize;
   margin-bottom: 1rem;
+  font-size: 1.25em;
 }
 
 .flavor-text {
+  color: var(--text-color);
   border-top: 2px solid var(--tertiary-color);
   font-size: 0.85rem;
   text-wrap: balance;
