@@ -20,7 +20,7 @@ export const LoggingCamp: BuildingDefinition = {
   info: [
     {
       type: BuildingTypes.JobProducer,
-      jobId: JobIds.Logger,
+      jobId: JobIds.Lumberjack,
       addOpenJobs: 4,
     },
   ] satisfies BuildingInfo[],
