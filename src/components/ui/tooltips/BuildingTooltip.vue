@@ -19,7 +19,6 @@ const props = defineProps<{
 }>()
 
 function formatCost(costs: ResourceCost[]) {
-  // return costs.map((c) => `${c.amount} ${c.resourceId}`)
   return costs.map((cost) => `${cost.resourceId}: ${cost.amount}`)
 }
 </script>
