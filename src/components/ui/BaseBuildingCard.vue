@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import BuildingTooltip from './tooltips/BuildingTooltip.vue'
+import { useGameStore } from '@/stores/game'
 import type { BuildingId } from '@/game/data/buildingsId'
 import type { ResourceCost } from '@/game/models/Resource'
+
+const gameStore = useGameStore()
+
+function canAffordBuilding(buildingId: BuildingId): boolean {
+  return gameStore.manager.canAffordBuilding(buildingId)
+}
 
 defineProps<{
   id: BuildingId
@@ -19,7 +26,16 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <building-tooltip :name="name" :cost="cost" :purchase-effect-text="purchaseEffectText" :flavor-text="flavorText">
+  <building-tooltip
+    :name="name"
+    :cost="cost"
+    :purchase-effect-text="purchaseEffectText"
+    :flavor-text="flavorText"
+    :class="{
+      affordable: canAffordBuilding(id),
+      unaffordable: !canAffordBuilding(id),
+    }"
+  >
     <div class="building-card" @click="emit('purchase', id)">
       <p class="building-name">{{ name }}</p>
       <span class="building-count">{{ count }}</span>
@@ -59,5 +75,15 @@ const emit = defineEmits<{
   background-color: var(--bg-color);
   filter: brightness(1.5);
   padding: 0.1rem;
+}
+
+.affordable {
+  filter: brightness(1);
+  transition: 0.3s ease-in;
+}
+
+.unaffordable {
+  filter: brightness(0.7);
+  transition: 0.3s ease-in;
 }
 </style>
