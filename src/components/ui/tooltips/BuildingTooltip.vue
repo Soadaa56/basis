@@ -1,8 +1,17 @@
 <script setup lang="ts">
 import BaseTooltip from './BaseTooltip.vue'
+import { useGameStore } from '@/stores/game'
 import type { ResourceCost } from '@/game/models/Resource'
+import type { BuildingId } from '@/game/data/buildingsId'
+
+const gameStore = useGameStore()
+
+function canAffordBuildingWithCurrentStorage(buildingId: BuildingId) {
+  return gameStore.manager.canAffordBuildingWithCurrentStorage(buildingId)
+}
 
 const props = defineProps<{
+  id: BuildingId
   name: string
   cost: ResourceCost[]
   purchaseEffectText: string
@@ -24,7 +33,15 @@ function formatCost(costs: ResourceCost[]) {
     <template #tooltip>
       <div class="tooltip-container">
         <div class="effect">{{ props.purchaseEffectText }}</div>
-        <div class="cost">{{ formatCost(props.cost) }}</div>
+        <div
+          class="cost"
+          :class="{
+            affordableStorage: canAffordBuildingWithCurrentStorage(id),
+            unaffordableStorage: !canAffordBuildingWithCurrentStorage(id),
+          }"
+        >
+          {{ formatCost(props.cost) }}
+        </div>
         <div v-if="props.flavorText" class="flavor-text">{{ props.flavorText }}</div>
       </div>
     </template>
@@ -49,5 +66,13 @@ function formatCost(costs: ResourceCost[]) {
   text-wrap: balance;
   padding-left: 1rem;
   text-align: end;
+}
+
+.affordableStorage {
+  color: var(--basic-text-color);
+}
+
+.unaffordableStorage {
+  color: var(--storage-cost-problem-color);
 }
 </style>
