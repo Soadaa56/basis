@@ -1,5 +1,5 @@
 import type { BuildingDefinition } from './buildings/buildingsDefinitions'
-import type { ResourceCost } from './Resource'
+import type { ResourceCost, ResourceId } from './Resource'
 
 export class Building {
   definition: BuildingDefinition
@@ -27,5 +27,13 @@ export class Building {
 
   unlockBuilding() {
     this.isUnlocked = true
+  }
+
+  getSingleResourceCostByResourceId(resourceId: ResourceId): number {
+    const resource = this.definition.cost.find((cost) => cost.resourceId == resourceId)
+    if (!resource) {
+      return Infinity
+    }
+    return resource?.amount
   }
 }

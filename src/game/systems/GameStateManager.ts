@@ -99,6 +99,13 @@ export class GameStateManager {
     return false
   }
 
+  canAffordCostWithCurrentStorage(buildingId: BuildingId, resource: Resource): boolean {
+    const building = this.buildingSystem.getBuildingOrError(buildingId)
+    const resourceCost = building.getSingleResourceCostByResourceId(resource.id)
+
+    return resource.calculatedStorage >= resourceCost
+  }
+
   fillResources() {
     const resources = this.resourceSystem.getAllResources()
 
