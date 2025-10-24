@@ -62,10 +62,9 @@ export class GameStateManager {
   }
 
   purchaseBuilding(buildingId: BuildingId) {
-    const building = this.buildingSystem.getBuilding(buildingId)
-    const cost = building?.getCurrentCost()
+    const building = this.buildingSystem.getBuildingOrError(buildingId)
+    const cost = building.getCurrentCost()
 
-    if (!building) return
     if (!cost) return
     if (!this.resourceSystem.canAfford(cost)) return
 
@@ -82,6 +81,14 @@ export class GameStateManager {
   removeWorkerFromJob(jobId: JobId) {
     this.workerSystem.unassignWorker(jobId)
     this.jobSystem.jobResourceContribution(jobId)
+  }
+
+  canAffordBuilding(buildingId: BuildingId) {
+    const building = this.buildingSystem.getBuildingOrError(buildingId)
+    const cost = building.getCurrentCost()
+
+    if (this.resourceSystem.canAfford(cost)) return true
+    return false
   }
 
   fillResources() {
