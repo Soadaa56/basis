@@ -83,11 +83,19 @@ export class GameStateManager {
     this.jobSystem.jobResourceContribution(jobId)
   }
 
-  canAffordBuilding(buildingId: BuildingId) {
+  canAffordBuilding(buildingId: BuildingId): boolean {
     const building = this.buildingSystem.getBuildingOrError(buildingId)
     const cost = building.getCurrentCost()
 
     if (this.resourceSystem.canAfford(cost)) return true
+    return false
+  }
+
+  canAffordBuildingWithCurrentStorage(buildingId: BuildingId): boolean {
+    const building = this.buildingSystem.getBuildingOrError(buildingId)
+    const cost = building.getCurrentCost()
+
+    if (this.resourceSystem.canAffordWithCurrentStorage(cost)) return true
     return false
   }
 
