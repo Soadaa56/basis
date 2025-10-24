@@ -31,6 +31,14 @@ export class ResourceSystem {
     })
   }
 
+  canAffordWithCurrentStorage(costs: ResourceCost[]): boolean {
+    return costs.every((cost) => {
+      const resource = this.getResourceById(cost.resourceId)
+      if (!resource) return false
+      return resource.calculatedStorage >= cost.amount
+    })
+  }
+
   spendResources(costs: ResourceCost[]) {
     costs.forEach((cost) => {
       const resource = this.getResourceById(cost.resourceId)
