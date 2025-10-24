@@ -10,6 +10,10 @@ function canAffordBuilding(buildingId: BuildingId): boolean {
   return gameStore.manager.canAffordBuilding(buildingId)
 }
 
+function canAffordBuildingWithCurrentStorage(buildingId: BuildingId): boolean {
+  return gameStore.manager.canAffordBuildingWithCurrentStorage(buildingId)
+}
+
 defineProps<{
   id: BuildingId
   name: string
@@ -26,17 +30,15 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <building-tooltip
-    :name="name"
-    :cost="cost"
-    :purchase-effect-text="purchaseEffectText"
-    :flavor-text="flavorText"
-    :class="{
-      affordable: canAffordBuilding(id),
-      unaffordable: !canAffordBuilding(id),
-    }"
-  >
-    <div class="building-card" @click="emit('purchase', id)">
+  <building-tooltip :name="name" :cost="cost" :purchase-effect-text="purchaseEffectText" :flavor-text="flavorText">
+    <div
+      class="building-card"
+      :class="{
+        affordable: canAffordBuilding(id),
+        unaffordable: !canAffordBuilding(id),
+      }"
+      @click="emit('purchase', id)"
+    >
       <p class="building-name">{{ name }}</p>
       <span class="building-count">{{ count }}</span>
     </div>
