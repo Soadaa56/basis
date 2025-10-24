@@ -1,6 +1,6 @@
 import { Bakehouse } from '../../data/buildings/bakehouse'
 import { Farm } from '../../data/buildings/farm'
-import { Granery } from './granery'
+import { Granary } from './granary'
 import { Hut } from '../../data/buildings/hut'
 import { LoggingCamp } from '../../data/buildings/loggingCamp'
 import { Mill } from './mill'
@@ -18,7 +18,7 @@ export const buildingDefinitions: Record<BuildingId, BuildingDefinition> = {
   blackSmith: {} as BuildingDefinition,
   farm: Farm,
   fishingCamp: {} as BuildingDefinition,
-  granery: Granery,
+  granary: Granary,
   hut: Hut,
   loggingCamp: LoggingCamp,
   market: {} as BuildingDefinition,

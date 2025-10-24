@@ -3,7 +3,7 @@ export const BuildingIds = {
   BlackSmith: 'blackSmith',
   Farm: 'farm',
   FishingCamp: 'fishingCamp',
-  Granary: 'granery',
+  Granary: 'granary',
   Hut: 'hut',
   LoggingCamp: 'loggingCamp',
   Market: 'market',

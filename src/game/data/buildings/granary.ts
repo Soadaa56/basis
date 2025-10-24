@@ -4,9 +4,9 @@ import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
-export const Granery: BuildingDefinition = {
+export const Granary: BuildingDefinition = {
   id: BuildingIds.Granary,
-  name: 'Granery',
+  name: 'Granary',
   cost: [
     { resourceId: ResourceIds.Food, amount: 100 },
     { resourceId: ResourceIds.Wood, amount: 50 },
