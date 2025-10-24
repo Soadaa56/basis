@@ -26,7 +26,13 @@ const props = defineProps<{
 <template>
   <BaseTooltip>
     <template #default>
-      <div class="building-wrapper">
+      <div
+        class="building-wrapper"
+        :class="{
+          affordableStorage: canAffordBuildingWithCurrentStorage(id),
+          unaffordableStorage: !canAffordBuildingWithCurrentStorage(id),
+        }"
+      >
         <slot />
       </div>
     </template>
@@ -43,7 +49,7 @@ const props = defineProps<{
               unaffordableStorage: !canAffordCostWithCurrentStorage(id, cost.resourceId),
             }"
           >
-            <span class="cost-resource">{{ cost.resourceId }}</span>
+            <span class="cost-resource">{{ cost.resourceId }}: </span>
             <span class="cost-amount">{{ cost.amount }}</span>
           </div>
         </div>
@@ -54,6 +60,9 @@ const props = defineProps<{
 </template>
 
 <style scoped lang="scss">
+.building-wrapper {
+  border: 1px solid var(--secondary-color);
+}
 .effect {
   border-bottom: 1px solid black;
   margin-bottom: 0.75rem;
