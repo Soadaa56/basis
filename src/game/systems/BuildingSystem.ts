@@ -5,6 +5,7 @@ import { ResourceSystem } from './ResourceSystem'
 
 import type { Building } from '@/game/models/Buildings'
 import { jobDefinitions } from '../data/jobs'
+import type { BuildingId } from '../data/buildingsId'
 
 export class BuildingSystem {
   private buildings: Building[] = []
@@ -21,15 +22,17 @@ export class BuildingSystem {
     return this.buildings
   }
 
-  getBuilding(id: string) {
-    const building = this.buildings.find((building) => building.definition.id === id)
-    if (!building) console.warn(`BuildingSystem: building ${id} not found`)
-    return building
+  hasBuilding(buildingId: BuildingId) {
+    const building = this.getBuildingOrError(buildingId)
+    return building ? true : false
   }
 
-  hasBuilding(id: string) {
-    const building = this.getBuilding(id)
-    return building ? true : false
+  getBuildingOrError(buildingId: BuildingId) {
+    const building = this.buildings.find((building) => building.definition.id == buildingId)
+    if (!building) {
+      throw new Error(`BuildingSystem => getBuildingOrError on buildingId: ${buildingId}`)
+    }
+    return building
   }
 
   triggerBuilding(
