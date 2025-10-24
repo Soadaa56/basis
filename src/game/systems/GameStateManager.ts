@@ -6,7 +6,7 @@ import { WorkerSystem } from '@/game/systems/WorkerSystem'
 import { JobSystem } from './JobSystem'
 import { TICK_INTERVAL } from '@/game/config/config'
 
-import type { Resource } from '@/game/models/Resource'
+import type { Resource, ResourceId } from '@/game/models/Resource'
 import type { Building } from '@/game/models/Buildings'
 import type { BuildingId } from '@/game/data/buildingsId'
 import type { Magic } from '@/game/models/Magic'
@@ -99,9 +99,16 @@ export class GameStateManager {
     return false
   }
 
-  canAffordCostWithCurrentStorage(buildingId: BuildingId, resource: Resource): boolean {
+  canAffordCostWithCurrentStorage(buildingId: BuildingId, resourceId: ResourceId): boolean {
     const building = this.buildingSystem.getBuildingOrError(buildingId)
-    const resourceCost = building.getSingleResourceCostByResourceId(resource.id)
+    const resourceCost = building.getSingleResourceCostByResourceId(resourceId)
+    const resource = this.resourceSystem.getResourceById(resourceId)
+
+    if (!resource) {
+      console.log(`GameStateManager error on canAffordCostWithCurrentStorage.`)
+      console.log(buildingId, resourceId)
+      return false
+    }
 
     return resource.calculatedStorage >= resourceCost
   }
