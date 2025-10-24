@@ -19,7 +19,8 @@ const props = defineProps<{
 }>()
 
 function formatCost(costs: ResourceCost[]) {
-  return costs.map((c) => `${c.amount} ${c.resourceId}`).join('\n')
+  // return costs.map((c) => `${c.amount} ${c.resourceId}`)
+  return costs.map((cost) => `${cost.resourceId}: ${cost.amount}`)
 }
 </script>
 
@@ -33,14 +34,18 @@ function formatCost(costs: ResourceCost[]) {
     <template #tooltip>
       <div class="tooltip-container">
         <div class="effect">{{ props.purchaseEffectText }}</div>
-        <div
-          class="cost"
-          :class="{
-            affordableStorage: canAffordBuildingWithCurrentStorage(id),
-            unaffordableStorage: !canAffordBuildingWithCurrentStorage(id),
-          }"
-        >
-          {{ formatCost(props.cost) }}
+        <div class="costs-container">
+          <div
+            v-for="cost in formatCost(props.cost)"
+            :key="cost"
+            class="costs"
+            :class="{
+              affordableStorage: canAffordBuildingWithCurrentStorage(id),
+              unaffordableStorage: !canAffordBuildingWithCurrentStorage(id),
+            }"
+          >
+            {{ cost }}
+          </div>
         </div>
         <div v-if="props.flavorText" class="flavor-text">{{ props.flavorText }}</div>
       </div>
@@ -53,10 +58,13 @@ function formatCost(costs: ResourceCost[]) {
   border-bottom: 1px solid black;
   margin-bottom: 0.75rem;
 }
-.cost {
+.costs {
   text-transform: capitalize;
-  margin-bottom: 1rem;
   font-size: 1.25em;
+}
+
+.costs-container {
+  margin-bottom: 1rem;
 }
 
 .flavor-text {
