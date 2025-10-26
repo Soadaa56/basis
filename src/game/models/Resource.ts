@@ -2,7 +2,7 @@ import type { Unlockable } from '@/game/models/Unlockable'
 
 export const ResourceIds = {
   Copper: 'copper',
-  Food: 'food', // might seperate into grain, fish, ect
+  Food: 'food',
   Gold: 'gold',
   Iron: 'iron',
   Plank: 'plank',
