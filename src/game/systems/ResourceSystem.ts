@@ -1,6 +1,6 @@
 import { softCap } from '@/game/config/softCaps'
 
-import type { JobId } from '../models/Jobs'
+import { JobIds, type JobId } from '../models/Jobs'
 import type { Resource, ResourceId } from '@/game/models/Resource'
 import type { ResourceCost } from '@/game/models/Resource'
 
@@ -110,6 +110,39 @@ export class ResourceSystem {
     }
 
     return 1 - reduction
+  }
+
+  ensureResourceExists(resourceId: ResourceId) {
+    if (this.doesResourceExist(resourceId)) {
+      return this.getResourceById(resourceId)
+    }
+
+    const newResource: Resource = {
+      id: resourceId,
+      name: resourceId.charAt(0).toUpperCase() + resourceId.slice(1),
+      currentAmount: 0,
+      baseStorage: 100,
+      baseStorageFlatBonus: {},
+      baseStorageModifiers: {},
+      calculatedStorage: 100,
+      baseIncome: 0,
+      incomeSources: {
+        jobs: {},
+        buildings: {},
+      },
+      IncomeMultipliers: {},
+      totalIncome: 0,
+    }
+
+    this.resources.push(newResource)
+    return this.getResourceById(resourceId)
+  }
+
+  doesResourceExist(resourceId: ResourceId) {
+    if (this.resources.find((resource) => resource.id === resourceId)) {
+      return true
+    }
+    return false
   }
 
   private getResourceOrError(resourceId: ResourceId) {
