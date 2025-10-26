@@ -105,8 +105,6 @@ export class GameStateManager {
     const resource = this.resourceSystem.getResourceById(resourceId)
 
     if (!resource) {
-      console.log(`GameStateManager error on canAffordCostWithCurrentStorage.`)
-      console.log(buildingId, resourceId)
       return false
     }
 
