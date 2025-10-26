@@ -77,8 +77,9 @@ export class BuildingSystem {
             resource.baseStorageFlatBonus[buildingId] = effect.flatStorageAmount * building.count
           }
           if (effect.modifierStorageAmount) {
-            resource.baseStorageModifiers[buildingId] = effect.modifierStorageAmount * building.count
+            resource.baseStorageModifiers[buildingId] = Math.pow(effect.modifierStorageAmount, building.count)
           }
+          resourceSystem.updateCalculatedStorage(resource)
           break
         }
         case BuildingTypes.JobMultiplierOutput: {

@@ -1,6 +1,6 @@
 import { softCap } from '@/game/config/softCaps'
 
-import { JobIds, type JobId } from '../models/Jobs'
+import type { JobId } from '../models/Jobs'
 import type { Resource, ResourceId } from '@/game/models/Resource'
 import type { ResourceCost } from '@/game/models/Resource'
 
@@ -50,14 +50,12 @@ export class ResourceSystem {
 
   updateCalculatedStorage(resource: Resource) {
     const baseStorage = resource.baseStorage
-    const baseStorageFlatBonus = resource.baseStorageFlatBonus
-    const baseStorageModifiers = resource.baseStorageModifiers
+    const baseStorageFlatBonus = Object.values(resource.baseStorageFlatBonus).reduce((sum, value) => sum + value, 0)
+    const baseStorageModifiers = Object.values(resource.baseStorageModifiers).reduce((sum, value) => sum * value, 1)
+    const storageFlat = baseStorage + baseStorageFlatBonus
+    console.log(baseStorage, baseStorageFlatBonus, baseStorageModifiers, storageFlat)
 
-    let calculatedStorage = baseStorageFlatBonus.reduce((sum, currentValue) => sum + currentValue, baseStorage)
-
-    calculatedStorage = baseStorageModifiers.reduce((sum, currentValue) => sum + currentValue, calculatedStorage)
-
-    return (resource.calculatedStorage = calculatedStorage)
+    resource.calculatedStorage = storageFlat * baseStorageModifiers
   }
 
   // possibly goes unused, unless meta upgrade gives flat amount? idk
