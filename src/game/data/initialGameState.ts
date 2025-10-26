@@ -12,11 +12,11 @@ const initialResources: Resource[] = [
   {
     id: ResourceIds.Gold,
     name: 'Gold',
-    currentAmount: 5,
-    baseStorage: 500,
+    currentAmount: 10,
+    baseStorage: 100,
     baseStorageFlatBonus: {},
     baseStorageModifiers: {},
-    calculatedStorage: 500,
+    calculatedStorage: 100,
     baseIncome: 0,
     incomeSources: {
       jobs: {},
@@ -42,13 +42,13 @@ const initialResources: Resource[] = [
     totalIncome: 0,
   },
   {
-    id: ResourceIds.Wood,
-    name: 'Wood',
-    currentAmount: 20,
-    baseStorage: 40,
+    id: ResourceIds.Stone,
+    name: 'Stone',
+    currentAmount: 50,
+    baseStorage: 200,
     baseStorageFlatBonus: {},
     baseStorageModifiers: {},
-    calculatedStorage: 40,
+    calculatedStorage: 200,
     baseIncome: 0,
     incomeSources: {
       jobs: {},

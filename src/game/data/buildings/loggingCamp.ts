@@ -11,17 +11,21 @@ export const LoggingCamp: BuildingDefinition = {
   cost: [
     {
       resourceId: ResourceIds.Gold,
-      amount: 30,
+      amount: 35,
+    },
+    {
+      resourceId: ResourceIds.Stone,
+      amount: 50,
     },
   ] satisfies ResourceCost[],
   costMultiplier: 1.3,
-  purchaseEffectText: '+4 Loggers',
+  purchaseEffectText: '+2 Loggers',
   flavorText: 'Dont forget to edit this.',
   info: [
     {
       type: BuildingTypes.JobProducer,
       jobId: JobIds.Lumberjack,
-      addOpenJobs: 4,
+      addOpenJobs: 2,
     },
   ] satisfies BuildingInfo[],
 }
