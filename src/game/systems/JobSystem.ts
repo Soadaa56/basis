@@ -97,20 +97,20 @@ export class JobSystem {
     })
   }
 
-  private getJobOrError(jobId: JobId): Job {
-    const job = this.jobs.find((job) => job.id === jobId)
-    if (!job) {
-      throw new Error(`Error at WorkerSystem: job not found: ${jobId}`)
-    }
-    return job
-  }
-
-  private getJobInfoOrError(jobId: JobId): JobInfo {
+  getJobInfoOrError(jobId: JobId): JobInfo {
     const jobInfo = jobDefinitions[jobId]
     if (!jobInfo) {
       console.log(`jobId: ${jobId} for jobInfo not found: ${jobInfo}`)
       throw new Error('Error at JobSystem')
     }
     return jobInfo
+  }
+
+  private getJobOrError(jobId: JobId): Job {
+    const job = this.jobs.find((job) => job.id === jobId)
+    if (!job) {
+      throw new Error(`Error at WorkerSystem: job not found: ${jobId}`)
+    }
+    return job
   }
 }

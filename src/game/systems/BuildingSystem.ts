@@ -44,7 +44,7 @@ export class BuildingSystem {
     building.definition.info.forEach((effect) => {
       switch (effect.type) {
         case BuildingTypes.ResourceProducer: {
-          const resource = resourceSystem.getResourceById(effect.resourceId)
+          const resource = resourceSystem.ensureResourceExists(effect.resourceId)
           const buildingId = building.definition.id
           const rate = effect.rate * building.count
 
@@ -53,7 +53,7 @@ export class BuildingSystem {
           break
         }
         case BuildingTypes.ResourceMultiplier: {
-          const resource = resourceSystem.getResourceById(effect.resourceId)
+          const resource = resourceSystem.ensureResourceExists(effect.resourceId)
           const buildingId = building.definition.id
           const count = building.count
           const totalMult = Math.pow(effect.multiplier, count)
@@ -65,11 +65,11 @@ export class BuildingSystem {
         }
 
         case BuildingTypes.ResourceStorage: {
-          const resource = resourceSystem.getResourceById(effect.resourceId)
+          const resource = resourceSystem.ensureResourceExists(effect.resourceId)
           const buildingId = building.definition.id
 
           if (!resource) {
-            console.warn(`triggerBuilding error => resourceStorage Resource: ${resource}`)
+            console.warn(`triggerBuilding error => resourceStorage Resource: ${effect.resourceId}`)
             return
           }
 
@@ -108,8 +108,17 @@ export class BuildingSystem {
         case BuildingTypes.JobProducer: {
           const jobId = effect.jobId
           const addOpenJobs = effect.addOpenJobs
+
           if (building.count == 1) {
             jobSystem.createNewJob(jobId)
+
+            const jobInfo = jobSystem.getJobInfoOrError(jobId)
+            const resourceOutputs = jobInfo.outputs.map((output) => output.resourceId)
+            const resourceInputs = jobInfo.inputs?.map((input) => input.resourceId) ?? []
+
+            for (const resourceId of [...resourceOutputs, ...resourceInputs]) {
+              resourceSystem.ensureResourceExists(resourceId)
+            }
           }
 
           jobSystem.addJobSlots(jobId, addOpenJobs)
