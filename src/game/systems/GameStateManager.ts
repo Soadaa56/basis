@@ -108,7 +108,7 @@ export class GameStateManager {
       return false
     }
 
-    return resource.calculatedStorage >= resourceCost
+    return resource.currentAmount >= resourceCost
   }
 
   fillResources() {
