@@ -6,10 +6,6 @@ import type { BuildingId } from '@/game/data/buildingsId'
 
 const gameStore = useGameStore()
 
-function canAffordBuildingWithCurrentStorage(buildingId: BuildingId) {
-  return gameStore.manager.canAffordBuildingWithCurrentStorage(buildingId)
-}
-
 function canAffordCostWithCurrentStorage(buildingId: BuildingId, resourceId: ResourceId) {
   return gameStore.manager.canAffordCostWithCurrentStorage(buildingId, resourceId)
 }
@@ -26,13 +22,7 @@ const props = defineProps<{
 <template>
   <BaseTooltip>
     <template #default>
-      <div
-        class="building-wrapper"
-        :class="{
-          affordableStorage: canAffordBuildingWithCurrentStorage(id),
-          unaffordableStorage: !canAffordBuildingWithCurrentStorage(id),
-        }"
-      >
+      <div class="building-wrapper">
         <slot />
       </div>
     </template>

@@ -10,6 +10,10 @@ function canAffordBuilding(buildingId: BuildingId): boolean {
   return gameStore.manager.canAffordBuilding(buildingId)
 }
 
+function canAffordBuildingWithCurrentStorage(buildingId: BuildingId) {
+  return gameStore.manager.canAffordBuildingWithCurrentStorage(buildingId)
+}
+
 defineProps<{
   id: BuildingId
   name: string
@@ -38,6 +42,8 @@ const emit = defineEmits<{
       :class="{
         affordable: canAffordBuilding(id),
         unaffordable: !canAffordBuilding(id),
+        affordableStorage: canAffordBuildingWithCurrentStorage(id),
+        unaffordableStorage: !canAffordBuildingWithCurrentStorage(id),
       }"
       @click="emit('purchase', id)"
     >
@@ -89,5 +95,13 @@ const emit = defineEmits<{
 .unaffordable {
   filter: brightness(0.7);
   transition: 0.3s ease-in;
+}
+
+.affordableStorage {
+  color: var(--basic-text-color);
+}
+
+.unaffordableStorage {
+  color: var(--storage-cost-problem-color);
 }
 </style>
