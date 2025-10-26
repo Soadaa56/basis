@@ -87,16 +87,16 @@ export class ResourceSystem {
   updateAllResources() {
     this.resources.forEach((resource) => {
       const income = resource.totalIncome
-      if (resource.currentAmount > resource.calculatedStorage) {
-        const softCapReductionPercentage = this.enforceResourceSoftCaps(resource)
-        resource.currentAmount += income * softCapReductionPercentage
+      if (resource.currentAmount >= resource.calculatedStorage) {
+        return
       } else {
         resource.currentAmount += income
       }
     })
   }
 
-  // consider lighter or heavier softcaps for resources with resourceDefinitions record
+  // Deciding against this idea as a base mechanic
+  // *might* use on specific resources or a meta upgrade
   enforceResourceSoftCaps(resource: Resource): number {
     const resourceFactor: number = resource.currentAmount / resource.calculatedStorage
     let reduction: number = 0
