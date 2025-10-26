@@ -51,7 +51,7 @@ export class JobSystem {
 
     const newJob: Job = {
       id: jobId,
-      name: jobId.charAt(0).toLocaleUpperCase() + jobId.slice(1),
+      name: jobId.charAt(0).toUpperCase() + jobId.slice(1),
       totalJobs: 0,
       assignedWorkers: 0,
       isUnlocked: false,
@@ -98,7 +98,7 @@ export class JobSystem {
   }
 
   private getJobOrError(jobId: JobId): Job {
-    const job = this.getJobById(jobId)
+    const job = this.jobs.find((job) => job.id === jobId)
     if (!job) {
       throw new Error(`Error at WorkerSystem: job not found: ${jobId}`)
     }
