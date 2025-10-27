@@ -14,6 +14,7 @@ provide('resourceSystem', gameStore.manager.resourceSystem)
     <base-resource-text
       v-for="resource in gameStore.manager.resourceSystem.getAllResources()"
       :key="resource.id"
+      :resource-id="resource.id"
       :name="resource.name"
       :value="resource.currentAmount"
       :max="resource.calculatedStorage"

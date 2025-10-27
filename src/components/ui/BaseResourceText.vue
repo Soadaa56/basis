@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ResourceId } from '@/game/models/Resource'
 import TooltipResourceIncome from './tooltips/TooltipResourceIncome.vue'
 import TooltipResourceStorage from './tooltips/TooltipResourceStorage.vue'
 
@@ -20,6 +21,7 @@ function formatIncome(income: number) {
 }
 
 defineProps<{
+  resourceId: ResourceId
   name: string
   value: number
   max: number
@@ -30,10 +32,10 @@ defineProps<{
 <template>
   <div class="resource-text">
     <span class="resource-name">{{ name }}:</span>
-    <tooltip-resource-storage>
+    <tooltip-resource-storage :resource-id="resourceId">
       <span class="resource-numbers">{{ value.toFixed(0) }}/{{ max }}</span>
     </tooltip-resource-storage>
-    <tooltip-resource-income>
+    <tooltip-resource-income :resource-id="resourceId">
       <span class="income">+{{ formatIncome(income) }}/s</span>
     </tooltip-resource-income>
   </div>
