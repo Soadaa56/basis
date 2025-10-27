@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { useGameStore } from '@/stores/game'
 import BaseResourceText from '@/components/ui/BaseResourceText.vue'
+import { provide } from 'vue'
+import { useGameStore } from '@/stores/game'
 
 const gameStore = useGameStore()
+provide('resourceSystem', gameStore.manager.resourceSystem)
 </script>
 
 <template>

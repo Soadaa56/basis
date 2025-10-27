@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import TooltipResourceIncome from './tooltips/TooltipResourceIncome.vue'
+import TooltipResourceStorage from './tooltips/TooltipResourceStorage.vue'
+
 function formatIncome(income: number) {
   if (income == 0) {
     return 0
@@ -27,8 +30,12 @@ defineProps<{
 <template>
   <div class="resource-text">
     <span class="resource-name">{{ name }}:</span>
-    <span class="resource-numbers">{{ value.toFixed(0) }}/{{ max }}</span>
-    <span class="income">(+{{ formatIncome(income) }}/s)</span>
+    <tooltip-resource-storage>
+      <span class="resource-numbers">{{ value.toFixed(0) }}/{{ max }}</span>
+    </tooltip-resource-storage>
+    <tooltip-resource-income>
+      <span class="income">+{{ formatIncome(income) }}/s</span>
+    </tooltip-resource-income>
   </div>
 </template>
 
