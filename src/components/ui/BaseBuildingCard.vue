@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BuildingTooltip from './tooltips/BuildingTooltip.vue'
+import TooltipBuilding from './tooltips/TooltipBuilding.vue'
 import { useGameStore } from '@/stores/game'
 import type { BuildingId } from '@/game/data/buildingsId'
 import type { ResourceCost } from '@/game/models/Resource'
@@ -30,7 +30,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <building-tooltip
+  <tooltip-building
     :id="id"
     :name="name"
     :cost="cost"
@@ -50,7 +50,7 @@ const emit = defineEmits<{
       <p class="building-name">{{ name }}</p>
       <span class="building-count">{{ count }}</span>
     </div>
-  </building-tooltip>
+  </tooltip-building>
 </template>
 
 <style scoped lang="scss">
