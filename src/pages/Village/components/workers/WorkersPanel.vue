@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { useGameStore } from '@/stores/game'
 import BaseWorkerText from '@/components/ui/BaseWorkerText.vue'
+import { useGameStore } from '@/stores/game'
 
 const gameStore = useGameStore()
 </script>
-
 <template>
   <div v-if="gameStore" class="worker-panel-container">
     <h2>Workers Panel</h2>
@@ -15,7 +14,7 @@ const gameStore = useGameStore()
     <BaseWorkerText
       v-for="job in gameStore.manager.gameState.jobs"
       :key="job.id"
-      :id="job.id"
+      :jobId="job.id"
       :name="job.name"
       :assigned-workers="job?.assignedWorkers"
       :max-job-slots="job?.totalJobs"

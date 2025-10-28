@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import TooltipJob from './tooltips/TooltipJob.vue'
 import type { JobId } from '@/game/models/Jobs'
 
 defineProps<{
+  jobId: JobId
   name: string
-  id: JobId
   assignedWorkers: number
   maxJobSlots: number
 }>()
@@ -16,10 +17,12 @@ const emit = defineEmits<{
 
 <template>
   <div class="worker-text">
-    <span class="worker-name">{{ name }}:</span>
-    <FaIcon class="awesome-icon" :icon="['fas', 'minus']" size="1x" @click="emit('unassign', id)" />
-    <span class="worker-assigned">{{ assignedWorkers }} / {{ maxJobSlots }}</span>
-    <FaIcon class="awesome-icon" :icon="['fas', 'plus']" size="1x" @click="emit('assign', id)" />
+    <tooltip-job :key="jobId" :job-id="jobId">
+      <span class="worker-name">{{ name }}: </span>
+      <span class="worker-assigned">{{ assignedWorkers }} / {{ maxJobSlots }}</span>
+    </tooltip-job>
+    <FaIcon class="awesome-icon" :icon="['fas', 'minus']" size="1x" @click="emit('unassign', jobId)" />
+    <FaIcon class="awesome-icon" :icon="['fas', 'plus']" size="1x" @click="emit('assign', jobId)" />
   </div>
 </template>
 
