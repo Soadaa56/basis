@@ -2,10 +2,11 @@ import type { JobId } from '../models/Jobs'
 
 export const JobDescriptions: Partial<Record<JobId, string>> = {
   baker: 'Bakes fresh bread and pastries.',
-  beggar: 'Goes to the city to beg for coin. Probably shares most of their earnings with you',
+  beggar: 'Goes to the city to beg for coin.\nProbably shares most of their earnings with you',
   blacksmith: 'Turns useless lumps of metal into tools.',
   farmer: 'Works the field.',
   fishermen: "Pretends they're hard at work most of the day.",
+  gatherer: 'Wanders around the woods looking for food.\nMaybe can find something interesting?',
   lumberjack: "Sterotypical 'chad' job.",
   merchant: 'What are ya selling, stranger?',
   miner: "*cough**cough* I think I'm getting the black lung pop.",
