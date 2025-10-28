@@ -13,6 +13,10 @@ export const Farm: BuildingDefinition = {
       resourceId: ResourceIds.Food,
       amount: 30,
     },
+    {
+      resourceId: ResourceIds.Gold,
+      amount: 20,
+    },
   ] satisfies ResourceCost[],
   costMultiplier: 1.25,
   purchaseEffectText: '+1 Farmer Job',
