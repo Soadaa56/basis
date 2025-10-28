@@ -9,15 +9,11 @@ export const Hut: BuildingDefinition = {
   name: 'Hut',
   cost: [
     {
-      resourceId: ResourceIds.Food,
+      resourceId: ResourceIds.Wood,
       amount: 20,
     },
-    {
-      resourceId: ResourceIds.Gold,
-      amount: 10,
-    },
   ] satisfies ResourceCost[],
-  costMultiplier: 1.2,
+  costMultiplier: 1.25,
   purchaseEffectText: '+1 Worker',
   flavorText: 'Better than nothing.',
   info: [

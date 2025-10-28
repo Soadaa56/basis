@@ -10,10 +10,6 @@ export const LoggingCamp: BuildingDefinition = {
   name: 'Logging Camp',
   cost: [
     {
-      resourceId: ResourceIds.Gold,
-      amount: 35,
-    },
-    {
       resourceId: ResourceIds.Stone,
       amount: 50,
     },
