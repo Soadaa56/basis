@@ -10,7 +10,7 @@ export const Hut: BuildingDefinition = {
   cost: [
     {
       resourceId: ResourceIds.Wood,
-      amount: 20,
+      amount: 10,
     },
   ] satisfies ResourceCost[],
   costMultiplier: 1.25,
