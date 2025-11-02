@@ -11,9 +11,6 @@ if (saveFileString) {
   console.log(saveFileJson)
 }
 
-// @ts-expect-error expose gameState for debugging
-window.gameStore = gameStore
-
 onMounted(() => {
   // ms, default 1000
   if (gameStore.manager) {
