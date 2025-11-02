@@ -2,8 +2,8 @@ import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildi
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import { BuildingIds } from '../buildingsId'
 import { JobIds } from '@/game/models/Jobs'
-
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
+import { UnlockTypes, type UnlockRequirement } from '@/game/models/Unlockable'
 
 export const Sawmill: BuildingDefinition = {
   id: BuildingIds.Sawmill,
@@ -24,8 +24,20 @@ export const Sawmill: BuildingDefinition = {
   info: [
     {
       type: BuildingTypes.JobMultiplierInput,
-      jobId: JobIds.Logger,
+      jobId: JobIds.Lumberjack,
       multiplier: 1.2,
     },
   ] satisfies BuildingInfo[],
+  unlockRequirements: [
+    {
+      unlockType: UnlockTypes.BuildingUnlock,
+      id: BuildingIds.LoggingCamp,
+      amount: 5,
+    },
+    {
+      unlockType: UnlockTypes.BuildingUnlock,
+      id: BuildingIds.Mine,
+      amount: 1,
+    },
+  ] satisfies UnlockRequirement[],
 }

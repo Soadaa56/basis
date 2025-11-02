@@ -1,8 +1,8 @@
 import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildingsInfo'
 import { BuildingIds } from '@/game/data/buildingsId'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
-
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
+import { UnlockTypes, type UnlockRequirement } from '@/game/models/Unlockable'
 
 export const Granary: BuildingDefinition = {
   id: BuildingIds.Granary,
@@ -22,4 +22,11 @@ export const Granary: BuildingDefinition = {
       modifierStorageAmount: 1.02,
     },
   ] satisfies BuildingInfo[],
+  unlockRequirements: [
+    {
+      unlockType: UnlockTypes.BuildingUnlock,
+      id: BuildingIds.Farm,
+      amount: 1,
+    },
+  ] satisfies UnlockRequirement[],
 }
