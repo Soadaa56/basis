@@ -12,11 +12,11 @@ const initialResources: Resource[] = [
   {
     id: ResourceIds.Gold,
     name: 'Gold',
-    currentAmount: 12,
-    baseStorage: 100,
+    currentAmount: 20,
+    baseStorage: 200,
     baseStorageFlatBonus: {},
     baseStorageModifiers: {},
-    calculatedStorage: 100,
+    calculatedStorage: 200,
     baseIncome: 0,
     incomeSources: {
       jobs: {},
@@ -28,18 +28,18 @@ const initialResources: Resource[] = [
   {
     id: ResourceIds.Food,
     name: 'Food',
-    currentAmount: 30,
+    currentAmount: 50,
     baseStorage: 100,
     baseStorageFlatBonus: {},
     baseStorageModifiers: {},
     calculatedStorage: 100,
-    baseIncome: 0,
+    baseIncome: 1,
     incomeSources: {
       jobs: {},
       buildings: {},
     },
     IncomeMultipliers: {},
-    totalIncome: 0,
+    totalIncome: 1,
   },
   {
     id: ResourceIds.Stone,
