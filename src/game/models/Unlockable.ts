@@ -1,10 +1,12 @@
 export type UnlockRequirement = {
-  type: 'resource' | 'building' | 'magic' | 'worker' | 'other'
+  type: 'research' | 'building' | 'magic' | 'other'
   id: string
   amount: number
 }
 
+export type UnlockStatus = 'unlocked' | 'locked' | 'unknown'
+
 export interface Unlockable {
   unlockRequirements?: UnlockRequirement[]
-  isUnlocked?: boolean
+  unlockStatus?: UnlockStatus
 }
