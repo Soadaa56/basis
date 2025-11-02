@@ -9,7 +9,6 @@ import { Sawmill } from '../../data/buildings/sawmill'
 import { StorageShed } from './storageShed'
 import { Well } from '../../data/buildings/Well'
 import { WizardTower } from '../../data/buildings/wizardTower'
-
 import type { BuildingId } from '@/game/data/buildingsId'
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 

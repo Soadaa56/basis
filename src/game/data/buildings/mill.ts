@@ -3,7 +3,6 @@ import { BuildingIds } from '@/game/data/buildingsId'
 import { JobIds } from '@/game/models/Jobs'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
-import { UnlockTypes, type UnlockRequirement } from '@/game/models/Unlockable'
 
 export const Mill: BuildingDefinition = {
   id: BuildingIds.Mill,
@@ -24,16 +23,4 @@ export const Mill: BuildingDefinition = {
       multiplier: 1.15,
     },
   ] satisfies BuildingInfo[],
-  unlockRequirements: [
-    {
-      unlockType: UnlockTypes.BuildingUnlock,
-      id: BuildingIds.Farm,
-      amount: 3,
-    },
-    {
-      unlockType: UnlockTypes.BuildingUnlock,
-      id: BuildingIds.Granary,
-      amount: 1,
-    },
-  ] satisfies UnlockRequirement[],
 }

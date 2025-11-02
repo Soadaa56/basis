@@ -3,7 +3,6 @@ import { BuildingIds } from '@/game/data/buildingsId'
 import { JobIds } from '@/game/models/Jobs'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
-import { UnlockTypes } from '@/game/models/Unlockable'
 
 export const Mine: BuildingDefinition = {
   id: BuildingIds.Mine,
@@ -26,11 +25,4 @@ export const Mine: BuildingDefinition = {
       addOpenJobs: 1,
     },
   ] satisfies BuildingInfo[],
-  unlockRequirements: [
-    {
-      unlockType: UnlockTypes.BuildingUnlock,
-      id: BuildingIds.LoggingCamp,
-      amount: 3,
-    },
-  ],
 }

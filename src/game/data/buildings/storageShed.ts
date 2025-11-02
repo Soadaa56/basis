@@ -2,7 +2,6 @@ import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildi
 import { BuildingIds } from '@/game/data/buildingsId'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
-import { UnlockTypes, type UnlockRequirement } from '@/game/models/Unlockable'
 
 export const StorageShed: BuildingDefinition = {
   id: BuildingIds.StorageShed,
@@ -19,11 +18,4 @@ export const StorageShed: BuildingDefinition = {
     { type: BuildingTypes.ResourceStorage, resourceId: ResourceIds.Wood, flatStorageAmount: 250 },
     { type: BuildingTypes.ResourceStorage, resourceId: ResourceIds.Copper, flatStorageAmount: 30 },
   ] satisfies BuildingInfo[],
-  unlockRequirements: [
-    {
-      unlockType: UnlockTypes.BuildingUnlock,
-      id: BuildingIds.Granary,
-      amount: 1,
-    },
-  ] satisfies UnlockRequirement[],
 }

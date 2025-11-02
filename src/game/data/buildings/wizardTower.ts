@@ -2,7 +2,6 @@ import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildi
 import { BuildingIds } from '../buildingsId'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
-import { UnlockTypes, type UnlockRequirement } from '@/game/models/Unlockable'
 
 export const WizardTower: BuildingDefinition = {
   id: BuildingIds.WizardTower,
@@ -24,21 +23,4 @@ export const WizardTower: BuildingDefinition = {
       unlocks: 'magic tab', // Will be changed to open Magic tab
     },
   ] satisfies BuildingInfo[],
-  unlockRequirements: [
-    {
-      unlockType: UnlockTypes.BuildingUnlock,
-      id: BuildingIds.Granary,
-      amount: 5,
-    },
-    {
-      unlockType: UnlockTypes.BuildingUnlock,
-      id: BuildingIds.StorageShed,
-      amount: 5,
-    },
-    {
-      unlockType: UnlockTypes.BuildingUnlock,
-      id: BuildingIds.Well,
-      amount: 5,
-    },
-  ] satisfies UnlockRequirement[],
 }

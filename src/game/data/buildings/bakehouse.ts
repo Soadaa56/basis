@@ -3,7 +3,6 @@ import { JobIds } from '@/game/models/Jobs'
 import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildingsInfo'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
-import { UnlockTypes, type UnlockRequirement } from '@/game/models/Unlockable'
 
 export const Bakehouse: BuildingDefinition = {
   id: BuildingIds.Bakehouse,
@@ -28,16 +27,4 @@ export const Bakehouse: BuildingDefinition = {
       addOpenJobs: 1,
     },
   ] satisfies BuildingInfo[],
-  unlockRequirements: [
-    {
-      unlockType: UnlockTypes.BuildingUnlock,
-      id: BuildingIds.Hut,
-      amount: 10,
-    },
-    {
-      unlockType: UnlockTypes.BuildingUnlock,
-      id: BuildingIds.Farm,
-      amount: 5,
-    },
-  ] satisfies UnlockRequirement[],
 }

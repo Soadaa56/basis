@@ -2,7 +2,6 @@ import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildi
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import { BuildingIds } from '../buildingsId'
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
-import { UnlockTypes, type UnlockRequirement } from '@/game/models/Unlockable'
 
 export const Well: BuildingDefinition = {
   id: BuildingIds.Well,
@@ -32,16 +31,4 @@ export const Well: BuildingDefinition = {
       flatStorageAmount: 1000,
     },
   ] satisfies BuildingInfo[],
-  unlockRequirements: [
-    {
-      unlockType: UnlockTypes.BuildingUnlock,
-      id: BuildingIds.Granary,
-      amount: 1,
-    },
-    {
-      unlockType: UnlockTypes.BuildingUnlock,
-      id: BuildingIds.StorageShed,
-      amount: 3,
-    },
-  ] satisfies UnlockRequirement[],
 }
