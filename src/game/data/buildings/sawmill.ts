@@ -2,7 +2,6 @@ import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildi
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import { BuildingIds } from '../buildingsId'
 import { JobIds } from '@/game/models/Jobs'
-
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
 export const Sawmill: BuildingDefinition = {
@@ -24,7 +23,7 @@ export const Sawmill: BuildingDefinition = {
   info: [
     {
       type: BuildingTypes.JobMultiplierInput,
-      jobId: JobIds.Logger,
+      jobId: JobIds.Lumberjack,
       multiplier: 1.2,
     },
   ] satisfies BuildingInfo[],

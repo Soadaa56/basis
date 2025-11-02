@@ -10,13 +10,29 @@ import { buildingDefinitions } from './buildings'
 
 const initialResources: Resource[] = [
   {
-    id: ResourceIds.Gold,
-    name: 'Gold',
-    currentAmount: 12,
+    id: ResourceIds.Research,
+    name: 'Research',
+    currentAmount: 0,
     baseStorage: 100,
     baseStorageFlatBonus: {},
     baseStorageModifiers: {},
     calculatedStorage: 100,
+    baseIncome: 1,
+    incomeSources: {
+      jobs: {},
+      buildings: {},
+    },
+    IncomeMultipliers: {},
+    totalIncome: 1,
+  },
+  {
+    id: ResourceIds.Gold,
+    name: 'Gold',
+    currentAmount: 20,
+    baseStorage: 200,
+    baseStorageFlatBonus: {},
+    baseStorageModifiers: {},
+    calculatedStorage: 200,
     baseIncome: 0,
     incomeSources: {
       jobs: {},
@@ -28,18 +44,18 @@ const initialResources: Resource[] = [
   {
     id: ResourceIds.Food,
     name: 'Food',
-    currentAmount: 30,
+    currentAmount: 50,
     baseStorage: 100,
     baseStorageFlatBonus: {},
     baseStorageModifiers: {},
     calculatedStorage: 100,
-    baseIncome: 0,
+    baseIncome: 1,
     incomeSources: {
       jobs: {},
       buildings: {},
     },
     IncomeMultipliers: {},
-    totalIncome: 0,
+    totalIncome: 1,
   },
   {
     id: ResourceIds.Stone,
@@ -60,9 +76,9 @@ const initialResources: Resource[] = [
 ]
 
 const initialBuildings: Building[] = [
-  new Building(buildingDefinitions.hut, 1, true),
-  new Building(buildingDefinitions.loggingCamp, 0, true),
-  new Building(buildingDefinitions.farm, 0, true),
+  new Building(buildingDefinitions.hut, 1), // buildingDefinition, count = 0
+  new Building(buildingDefinitions.loggingCamp, 0),
+  new Building(buildingDefinitions.farm, 0),
 ]
 
 const initialJobs: Job[] = [

@@ -1,7 +1,6 @@
 import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildingsInfo'
 import { BuildingIds } from '@/game/data/buildingsId'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
-
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
 export const Hut: BuildingDefinition = {
@@ -10,7 +9,7 @@ export const Hut: BuildingDefinition = {
   cost: [
     {
       resourceId: ResourceIds.Wood,
-      amount: 20,
+      amount: 10,
     },
   ] satisfies ResourceCost[],
   costMultiplier: 1.25,

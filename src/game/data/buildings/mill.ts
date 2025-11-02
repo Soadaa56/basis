@@ -2,7 +2,6 @@ import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildi
 import { BuildingIds } from '@/game/data/buildingsId'
 import { JobIds } from '@/game/models/Jobs'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
-
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
 export const Mill: BuildingDefinition = {
@@ -11,7 +10,7 @@ export const Mill: BuildingDefinition = {
   cost: [
     {
       resourceId: ResourceIds.Food,
-      amount: 80,
+      amount: 120,
     },
   ] satisfies ResourceCost[],
   costMultiplier: 1.4,

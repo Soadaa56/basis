@@ -1,10 +1,19 @@
+import type { BuildingId } from '../data/buildingsId'
+
+export const UnlockTypes = {
+  BuildingUnlock: 'buildingUnlock',
+  ResearchUnlock: 'researchUnlock',
+  MagicUnlock: 'magicUnlock',
+} as const
+
+export type UnlockType = (typeof UnlockTypes)[keyof typeof UnlockTypes]
+
 export type UnlockRequirement = {
-  type: 'resource' | 'building' | 'magic' | 'worker' | 'other'
-  id: string
+  unlockType: UnlockType
+  id: BuildingId //| ResearchId | MagicId
   amount: number
 }
 
 export interface Unlockable {
   unlockRequirements?: UnlockRequirement[]
-  isUnlocked?: boolean
 }

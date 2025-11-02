@@ -1,7 +1,6 @@
 import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildingsInfo'
 import { BuildingIds } from '@/game/data/buildingsId'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
-
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
 export const Granary: BuildingDefinition = {

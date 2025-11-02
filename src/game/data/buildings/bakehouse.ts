@@ -2,7 +2,6 @@ import { BuildingIds } from '../buildingsId'
 import { JobIds } from '@/game/models/Jobs'
 import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildingsInfo'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
-
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
 export const Bakehouse: BuildingDefinition = {

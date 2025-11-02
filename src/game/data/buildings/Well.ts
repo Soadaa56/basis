@@ -1,7 +1,6 @@
 import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildingsInfo'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import { BuildingIds } from '../buildingsId'
-
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
 export const Well: BuildingDefinition = {
@@ -10,16 +9,16 @@ export const Well: BuildingDefinition = {
   cost: [
     {
       resourceId: ResourceIds.Food,
-      amount: 250,
+      amount: 800,
     },
     {
       resourceId: ResourceIds.Stone,
-      amount: 500,
+      amount: 250,
     },
   ] satisfies ResourceCost[],
   costMultiplier: 1.35,
   purchaseEffectText: '+1 Water\n+1,000 Water Storage',
-  flavorText: 'The second most important resource',
+  flavorText: 'Humans most important resource',
   info: [
     {
       type: BuildingTypes.ResourceProducer,

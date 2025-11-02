@@ -4,13 +4,11 @@ import type { ResourceCost, ResourceId } from './Resource'
 export class Building {
   definition: BuildingDefinition
   count: number = 0
-  isUnlocked: boolean = false
-  maxCount?: number
+  maxCount?: number = Infinity
 
-  constructor(definition: BuildingDefinition, count = 0, isUnlocked = false) {
+  constructor(definition: BuildingDefinition, count = 0) {
     this.definition = definition
     this.count = count
-    this.isUnlocked = isUnlocked
     this.maxCount = this.definition.maxCount
   }
 
@@ -23,10 +21,6 @@ export class Building {
       resourceId: cost.resourceId,
       amount: Math.floor(cost.amount * Math.pow(this.definition.costMultiplier, this.count ?? 1)),
     }))
-  }
-
-  unlockBuilding() {
-    this.isUnlocked = true
   }
 
   getSingleResourceCostByResourceId(resourceId: ResourceId): number {
