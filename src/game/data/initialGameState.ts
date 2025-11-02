@@ -10,6 +10,22 @@ import { buildingDefinitions } from './buildings'
 
 const initialResources: Resource[] = [
   {
+    id: ResourceIds.Research,
+    name: 'Research',
+    currentAmount: 0,
+    baseStorage: 100,
+    baseStorageFlatBonus: {},
+    baseStorageModifiers: {},
+    calculatedStorage: 100,
+    baseIncome: 1,
+    incomeSources: {
+      jobs: {},
+      buildings: {},
+    },
+    IncomeMultipliers: {},
+    totalIncome: 1,
+  },
+  {
     id: ResourceIds.Gold,
     name: 'Gold',
     currentAmount: 20,
