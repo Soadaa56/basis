@@ -3,9 +3,10 @@ import { JobSystem } from './JobSystem'
 import { WorkerSystem } from './WorkerSystem'
 import { ResourceSystem } from './ResourceSystem'
 
-import type { Building } from '@/game/models/Buildings'
+import { Building } from '@/game/models/Buildings'
 import { jobDefinitions } from '../data/jobs'
 import type { BuildingId } from '../data/buildingsId'
+import { buildingDefinitions } from '../data/buildings'
 
 export class BuildingSystem {
   private buildings: Building[] = []
@@ -33,6 +34,16 @@ export class BuildingSystem {
       throw new Error(`BuildingSystem => getBuildingOrError on buildingId: ${buildingId}`)
     }
     return building
+  }
+
+  unlockBuilding(buildingId: BuildingId) {
+    if (this.hasBuilding(buildingId)) {
+      return
+    }
+
+    const newBuilding = new Building(buildingDefinitions[buildingId], 0)
+
+    this.buildings.push(newBuilding)
   }
 
   triggerBuilding(
