@@ -54,7 +54,6 @@ export class JobSystem {
       name: jobId.charAt(0).toUpperCase() + jobId.slice(1),
       totalJobs: 0,
       assignedWorkers: 0,
-      isUnlocked: false,
     }
 
     this.jobs.push(newJob)

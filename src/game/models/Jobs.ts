@@ -1,5 +1,3 @@
-import type { Unlockable } from '@/game/models/Unlockable'
-
 export const JobIds = {
   Baker: 'baker',
   Beggar: 'beggar',
@@ -14,7 +12,7 @@ export const JobIds = {
 
 export type JobId = (typeof JobIds)[keyof typeof JobIds]
 
-export interface Job extends Unlockable {
+export interface Job {
   id: JobId
   name: string
   totalJobs: number
