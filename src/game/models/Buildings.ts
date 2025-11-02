@@ -4,7 +4,7 @@ import type { ResourceCost, ResourceId } from './Resource'
 export class Building {
   definition: BuildingDefinition
   count: number = 0
-  maxCount?: number
+  maxCount?: number = Infinity
 
   constructor(definition: BuildingDefinition, count = 0) {
     this.definition = definition
