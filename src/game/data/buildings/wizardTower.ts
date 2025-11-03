@@ -3,7 +3,7 @@ import { BuildingIds } from '../buildingsId'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
-export const WizardTower: BuildingDefinition = {
+export const wizardTower: BuildingDefinition = {
   id: BuildingIds.WizardTower,
   name: 'Wizard Tower',
   cost: [

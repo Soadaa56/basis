@@ -4,7 +4,7 @@ import { JobIds } from '@/game/models/Jobs'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
-export const Mine: BuildingDefinition = {
+export const mine: BuildingDefinition = {
   id: BuildingIds.Mine,
   name: 'Mine',
   cost: [
