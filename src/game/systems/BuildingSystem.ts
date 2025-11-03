@@ -19,7 +19,7 @@ export class BuildingSystem {
     this.buildings = buildings
   }
 
-  getAllBuildings(): Building[] {
+  public get getAllBuildings(): Building[] {
     return this.buildings
   }
 

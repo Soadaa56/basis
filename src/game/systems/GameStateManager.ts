@@ -118,7 +118,7 @@ export class GameStateManager {
   }
 
   fillResources() {
-    const resources = this.resourceSystem.getAllResources()
+    const resources = this.resourceSystem.getAllResources
 
     resources.forEach((resource) => {
       resource.currentAmount = resource.calculatedStorage

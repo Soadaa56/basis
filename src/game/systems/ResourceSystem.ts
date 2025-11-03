@@ -15,7 +15,7 @@ export class ResourceSystem {
     this.resources = resources
   }
 
-  getAllResources(): Resource[] {
+  public get getAllResources(): Resource[] {
     return this.resources
   }
 

@@ -11,7 +11,7 @@ export class MagicSystem {
     this.magics = magics
   }
 
-  getAllMagic(): Magic[] {
+  public get getAllMagic(): Magic[] {
     return this.magics
   }
 
