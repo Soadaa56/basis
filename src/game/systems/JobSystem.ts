@@ -18,7 +18,7 @@ export class JobSystem {
     this.jobs = jobs
   }
 
-  getAllJobs() {
+  getAllJobs(): Job[] {
     return this.jobs
   }
 

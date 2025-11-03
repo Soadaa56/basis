@@ -15,12 +15,12 @@ export class ResourceSystem {
     this.resources = resources
   }
 
-  getResourceById(id: string) {
-    return this.resources.find((resource) => resource.id === id)
-  }
-
   getAllResources(): Resource[] {
     return this.resources
+  }
+
+  getResourceById(id: string) {
+    return this.resources.find((resource) => resource.id === id)
   }
 
   canAfford(costs: ResourceCost[]): boolean {
@@ -50,8 +50,14 @@ export class ResourceSystem {
 
   updateCalculatedStorage(resource: Resource) {
     const baseStorage = resource.baseStorage
-    const baseStorageFlatBonus = Object.values(resource.baseStorageFlatBonus).reduce((sum, value) => sum + value, 0)
-    const baseStorageModifiers = Object.values(resource.baseStorageModifiers).reduce((sum, value) => sum * value, 1)
+    const baseStorageFlatBonus = Object.values(resource.baseStorageFlatBonus).reduce(
+      (sum, value) => sum + value,
+      0,
+    )
+    const baseStorageModifiers = Object.values(resource.baseStorageModifiers).reduce(
+      (sum, value) => sum * value,
+      1,
+    )
     const storageFlat = baseStorage + baseStorageFlatBonus
     console.log(baseStorage, baseStorageFlatBonus, baseStorageModifiers, storageFlat)
 
@@ -74,7 +80,10 @@ export class ResourceSystem {
     const baseIncome = resource.baseIncome
     const incomeMultipliers = Object.values(resource.IncomeMultipliers).reduce((sum, value) => sum * value, 1)
     const incomeSourceJob = Object.values(resource.incomeSources.jobs).reduce((sum, value) => sum + value, 0)
-    const incomeSourceBuilding = Object.values(resource.incomeSources.buildings).reduce((sum, value) => sum + value, 0)
+    const incomeSourceBuilding = Object.values(resource.incomeSources.buildings).reduce(
+      (sum, value) => sum + value,
+      0,
+    )
     const incomeSources = incomeSourceJob + incomeSourceBuilding
     const flatIncome = baseIncome + incomeSources
 

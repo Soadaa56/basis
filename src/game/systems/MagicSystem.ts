@@ -1,18 +1,22 @@
 import type { Magic } from '@/game/models/Magic'
 
 export class MagicSystem {
-  private magic: Magic[] = []
+  private magics: Magic[] = []
 
-  constructor(magic: Magic[]) {
-    this.magic = magic
+  constructor(magics: Magic[]) {
+    this.magics = magics
   }
 
-  loadMagic(magic: Magic[]) {
-    this.magic = magic
+  loadMagic(magics: Magic[]) {
+    this.magics = magics
+  }
+
+  getAllMagic(): Magic[] {
+    return this.magics
   }
 
   getMagic(id: string) {
-    return this.magic.find((magic) => magic.id === id)
+    return this.magics.find((magic) => magic.id === id)
   }
 
   updateCalculatedStorage(magic: Magic) {
@@ -20,8 +24,14 @@ export class MagicSystem {
     const baseStorageFlatBonus = magic.baseStorageFlatBonus
     const baseStorageModifiers = magic.baseStorageModifiers
 
-    let calculatedStorage = baseStorageFlatBonus.reduce((sum, currentValue) => sum + currentValue, baseStorage)
-    calculatedStorage = baseStorageModifiers.reduce((sum, currentValue) => sum * currentValue, calculatedStorage)
+    let calculatedStorage = baseStorageFlatBonus.reduce(
+      (sum, currentValue) => sum + currentValue,
+      baseStorage,
+    )
+    calculatedStorage = baseStorageModifiers.reduce(
+      (sum, currentValue) => sum * currentValue,
+      calculatedStorage,
+    )
 
     return (magic.calculatedStorage = calculatedStorage)
   }
