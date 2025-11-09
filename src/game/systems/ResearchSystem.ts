@@ -126,12 +126,13 @@ export class ResearchSystem {
           console.log(effect)
           break
         }
-        case ResearchTypes.UnlockResearch: {
-          console.log(effect)
-          break
-        }
         case ResearchTypes.UnlockResearchTier: {
-          this.tier = effect.targetId as Tier // Technical debt? but each one has its own Unlock file and there're only a handful of these.
+          if (typeof effect.targetId !== 'number') {
+            console.log('ResearchSystem: triggerResearchEffect: UnlockResearchTier error')
+            console.log(researchId, effect, effect.targetId)
+            break
+          }
+          this.setCurrentTier = effect.targetId
           break
         }
         default:

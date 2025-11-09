@@ -22,7 +22,6 @@ export const ResearchTypes = {
   ResourceMult: 'resourceMult',
   ResourceStorageAddFlat: 'resourceStorageAddFlat',
   ResourceStorageMult: 'resourceStorageMult',
-  UnlockResearch: 'unlockResearch',
   UnlockBuilding: 'unlockBuilding',
   UnlockResearchTier: 'unlockResearchTier',
 } as const
