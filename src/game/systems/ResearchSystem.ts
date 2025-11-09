@@ -1,13 +1,17 @@
 import { ResearchTypes, Tiers, type Research, type Tier } from '../models/Research'
+import { UnlockTypes } from '../models/researches/ResearchUnlockable'
+import { Building } from '@/game/models/Buildings'
 
 export class ResearchSystem {
   private allResearches: Research[] = []
   private unlockedResearches: Research[] = []
   private completedResearches: Research[] = []
   private tier: Tier = Tiers.Tier0
+  private buildings: Building[]
 
-  constructor(allResearches: Research[]) {
+  constructor(allResearches: Research[], buildings: Building[]) {
     this.allResearches = allResearches
+    this.buildings = buildings
   }
 
   loadResearches(unlockedResearches: Research[], completedResearches: Research[]) {
@@ -21,6 +25,10 @@ export class ResearchSystem {
 
   public get getAllCompletedResearches(): Research[] {
     return this.completedResearches
+  }
+
+  public set setCurrentTier(v: Tier) {
+    this.tier = v
   }
 
   getResearchOrError(researchId: string) {
@@ -46,16 +54,43 @@ export class ResearchSystem {
 
   getResearchByCurrentTier() {
     const currentTier = this.tier
-    const tieredResearch = this.allResearches.filter((resarch) => resarch.tier == currentTier)
+    const tieredResearch = this.allResearches.filter((research) => research.tier == currentTier)
 
     return tieredResearch
   }
 
-  unlockedResearchByTier() {
+  areUnlockRequirementsMet(research: Research, building: Building[]): boolean {
     const currentTier = this.tier
-    const tieredResearch = this.getResearchByCurrentTier()
 
-    tieredResearch.array.forEach((element) => {})
+    return (
+      research.unlockRequirements?.every((res) => {
+        switch (res.unlockType) {
+          case UnlockTypes.BuildingUnlockRequirement:
+            return building.some((b) => b.definition.id == res.id)
+          case UnlockTypes.TierUnlockRequirement:
+            const unlockTier = res.id
+
+            if (typeof unlockTier !== 'number') {
+              console.log('ResearchSystem: areUnlockRequirementsMet Bug')
+              console.log(research, res.unlockType, unlockTier)
+              return false
+            }
+
+            return currentTier >= unlockTier
+          case UnlockTypes.ResearchUnlock:
+            if (typeof res.id !== 'string') return false
+
+            return this.completedResearches.some((completedResearch) => completedResearch.id === res.id)
+          case UnlockTypes.MagicUnlock: // Magic System not yet implemented
+            console.log(research, res, res.unlockType)
+            return true
+          default:
+            console.log('ResearchSystem areUnlockRequirementsMet default triggered.')
+            console.log(research, res, res.unlockType)
+            return true
+        }
+      }) ?? false // if unlockRequirements is underfined
+    )
   }
 
   triggerResearchEffect(researchId: string) {
