@@ -11,9 +11,9 @@ export type UnlockRequirement = {
 }
 
 export const UnlockTypes = {
+  BuildingUnlockRequirement: 'buildingUnlock',
   TierUnlockRequirement: 'tierUnlock',
   ResearchUnlock: 'researchUnlock',
-  BuildingUnlockRequirement: 'buildingUnlock',
   MagicUnlock: 'magicUnlock',
 } as const
 
