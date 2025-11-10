@@ -45,7 +45,7 @@ export class GameStateManager {
     this.magicSystem = new MagicSystem(gameState.magic)
     this.jobSystem = new JobSystem(gameState.jobs, this.resourceSystem)
     this.workerSystem = new WorkerSystem(this.jobSystem, gameState.workers)
-    this.researchSystem = new ResearchSystem()
+    this.researchSystem = new ResearchSystem(this.buildingSystem, this.jobSystem, this.resourceSystem)
   }
 
   loadGameState(gameState: GameState) {
