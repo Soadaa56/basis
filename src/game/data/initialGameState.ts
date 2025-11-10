@@ -107,5 +107,8 @@ export const initialGameState: GameState = {
   jobs: initialJobs,
   magic: [],
   workers: initialWorkers,
-  researches: [],
+  researches: {
+    unlocked: [],
+    completed: [],
+  },
 }
