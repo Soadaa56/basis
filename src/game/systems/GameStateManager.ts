@@ -21,7 +21,9 @@ export interface GameState {
   magic: Magic[]
   jobs: Job[]
   workers: WorkerState
-  researches: Research[]
+  allResearches: Research[]
+  unlockedResearches: Research[]
+  completedResearches: Research[]
 }
 
 export class GameStateManager {
@@ -42,7 +44,7 @@ export class GameStateManager {
     this.magicSystem = new MagicSystem(gameState.magic)
     this.jobSystem = new JobSystem(gameState.jobs, this.resourceSystem)
     this.workerSystem = new WorkerSystem(this.jobSystem, gameState.workers)
-    this.researchSystem = new ResearchSystem(gameState.researches)
+    this.researchSystem = new ResearchSystem(gameState.allResearches)
   }
 
   loadGameState(gameState: GameState) {
@@ -52,7 +54,7 @@ export class GameStateManager {
     this.magicSystem.loadMagic(gameState.magic)
     this.jobSystem.loadJobs(gameState.jobs)
     this.workerSystem.loadWorkers(gameState.workers)
-    this.researchSystem.loadResearches(gameState.researches)
+    this.researchSystem.loadResearches(gameState.unlockedResearches, gameState.completedResearches)
   }
 
   startTick(tickInterval: number = this.tickInterval) {

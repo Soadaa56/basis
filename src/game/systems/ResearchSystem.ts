@@ -1,18 +1,13 @@
 import { ResearchTypes, Tiers, type Research, type Tier } from '../models/Research'
 import { UnlockTypes } from '../models/researches/ResearchUnlockable'
 import { Building } from '@/game/models/Buildings'
+import { allResearch } from '../data/researches/allResearch'
 
 export class ResearchSystem {
-  private allResearches: Research[] = []
+  private allResearches: Research[] = allResearch
   private unlockedResearches: Research[] = []
   private completedResearches: Research[] = []
   private tier: Tier = Tiers.Tier0
-  private buildings: Building[]
-
-  constructor(allResearches: Research[], buildings: Building[]) {
-    this.allResearches = allResearches
-    this.buildings = buildings
-  }
 
   loadResearches(unlockedResearches: Research[], completedResearches: Research[]) {
     this.unlockedResearches = unlockedResearches
@@ -99,7 +94,6 @@ export class ResearchSystem {
     research.researchEffect.forEach((effect) => {
       switch (effect.researchType) {
         case ResearchTypes.BuildingMult: {
-          console.log(effect)
           break
         }
         case ResearchTypes.JobMult: {
@@ -127,11 +121,6 @@ export class ResearchSystem {
           break
         }
         case ResearchTypes.UnlockResearchTier: {
-          if (typeof effect.targetId !== 'number') {
-            console.log('ResearchSystem: triggerResearchEffect: UnlockResearchTier error')
-            console.log(researchId, effect, effect.targetId)
-            break
-          }
           this.setCurrentTier = effect.targetId
           break
         }
