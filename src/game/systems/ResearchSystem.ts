@@ -62,9 +62,10 @@ export class ResearchSystem {
     return tieredResearch
   }
 
-  // wip: refactor to use no variable
+  // researchNotUnlocked could be moved to a class variable for performance?
   areUnlockRequirementsMet(): boolean {
     const currentTier = this.tier
+    // get all research not unlocked or completed
     const researchNotUnlocked = allResearch.filter((res: Research) => {
       const isUnlocked = this.unlockedResearches.some((r) => r.id === res.id)
       const isCompleted = this.completedResearches.some((r) => r.id === res.id)
