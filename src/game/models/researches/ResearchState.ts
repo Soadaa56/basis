@@ -1,8 +1,8 @@
 export const ResearchStates = {
   Completed: 'completed',
-  inProgress: 'inProgress',
-  Unlocked: 'unlocked',
+  InProgress: 'inProgress',
   Locked: 'locked',
+  Unlocked: 'unlocked',
 }
 
 export type ResearchState = (typeof ResearchStates)[keyof typeof ResearchStates]
