@@ -1,6 +1,5 @@
 import { ResearchTypes, Tiers, type Research, type Tier } from '../models/Research'
 import { UnlockTypes } from '../models/researches/ResearchUnlockable'
-import { Building } from '@/game/models/Buildings'
 import { allResearch } from '../data/researches/allResearch'
 import { BuildingSystem } from './BuildingSystem'
 import type { JobSystem } from './JobSystem'
@@ -63,14 +62,15 @@ export class ResearchSystem {
     return tieredResearch
   }
 
-  areUnlockRequirementsMet(research: Research, building: Building[]): boolean {
+  areUnlockRequirementsMet(research: Research): boolean {
     const currentTier = this.tier
 
     return (
       research.unlockRequirements?.every((res) => {
         switch (res.unlockType) {
           case UnlockTypes.BuildingUnlockRequirement:
-            return building.some((b) => b.definition.id == res.id)
+            const allBuildings = this.buildingSystem.getAllBuildings
+            return allBuildings.some((b) => b.definition.id === res.id)
           case UnlockTypes.TierUnlockRequirement:
             const unlockTier = res.id
             if (typeof unlockTier !== 'number') {
