@@ -18,91 +18,81 @@ export class ResearchSystem {
     // research locked by default
     this.allResearch = allResearch.map((res) => ({
       ...res,
-      state: res.researchState ?? ResearchStates.Locked,
+      state: res.state ?? ResearchStates.Locked,
     }))
   }
 
-  loadResearches(unlockedResearches: Research[], completedResearches: Research[]) {
-    this.unlockedResearches = unlockedResearches
-    this.completedResearches = completedResearches
+  loadResearches(saveFileResearch: Research[]) {
+    this.allResearch = saveFileResearch
   }
 
-  public get getAllUnlockedResearches(): Research[] {
-    return this.unlockedResearches
+  public get getAllResearch(): Research[] {
+    return this.allResearch
   }
 
-  public get getAllCompletedResearches(): Research[] {
-    return this.completedResearches
+  public get getAllCompletedResearch(): Research[] {
+    return this.allResearch.filter((res) => res.state === ResearchStates.Completed)
+  }
+
+  public get getAllUnlockedResearch(): Research[] {
+    return this.allResearch.filter((res) => res.state === ResearchStates.Unlocked)
+  }
+
+  public get getAllLockedResearch(): Research[] {
+    return this.allResearch.filter((res) => res.state === ResearchStates.Locked)
   }
 
   public set setCurrentTier(v: Tier) {
     this.tier = v
   }
 
-  getResearchOrError(researchId: string) {
-    const research = this.allResearches.find((research) => research.id == researchId)
+  getResearchById(researchId: string): Research {
+    const research = this.allResearch.find((res) => res.id === researchId)
     if (!research) {
-      throw new Error(`getResearchOrError on researchId: ${researchId}`)
+      throw new Error(`getResearchById Error: ${researchId}`)
     }
     return research
   }
 
   unlockResearch(researchId: string) {
-    const research = this.getResearchOrError(researchId)
-    if (!this.unlockedResearches.includes(research)) {
-      this.unlockedResearches.push(research)
-    }
+    const research = this.getResearchById(researchId)
+    research.state = ResearchStates.Unlocked
   }
 
   completeResearch(researchId: string) {
-    const research = this.getResearchOrError(researchId)
-    this.unlockedResearches = this.unlockedResearches.filter((research) => research.id !== researchId)
-    this.completedResearches.push(research)
+    const research = this.getResearchById(researchId)
+    research.state = ResearchStates.Completed
   }
 
-  getResearchByCurrentTier() {
+  canBeUnlocked(researchId: string): boolean {
+    const research = this.getResearchById(researchId)
     const currentTier = this.tier
-    const tieredResearch = this.allResearches.filter((research) => research.tier == currentTier)
-
-    return tieredResearch
-  }
-
-  // researchNotUnlocked could be moved to a class variable for performance?
-  areUnlockRequirementsMet(): boolean {
-    const currentTier = this.tier
-    // get all research not unlocked or completed
-    const researchNotUnlocked = allResearch.filter((res: Research) => {
-      const isUnlocked = this.unlockedResearches.some((r) => r.id === res.id)
-      const isCompleted = this.completedResearches.some((r) => r.id === res.id)
-      return !isUnlocked && !isCompleted
-    })
-    const research = researchNotUnlocked.find((res) => res.unlockRequirements)
-    if (!research) return false
 
     return (
       research.unlockRequirements?.every((res) => {
         switch (res.unlockType) {
           case UnlockTypes.BuildingUnlockRequirement:
             const allBuildings = this.buildingSystem.getAllBuildings
+
             return allBuildings.some((b) => b.definition.id === res.id)
           case UnlockTypes.TierUnlockRequirement:
             const unlockTier = res.id
             if (typeof unlockTier !== 'number') {
-              console.log('ResearchSystem: areUnlockRequirementsMet Bug')
+              console.log('ResearchSystem: canBeUnlocked? Bug')
               console.log(research, res.unlockType, unlockTier)
               return false
             }
 
             return currentTier >= unlockTier
           case UnlockTypes.ResearchUnlock:
-            if (typeof res.id !== 'string') return false
+            const requiredResearch = this.getResearchById(res.id as string)
 
-            return this.completedResearches.some((completedResearch) => completedResearch.id === res.id)
+            return requiredResearch.state === ResearchStates.Completed
           case UnlockTypes.MagicUnlock: // Magic System not yet implemented
             console.log(research, res, res.unlockType)
             return true
           default:
-            console.log('ResearchSystem areUnlockRequirementsMet default triggered.')
+            console.log('ResearchSystem: canBeUnlocked? default triggered.')
             console.log(research, res, res.unlockType)
             return true
         }
@@ -110,10 +100,20 @@ export class ResearchSystem {
     )
   }
 
-  triggerResearchEffect(researchId: string) {
-    const research = this.getResearchOrError(researchId)
+  checkLockedResearch(): void {
+    const lockedResearch = this.getAllLockedResearch
 
-    research.researchEffect.forEach((effect) => {
+    lockedResearch.forEach((res) => {
+      if (this.canBeUnlocked(res.id)) {
+        this.unlockResearch(res.id)
+      }
+    })
+  }
+
+  triggerResearchEffect(researchId: string) {
+    const research = this.getResearchById(researchId)
+
+    research.effect.forEach((effect) => {
       switch (effect.researchType) {
         case ResearchTypes.BuildingMult: {
           // Not currently implemented - Needs something similar to JobInput JobOutput system
@@ -182,7 +182,5 @@ export class ResearchSystem {
           break
       }
     })
-
-    this.areUnlockRequirementsMet()
   }
 }
