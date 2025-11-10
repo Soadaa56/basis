@@ -2,20 +2,25 @@ import { ResearchTypes, Tiers, type Research, type Tier } from '../models/Resear
 import { UnlockTypes } from '../models/researches/ResearchUnlockable'
 import { allResearch } from '../data/researches/allResearch'
 import { BuildingSystem } from './BuildingSystem'
+import { ResearchStates } from '../models/researches/ResearchState'
 import type { JobSystem } from './JobSystem'
 import type { ResourceSystem } from './ResourceSystem'
 
 export class ResearchSystem {
-  private allResearches: Research[] = allResearch
-  private unlockedResearches: Research[] = []
-  private completedResearches: Research[] = []
+  private allResearch: Research[] = allResearch
   private tier: Tier = Tiers.Tier0
 
   constructor(
     private buildingSystem: BuildingSystem,
     private jobSystem: JobSystem,
     private resourceSystem: ResourceSystem,
-  ) {}
+  ) {
+    // research locked by default
+    this.allResearch = allResearch.map((res) => ({
+      ...res,
+      state: res.researchState ?? ResearchStates.Locked,
+    }))
+  }
 
   loadResearches(unlockedResearches: Research[], completedResearches: Research[]) {
     this.unlockedResearches = unlockedResearches

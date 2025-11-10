@@ -3,13 +3,15 @@ import type { researchUnlockable } from './researches/ResearchUnlockable'
 import type { BuildingId } from '../data/buildingsId'
 import type { ResourceId } from './Resource'
 import type { JobId } from './Jobs'
+import type { ResearchState } from './researches/ResearchState'
 
 export interface Research extends researchUnlockable {
   id: string
   name: string
-  tier: number
+  tier: Tier
   researchCost: number
   researchEffect: ResearchEffect[]
+  researchState?: ResearchState
   category?: ResearchCategory
   description?: string
   resourceCost?: ResourceCost
