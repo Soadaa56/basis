@@ -18,7 +18,7 @@ import BuildingsPanel from './components/buildings/BuildingsPanel.vue'
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .village-name-header {
   text-align: center;
 }

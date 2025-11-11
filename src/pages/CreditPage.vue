@@ -13,9 +13,7 @@
         <a href="https://fontawesome.com/icons/bars?f=classic&s=solid">Bars</a>
       </li>
       <li>
-        <a href="https://fontawesome.com/icons/window-maximize?f=classic&s=regular">
-          Window-maximize:
-        </a>
+        <a href="https://fontawesome.com/icons/window-maximize?f=classic&s=regular"> Window-maximize: </a>
       </li>
       <li>
         <a href="https://fontawesome.com/icons/shield?f=classic&s=solid">Shield</a>
@@ -27,4 +25,4 @@
   </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss"></style>
