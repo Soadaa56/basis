@@ -12,8 +12,8 @@ export const tier2Unlock: Research = {
   id: 'tier1Unlock',
   name: 'Smarties',
   tier: 1,
-  researchCost: 600,
-  researchEffect: [
+  cost: 600,
+  effect: [
     {
       researchType: ResearchTypes.ResourceAddFlat,
       targetId: ResourceIds.Research,
