@@ -42,7 +42,12 @@ export class GameStateManager {
     this.magicSystem = new MagicSystem(gameState.magic)
     this.jobSystem = new JobSystem(gameState.jobs, this.resourceSystem)
     this.workerSystem = new WorkerSystem(this.jobSystem, gameState.workers)
-    this.researchSystem = new ResearchSystem(this.buildingSystem, this.jobSystem, this.resourceSystem)
+    this.researchSystem = new ResearchSystem(
+      gameState.research,
+      this.buildingSystem,
+      this.jobSystem,
+      this.resourceSystem,
+    )
   }
 
   loadGameState(gameState: GameState) {
@@ -52,7 +57,7 @@ export class GameStateManager {
     this.magicSystem.loadMagic(gameState.magic)
     this.jobSystem.loadJobs(gameState.jobs)
     this.workerSystem.loadWorkers(gameState.workers)
-    this.researchSystem.loadResearches(gameState.research)
+    this.researchSystem.loadResearch(gameState.research)
   }
 
   startTick(tickInterval: number = this.tickInterval) {
