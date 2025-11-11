@@ -50,9 +50,6 @@ const props = defineProps<{
 </template>
 
 <style scoped lang="scss">
-.building-wrapper {
-  border: 1px solid var(--secondary-color);
-}
 .effect {
   border-bottom: 1px solid black;
   margin-bottom: 0.75rem;
