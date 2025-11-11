@@ -6,6 +6,7 @@ import {
   type Research,
   type ResearchEffect,
 } from '@/game/models/Research'
+import { ResearchStates } from '@/game/models/researches/ResearchState'
 
 export const tier1Unlock: Research = {
   id: 'tier0Unlock',
@@ -23,6 +24,7 @@ export const tier1Unlock: Research = {
       targetId: Tiers.Tier1,
     },
   ] satisfies ResearchEffect[],
+  state: ResearchStates.Unlocked,
   category: ResearchCategories.Research,
   description: 'Start thinking about things',
 }
