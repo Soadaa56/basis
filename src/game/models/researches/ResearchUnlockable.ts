@@ -7,7 +7,7 @@ export interface researchUnlockable {
 
 export type UnlockRequirement = {
   unlockType: UnlockType
-  id: BuildingId | Tier | string // | MagicId
+  id: BuildingId | Tier | string // researchId
 }
 
 export const UnlockTypes = {
