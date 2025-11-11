@@ -21,10 +21,7 @@ export interface GameState {
   magic: Magic[]
   jobs: Job[]
   workers: WorkerState
-  researches: {
-    unlocked: Research[]
-    completed: Research[]
-  }
+  researches: Research[]
 }
 
 export class GameStateManager {
@@ -55,7 +52,7 @@ export class GameStateManager {
     this.magicSystem.loadMagic(gameState.magic)
     this.jobSystem.loadJobs(gameState.jobs)
     this.workerSystem.loadWorkers(gameState.workers)
-    this.researchSystem.loadResearches(gameState.researches.unlocked, gameState.researches.completed)
+    this.researchSystem.loadResearches(gameState.researches)
   }
 
   startTick(tickInterval: number = this.tickInterval) {
@@ -80,6 +77,13 @@ export class GameStateManager {
     this.resourceSystem.spendResources(cost)
     building?.addBuildingCount()
     this.buildingSystem.triggerBuilding(building, this.resourceSystem, this.jobSystem, this.workerSystem)
+    // can be optimized by checking for only research containing unlockType Building
+    this.researchSystem.checkLockedResearch()
+  }
+
+  purchaseResearch(researchId: string) {
+    this.researchSystem.completeResearch(researchId)
+    this.researchSystem.checkLockedResearch()
   }
 
   addWorkerToJob(jobId: JobId) {
