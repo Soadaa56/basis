@@ -1,7 +1,7 @@
 import { ResourceIds } from '@/game/models/Resource'
 import type { JobInfo, JobOutput } from '@/game/data/jobsInfo'
 
-export const Gatherer: JobInfo = {
+export const gatherer: JobInfo = {
   unlocked: true,
   outputs: [
     {
@@ -12,11 +12,6 @@ export const Gatherer: JobInfo = {
     {
       resourceId: ResourceIds.Stone,
       rate: 1,
-      multipliers: [],
-    },
-    {
-      resourceId: ResourceIds.Gold,
-      rate: 0.5,
       multipliers: [],
     },
   ] satisfies JobOutput[],

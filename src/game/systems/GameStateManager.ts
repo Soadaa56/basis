@@ -12,6 +12,8 @@ import type { BuildingId } from '@/game/data/buildingsId'
 import type { Magic } from '@/game/models/Magic'
 import type { Job, JobId } from '@/game/models/Jobs'
 import type { WorkerState } from '@/game/systems/WorkerSystem'
+import type { Research } from '../models/Research'
+import { ResearchSystem } from './ResearchSystem'
 
 export interface GameState {
   resources: Resource[]
@@ -19,6 +21,7 @@ export interface GameState {
   magic: Magic[]
   jobs: Job[]
   workers: WorkerState
+  researches: Research[]
 }
 
 export class GameStateManager {
@@ -28,6 +31,7 @@ export class GameStateManager {
   magicSystem: MagicSystem
   jobSystem: JobSystem
   workerSystem: WorkerSystem
+  researchSystem: ResearchSystem
   private tickInterval: number = TICK_INTERVAL //ms
 
   constructor(gameState: GameState) {
@@ -38,6 +42,7 @@ export class GameStateManager {
     this.magicSystem = new MagicSystem(gameState.magic)
     this.jobSystem = new JobSystem(gameState.jobs, this.resourceSystem)
     this.workerSystem = new WorkerSystem(this.jobSystem, gameState.workers)
+    this.researchSystem = new ResearchSystem(this.buildingSystem, this.jobSystem, this.resourceSystem)
   }
 
   loadGameState(gameState: GameState) {
@@ -47,6 +52,7 @@ export class GameStateManager {
     this.magicSystem.loadMagic(gameState.magic)
     this.jobSystem.loadJobs(gameState.jobs)
     this.workerSystem.loadWorkers(gameState.workers)
+    this.researchSystem.loadResearches(gameState.researches)
   }
 
   startTick(tickInterval: number = this.tickInterval) {
@@ -71,6 +77,13 @@ export class GameStateManager {
     this.resourceSystem.spendResources(cost)
     building?.addBuildingCount()
     this.buildingSystem.triggerBuilding(building, this.resourceSystem, this.jobSystem, this.workerSystem)
+    // can be optimized by checking for only research containing unlockType Building
+    this.researchSystem.checkLockedResearch()
+  }
+
+  purchaseResearch(researchId: string) {
+    this.researchSystem.completeResearch(researchId)
+    this.researchSystem.checkLockedResearch()
   }
 
   addWorkerToJob(jobId: JobId) {
@@ -112,7 +125,7 @@ export class GameStateManager {
   }
 
   fillResources() {
-    const resources = this.resourceSystem.getAllResources()
+    const resources = this.resourceSystem.getAllResources
 
     resources.forEach((resource) => {
       resource.currentAmount = resource.calculatedStorage

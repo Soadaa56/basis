@@ -12,7 +12,7 @@ provide('resourceSystem', gameStore.manager.resourceSystem)
   <div v-if="gameStore" class="resource-panel-container">
     <h2>Resources Panel</h2>
     <base-resource-text
-      v-for="resource in gameStore.manager.resourceSystem.getAllResources()"
+      v-for="resource in gameStore.manager.resourceSystem.getAllResources"
       :key="resource.id"
       :resource-id="resource.id"
       :name="resource.name"

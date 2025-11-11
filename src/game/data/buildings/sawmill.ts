@@ -4,7 +4,7 @@ import { BuildingIds } from '../buildingsId'
 import { JobIds } from '@/game/models/Jobs'
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
-export const Sawmill: BuildingDefinition = {
+export const sawmill: BuildingDefinition = {
   id: BuildingIds.Sawmill,
   name: 'Sawmill',
   cost: [

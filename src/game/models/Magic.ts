@@ -1,5 +1,3 @@
-import type { Unlockable } from '@/game/models/Unlockable'
-
 // Unsure if this will just be mana or 2-3 'mystical' resources
 export const MagicIds = {
   Mana: 'mana',
@@ -8,7 +6,7 @@ export const MagicIds = {
 
 type MagicId = (typeof MagicIds)[keyof typeof MagicIds]
 
-export interface Magic extends Unlockable {
+export interface Magic {
   id: MagicId
   name: string
   currentAmount: number

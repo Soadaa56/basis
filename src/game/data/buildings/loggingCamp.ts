@@ -4,7 +4,7 @@ import { BuildingIds } from '../buildingsId'
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
-export const LoggingCamp: BuildingDefinition = {
+export const loggingCamp: BuildingDefinition = {
   id: BuildingIds.LoggingCamp,
   name: 'Logging Camp',
   cost: [

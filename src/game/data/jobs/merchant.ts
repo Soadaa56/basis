@@ -1,7 +1,7 @@
 import { ResourceIds } from '@/game/models/Resource'
 import type { JobInfo, JobInput, JobOutput } from '@/game/data/jobsInfo'
 
-export const Merchant: JobInfo = {
+export const merchant: JobInfo = {
   unlocked: true,
   outputs: [
     {

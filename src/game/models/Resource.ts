@@ -1,5 +1,3 @@
-import type { Unlockable } from '@/game/models/Unlockable'
-
 export const ResourceIds = {
   Copper: 'copper',
   Food: 'food',
@@ -24,7 +22,7 @@ export interface IncomeSources {
   buildings: Record<string, number>
 }
 
-export interface Resource extends Unlockable {
+export interface Resource {
   id: ResourceId
   name: string
   currentAmount: number
@@ -32,7 +30,7 @@ export interface Resource extends Unlockable {
   baseStorageFlatBonus: Record<string, number>
   baseStorageModifiers: Record<string, number>
   calculatedStorage: number
-  baseIncome: number // probably zero for almost all?
+  baseIncome: number
   incomeSources: IncomeSources
   IncomeMultipliers: Record<string, number>
   totalIncome: number

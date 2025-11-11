@@ -4,7 +4,7 @@ import { BuildingTypes, type BuildingInfo } from '@/game/models/buildings/buildi
 import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import type { BuildingDefinition } from '@/game/models/buildings/buildingsDefinitions'
 
-export const Bakehouse: BuildingDefinition = {
+export const bakehouse: BuildingDefinition = {
   id: BuildingIds.Bakehouse,
   name: 'BakeHouse',
   cost: [
