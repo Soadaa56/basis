@@ -21,7 +21,7 @@ export interface GameState {
   magic: Magic[]
   jobs: Job[]
   workers: WorkerState
-  researches: Research[]
+  research: Research[]
 }
 
 export class GameStateManager {
@@ -52,7 +52,7 @@ export class GameStateManager {
     this.magicSystem.loadMagic(gameState.magic)
     this.jobSystem.loadJobs(gameState.jobs)
     this.workerSystem.loadWorkers(gameState.workers)
-    this.researchSystem.loadResearches(gameState.researches)
+    this.researchSystem.loadResearches(gameState.research)
   }
 
   startTick(tickInterval: number = this.tickInterval) {
