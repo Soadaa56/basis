@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ResearchCategory, ResearchEffect, Tier } from '@/game/models/Research'
+import type { Tier } from '@/game/models/Research'
 import type { ResearchState } from '@/game/models/researches/ResearchState'
 import type { ResourceCost } from '@/game/models/Resource'
 // import { useGameStore } from '@/stores/game'
@@ -11,10 +11,7 @@ defineProps<{
   name: string
   tier: Tier
   cost: number
-  effect: ResearchEffect[]
   state?: ResearchState
-  category?: ResearchCategory
-  description?: string
   resourceCost?: ResourceCost
 }>()
 

@@ -9,16 +9,13 @@ const gameStore = useGameStore()
   <h1>Research</h1>
   <div class="research-panel">
     <BaseResearchCard
-      v-for="research in gameStore.manager.gameState.researches"
+      v-for="research in gameStore.manager.gameState.research"
       :key="research.id"
       :id="research.id"
       :name="research.name"
       :tier="research.tier"
       :cost="research.cost"
-      :effect="research.effect"
       :state="research.state"
-      :category="research.category"
-      :description="research.description"
       :resource-cost="research.resourceCost"
     />
   </div>
