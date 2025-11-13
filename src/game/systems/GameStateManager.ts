@@ -6,7 +6,7 @@ import { WorkerSystem } from '@/game/systems/WorkerSystem'
 import { JobSystem } from './JobSystem'
 import { TICK_INTERVAL } from '@/game/config/config'
 
-import type { Resource, ResourceCost, ResourceId } from '@/game/models/Resource'
+import type { Resource, ResourceId } from '@/game/models/Resource'
 import type { Building } from '@/game/models/Buildings'
 import type { BuildingId } from '@/game/data/buildingsId'
 import type { Magic } from '@/game/models/Magic'
@@ -88,7 +88,10 @@ export class GameStateManager {
 
   purchaseResearch(researchId: string) {
     const research = this.researchSystem.getResearchById(researchId)
-    if (!this.resourceSystem.canAfford(research.cost)) this.researchSystem.completeResearch(researchId)
+    if (!this.resourceSystem.canAfford(research.cost)) return
+
+    this.resourceSystem.spendResources(research.cost)
+    this.researchSystem.completeResearch(researchId)
     this.researchSystem.checkLockedResearch()
   }
 
