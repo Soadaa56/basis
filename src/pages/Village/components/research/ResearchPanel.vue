@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { useGameStore } from '@/stores/game'
 import BaseResearchCard from '@/components/ui/BaseResearchCard.vue'
+import { useGameStore } from '@/stores/game'
+import { computed } from 'vue'
 
 const gameStore = useGameStore()
-const unlockedReseach = gameStore.manager.researchSystem.getAllUnlockedResearch
+const unlockedReseach = computed(() => gameStore.manager.researchSystem.getAllUnlockedResearch)
 </script>
 
 <template>
@@ -13,7 +14,7 @@ const unlockedReseach = gameStore.manager.researchSystem.getAllUnlockedResearch
       v-for="research in unlockedReseach"
       :key="research.id"
       :research="research"
-      @purchase="gameStore.manager.purchaseResearch(research.id)"
+      @purchase="gameStore.manager.purchaseResearch(research)"
     />
   </div>
 </template>

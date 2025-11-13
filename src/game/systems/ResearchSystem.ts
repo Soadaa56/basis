@@ -98,6 +98,7 @@ export class ResearchSystem {
 
   checkLockedResearch(): void {
     const lockedResearch = this.getAllLockedResearch
+    console.log(lockedResearch)
 
     lockedResearch.forEach((res) => {
       if (this.canBeUnlocked(res.id)) {
@@ -131,7 +132,7 @@ export class ResearchSystem {
             throw new Error('ResearchSystem: triggerResearchEffect: ResourceAddFlat')
           }
 
-          resource.baseIncome += effect.value // Probably needs a refactor?
+          this.resourceSystem.updateBaseIncome(resource, effect.value)
           break
         }
         case ResearchTypes.ResourceMult: {

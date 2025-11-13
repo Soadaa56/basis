@@ -64,9 +64,9 @@ export class ResourceSystem {
     resource.calculatedStorage = storageFlat * baseStorageModifiers
   }
 
-  // possibly goes unused, unless meta upgrade gives flat amount? idk
   updateBaseIncome(resource: Resource, incomeAdjustment: number) {
     resource.baseIncome += incomeAdjustment
+    this.updateCalculatedIncome(resource)
   }
 
   addJobContribution(resourceId: ResourceId, jobId: JobId, value: number) {

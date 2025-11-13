@@ -3,10 +3,6 @@ import { provide } from 'vue'
 import TooltipResearch from './tooltips/TooltipResearch.vue'
 import type { Research } from '@/game/models/Research'
 
-// import { useGameStore } from '@/stores/game'
-
-// const gameStore = useGameStore()
-
 const props = defineProps<{
   research: Research
 }>()

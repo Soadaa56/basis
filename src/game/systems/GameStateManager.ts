@@ -86,12 +86,17 @@ export class GameStateManager {
     this.researchSystem.checkLockedResearch()
   }
 
-  purchaseResearch(researchId: string) {
-    const research = this.researchSystem.getResearchById(researchId)
-    if (!this.resourceSystem.canAfford(research.cost)) return
+  purchaseResearch(research: Research) {
+    if (!this.resourceSystem.canAfford(research.cost)) {
+      console.log('cant afford')
+      return
+    }
+    console.log(research)
 
     this.resourceSystem.spendResources(research.cost)
-    this.researchSystem.completeResearch(researchId)
+
+    this.researchSystem.triggerResearchEffect(research.id)
+    this.researchSystem.completeResearch(research.id)
     this.researchSystem.checkLockedResearch()
   }
 

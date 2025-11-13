@@ -26,7 +26,7 @@ const resourceCost = research?.cost.filter((res) => res.resourceId !== ResourceI
           </div>
           <div class="cost-resource-list" v-if="resourceCost">
             <div class="cost-resource" v-for="(extraCost, i) in resourceCost" :key="i">
-              {{ extraCost.resourceId }}: {{ extraCost.resourceId }}
+              {{ extraCost.resourceId }}: {{ extraCost.amount }}
             </div>
           </div>
         </div>

@@ -11,8 +11,8 @@ import { ResearchStates } from '../models/researches/ResearchState'
 
 const initialResources: Resource[] = [
   {
-    id: ResourceIds.Research,
-    name: 'Research',
+    id: ResourceIds.Knowledge,
+    name: 'Knowledge',
     currentAmount: 0,
     baseStorage: 100,
     baseStorageFlatBonus: {},

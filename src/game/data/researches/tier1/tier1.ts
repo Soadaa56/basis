@@ -83,4 +83,10 @@ export const unlockGranary: Research = {
   ],
   category: ResearchCategories.Agriculture,
   description: 'Store food away inside.\nUnlock the Granary building.',
+  unlockRequirements: [
+    {
+      unlockType: UnlockTypes.TierUnlockRequirement,
+      id: Tiers.Tier1,
+    },
+  ],
 }
