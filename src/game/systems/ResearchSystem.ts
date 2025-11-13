@@ -124,7 +124,6 @@ export class ResearchSystem {
           console.log(researchId, effect, jobDefinition)
           break
         }
-        // Meant for flat increase to research income
         case ResearchTypes.ResourceAddFlat: {
           const resource = this.resourceSystem.getResourceById(effect.targetId)
           if (!resource) {
