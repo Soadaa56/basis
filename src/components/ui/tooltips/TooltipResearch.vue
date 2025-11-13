@@ -5,8 +5,8 @@ import type { Research } from '@/game/models/Research'
 import { ResourceIds } from '@/game/models/Resource'
 
 const research = inject<Research>('research')
-const knowledgeCost = research?.cost.find((res) => res.resourceId === ResourceIds.Research)
-const resourceCost = research?.cost.filter((res) => res.resourceId !== ResourceIds.Research)
+const knowledgeCost = research?.cost.find((res) => res.resourceId === ResourceIds.Knowledge)
+const resourceCost = research?.cost.filter((res) => res.resourceId !== ResourceIds.Knowledge)
 </script>
 
 <template>

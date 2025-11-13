@@ -14,18 +14,18 @@ export const tier1Unlock: Research = {
   tier: 0,
   cost: [
     {
-      resourceId: ResourceIds.Research,
+      resourceId: ResourceIds.Knowledge,
       amount: 20,
     },
   ],
   effect: [
     {
-      researchType: ResearchTypes.ResourceAddFlat,
-      targetId: ResourceIds.Research,
+      type: ResearchTypes.ResourceAddFlat,
+      targetId: ResourceIds.Knowledge,
       value: 1,
     },
     {
-      researchType: ResearchTypes.UnlockResearchTier,
+      type: ResearchTypes.UnlockResearchTier,
       targetId: Tiers.Tier1,
     },
   ] satisfies ResearchEffect[],

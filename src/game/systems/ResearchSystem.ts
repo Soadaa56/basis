@@ -110,12 +110,12 @@ export class ResearchSystem {
     const research = this.getResearchById(researchId)
 
     research.effect.forEach((effect) => {
-      switch (effect.researchType) {
+      switch (effect.type) {
         case ResearchTypes.BuildingMult: {
           // Not currently implemented - Needs something similar to JobInput JobOutput system
           // (assuming I implement resource production on a building)
           console.log('ResearchSystem: triggerResearchEffect: BuildingMult triggered')
-          console.log(researchId, effect, effect.researchType)
+          console.log(researchId, effect, effect.type)
           break
         }
         case ResearchTypes.JobMult: {
