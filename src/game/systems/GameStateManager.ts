@@ -110,6 +110,11 @@ export class GameStateManager {
     this.jobSystem.jobResourceContribution(jobId)
   }
 
+  // Could probably consolidate building and research afford checks
+  canAffordResearch(research: Research): boolean {
+    return this.resourceSystem.canAfford(research.cost)
+  }
+
   canAffordBuilding(buildingId: BuildingId): boolean {
     const building = this.buildingSystem.getBuildingOrError(buildingId)
     const cost = building.getCurrentCost()
