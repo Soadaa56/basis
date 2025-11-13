@@ -15,7 +15,7 @@ export const discussions: Research = {
     },
   ],
   category: ResearchCategories.Research,
-  description: 'Try words.',
+  description: 'Try words.\n+150 Research capacity.',
   unlockRequirements: [
     {
       unlockType: UnlockTypes.TierUnlockRequirement,
@@ -37,7 +37,7 @@ export const poolKnowledge: Research = {
     },
   ],
   category: ResearchCategories.Research,
-  description: 'Collect your groups knowledge.',
+  description: 'Collect your groups knowledge.\n+500 Research capacity.',
   unlockRequirements: [
     {
       unlockType: UnlockTypes.TierUnlockRequirement,

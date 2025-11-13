@@ -26,5 +26,5 @@ export const tier1Unlock: Research = {
   ] satisfies ResearchEffect[],
   state: ResearchStates.Unlocked,
   category: ResearchCategories.Research,
-  description: 'Start thinking about things.',
+  description: 'Start thinking about things.\n+1 Research income.',
 }

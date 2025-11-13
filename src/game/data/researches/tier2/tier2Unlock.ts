@@ -25,7 +25,7 @@ export const tier2Unlock: Research = {
     },
   ] satisfies ResearchEffect[],
   category: ResearchCategories.Research,
-  description: 'Make smart people the thinkers.',
+  description: 'Make smart people the thinkers.\n+1 Research income.',
   unlockRequirements: [
     {
       unlockType: UnlockTypes.TierUnlockRequirement,
