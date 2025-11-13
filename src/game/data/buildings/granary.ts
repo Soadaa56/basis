@@ -7,8 +7,8 @@ export const granary: BuildingDefinition = {
   id: BuildingIds.Granary,
   name: 'Granary',
   cost: [
-    { resourceId: ResourceIds.Food, amount: 100 },
-    { resourceId: ResourceIds.Wood, amount: 50 },
+    { resourceId: ResourceIds.Food, amount: 30 },
+    { resourceId: ResourceIds.Wood, amount: 75 },
   ] satisfies ResourceCost[],
   costMultiplier: 1.25,
   purchaseEffectText: '+500 Food Storage\n+2% Food Storage',
