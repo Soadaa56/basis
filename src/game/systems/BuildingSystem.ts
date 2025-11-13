@@ -22,13 +22,17 @@ export class BuildingSystem {
     return this.buildings
   }
 
-  hasBuilding(buildingId: BuildingId) {
-    const building = this.getBuildingOrError(buildingId)
+  hasBuilding(buildingId: BuildingId): boolean {
+    const building = this.getBuildingById(buildingId)
     return building ? true : false
   }
 
+  getBuildingById(buildingId: BuildingId) {
+    return this.buildings.find((building) => building.definition.id === buildingId)
+  }
+
   getBuildingOrError(buildingId: BuildingId) {
-    const building = this.buildings.find((building) => building.definition.id == buildingId)
+    const building = this.buildings.find((building) => building.definition.id === buildingId)
     if (!building) {
       throw new Error(`BuildingSystem => getBuildingOrError on buildingId: ${buildingId}`)
     }
