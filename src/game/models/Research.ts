@@ -9,7 +9,7 @@ export interface Research extends researchUnlockable {
   id: string
   name: string
   tier: Tier
-  cost: number // research
+  cost: ResourceCost
   effect: ResearchEffect[]
   state?: ResearchState
   category?: ResearchCategory

@@ -4,9 +4,6 @@ import BaseTooltip from './BaseTooltip.vue'
 import type { Research } from '@/game/models/Research'
 import type { ResourceCost } from '@/game/models/Resource'
 
-// import { useGameStore } from '@/stores/game'
-// const gameStore = useGameStore()
-
 const research = inject<Research>('research')
 const resourceCost = computed<ResourceCost[]>(() => research?.resourceCost ?? [])
 </script>
@@ -23,7 +20,7 @@ const resourceCost = computed<ResourceCost[]>(() => research?.resourceCost ?? []
         <div class="name">{{ research.name }}</div>
         <div class="category" v-if="research.category">Category: {{ research.category }}</div>
         <div class="costs">
-          <div class="cost-research">Research Cost: {{ research.cost }}</div>
+          <div class="cost-research">{{ research.cost.resourceId }}: {{ research.cost.amount }}</div>
           <div class="cost-resource-list" v-if="research.resourceCost">
             <div class="cost-resource" v-for="(extraCost, i) in resourceCost" :key="i">
               {{ extraCost.resourceId }}: {{ extraCost.resourceId }}
