@@ -6,10 +6,12 @@ export const discussions: Research = {
   id: 'discussions',
   name: 'Discussions',
   tier: 1,
-  cost: {
-    resourceId: ResourceIds.Research,
-    amount: 50,
-  },
+  cost: [
+    {
+      resourceId: ResourceIds.Research,
+      amount: 50,
+    },
+  ],
   effect: [
     {
       researchType: ResearchTypes.ResourceStorageAddFlat,
@@ -31,10 +33,12 @@ export const poolKnowledge: Research = {
   id: 'poolKnowledge',
   name: 'Pool Knowledge',
   tier: 1,
-  cost: {
-    resourceId: ResourceIds.Research,
-    amount: 150,
-  },
+  cost: [
+    {
+      resourceId: ResourceIds.Research,
+      amount: 150,
+    },
+  ],
   effect: [
     {
       researchType: ResearchTypes.ResourceStorageAddFlat,

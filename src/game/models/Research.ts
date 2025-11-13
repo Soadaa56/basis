@@ -9,12 +9,11 @@ export interface Research extends researchUnlockable {
   id: string
   name: string
   tier: Tier
-  cost: ResourceCost
+  cost: ResourceCost[]
   effect: ResearchEffect[]
   state?: ResearchState
   category?: ResearchCategory
   description?: string
-  resourceCost?: ResourceCost[] // non-research cost
 }
 
 export const ResearchTypes = {
