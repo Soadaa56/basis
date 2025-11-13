@@ -14,7 +14,7 @@ export interface Research extends researchUnlockable {
   state?: ResearchState
   category?: ResearchCategory
   description?: string
-  resourceCost?: ResourceCost // non-research cost
+  resourceCost?: ResourceCost[] // non-research cost
 }
 
 export const ResearchTypes = {

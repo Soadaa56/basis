@@ -1,19 +1,17 @@
 <script setup lang="ts">
-import type { Tier } from '@/game/models/Research'
-import type { ResearchState } from '@/game/models/researches/ResearchState'
-import type { ResourceCost } from '@/game/models/Resource'
+import { provide } from 'vue'
+import TooltipResearch from './tooltips/TooltipResearch.vue'
+import type { Research } from '@/game/models/Research'
+
 // import { useGameStore } from '@/stores/game'
 
 // const gameStore = useGameStore()
 
-defineProps<{
-  id: string
-  name: string
-  tier: Tier
-  cost: number
-  state?: ResearchState
-  resourceCost?: ResourceCost
+const props = defineProps<{
+  research: Research
 }>()
+
+provide('research', props.research)
 
 const emit = defineEmits<{
   (e: 'purchase', researchId: string): void
@@ -21,9 +19,11 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="research-card" @click="emit('purchase', id)">
-    <p class="research-name">{{ name }}</p>
-  </div>
+  <tooltip-research>
+    <div class="research-card" @click="emit('purchase', research.id)">
+      <p class="research-name">{{ research.name }}</p>
+    </div>
+  </tooltip-research>
 </template>
 
 <style scoped lang="scss">
