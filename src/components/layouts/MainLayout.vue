@@ -37,7 +37,7 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  outline: 3px solid black;
+  outline: 1px solid var(--accent-color);
   padding: 4px;
   button {
     background-color: var(--accent-color);

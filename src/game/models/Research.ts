@@ -9,12 +9,11 @@ export interface Research extends researchUnlockable {
   id: string
   name: string
   tier: Tier
-  cost: number // research
+  cost: ResourceCost[]
   effect: ResearchEffect[]
   state?: ResearchState
   category?: ResearchCategory
   description?: string
-  resourceCost?: ResourceCost // non-research cost
 }
 
 export const ResearchTypes = {
@@ -40,14 +39,14 @@ export const Tiers = {
 export type Tier = (typeof Tiers)[keyof typeof Tiers]
 
 export type ResearchEffect =
-  | { researchType: typeof ResearchTypes.BuildingMult; targetId: BuildingId; value: number }
-  | { researchType: typeof ResearchTypes.JobMult; targetId: JobId; value: number }
-  | { researchType: typeof ResearchTypes.ResourceAddFlat; targetId: ResourceId; value: number }
-  | { researchType: typeof ResearchTypes.ResourceMult; targetId: ResourceId; value: number }
-  | { researchType: typeof ResearchTypes.ResourceStorageAddFlat; targetId: ResourceId; value: number }
-  | { researchType: typeof ResearchTypes.ResourceStorageMult; targetId: ResourceId; value: number }
-  | { researchType: typeof ResearchTypes.UnlockBuilding; targetId: BuildingId }
-  | { researchType: typeof ResearchTypes.UnlockResearchTier; targetId: Tier }
+  | { type: typeof ResearchTypes.BuildingMult; targetId: BuildingId; value: number }
+  | { type: typeof ResearchTypes.JobMult; targetId: JobId; value: number }
+  | { type: typeof ResearchTypes.ResourceAddFlat; targetId: ResourceId; value: number }
+  | { type: typeof ResearchTypes.ResourceMult; targetId: ResourceId; value: number }
+  | { type: typeof ResearchTypes.ResourceStorageAddFlat; targetId: ResourceId; value: number }
+  | { type: typeof ResearchTypes.ResourceStorageMult; targetId: ResourceId; value: number }
+  | { type: typeof ResearchTypes.UnlockBuilding; targetId: BuildingId }
+  | { type: typeof ResearchTypes.UnlockResearchTier; targetId: Tier }
 
 export const ResearchCategories = {
   Agriculture: 'agriculture',

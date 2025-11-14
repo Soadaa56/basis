@@ -1,28 +1,24 @@
 import { ResearchTypes, Tiers, type Research, type Tier } from '../models/Research'
 import { UnlockTypes } from '../models/researches/ResearchUnlockable'
-import { allResearch } from '../data/researches/allResearch'
 import { BuildingSystem } from './BuildingSystem'
 import { ResearchStates } from '../models/researches/ResearchState'
 import type { JobSystem } from './JobSystem'
 import type { ResourceSystem } from './ResourceSystem'
 
 export class ResearchSystem {
-  private allResearch: Research[] = allResearch
+  private allResearch: Research[]
   private tier: Tier = Tiers.Tier0
 
   constructor(
+    private gameStateResearch: Research[],
     private buildingSystem: BuildingSystem,
     private jobSystem: JobSystem,
     private resourceSystem: ResourceSystem,
   ) {
-    // research locked by default
-    this.allResearch = allResearch.map((res) => ({
-      ...res,
-      state: res.state ?? ResearchStates.Locked,
-    }))
+    this.allResearch = gameStateResearch
   }
 
-  loadResearches(saveFileResearch: Research[]) {
+  loadResearch(saveFileResearch: Research[]) {
     this.allResearch = saveFileResearch
   }
 
@@ -102,6 +98,7 @@ export class ResearchSystem {
 
   checkLockedResearch(): void {
     const lockedResearch = this.getAllLockedResearch
+    console.log(lockedResearch)
 
     lockedResearch.forEach((res) => {
       if (this.canBeUnlocked(res.id)) {
@@ -114,12 +111,12 @@ export class ResearchSystem {
     const research = this.getResearchById(researchId)
 
     research.effect.forEach((effect) => {
-      switch (effect.researchType) {
+      switch (effect.type) {
         case ResearchTypes.BuildingMult: {
           // Not currently implemented - Needs something similar to JobInput JobOutput system
           // (assuming I implement resource production on a building)
           console.log('ResearchSystem: triggerResearchEffect: BuildingMult triggered')
-          console.log(researchId, effect, effect.researchType)
+          console.log(researchId, effect, effect.type)
           break
         }
         case ResearchTypes.JobMult: {
@@ -127,7 +124,6 @@ export class ResearchSystem {
           console.log(researchId, effect, jobDefinition)
           break
         }
-        // Meant for flat increase to research income
         case ResearchTypes.ResourceAddFlat: {
           const resource = this.resourceSystem.getResourceById(effect.targetId)
           if (!resource) {
@@ -135,7 +131,7 @@ export class ResearchSystem {
             throw new Error('ResearchSystem: triggerResearchEffect: ResourceAddFlat')
           }
 
-          resource.baseIncome += effect.value // Probably needs a refactor?
+          this.resourceSystem.updateBaseIncome(resource, effect.value)
           break
         }
         case ResearchTypes.ResourceMult: {
@@ -155,7 +151,7 @@ export class ResearchSystem {
             throw new Error('ResearchSystem: triggerResearchEffect: ResourceStorageAddFlat')
           }
 
-          resource.baseStorageFlatBonus[research.name] = effect.value
+          this.resourceSystem.updateBaseStorage(resource, effect.value)
           break
         }
         case ResearchTypes.ResourceStorageMult: {

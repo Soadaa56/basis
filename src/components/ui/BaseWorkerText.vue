@@ -19,10 +19,10 @@ const emit = defineEmits<{
   <div class="worker-text">
     <tooltip-job :key="jobId" :job-id="jobId">
       <span class="worker-name">{{ name }}: </span>
-      <span class="assigned-workers-limit" v-if="maxJobSlots != Infinity"
+      <span class="workers-limit" v-if="maxJobSlots != Infinity"
         >{{ assignedWorkers }} / {{ maxJobSlots }}</span
       >
-      <span class="assigned-workers-no-limit" v-if="maxJobSlots == Infinity">{{ assignedWorkers }}</span>
+      <span class="workers-no-limit" v-if="maxJobSlots == Infinity">{{ assignedWorkers }}</span>
     </tooltip-job>
     <FaIcon class="awesome-icon" :icon="['fas', 'minus']" size="1x" @click="emit('unassign', jobId)" />
     <FaIcon class="awesome-icon" :icon="['fas', 'plus']" size="1x" @click="emit('assign', jobId)" />

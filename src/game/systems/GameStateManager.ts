@@ -21,7 +21,7 @@ export interface GameState {
   magic: Magic[]
   jobs: Job[]
   workers: WorkerState
-  researches: Research[]
+  research: Research[]
 }
 
 export class GameStateManager {
@@ -42,7 +42,12 @@ export class GameStateManager {
     this.magicSystem = new MagicSystem(gameState.magic)
     this.jobSystem = new JobSystem(gameState.jobs, this.resourceSystem)
     this.workerSystem = new WorkerSystem(this.jobSystem, gameState.workers)
-    this.researchSystem = new ResearchSystem(this.buildingSystem, this.jobSystem, this.resourceSystem)
+    this.researchSystem = new ResearchSystem(
+      gameState.research,
+      this.buildingSystem,
+      this.jobSystem,
+      this.resourceSystem,
+    )
   }
 
   loadGameState(gameState: GameState) {
@@ -52,7 +57,7 @@ export class GameStateManager {
     this.magicSystem.loadMagic(gameState.magic)
     this.jobSystem.loadJobs(gameState.jobs)
     this.workerSystem.loadWorkers(gameState.workers)
-    this.researchSystem.loadResearches(gameState.researches)
+    this.researchSystem.loadResearch(gameState.research)
   }
 
   startTick(tickInterval: number = this.tickInterval) {
@@ -81,8 +86,17 @@ export class GameStateManager {
     this.researchSystem.checkLockedResearch()
   }
 
-  purchaseResearch(researchId: string) {
-    this.researchSystem.completeResearch(researchId)
+  purchaseResearch(research: Research) {
+    if (!this.resourceSystem.canAfford(research.cost)) {
+      console.log('cant afford')
+      return
+    }
+    console.log(research)
+
+    this.resourceSystem.spendResources(research.cost)
+
+    this.researchSystem.triggerResearchEffect(research.id)
+    this.researchSystem.completeResearch(research.id)
     this.researchSystem.checkLockedResearch()
   }
 
@@ -94,6 +108,11 @@ export class GameStateManager {
   removeWorkerFromJob(jobId: JobId) {
     this.workerSystem.unassignWorker(jobId)
     this.jobSystem.jobResourceContribution(jobId)
+  }
+
+  // Could probably consolidate building and research afford checks
+  canAffordResearch(research: Research): boolean {
+    return this.resourceSystem.canAfford(research.cost)
   }
 
   canAffordBuilding(buildingId: BuildingId): boolean {

@@ -12,20 +12,25 @@ export const tier2Unlock: Research = {
   id: 'tier1Unlock',
   name: 'Smarties',
   tier: 1,
-  researchCost: 600,
-  researchEffect: [
+  cost: [
     {
-      researchType: ResearchTypes.ResourceAddFlat,
-      targetId: ResourceIds.Research,
+      resourceId: ResourceIds.Knowledge,
+      amount: 600,
+    },
+  ],
+  effect: [
+    {
+      type: ResearchTypes.ResourceAddFlat,
+      targetId: ResourceIds.Knowledge,
       value: 1,
     },
     {
-      researchType: ResearchTypes.UnlockResearchTier,
+      type: ResearchTypes.UnlockResearchTier,
       targetId: Tiers.Tier2,
     },
   ] satisfies ResearchEffect[],
   category: ResearchCategories.Research,
-  description: 'Make smart people the thinkers',
+  description: 'Make smart people the thinkers.\n+1 Research income.',
   unlockRequirements: [
     {
       unlockType: UnlockTypes.TierUnlockRequirement,
