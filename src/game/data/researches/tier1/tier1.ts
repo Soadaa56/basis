@@ -1,7 +1,9 @@
-import { ResourceIds } from '@/game/models/Resource'
-import { ResearchCategories, ResearchTypes, Tiers, type Research } from '@/game/models/Research'
+import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import { UnlockTypes } from '@/game/models/researches/ResearchUnlockable'
 import { BuildingIds } from '../../buildingsId'
+import { ResearchCategories, ResearchTypes, Tiers, type Research } from '@/game/models/Research'
+import type { ResearchEffect } from '@/game/models/Research'
+import type { UnlockRequirement } from '@/game/models/researches/ResearchUnlockable'
 
 export const discussions: Research = {
   id: 'discussions',
@@ -123,4 +125,30 @@ export const unlockGranary: Research = {
       id: 'unlockFarm',
     },
   ],
+}
+
+export const pascalName: Research = {
+  id: 'pascalName',
+  name: 'pascal Name',
+  tier: 1,
+  cost: [
+    {
+      resourceId: ResourceIds.Knowledge,
+      amount: 1,
+    },
+  ] satisfies ResourceCost[],
+  effect: [
+    {
+      type: ResearchTypes.UnlockBuilding,
+      targetId: BuildingIds.Granary,
+    },
+  ] satisfies ResearchEffect[],
+  category: ResearchCategories.Research,
+  description: 'Description.\nEffect.',
+  unlockRequirements: [
+    {
+      unlockType: UnlockTypes.TierUnlockRequirement,
+      id: Tiers.Tier1,
+    },
+  ] satisfies UnlockRequirement[],
 }
