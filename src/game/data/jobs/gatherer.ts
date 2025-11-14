@@ -9,10 +9,5 @@ export const gatherer: JobInfo = {
       rate: 1.1,
       multipliers: [],
     },
-    {
-      resourceId: ResourceIds.Stone,
-      rate: 1,
-      multipliers: [],
-    },
   ] satisfies JobOutput[],
 }
