@@ -5,15 +5,14 @@ import { MagicSystem } from '@/game/systems/MagicSystem'
 import { WorkerSystem } from '@/game/systems/WorkerSystem'
 import { JobSystem } from './JobSystem'
 import { TICK_INTERVAL } from '@/game/config/config'
-
-import type { Resource, ResourceId } from '@/game/models/Resource'
+import { ResearchSystem } from './ResearchSystem'
+import type { Resource } from '@/game/models/Resource'
 import type { Building } from '@/game/models/Buildings'
 import type { BuildingId } from '@/game/data/buildingsId'
 import type { Magic } from '@/game/models/Magic'
 import type { Job, JobId } from '@/game/models/Jobs'
 import type { WorkerState } from '@/game/systems/WorkerSystem'
 import type { Research } from '../models/Research'
-import { ResearchSystem } from './ResearchSystem'
 
 export interface GameState {
   resources: Resource[]
@@ -81,7 +80,12 @@ export class GameStateManager {
 
     this.resourceSystem.spendResources(cost)
     building?.addBuildingCount()
-    this.buildingSystem.triggerBuilding(building, this.resourceSystem, this.jobSystem, this.workerSystem)
+    this.buildingSystem.triggerBuilding(
+      building,
+      this.resourceSystem,
+      this.jobSystem,
+      this.workerSystem,
+    )
     // can be optimized by checking for only research containing unlockType Building
     this.researchSystem.checkLockedResearch()
   }
@@ -108,39 +112,6 @@ export class GameStateManager {
   removeWorkerFromJob(jobId: JobId) {
     this.workerSystem.unassignWorker(jobId)
     this.jobSystem.jobResourceContribution(jobId)
-  }
-
-  // Could probably consolidate building and research afford checks
-  canAffordResearch(research: Research): boolean {
-    return this.resourceSystem.canAfford(research.cost)
-  }
-
-  canAffordBuilding(buildingId: BuildingId): boolean {
-    const building = this.buildingSystem.getBuildingOrError(buildingId)
-    const cost = building.getCurrentCost()
-
-    if (this.resourceSystem.canAfford(cost)) return true
-    return false
-  }
-
-  canAffordBuildingWithCurrentStorage(buildingId: BuildingId): boolean {
-    const building = this.buildingSystem.getBuildingOrError(buildingId)
-    const cost = building.getCurrentCost()
-
-    if (this.resourceSystem.canAffordWithCurrentStorage(cost)) return true
-    return false
-  }
-
-  canAffordCostWithCurrentStorage(buildingId: BuildingId, resourceId: ResourceId): boolean {
-    const building = this.buildingSystem.getBuildingOrError(buildingId)
-    const resourceCost = building.getSingleResourceCostByResourceId(resourceId)
-    const resource = this.resourceSystem.getResourceById(resourceId)
-
-    if (!resource) {
-      return false
-    }
-
-    return resource.currentAmount >= resourceCost
   }
 
   fillResources() {

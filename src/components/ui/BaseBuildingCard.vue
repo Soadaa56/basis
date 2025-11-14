@@ -3,18 +3,23 @@ import TooltipBuilding from './tooltips/TooltipBuilding.vue'
 import { useGameStore } from '@/stores/game'
 import type { BuildingId } from '@/game/data/buildingsId'
 import type { ResourceCost } from '@/game/models/Resource'
+import { computed } from 'vue'
 
 const gameStore = useGameStore()
 
-function canAffordBuilding(buildingId: BuildingId): boolean {
-  return gameStore.manager.canAffordBuilding(buildingId)
-}
+const canAfford = computed(() => gameStore.manager.resourceSystem.canAfford(props.cost))
+const canAffordWithCurrentStorage = computed(() =>
+  gameStore.manager.resourceSystem.canAffordWithCurrentStorage(props.cost),
+)
+// function canAffordBuilding(costs: ResourceCost[]): boolean {
+//   return gameStore.manager.resourceSystem.canAfford(costs)
+// }
 
-function canAffordBuildingWithCurrentStorage(buildingId: BuildingId) {
-  return gameStore.manager.canAffordBuildingWithCurrentStorage(buildingId)
-}
+// function canAffordBuildingWithCurrentStorage(costs: ResourceCost[]): boolean {
+//   return gameStore.manager.resourceSystem.canAffordWithCurrentStorage(costs)
+// }
 
-defineProps<{
+const props = defineProps<{
   id: BuildingId
   name: string
   cost: ResourceCost[]
@@ -40,10 +45,10 @@ const emit = defineEmits<{
     <div
       class="building-card"
       :class="{
-        affordable: canAffordBuilding(id),
-        unaffordable: !canAffordBuilding(id),
-        affordableStorage: canAffordBuildingWithCurrentStorage(id),
-        unaffordableStorage: !canAffordBuildingWithCurrentStorage(id),
+        affordable: canAfford,
+        unaffordable: !canAfford,
+        affordableStorage: canAffordWithCurrentStorage,
+        unaffordableStorage: !canAffordWithCurrentStorage,
       }"
       @click="emit('purchase', id)"
     >
@@ -103,6 +108,6 @@ const emit = defineEmits<{
 }
 
 .unaffordableStorage {
-  color: var(--storage-cost-problem-color);
+  color: var(--cost-problem-color);
 }
 </style>

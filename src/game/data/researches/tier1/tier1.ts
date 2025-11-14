@@ -61,6 +61,36 @@ export const poolKnowledge: Research = {
   ],
 }
 
+export const unlockFarm: Research = {
+  id: 'unlockFarm',
+  name: 'Unlock Farms',
+  tier: 1,
+  cost: [
+    {
+      resourceId: ResourceIds.Knowledge,
+      amount: 50,
+    },
+    {
+      resourceId: ResourceIds.Gold,
+      amount: 5,
+    },
+  ],
+  effect: [
+    {
+      type: ResearchTypes.UnlockBuilding,
+      targetId: BuildingIds.Farm,
+    },
+  ],
+  category: ResearchCategories.Agriculture,
+  description: 'Start growing food over foraging.\nUnlock the Farm building.',
+  unlockRequirements: [
+    {
+      unlockType: UnlockTypes.TierUnlockRequirement,
+      id: Tiers.Tier1,
+    },
+  ],
+}
+
 export const unlockGranary: Research = {
   id: 'unlockGranary',
   name: 'Unlock Granary',
@@ -87,6 +117,10 @@ export const unlockGranary: Research = {
     {
       unlockType: UnlockTypes.TierUnlockRequirement,
       id: Tiers.Tier1,
+    },
+    {
+      unlockType: UnlockTypes.ResearchUnlock,
+      id: 'unlockFarm',
     },
   ],
 }

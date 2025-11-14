@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import BaseTooltip from './BaseTooltip.vue'
 import { useGameStore } from '@/stores/game'
-import type { ResourceId, ResourceCost } from '@/game/models/Resource'
+import { computed } from 'vue'
+import type { ResourceCost } from '@/game/models/Resource'
 import type { BuildingId } from '@/game/data/buildingsId'
 
 const gameStore = useGameStore()
-
-function canAffordCostWithCurrentStorage(buildingId: BuildingId, resourceId: ResourceId) {
-  return gameStore.manager.canAffordCostWithCurrentStorage(buildingId, resourceId)
-}
+const costAffordability = computed(() => {
+  return props.cost.map((cost) => ({
+    ...cost,
+    affordable: gameStore.manager.resourceSystem.canAffordSingleCost(cost),
+  }))
+})
 
 const props = defineProps<{
   id: BuildingId
@@ -31,12 +34,12 @@ const props = defineProps<{
         <div class="effect">{{ props.purchaseEffectText }}</div>
         <div class="costs-container">
           <div
-            v-for="cost in props.cost"
+            v-for="cost in costAffordability"
             :key="cost.resourceId"
             class="costs"
             :class="{
-              affordableStorage: canAffordCostWithCurrentStorage(id, cost.resourceId),
-              unaffordableStorage: !canAffordCostWithCurrentStorage(id, cost.resourceId),
+              affordable: cost.affordable,
+              unaffordable: !cost.affordable,
             }"
           >
             <span class="cost-resource">{{ cost.resourceId }}: </span>
@@ -72,11 +75,11 @@ const props = defineProps<{
   text-align: end;
 }
 
-.affordableStorage {
+.affordable {
   color: var(--basic-text-color);
 }
 
-.unaffordableStorage {
-  color: var(--storage-cost-problem-color);
+.unaffordable {
+  color: var(--cost-problem-color);
 }
 </style>

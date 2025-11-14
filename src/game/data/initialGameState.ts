@@ -29,7 +29,7 @@ const initialResources: Resource[] = [
   {
     id: ResourceIds.Gold,
     name: 'Gold',
-    currentAmount: 20,
+    currentAmount: 0,
     baseStorage: 200,
     baseStorageFlatBonus: {},
     baseStorageModifiers: {},
@@ -79,7 +79,6 @@ const initialResources: Resource[] = [
 const initialBuildings: Building[] = [
   new Building(buildingDefinitions.hut, 1), // buildingDefinition, count = 0
   new Building(buildingDefinitions.loggingCamp, 0),
-  new Building(buildingDefinitions.farm, 0),
 ]
 
 const initialJobs: Job[] = [
@@ -87,12 +86,6 @@ const initialJobs: Job[] = [
     id: JobIds.Gatherer,
     name: 'Gathrerer',
     totalJobs: Infinity,
-    assignedWorkers: 0,
-  },
-  {
-    id: JobIds.Farmer,
-    name: 'Farmer',
-    totalJobs: 0,
     assignedWorkers: 0,
   },
 ]
