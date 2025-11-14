@@ -28,3 +28,7 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# custom base files
+src/pages/BasePage.vue
+src/game/data/researches/baseResearchExample.ts
