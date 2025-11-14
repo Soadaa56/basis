@@ -89,13 +89,13 @@ const emit = defineEmits<{
 }
 
 .affordable {
-  filter: brightness(1);
   transition: 0.3s ease-in;
+  background-color: var(--bg-color);
 }
 
 .unaffordable {
-  filter: brightness(0.7);
   transition: 0.3s ease-in;
+  background-color: var(--bg-storage-problem-color);
 }
 
 .affordableStorage {
