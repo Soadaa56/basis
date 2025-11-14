@@ -4,6 +4,7 @@ import { BuildingIds } from '../../buildingsId'
 import { ResearchCategories, ResearchTypes, Tiers, type Research } from '@/game/models/Research'
 import type { ResearchEffect } from '@/game/models/Research'
 import type { UnlockRequirement } from '@/game/models/researches/ResearchUnlockable'
+import { JobIds } from '@/game/models/Jobs'
 
 export const discussions: Research = {
   id: 'discussions',
@@ -127,24 +128,26 @@ export const unlockGranary: Research = {
   ],
 }
 
-export const pascalName: Research = {
-  id: 'pascalName',
-  name: 'pascal Name',
+export const unlockGathererStone: Research = {
+  id: 'unlockGathererStone',
+  name: 'Gather More Stone',
   tier: 1,
   cost: [
     {
       resourceId: ResourceIds.Knowledge,
-      amount: 1,
+      amount: 80,
     },
   ] satisfies ResourceCost[],
   effect: [
     {
-      type: ResearchTypes.UnlockBuilding,
-      targetId: BuildingIds.Granary,
+      type: ResearchTypes.UnlockJobResource,
+      jobId: JobIds.Gatherer,
+      resourceId: ResourceIds.Stone,
     },
   ] satisfies ResearchEffect[],
-  category: ResearchCategories.Research,
-  description: 'Description.\nEffect.',
+  category: ResearchCategories.Agriculture,
+  description:
+    'Tell your gatherers to be on the look out for rocks in addition to food.\nGatherers now collect stones.',
   unlockRequirements: [
     {
       unlockType: UnlockTypes.TierUnlockRequirement,
