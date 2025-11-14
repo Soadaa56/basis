@@ -7,11 +7,11 @@ import type { ResourceCost } from '@/game/models/Resource'
 
 const gameStore = useGameStore()
 
-function canAffordResearchCosts(costs: ResourceCost[]) {
+function canAffordResearchCosts(costs: ResourceCost[]): boolean {
   return gameStore.manager.resourceSystem.canAfford(costs)
 }
 
-function canAffordWithCurrentStorage(costs: ResourceCost[]) {
+function canAffordWithCurrentStorage(costs: ResourceCost[]): boolean {
   return gameStore.manager.resourceSystem.canAffordWithCurrentStorage(costs)
 }
 
