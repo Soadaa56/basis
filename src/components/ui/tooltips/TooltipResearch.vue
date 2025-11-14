@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import { inject } from 'vue'
 import BaseTooltip from './BaseTooltip.vue'
+import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
+import { useGameStore } from '@/stores/game'
 import type { Research } from '@/game/models/Research'
-import { ResourceIds } from '@/game/models/Resource'
 
+const gameStore = useGameStore()
 const research = inject<Research>('research')
 const knowledgeCost = research?.cost.find((res) => res.resourceId === ResourceIds.Knowledge)
 const resourceCost = research?.cost.filter((res) => res.resourceId !== ResourceIds.Knowledge)
+
+function canAffordCost(costs: ResourceCost[]) {
+  return gameStore.manager.resourceSystem.canAfford(costs)
+}
 </script>
 
 <template>
@@ -18,14 +24,25 @@ const resourceCost = research?.cost.filter((res) => res.resourceId !== ResourceI
     </template>
     <template #tooltip>
       <div class="tooltip-container" v-if="research">
-        <div class="name">{{ research.name }}</div>
         <div class="category" v-if="research.category">Category: {{ research.category }}</div>
         <div class="costs">
-          <div class="cost-research" v-if="knowledgeCost">
+          <div
+            class="cost-research"
+            v-if="knowledgeCost"
+            :class="{ affordable: canAffordCost(research.cost), unaffordable: !canAffordCost(research.cost) }"
+          >
             {{ knowledgeCost.resourceId }}: {{ knowledgeCost.amount }}
           </div>
           <div class="cost-resource-list" v-if="resourceCost">
-            <div class="cost-resource" v-for="(extraCost, i) in resourceCost" :key="i">
+            <div
+              class="cost-resource"
+              v-for="(extraCost, i) in resourceCost"
+              :key="i"
+              :class="{
+                affordable: canAffordCost(research.cost),
+                unaffordable: !canAffordCost(research.cost),
+              }"
+            >
               {{ extraCost.resourceId }}: {{ extraCost.amount }}
             </div>
           </div>
@@ -37,23 +54,27 @@ const resourceCost = research?.cost.filter((res) => res.resourceId !== ResourceI
 </template>
 
 <style scoped lang="scss">
-.tooltip-container :not(:last-child) {
-  border-bottom: 1px solid var(--line-divide-color);
-}
-.tooltip-container :not(:first-child) {
-  margin-bottom: 0.1rem;
-}
-
-.name {
-  margin-bottom: 0.5rem;
-}
-
 .category {
   color: var(--secondary-color);
   text-transform: capitalize;
+  border-bottom: 0.5px solid black;
 }
 
 .costs {
   text-transform: capitalize;
+  margin-top: 0.5rem;
+  border-bottom: 1px solid var(--line-divide-color);
+}
+
+.description {
+  margin-top: 0.5rem;
+}
+
+.affordable {
+  color: var(--basic-text-color);
+}
+
+.unaffordable {
+  color: var(--cost-problem-color);
 }
 </style>

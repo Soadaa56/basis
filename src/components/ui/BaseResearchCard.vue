@@ -1,7 +1,19 @@
 <script setup lang="ts">
-import { provide } from 'vue'
 import TooltipResearch from './tooltips/TooltipResearch.vue'
+import { provide } from 'vue'
+import { useGameStore } from '@/stores/game'
 import type { Research } from '@/game/models/Research'
+import type { ResourceCost } from '@/game/models/Resource'
+
+const gameStore = useGameStore()
+
+function canAffordResearchCosts(costs: ResourceCost[]) {
+  return gameStore.manager.resourceSystem.canAfford(costs)
+}
+
+function canAffordWithCurrentStorage(costs: ResourceCost[]) {
+  return gameStore.manager.resourceSystem.canAffordWithCurrentStorage(costs)
+}
 
 const props = defineProps<{
   research: Research
@@ -16,7 +28,16 @@ const emit = defineEmits<{
 
 <template>
   <tooltip-research>
-    <div class="research-card" @click="emit('purchase', research.id)">
+    <div
+      class="research-card"
+      @click="emit('purchase', research.id)"
+      :class="{
+        affordable: canAffordResearchCosts(research.cost),
+        unaffordable: !canAffordResearchCosts(research.cost),
+        hasEnoughStorage: canAffordWithCurrentStorage(research.cost),
+        notEnoughStorage: !canAffordWithCurrentStorage(research.cost),
+      }"
+    >
       <p class="research-name">{{ research.name }}</p>
     </div>
   </tooltip-research>
@@ -38,7 +59,7 @@ const emit = defineEmits<{
 
   &:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    filter: brightness(1.15);
+    filter: brightness(1.11);
     cursor: pointer;
   }
 }
@@ -46,5 +67,23 @@ const emit = defineEmits<{
 .research-name {
   margin: auto;
   font-size: 1.1rem;
+}
+
+.affordable {
+  transition: 0.3s ease-in;
+  background-color: var(--bg-color);
+}
+
+.unaffordable {
+  transition: 0.3s ease-in;
+  background-color: var(--bg-storage-problem-color);
+}
+
+.affordableStorage {
+  color: var(--basic-text-color);
+}
+
+.unaffordableStorage {
+  color: var(--storage-cost-problem-color);
 }
 </style>
