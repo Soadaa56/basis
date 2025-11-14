@@ -51,7 +51,7 @@ const currentTab = ref<TabKey>('BuildingsPanel')
   padding: 0.25rem 2rem;
   cursor: pointer;
   color: var(--basic-text-color);
-  background: var(--webpage-background-color);
+  background: var(--webpage-bg-color);
 
   &:hover {
     background: var(--bg-color);

@@ -1,11 +1,16 @@
 :root {
-  --bg-color: #222524; // eerie black
+  --bg-color: hsl(160, 4%, 14%); // eerie black
+  --bg-storage-problem-color: color-mix(
+    in srgb,
+    var(--bg-color),
+    black 40%
+  ); // slightly darker bg-color
   --text-color: #63ccca; // robin egg blue
   --secondary-color: #42858c; // dark cyan
   --tertiary-color: #5da399; // keppel
   --accent-color: #3066be; // true blue
   --button-text-color: black; // black
-  --webpage-background-color: #121212; //
+  --webpage-bg-color: #201f1f;
   --basic-text-color: white;
   --storage-cost-problem-color: orangered;
   --cost-problem-color: red;
