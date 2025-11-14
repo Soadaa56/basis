@@ -69,6 +69,11 @@ export class ResourceSystem {
     this.updateCalculatedIncome(resource)
   }
 
+  updateBaseStorage(resource: Resource, storageAdjustment: number) {
+    resource.baseStorage += storageAdjustment
+    this.updateCalculatedStorage(resource)
+  }
+
   addJobContribution(resourceId: ResourceId, jobId: JobId, value: number) {
     const resource = this.getResourceOrError(resourceId)
 
