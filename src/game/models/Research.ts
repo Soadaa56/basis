@@ -24,6 +24,7 @@ export const ResearchTypes = {
   ResourceStorageAddFlat: 'resourceStorageAddFlat',
   ResourceStorageMult: 'resourceStorageMult',
   UnlockBuilding: 'unlockBuilding',
+  UnlockJobResource: 'unlockJobResource',
   UnlockResearchTier: 'unlockResearchTier',
 } as const
 
@@ -45,6 +46,7 @@ export type ResearchEffect =
   | { type: typeof ResearchTypes.ResourceMult; targetId: ResourceId; value: number }
   | { type: typeof ResearchTypes.ResourceStorageAddFlat; targetId: ResourceId; value: number }
   | { type: typeof ResearchTypes.ResourceStorageMult; targetId: ResourceId; value: number }
+  | { type: typeof ResearchTypes.UnlockJobResource; jobId: JobId; resourceId: ResourceId }
   | { type: typeof ResearchTypes.UnlockBuilding; targetId: BuildingId }
   | { type: typeof ResearchTypes.UnlockResearchTier; targetId: Tier }
 
