@@ -151,7 +151,7 @@ export class ResearchSystem {
             throw new Error('ResearchSystem: triggerResearchEffect: ResourceStorageAddFlat')
           }
 
-          resource.baseStorageFlatBonus[research.name] = effect.value
+          this.resourceSystem.updateBaseStorage(resource, effect.value)
           break
         }
         case ResearchTypes.ResourceStorageMult: {
