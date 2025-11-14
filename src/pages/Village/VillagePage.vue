@@ -15,23 +15,28 @@ import MainPanel from './components/ui/MainPanel.vue'
       <h2>Temp</h2>
       <p>Simulate Spacing</p>
       <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. <span class="bold">Officiis</span>, quisquam?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. <span class="bold">Officiis</span>,
+        quisquam?
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.village-name-header {
-  text-align: center;
-}
-
 .village-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 1rem;
   /* height: 75vh; */
+
+  .resource-panel {
+    outline: 1px solid var(--accent-color);
+  }
+
+  .log-panel {
+    outline: 1px solid var(--accent-color);
+  }
 }
 
 .main-panel-container {
