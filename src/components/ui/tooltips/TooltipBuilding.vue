@@ -6,7 +6,6 @@ import type { ResourceCost } from '@/game/models/Resource'
 import type { BuildingId } from '@/game/data/buildingsId'
 
 const gameStore = useGameStore()
-
 const costAffordability = computed(() => {
   return props.cost.map((cost) => ({
     ...cost,

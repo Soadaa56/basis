@@ -1,18 +1,17 @@
 <script setup lang="ts">
-import { inject } from 'vue'
 import BaseTooltip from './BaseTooltip.vue'
-import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
+import { inject, computed } from 'vue'
 import { useGameStore } from '@/stores/game'
 import type { Research } from '@/game/models/Research'
 
 const gameStore = useGameStore()
 const research = inject<Research>('research')
-const knowledgeCost = research?.cost.find((res) => res.resourceId === ResourceIds.Knowledge)
-const resourceCost = research?.cost.filter((res) => res.resourceId !== ResourceIds.Knowledge)
-
-function canAffordCost(costs: ResourceCost[]) {
-  return gameStore.manager.resourceSystem.canAfford(costs)
-}
+const costAffordability = computed(() => {
+  return research?.cost.map((cost) => ({
+    ...cost,
+    affordable: gameStore.manager.resourceSystem.canAffordSingleCost(cost),
+  }))
+})
 </script>
 
 <template>
@@ -27,24 +26,15 @@ function canAffordCost(costs: ResourceCost[]) {
         <div class="category" v-if="research.category">Category: {{ research.category }}</div>
         <div class="costs">
           <div
-            class="cost-research"
-            v-if="knowledgeCost"
-            :class="{ affordable: canAffordCost(research.cost), unaffordable: !canAffordCost(research.cost) }"
+            class="cost-resource"
+            v-for="(extraCost, i) in costAffordability"
+            :key="i"
+            :class="{
+              affordable: extraCost.affordable,
+              unaffordable: !extraCost.affordable,
+            }"
           >
-            {{ knowledgeCost.resourceId }}: {{ knowledgeCost.amount }}
-          </div>
-          <div class="cost-resource-list" v-if="resourceCost">
-            <div
-              class="cost-resource"
-              v-for="(extraCost, i) in resourceCost"
-              :key="i"
-              :class="{
-                affordable: canAffordCost(research.cost),
-                unaffordable: !canAffordCost(research.cost),
-              }"
-            >
-              {{ extraCost.resourceId }}: {{ extraCost.amount }}
-            </div>
+            {{ extraCost.resourceId }}: {{ extraCost.amount }}
           </div>
         </div>
         <div class="description" v-if="research.description">{{ research.description }}</div>
