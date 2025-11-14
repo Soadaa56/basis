@@ -31,6 +31,12 @@ export class ResourceSystem {
     })
   }
 
+  canAffordSingleCost(cost: ResourceCost): boolean {
+    const resource = this.getResourceById(cost.resourceId)
+    if (!resource) return false
+    return resource.currentAmount >= cost.amount
+  }
+
   canAffordWithCurrentStorage(costs: ResourceCost[]): boolean {
     return costs.every((cost) => {
       const resource = this.getResourceById(cost.resourceId)
