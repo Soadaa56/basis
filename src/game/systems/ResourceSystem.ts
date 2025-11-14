@@ -83,8 +83,14 @@ export class ResourceSystem {
 
   updateCalculatedIncome(resource: Resource) {
     const baseIncome = resource.baseIncome
-    const incomeMultipliers = Object.values(resource.IncomeMultipliers).reduce((sum, value) => sum * value, 1)
-    const incomeSourceJob = Object.values(resource.incomeSources.jobs).reduce((sum, value) => sum + value, 0)
+    const incomeMultipliers = Object.values(resource.IncomeMultipliers).reduce(
+      (sum, value) => sum * value,
+      1,
+    )
+    const incomeSourceJob = Object.values(resource.incomeSources.jobs).reduce(
+      (sum, value) => sum + value,
+      0,
+    )
     const incomeSourceBuilding = Object.values(resource.incomeSources.buildings).reduce(
       (sum, value) => sum + value,
       0,
