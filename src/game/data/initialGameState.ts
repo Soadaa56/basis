@@ -79,7 +79,6 @@ const initialResources: Resource[] = [
 const initialBuildings: Building[] = [
   new Building(buildingDefinitions.hut, 1), // buildingDefinition, count = 0
   new Building(buildingDefinitions.loggingCamp, 0),
-  new Building(buildingDefinitions.farm, 0),
 ]
 
 const initialJobs: Job[] = [
