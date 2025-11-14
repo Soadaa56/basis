@@ -108,6 +108,6 @@ const emit = defineEmits<{
 }
 
 .unaffordableStorage {
-  color: var(--storage-cost-problem-color);
+  color: var(--cost-problem-color);
 }
 </style>
