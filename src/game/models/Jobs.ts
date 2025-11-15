@@ -1,3 +1,5 @@
+import type { ResourceId } from './Resource'
+
 export const JobIds = {
   Baker: 'baker',
   Beggar: 'beggar',
@@ -17,4 +19,10 @@ export interface Job {
   name: string
   totalJobs: number
   assignedWorkers: number
+  baseOutputs: {
+    resource: ResourceId
+    rate: number
+  }[]
+  multipliers: number[]
+  resourceMultipliers: Record<ResourceId, number[]>
 }

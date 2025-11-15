@@ -87,6 +87,7 @@ const initialJobs: Job[] = [
     name: 'Gathrerer',
     totalJobs: Infinity,
     assignedWorkers: 0,
+    baseOutputs: [],
   },
 ]
 
