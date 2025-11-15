@@ -22,55 +22,45 @@ export class JobSystem {
     return this.jobs
   }
 
-  getJobById(jobId: JobId) {
-    return this.jobs.find((job) => job.id === jobId)
-  }
-
-  doesJobExist(jobId: JobId) {
+  getJobById(jobId: JobId): Job {
     const job = this.jobs.find((job) => job.id === jobId)
-    if (!job) return false
-    return true
+    if (!job) throw new Error(`Could not get job by jobId: ${jobId}.`)
+    return job
   }
 
-  isJobUnlocked(jobId: JobId) {
-    const jobInfo = jobDefinitions[jobId]
-
-    return jobInfo?.unlocked
+  doesJobExist(jobId: JobId): boolean {
+    return Boolean(this.jobs.find((job) => job.id === jobId))
   }
 
-  unlockJob(jobId: JobId) {
-    const jobInfo = this.getJobInfoOrError(jobId)
-
-    jobInfo.unlocked = true
-  }
-
+  // refactor - include jobsDefinitions for inital creation
   createNewJob(jobId: JobId) {
-    if (this.doesJobExist(jobId)) {
-      return
-    }
+    if (this.doesJobExist(jobId)) return
 
     const newJob: Job = {
       id: jobId,
       name: jobId.charAt(0).toUpperCase() + jobId.slice(1),
       totalJobs: 0,
       assignedWorkers: 0,
+      baseOutputs: [],
     }
 
     this.jobs.push(newJob)
   }
 
   addJobSlots(jobId: JobId, numberOfJobSlots: number) {
-    const job = this.getJobOrError(jobId)
-
-    if (!this.isJobUnlocked(jobId)) {
-      this.unlockJob(jobId)
+    if (!this.doesJobExist(jobId)) {
+      this.createNewJob(jobId)
     }
+    const job = this.getJobById(jobId)
+    if (!job) throw new Error(`Job ${job} should exist after creation`)
 
     job.totalJobs += numberOfJobSlots
   }
 
+  // refactor - unsure if this will be a light or heavy rewrite
+  // is what I'm doing here is far more complicated than making jobs reactive in vue?
   jobResourceContribution(jobId: JobId) {
-    const job = this.getJobOrError(jobId)
+    const job = this.getJobById(jobId)
     const assignedWorkers = job.assignedWorkers
     const jobInfo = jobDefinitions[jobId]
 
@@ -96,20 +86,10 @@ export class JobSystem {
     })
   }
 
-  getJobInfoOrError(jobId: JobId): JobInfo {
+  private getJobInfoById(jobId: JobId): JobInfo {
     const jobInfo = jobDefinitions[jobId]
-    if (!jobInfo) {
-      console.log(`jobId: ${jobId} for jobInfo not found: ${jobInfo}`)
-      throw new Error('Error at JobSystem')
-    }
-    return jobInfo
-  }
+    if (!jobInfo) throw new Error(`Could not get jobInfo with jobId: ${jobId}`)
 
-  private getJobOrError(jobId: JobId): Job {
-    const job = this.jobs.find((job) => job.id === jobId)
-    if (!job) {
-      throw new Error(`Error at WorkerSystem: job not found: ${jobId}`)
-    }
-    return job
+    return jobInfo
   }
 }
