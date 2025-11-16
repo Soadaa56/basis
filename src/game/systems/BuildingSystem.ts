@@ -59,12 +59,12 @@ export class BuildingSystem {
         case BuildingTypes.ResourceProducer: {
           resourceSystem.ensureResourceExists(effect.resourceId)
           const resource = resourceSystem.getResourceById(effect.resourceId)
-          const rate = effect.rate * building.count
+          const totalRate = effect.rate * building.count
 
           if (!resource) {
             throw new Error('building resourceProducer. resource should exist')
           }
-          resource.incomeSources.buildings[building.definition.id] = rate
+          resource.incomeSources.buildings[building.definition.id] = totalRate
           break
         }
         case BuildingTypes.ResourceMultiplier: {
@@ -81,24 +81,10 @@ export class BuildingSystem {
         }
 
         case BuildingTypes.ResourceStorage: {
-          const resource = resourceSystem.getResourceById(effect.resourceId)
-          const buildingId = building.definition.id
-
-          if (!resource) {
-            console.error(`triggerBuilding error => resourceStorage Resource: ${effect.resourceId}`)
-            return
-          }
-
-          if (effect.flatStorageAmount) {
-            resource.baseStorageFlatBonus[buildingId] = effect.flatStorageAmount * building.count
-          }
-          if (effect.modifierStorageAmount) {
-            resource.baseStorageModifiers[buildingId] = Math.pow(
-              effect.modifierStorageAmount,
-              building.count,
-            )
-          }
-          resourceSystem.updateCalculatedStorage(resource)
+          resourceSystem.updateStorage(effect.resourceId, building.definition.id, building.count, {
+            flat: effect.flatStorageAmount,
+            mult: effect.modifierStorageAmount,
+          })
           break
         }
         case BuildingTypes.JobOutputMult: {

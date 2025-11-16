@@ -3,6 +3,7 @@ import { softCap } from '@/game/config/softCaps'
 import type { JobId } from '../models/Jobs'
 import type { Resource, ResourceId } from '@/game/models/Resource'
 import type { ResourceCost } from '@/game/models/Resource'
+import type { BuildingId } from '../data/buildingsId'
 
 export class ResourceSystem {
   private resources: Resource[] = []
@@ -88,7 +89,40 @@ export class ResourceSystem {
     })
   }
 
-  updateCalculatedStorage(resource: Resource) {
+  updateBaseIncome(resource: Resource, incomeAdjustment: number) {
+    resource.baseIncome += incomeAdjustment
+    this.updateCalculatedIncome(resource)
+  }
+
+  updateBaseStorage(resource: Resource, storageAdjustment: number) {
+    resource.baseStorage += storageAdjustment
+    this.updateCalculatedStorage(resource)
+  }
+
+  updateStorage(
+    resourceId: ResourceId,
+    buildingId: BuildingId,
+    count: number,
+    options: { flat?: number; mult?: number },
+  ): void {
+    const { flat, mult } = options
+    const resource = this.getResourceById(resourceId)
+    if (!resource) return
+
+    if (flat) {
+      resource.baseStorageFlatBonus[buildingId] = flat * count
+    }
+
+    if (mult) {
+      resource.baseStorageModifiers[buildingId] = Math.pow(mult, count)
+    }
+
+    this.updateCalculatedStorage(resourceId)
+  }
+
+  updateCalculatedStorage(resourceId: ResourceId): void {
+    const resource = this.getResourceOrError(resourceId)
+
     const baseStorage = resource.baseStorage
     const baseStorageFlatBonus = Object.values(resource.baseStorageFlatBonus).reduce(
       (sum, value) => sum + value,
@@ -102,16 +136,6 @@ export class ResourceSystem {
     console.log(baseStorage, baseStorageFlatBonus, baseStorageModifiers, storageFlat)
 
     resource.calculatedStorage = storageFlat * baseStorageModifiers
-  }
-
-  updateBaseIncome(resource: Resource, incomeAdjustment: number) {
-    resource.baseIncome += incomeAdjustment
-    this.updateCalculatedIncome(resource)
-  }
-
-  updateBaseStorage(resource: Resource, storageAdjustment: number) {
-    resource.baseStorage += storageAdjustment
-    this.updateCalculatedStorage(resource)
   }
 
   addJobContribution(resourceId: ResourceId, jobId: JobId, value: number) {
