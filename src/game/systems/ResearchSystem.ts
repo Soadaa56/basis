@@ -120,7 +120,7 @@ export class ResearchSystem {
           break
         }
         case ResearchTypes.JobMult: {
-          const jobDefinition = this.jobSystem.getJobInfoOrError(effect.targetId)
+          const jobDefinition = this.jobSystem.getJobById(effect.targetId)
           console.log(researchId, effect, jobDefinition)
           break
         }

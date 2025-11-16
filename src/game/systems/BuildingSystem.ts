@@ -3,7 +3,6 @@ import { JobSystem } from './JobSystem'
 import { WorkerSystem } from './WorkerSystem'
 import { ResourceSystem } from './ResourceSystem'
 import { Building } from '@/game/models/Buildings'
-import { jobDefinitions } from '../data/jobs'
 import { buildingDefinitions } from '../data/buildings'
 import type { BuildingId } from '../data/buildingsId'
 
@@ -58,32 +57,35 @@ export class BuildingSystem {
     building.definition.info.forEach((effect) => {
       switch (effect.type) {
         case BuildingTypes.ResourceProducer: {
-          const resource = resourceSystem.ensureResourceExists(effect.resourceId)
-          const buildingId = building.definition.id
+          resourceSystem.ensureResourceExists(effect.resourceId)
+          const resource = resourceSystem.getResourceById(effect.resourceId)
           const rate = effect.rate * building.count
 
-          if (!resource) return
-          resource.incomeSources.buildings[buildingId] = rate
+          if (!resource) {
+            throw new Error('building resourceProducer. resource should exist')
+          }
+          resource.incomeSources.buildings[building.definition.id] = rate
           break
         }
         case BuildingTypes.ResourceMultiplier: {
-          const resource = resourceSystem.ensureResourceExists(effect.resourceId)
-          const buildingId = building.definition.id
-          const count = building.count
-          const totalMult = Math.pow(effect.multiplier, count)
+          resourceSystem.ensureResourceExists(effect.resourceId)
+          const resource = resourceSystem.getResourceById(effect.resourceId)
+          const totalMult = Math.pow(effect.multiplier, building.count)
 
-          if (!resource) return
+          if (!resource) {
+            throw new Error('building resourceProducer. resource should exist')
+          }
 
-          resource.IncomeMultipliers[buildingId] = totalMult
+          resource.IncomeMultipliers[building.definition.id] = totalMult
           break
         }
 
         case BuildingTypes.ResourceStorage: {
-          const resource = resourceSystem.ensureResourceExists(effect.resourceId)
+          const resource = resourceSystem.getResourceById(effect.resourceId)
           const buildingId = building.definition.id
 
           if (!resource) {
-            console.warn(`triggerBuilding error => resourceStorage Resource: ${effect.resourceId}`)
+            console.error(`triggerBuilding error => resourceStorage Resource: ${effect.resourceId}`)
             return
           }
 
@@ -91,60 +93,31 @@ export class BuildingSystem {
             resource.baseStorageFlatBonus[buildingId] = effect.flatStorageAmount * building.count
           }
           if (effect.modifierStorageAmount) {
-            resource.baseStorageModifiers[buildingId] = Math.pow(effect.modifierStorageAmount, building.count)
+            resource.baseStorageModifiers[buildingId] = Math.pow(
+              effect.modifierStorageAmount,
+              building.count,
+            )
           }
           resourceSystem.updateCalculatedStorage(resource)
           break
         }
-        case BuildingTypes.JobMultiplierOutput: {
-          const jobInfo = jobDefinitions[effect.jobId]
-          const jobMult = effect.multiplier
+        case BuildingTypes.JobOutputMult: {
+          const job = jobSystem.getJobById(effect.jobId)
+          const totalBuildingMult = building.count * effect.multiplier
 
-          jobInfo?.outputs.forEach((output) => {
-            if (!output.multipliers) {
-              output.multipliers = []
-            }
-            output.multipliers.push(jobMult)
-          })
-          break
-        }
-        case BuildingTypes.JobMultiplierInput: {
-          const jobInfo = jobDefinitions[effect.jobId]
-          const jobMult = effect.multiplier
-
-          jobInfo?.inputs?.forEach((input) => {
-            if (!input.multipliers) {
-              input.multipliers = []
-            }
-            input.multipliers.push(jobMult)
-          })
+          job.multipliers.push(totalBuildingMult)
           break
         }
         case BuildingTypes.JobProducer: {
-          const jobId = effect.jobId
-          const addOpenJobs = effect.addOpenJobs
-
-          if (building.count == 1) {
-            jobSystem.createNewJob(jobId)
-
-            const jobInfo = jobSystem.getJobInfoOrError(jobId)
-            const resourceOutputs = jobInfo.outputs.map((output) => output.resourceId)
-            const resourceInputs = jobInfo.inputs?.map((input) => input.resourceId) ?? []
-
-            for (const resourceId of [...resourceOutputs, ...resourceInputs]) {
-              resourceSystem.ensureResourceExists(resourceId)
-            }
-          }
-
-          jobSystem.addJobSlots(jobId, addOpenJobs)
+          jobSystem.addJobSlots(effect.jobId, effect.addOpenJobs)
           break
         }
         case BuildingTypes.WorkerProducer: {
-          const newWorkers = effect.addWorkers
-
-          workerSystem.increaseMaxWorkerCount(newWorkers)
+          workerSystem.increaseMaxWorkerCount(effect.addWorkers)
           break
         }
+        // Might only need to tell systems (like research) to check if locked 'things' requirements are met
+        // or should unlocks be it own system?
         case BuildingTypes.Unlocker:
           console.log(`BuildingSystem => triggerBuilding => unlocker: (change this) ${effect.type}`)
           break

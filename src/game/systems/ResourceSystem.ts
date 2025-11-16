@@ -19,8 +19,42 @@ export class ResourceSystem {
     return this.resources
   }
 
-  getResourceById(id: string) {
-    return this.resources.find((resource) => resource.id === id)
+  getResourceById(resourceId: ResourceId) {
+    return this.resources.find((resource) => resource.id === resourceId)
+  }
+
+  // Could make resourceInfos if this need more flexibility
+  createNewResource(resourceId: ResourceId): void {
+    const newResource: Resource = {
+      id: resourceId,
+      name: resourceId.charAt(0).toUpperCase() + resourceId.slice(1),
+      currentAmount: 0,
+      baseStorage: 100,
+      baseStorageFlatBonus: {},
+      baseStorageModifiers: {},
+      calculatedStorage: 100,
+      baseIncome: 0,
+      incomeSources: {
+        jobs: {},
+        buildings: {},
+      },
+      IncomeMultipliers: {},
+      totalIncome: 0,
+    }
+
+    this.resources.push(newResource)
+  }
+
+  doesResourceExist(resourceId: ResourceId): boolean {
+    if (this.resources.find((resource) => resource.id === resourceId)) {
+      return true
+    }
+    return false
+  }
+
+  ensureResourceExists(resourceId: ResourceId): void {
+    if (this.doesResourceExist(resourceId)) return
+    this.createNewResource(resourceId)
   }
 
   canAfford(costs: ResourceCost[]): boolean {
@@ -28,6 +62,15 @@ export class ResourceSystem {
       const resource = this.getResourceById(cost.resourceId)
       if (!resource) return false
       return resource.currentAmount >= cost.amount
+    })
+  }
+
+  spendResources(costs: ResourceCost[]) {
+    costs.forEach((cost) => {
+      const resource = this.getResourceById(cost.resourceId)
+      if (!resource) return
+
+      resource.currentAmount -= cost.amount
     })
   }
 
@@ -42,15 +85,6 @@ export class ResourceSystem {
       const resource = this.getResourceById(cost.resourceId)
       if (!resource) return false
       return resource.calculatedStorage >= cost.amount
-    })
-  }
-
-  spendResources(costs: ResourceCost[]) {
-    costs.forEach((cost) => {
-      const resource = this.getResourceById(cost.resourceId)
-      if (!resource) return
-
-      resource.currentAmount -= cost.amount
     })
   }
 
@@ -134,39 +168,6 @@ export class ResourceSystem {
     }
 
     return 1 - reduction
-  }
-
-  ensureResourceExists(resourceId: ResourceId) {
-    if (this.doesResourceExist(resourceId)) {
-      return this.getResourceById(resourceId)
-    }
-
-    const newResource: Resource = {
-      id: resourceId,
-      name: resourceId.charAt(0).toUpperCase() + resourceId.slice(1),
-      currentAmount: 0,
-      baseStorage: 100,
-      baseStorageFlatBonus: {},
-      baseStorageModifiers: {},
-      calculatedStorage: 100,
-      baseIncome: 0,
-      incomeSources: {
-        jobs: {},
-        buildings: {},
-      },
-      IncomeMultipliers: {},
-      totalIncome: 0,
-    }
-
-    this.resources.push(newResource)
-    return this.getResourceById(resourceId)
-  }
-
-  doesResourceExist(resourceId: ResourceId) {
-    if (this.resources.find((resource) => resource.id === resourceId)) {
-      return true
-    }
-    return false
   }
 
   private getResourceOrError(resourceId: ResourceId) {

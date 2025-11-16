@@ -48,7 +48,17 @@ export class JobSystem {
       resourceMults: {} as Record<ResourceId, number[]>,
     }
 
+    const jobResourceIds = this.allJobResourceIds(newJob.id)
+    jobResourceIds.forEach((resourceId) => this.resourceSystem.ensureResourceExists(resourceId))
     this.jobs.push(newJob)
+  }
+
+  allJobResourceIds(jobId: JobId): ResourceId[] {
+    const job = this.getJobById(jobId)
+    const resourceOutputIds = job.baseOutputs.map((output) => output.resourceId) ?? []
+    const resourceInputIds = job.baseInputs?.map((input) => input.resourceId) ?? []
+
+    return [...resourceOutputIds, ...resourceInputIds]
   }
 
   addJobSlots(jobId: JobId, numberOfJobSlots: number): void {
