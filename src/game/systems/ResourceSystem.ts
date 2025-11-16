@@ -1,9 +1,8 @@
 import { softCap } from '@/game/config/softCaps'
-
-import type { JobId } from '../models/Jobs'
 import type { Resource, ResourceId } from '@/game/models/Resource'
 import type { ResourceCost } from '@/game/models/Resource'
 import type { BuildingId } from '../data/buildingsId'
+import type { JobId } from '../models/Jobs'
 
 export class ResourceSystem {
   private resources: Resource[] = []
@@ -91,12 +90,64 @@ export class ResourceSystem {
 
   updateBaseIncome(resource: Resource, incomeAdjustment: number) {
     resource.baseIncome += incomeAdjustment
-    this.updateCalculatedIncome(resource)
+    this.updateCalculatedIncome(resource.id)
+  }
+
+  updateBuildingIncome(
+    resourceId: ResourceId,
+    income: number,
+    BuildingId: BuildingId,
+    count: number,
+  ): void {
+    const resource = this.getResourceOrError(resourceId)
+
+    resource.incomeSources.buildings[BuildingId] = income * count
+    this.updateCalculatedIncome(resourceId)
+  }
+
+  updateBuildingMult(
+    resourceId: ResourceId,
+    mult: number,
+    BuildingId: BuildingId,
+    count: number,
+  ): void {
+    const resource = this.getResourceOrError(resourceId)
+
+    resource.IncomeMultipliers[BuildingId] = Math.pow(mult, count)
+    this.updateCalculatedIncome(resourceId)
+  }
+
+  addJobContribution(resourceId: ResourceId, jobId: JobId, value: number) {
+    const resource = this.getResourceOrError(resourceId)
+
+    resource.incomeSources.jobs[jobId] = value
+    this.updateCalculatedIncome(resource.id)
+  }
+
+  updateCalculatedIncome(resourceId: ResourceId) {
+    const resource = this.getResourceOrError(resourceId)
+    const baseIncome = resource.baseIncome
+    const incomeMultipliers = Object.values(resource.IncomeMultipliers).reduce(
+      (sum, value) => sum * value,
+      1,
+    )
+    const incomeSourceJob = Object.values(resource.incomeSources.jobs).reduce(
+      (sum, value) => sum + value,
+      0,
+    )
+    const incomeSourceBuilding = Object.values(resource.incomeSources.buildings).reduce(
+      (sum, value) => sum + value,
+      0,
+    )
+    const incomeSources = incomeSourceJob + incomeSourceBuilding
+    const flatIncome = baseIncome + incomeSources
+
+    resource.totalIncome = flatIncome * incomeMultipliers
   }
 
   updateBaseStorage(resource: Resource, storageAdjustment: number) {
     resource.baseStorage += storageAdjustment
-    this.updateCalculatedStorage(resource)
+    this.updateCalculatedStorage(resource.id)
   }
 
   updateStorage(
@@ -136,33 +187,6 @@ export class ResourceSystem {
     console.log(baseStorage, baseStorageFlatBonus, baseStorageModifiers, storageFlat)
 
     resource.calculatedStorage = storageFlat * baseStorageModifiers
-  }
-
-  addJobContribution(resourceId: ResourceId, jobId: JobId, value: number) {
-    const resource = this.getResourceOrError(resourceId)
-
-    resource.incomeSources.jobs[jobId] = value
-    this.updateCalculatedIncome(resource)
-  }
-
-  updateCalculatedIncome(resource: Resource) {
-    const baseIncome = resource.baseIncome
-    const incomeMultipliers = Object.values(resource.IncomeMultipliers).reduce(
-      (sum, value) => sum * value,
-      1,
-    )
-    const incomeSourceJob = Object.values(resource.incomeSources.jobs).reduce(
-      (sum, value) => sum + value,
-      0,
-    )
-    const incomeSourceBuilding = Object.values(resource.incomeSources.buildings).reduce(
-      (sum, value) => sum + value,
-      0,
-    )
-    const incomeSources = incomeSourceJob + incomeSourceBuilding
-    const flatIncome = baseIncome + incomeSources
-
-    resource.totalIncome = flatIncome * incomeMultipliers
   }
 
   // Ran on gameTick update
