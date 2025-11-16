@@ -20,9 +20,22 @@ export interface Job {
   totalJobs: number
   assignedWorkers: number
   baseOutputs: {
-    resource: ResourceId
+    resourceId: ResourceId
     rate: number
   }[]
-  multipliers: number[]
-  resourceMultipliers: Record<ResourceId, number[]>
+  baseInputs?: {
+    resourceId: ResourceId
+    rate: number
+    reduceRateMults?: Reduction[]
+  }[]
+  multipliers?: number[]
+  resourceMults?: Record<ResourceId, number[]>
+}
+
+export type Reduction = number & { __brand: 'Reduction' }
+
+// eslint-disable-next-line
+function isBetweenZeroAndOneInclusive(input: unknown): input is Reduction {
+  if (typeof input !== 'number') return false
+  return input >= 0 && input <= 1
 }
