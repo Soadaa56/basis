@@ -98,7 +98,6 @@ export class ResearchSystem {
 
   checkLockedResearch(): void {
     const lockedResearch = this.getAllLockedResearch
-    console.log(lockedResearch)
 
     lockedResearch.forEach((res) => {
       if (this.canBeUnlocked(res.id)) {
