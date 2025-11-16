@@ -2,6 +2,7 @@ import { jobDefinitions } from '@/game/data/jobs'
 import type { Job, JobId } from '@/game/models/Jobs'
 import type { ResourceSystem } from './ResourceSystem'
 import type { JobInfo } from '../data/jobsInfo'
+import type { ResourceId } from '../models/Resource'
 
 export class JobSystem {
   private jobs: Job[] = []
@@ -43,6 +44,8 @@ export class JobSystem {
       assignedWorkers: 0,
       baseOutputs: jobInfo.baseOutputs,
       baseInputs: jobInfo.baseInputs,
+      multipliers: [],
+      resourceMults: {} as Record<ResourceId, number[]>,
     }
 
     this.jobs.push(newJob)

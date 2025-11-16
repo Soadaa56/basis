@@ -28,8 +28,8 @@ export interface Job {
     rate: number
     reduceRateMults?: Reduction[]
   }[]
-  multipliers?: number[]
-  resourceMults?: Record<ResourceId, number[]>
+  multipliers: number[]
+  resourceMults: Record<ResourceId, number[]>
 }
 
 export type Reduction = number & { __brand: 'Reduction' }

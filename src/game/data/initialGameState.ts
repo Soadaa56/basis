@@ -6,7 +6,7 @@ import { allResearch } from './researches/allResearch'
 import { ResearchStates } from '../models/researches/ResearchState'
 import { jobDefinitions } from './jobs'
 import type { GameState } from '@/game/systems/GameStateManager'
-import type { Resource } from '@/game/models/Resource'
+import type { Resource, ResourceId } from '@/game/models/Resource'
 import type { Job } from '@/game/models/Jobs'
 import type { WorkerState } from '@/game/systems/WorkerSystem'
 
@@ -90,6 +90,7 @@ const initialJobs: Job[] = [
     assignedWorkers: 0,
     baseOutputs: jobDefinitions[JobIds.Gatherer]!.baseOutputs,
     multipliers: [],
+    resourceMults: {} as Record<ResourceId, number[]>,
   },
 ]
 
