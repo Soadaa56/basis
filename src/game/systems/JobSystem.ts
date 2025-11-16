@@ -13,8 +13,7 @@ export class JobSystem {
     this.jobs = jobs
   }
 
-  loadJobs(jobs: Job[]) {
-    console.log(jobs)
+  loadJobs(jobs: Job[]): void {
     this.jobs = jobs
   }
 
@@ -29,25 +28,27 @@ export class JobSystem {
   }
 
   doesJobExist(jobId: JobId): boolean {
-    return Boolean(this.jobs.find((job) => job.id === jobId))
+    return Boolean(this.jobs.some((job) => job.id === jobId))
   }
 
-  // refactor - include jobsDefinitions for inital creation
-  createNewJob(jobId: JobId) {
+  createNewJob(jobId: JobId): void {
     if (this.doesJobExist(jobId)) return
+    const jobInfo = jobDefinitions[jobId]
+    if (!jobInfo) return
 
     const newJob: Job = {
       id: jobId,
       name: jobId.charAt(0).toUpperCase() + jobId.slice(1),
       totalJobs: 0,
       assignedWorkers: 0,
-      baseOutputs: [],
+      baseOutputs: jobInfo.baseOutputs,
+      baseInputs: jobInfo.baseInputs,
     }
 
     this.jobs.push(newJob)
   }
 
-  addJobSlots(jobId: JobId, numberOfJobSlots: number) {
+  addJobSlots(jobId: JobId, numberOfJobSlots: number): void {
     if (!this.doesJobExist(jobId)) {
       this.createNewJob(jobId)
     }
@@ -57,30 +58,31 @@ export class JobSystem {
     job.totalJobs += numberOfJobSlots
   }
 
-  // refactor - unsure if this will be a light or heavy rewrite
-  // is what I'm doing here is far more complicated than making jobs reactive in vue?
-  jobResourceContribution(jobId: JobId) {
+  // Caching is possible here on mult calculations
+  // This should be called on job assignment or infrequently on new mults (from research/meta)
+  jobResourceContribution(jobId: JobId): void {
     const job = this.getJobById(jobId)
-    const assignedWorkers = job.assignedWorkers
-    const jobInfo = jobDefinitions[jobId]
 
-    if (!jobInfo) return
-
-    // outputs
-    jobInfo.outputs?.forEach((output) => {
-      const totalMults = (output.multipliers ?? [1]).reduce((sum, value) => sum * value, 1)
-      const outputRateWithMults = totalMults * output.rate
-      const totalOutput = outputRateWithMults * assignedWorkers
+    job.baseOutputs.forEach((output) => {
+      // multiply all mults if there is any, otherwise default to 1 (same as no mult).
+      const resourceMult = (job.resourceMults?.[output.resourceId] ?? [1]).reduce(
+        (sum, value) => sum * value,
+        1,
+      )
+      const jobMult = (job.multipliers ?? [1]).reduce((sum, value) => sum * value, 1)
+      const totalOutput = output.rate * job.assignedWorkers * (resourceMult * jobMult)
 
       this.resourceSystem.addJobContribution(output.resourceId, jobId, totalOutput)
     })
 
-    // inputs
-    jobInfo.inputs?.forEach((input) => {
-      const totalMults = (input.multipliers ?? [1]).reduce((sum, value) => sum * value, 1)
-      const inputRateWithMults = totalMults * input.rate
-      // negate to simulate a decrease of resources
-      const totalInput = inputRateWithMults * assignedWorkers * -1
+    job.baseInputs?.forEach((input) => {
+      const resourceMult = (job.resourceMults?.[input.resourceId] ?? [1]).reduce(
+        (sum, value) => sum * value,
+        1,
+      )
+      const reduceRateMult = (input.reduceRateMults ?? [1]).reduce((sum, value) => sum * value, 1)
+      // negative totalInput to simulate consumption of resources
+      const totalInput = input.rate * job.assignedWorkers * (resourceMult * reduceRateMult) * -1
 
       this.resourceSystem.addJobContribution(input.resourceId, jobId, totalInput)
     })

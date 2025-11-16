@@ -1,11 +1,11 @@
 import { ResourceIds } from '@/game/models/Resource'
-import type { JobInfo, JobOutput } from '@/game/data/jobsInfo'
+import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const gatherer: JobInfo = {
-  outputs: [
+  baseOutputs: [
     {
       resourceId: ResourceIds.Food,
-      rate: 1.1,
+      rate: 1.6,
     },
-  ] satisfies JobOutput[],
+  ],
 }

@@ -1,17 +1,17 @@
 import { ResourceIds } from '@/game/models/Resource'
-import type { JobInfo, JobInput, JobOutput } from '@/game/data/jobsInfo'
+import type { JobInfo } from '@/game/data/jobsInfo'
 
 export const merchant: JobInfo = {
-  outputs: [
+  baseOutputs: [
     {
       resourceId: ResourceIds.Gold,
-      rate: 4,
+      rate: 7,
     },
-  ] satisfies JobOutput[],
-  inputs: [
+  ],
+  baseInputs: [
     {
       resourceId: ResourceIds.Food,
       rate: 5,
     },
-  ] satisfies JobInput[],
+  ],
 }
