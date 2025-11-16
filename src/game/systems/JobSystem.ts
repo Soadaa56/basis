@@ -35,7 +35,7 @@ export class JobSystem {
   createNewJob(jobId: JobId): void {
     if (this.doesJobExist(jobId)) return
     const jobInfo = jobDefinitions[jobId]
-    if (!jobInfo) return
+    if (!jobInfo) throw new Error(`createNewJob: jobInfo should exist for jobId: ${jobId}`)
 
     const newJob: Job = {
       id: jobId,
@@ -48,9 +48,9 @@ export class JobSystem {
       resourceMults: {} as Record<ResourceId, number[]>,
     }
 
+    this.jobs.push(newJob)
     const jobResourceIds = this.allJobResourceIds(newJob.id)
     jobResourceIds.forEach((resourceId) => this.resourceSystem.ensureResourceExists(resourceId))
-    this.jobs.push(newJob)
   }
 
   allJobResourceIds(jobId: JobId): ResourceId[] {
