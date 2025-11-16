@@ -1,13 +1,14 @@
-import type { GameState } from '@/game/systems/GameStateManager'
-import type { Resource } from '@/game/models/Resource'
-import type { Job } from '@/game/models/Jobs'
-import type { WorkerState } from '@/game/systems/WorkerSystem'
 import { Building } from '@/game/models/Buildings'
 import { ResourceIds } from '@/game/models/Resource'
 import { JobIds } from '@/game/models/Jobs'
 import { buildingDefinitions } from './buildings'
 import { allResearch } from './researches/allResearch'
 import { ResearchStates } from '../models/researches/ResearchState'
+import { jobDefinitions } from './jobs'
+import type { GameState } from '@/game/systems/GameStateManager'
+import type { Resource } from '@/game/models/Resource'
+import type { Job } from '@/game/models/Jobs'
+import type { WorkerState } from '@/game/systems/WorkerSystem'
 
 const initialResources: Resource[] = [
   {
@@ -87,7 +88,8 @@ const initialJobs: Job[] = [
     name: 'Gathrerer',
     totalJobs: Infinity,
     assignedWorkers: 0,
-    baseOutputs: [],
+    baseOutputs: jobDefinitions[JobIds.Gatherer]!.baseOutputs,
+    multipliers: [],
   },
 ]
 
