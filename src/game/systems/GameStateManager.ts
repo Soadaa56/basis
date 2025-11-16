@@ -49,7 +49,7 @@ export class GameStateManager {
     )
   }
 
-  loadGameState(gameState: GameState) {
+  loadGameState(gameState: GameState): void {
     this.gameState = gameState
     this.resourceSystem.loadResources(gameState.resources)
     this.buildingSystem.loadBuildings(gameState.buildings)
@@ -59,19 +59,19 @@ export class GameStateManager {
     this.researchSystem.loadResearch(gameState.research)
   }
 
-  startTick(tickInterval: number = this.tickInterval) {
+  startTick(tickInterval: number = this.tickInterval): void {
     setInterval(() => this.gameTick(), tickInterval)
   }
 
-  gameTick() {
+  gameTick(): void {
     this.resourceSystem.updateAllResources()
   }
 
-  setTickInterval(tickInterval: number) {
+  setTickInterval(tickInterval: number): void {
     this.tickInterval = tickInterval
   }
 
-  purchaseBuilding(buildingId: BuildingId) {
+  purchaseBuilding(buildingId: BuildingId): void {
     const building = this.buildingSystem.getBuildingOrError(buildingId)
     const cost = building.getCurrentCost()
 
@@ -90,7 +90,7 @@ export class GameStateManager {
     this.researchSystem.checkLockedResearch()
   }
 
-  purchaseResearch(research: Research) {
+  purchaseResearch(research: Research): void {
     if (!this.resourceSystem.canAfford(research.cost)) {
       return
     }
@@ -101,17 +101,17 @@ export class GameStateManager {
     this.researchSystem.checkLockedResearch()
   }
 
-  addWorkerToJob(jobId: JobId) {
+  addWorkerToJob(jobId: JobId): void {
     this.workerSystem.assignWorker(jobId)
     this.jobSystem.jobResourceContribution(jobId)
   }
 
-  removeWorkerFromJob(jobId: JobId) {
+  removeWorkerFromJob(jobId: JobId): void {
     this.workerSystem.unassignWorker(jobId)
     this.jobSystem.jobResourceContribution(jobId)
   }
 
-  fillResources() {
+  fillResources(): void {
     const resources = this.resourceSystem.getAllResources
 
     resources.forEach((resource) => {
