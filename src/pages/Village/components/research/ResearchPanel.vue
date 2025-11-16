@@ -8,8 +8,8 @@ const unlockedReseach = computed(() => gameStore.manager.researchSystem.getAllUn
 </script>
 
 <template>
-  <h2>Research</h2>
   <div class="research-panel">
+    <h2>Research</h2>
     <BaseResearchCard
       v-for="research in unlockedReseach"
       :key="research.id"
