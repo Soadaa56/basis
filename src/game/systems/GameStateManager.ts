@@ -92,11 +92,8 @@ export class GameStateManager {
 
   purchaseResearch(research: Research) {
     if (!this.resourceSystem.canAfford(research.cost)) {
-      console.log('cant afford')
       return
     }
-    console.log(research)
-
     this.resourceSystem.spendResources(research.cost)
 
     this.researchSystem.triggerResearchEffect(research.id)
