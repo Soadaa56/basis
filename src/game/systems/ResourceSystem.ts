@@ -23,6 +23,18 @@ export class ResourceSystem {
     return this.resources.find((resource) => resource.id === resourceId)
   }
 
+  // Ran on gameTick update
+  updateAllResources() {
+    this.resources.forEach((resource) => {
+      const income = resource.totalIncome
+      if (resource.currentAmount >= resource.calculatedStorage) {
+        return
+      } else {
+        resource.currentAmount += income
+      }
+    })
+  }
+
   // Could make resourceInfos if this need more flexibility
   createNewResource(resourceId: ResourceId): void {
     const newResource: Resource = {
@@ -88,7 +100,8 @@ export class ResourceSystem {
     })
   }
 
-  updateBaseIncome(resource: Resource, incomeAdjustment: number) {
+  updateBaseIncome(resourceId: ResourceId, incomeAdjustment: number): void {
+    const resource = this.getResourceOrError(resourceId)
     resource.baseIncome += incomeAdjustment
     this.updateCalculatedIncome(resource.id)
   }
@@ -114,6 +127,14 @@ export class ResourceSystem {
     const resource = this.getResourceOrError(resourceId)
 
     resource.incomeMultipliers[BuildingId] = Math.pow(mult, count)
+    this.updateCalculatedIncome(resourceId)
+  }
+
+  updateResearchMult(resourceId: ResourceId, mult: number): void {
+    const resource = this.getResourceOrError(resourceId)
+    const currentResearchMult = (resource.incomeMultipliers['research'] ?? [1]) * mult
+
+    resource.incomeMultipliers['research'] = currentResearchMult
     this.updateCalculatedIncome(resourceId)
   }
 
@@ -189,20 +210,7 @@ export class ResourceSystem {
     resource.calculatedStorage = storageFlat * baseStorageMults
   }
 
-  // Ran on gameTick update
-  updateAllResources() {
-    this.resources.forEach((resource) => {
-      const income = resource.totalIncome
-      if (resource.currentAmount >= resource.calculatedStorage) {
-        return
-      } else {
-        resource.currentAmount += income
-      }
-    })
-  }
-
-  // Deciding against this idea as a base mechanic
-  // *might* use on specific resources or a meta upgrade
+  //  Not using as base mechanic anymore. Maybe as meta upgrade
   enforceResourceSoftCaps(resource: Resource): number {
     const resourceFactor: number = resource.currentAmount / resource.calculatedStorage
     let reduction: number = 0
