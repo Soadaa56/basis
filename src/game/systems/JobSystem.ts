@@ -3,6 +3,7 @@ import type { Job, JobId } from '@/game/models/Jobs'
 import type { ResourceSystem } from './ResourceSystem'
 import type { JobInfo } from '../data/jobsInfo'
 import type { ResourceId } from '../models/Resource'
+import type { BuildingId } from '../data/buildingsId'
 
 export class JobSystem {
   private jobs: Job[] = []
@@ -44,7 +45,7 @@ export class JobSystem {
       assignedWorkers: 0,
       baseOutputs: jobInfo.baseOutputs,
       baseInputs: jobInfo.baseInputs,
-      multipliers: [],
+      multipliers: {},
       resourceMults: {} as Record<ResourceId, number[]>,
     }
 
@@ -82,7 +83,7 @@ export class JobSystem {
         (sum, value) => sum * value,
         1,
       )
-      const jobMult = (job.multipliers ?? [1]).reduce((sum, value) => sum * value, 1)
+      const jobMult = (Object.values(job.multipliers) ?? [1]).reduce((sum, value) => sum * value, 1)
       const totalOutput = output.rate * job.assignedWorkers * (resourceMult * jobMult)
 
       this.resourceSystem.addJobContribution(output.resourceId, jobId, totalOutput)
@@ -99,6 +100,20 @@ export class JobSystem {
 
       this.resourceSystem.addJobContribution(input.resourceId, jobId, totalInput)
     })
+  }
+
+  // If each building gives 5% bonus, 5 building should give a final bonus of 25%
+  addBuildingJobMult(jobId: JobId, buildingId: BuildingId, mult: number, count: number): void {
+    const job = this.getJobById(jobId)
+    job.multipliers[buildingId] = Math.pow(mult, count)
+  }
+
+  // Consolidate all research upgrades, final is multiplicative (20% and 20% = 42% total)
+  addResearchJobMult(jobId: JobId, mult: number): void {
+    const job = this.getJobById(jobId)
+    const researchMult = (job.multipliers['research'] ?? [1]) * mult
+
+    job.multipliers['research'] = researchMult
   }
 
   private getJobInfoById(jobId: JobId): JobInfo {
