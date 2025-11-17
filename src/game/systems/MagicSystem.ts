@@ -44,7 +44,10 @@ export class MagicSystem {
     const baseIncome = magic.baseIncome
     const baseIncomeModifiers = magic.baseIncomeModifiers
 
-    const calculatedIncome = baseIncomeModifiers.reduce((sum, currentValue) => sum * currentValue, baseIncome)
+    const calculatedIncome = baseIncomeModifiers.reduce(
+      (sum, currentValue) => sum * currentValue,
+      baseIncome,
+    )
 
     return (magic.calculatedIncome = calculatedIncome)
   }

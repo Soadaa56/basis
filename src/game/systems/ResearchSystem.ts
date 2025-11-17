@@ -144,7 +144,7 @@ export class ResearchSystem {
             throw new Error('ResearchSystem: triggerResearchEffect: ResourceMult')
           }
 
-          resource.IncomeMultipliers[research.name] = effect.value
+          resource.incomeMultipliers[research.name] = effect.value
           break
         }
         case ResearchTypes.ResourceStorageAddFlat: {
@@ -164,7 +164,7 @@ export class ResearchSystem {
             throw new Error('ResearchSystem: triggerResearchEffect: ResourceStorageMukt')
           }
 
-          resource.baseStorageModifiers[research.name] = effect.value
+          resource.baseStorageMults[research.name] = effect.value
           break
         }
         case ResearchTypes.UnlockBuilding: {

@@ -31,14 +31,14 @@ export class ResourceSystem {
       currentAmount: 0,
       baseStorage: 100,
       baseStorageFlatBonus: {},
-      baseStorageModifiers: {},
+      baseStorageMults: {},
       calculatedStorage: 100,
       baseIncome: 0,
       incomeSources: {
         jobs: {},
         buildings: {},
       },
-      IncomeMultipliers: {},
+      incomeMultipliers: {},
       totalIncome: 0,
     }
 
@@ -113,7 +113,7 @@ export class ResourceSystem {
   ): void {
     const resource = this.getResourceOrError(resourceId)
 
-    resource.IncomeMultipliers[BuildingId] = Math.pow(mult, count)
+    resource.incomeMultipliers[BuildingId] = Math.pow(mult, count)
     this.updateCalculatedIncome(resourceId)
   }
 
@@ -127,7 +127,7 @@ export class ResourceSystem {
   updateCalculatedIncome(resourceId: ResourceId) {
     const resource = this.getResourceOrError(resourceId)
     const baseIncome = resource.baseIncome
-    const incomeMultipliers = Object.values(resource.IncomeMultipliers).reduce(
+    const incomeMultipliers = Object.values(resource.incomeMultipliers).reduce(
       (sum, value) => sum * value,
       1,
     )
@@ -165,7 +165,7 @@ export class ResourceSystem {
     }
 
     if (mult) {
-      resource.baseStorageModifiers[buildingId] = Math.pow(mult, count)
+      resource.baseStorageMults[buildingId] = Math.pow(mult, count)
     }
 
     this.updateCalculatedStorage(resourceId)
@@ -179,14 +179,14 @@ export class ResourceSystem {
       (sum, value) => sum + value,
       0,
     )
-    const baseStorageModifiers = Object.values(resource.baseStorageModifiers).reduce(
+    const baseStorageMults = Object.values(resource.baseStorageMults).reduce(
       (sum, value) => sum * value,
       1,
     )
     const storageFlat = baseStorage + baseStorageFlatBonus
-    console.log(baseStorage, baseStorageFlatBonus, baseStorageModifiers, storageFlat)
+    console.log(baseStorage, baseStorageFlatBonus, baseStorageMults, storageFlat)
 
-    resource.calculatedStorage = storageFlat * baseStorageModifiers
+    resource.calculatedStorage = storageFlat * baseStorageMults
   }
 
   // Ran on gameTick update

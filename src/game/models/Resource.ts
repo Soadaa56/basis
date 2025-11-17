@@ -28,10 +28,10 @@ export interface Resource {
   currentAmount: number
   baseStorage: number
   baseStorageFlatBonus: Record<string, number>
-  baseStorageModifiers: Record<string, number>
+  baseStorageMults: Record<string, number>
   calculatedStorage: number
   baseIncome: number
   incomeSources: IncomeSources
-  IncomeMultipliers: Record<string, number>
+  incomeMultipliers: Record<string, number>
   totalIncome: number
 }
