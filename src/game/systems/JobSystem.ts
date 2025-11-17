@@ -109,7 +109,7 @@ export class JobSystem {
   }
 
   // Consolidate all research upgrades, final is multiplicative (20% and 20% = 42% total)
-  addResearchJobMult(jobId: JobId, mult: number): void {
+  updateResearchJobMult(jobId: JobId, mult: number): void {
     const job = this.getJobById(jobId)
     const researchMult = (job.multipliers['research'] ?? [1]) * mult
 
