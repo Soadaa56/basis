@@ -156,3 +156,31 @@ export const unlockGathererStone: Research = {
     },
   ] satisfies UnlockRequirement[],
 }
+
+export const stoneAxe: Research = {
+  id: 'stoneAxe',
+  name: 'Stone Axes',
+  tier: 1,
+  cost: [
+    {
+      resourceId: ResourceIds.Knowledge,
+      amount: 60,
+    },
+    { resourceId: ResourceIds.Stone, amount: 50 },
+  ] satisfies ResourceCost[],
+  effect: [
+    {
+      type: ResearchTypes.JobMult,
+      targetId: JobIds.Lumberjack,
+      value: 1.25,
+    },
+  ] satisfies ResearchEffect[],
+  category: ResearchCategories.Research,
+  description: 'Use stone on tree, not hands.\n+25% Lumberjack Output.',
+  unlockRequirements: [
+    {
+      unlockType: UnlockTypes.TierUnlockRequirement,
+      id: Tiers.Tier1,
+    },
+  ] satisfies UnlockRequirement[],
+}
