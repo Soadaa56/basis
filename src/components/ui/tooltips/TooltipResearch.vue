@@ -58,6 +58,7 @@ const costAffordability = computed(() => {
 
 .description {
   margin-top: 0.5rem;
+  max-width: 300px;
 }
 
 .affordable {
