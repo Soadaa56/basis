@@ -166,7 +166,8 @@ export class ResourceSystem {
     resource.totalIncome = flatIncome * incomeMultipliers
   }
 
-  updateBaseStorage(resource: Resource, storageAdjustment: number) {
+  updateBaseStorage(resourceId: ResourceId, storageAdjustment: number) {
+    const resource = this.getResourceOrError(resourceId)
     resource.baseStorage += storageAdjustment
     this.updateCalculatedStorage(resource.id)
   }
