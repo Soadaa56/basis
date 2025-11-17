@@ -194,8 +194,8 @@ export class ResourceSystem {
 
   updateCalculatedStorage(resourceId: ResourceId): void {
     const resource = this.getResourceOrError(resourceId)
-
     const baseStorage = resource.baseStorage
+
     const baseStorageFlatBonus = Object.values(resource.baseStorageFlatBonus).reduce(
       (sum, value) => sum + value,
       0,
@@ -205,7 +205,6 @@ export class ResourceSystem {
       1,
     )
     const storageFlat = baseStorage + baseStorageFlatBonus
-    console.log(baseStorage, baseStorageFlatBonus, baseStorageMults, storageFlat)
 
     resource.calculatedStorage = storageFlat * baseStorageMults
   }
