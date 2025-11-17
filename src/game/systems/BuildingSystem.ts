@@ -86,10 +86,12 @@ export class BuildingSystem {
           break
         }
         case BuildingTypes.JobOutputMult: {
-          const job = jobSystem.getJobById(effect.jobId)
-          const totalBuildingMult = building.count * effect.multiplier
-
-          job.multipliers.push(totalBuildingMult)
+          jobSystem.addBuildingJobMult(
+            effect.jobId,
+            building.definition.id,
+            effect.multiplier,
+            building.count,
+          )
           break
         }
         case BuildingTypes.JobProducer: {
