@@ -114,6 +114,17 @@ export class JobSystem {
     const researchMult = (job.multipliers['research'] ?? [1]) * mult
 
     job.multipliers['research'] = researchMult
+    this.jobResourceContribution(jobId)
+  }
+
+  addResourceToJobOutput(jobId: JobId, resourceId: ResourceId, rate: number): void {
+    const job = this.getJobById(jobId)
+
+    job.baseOutputs.push({
+      resourceId: resourceId,
+      rate: rate,
+    })
+    this.jobResourceContribution(jobId)
   }
 
   private getJobInfoById(jobId: JobId): JobInfo {
