@@ -70,7 +70,7 @@ export class ResearchSystem {
           case UnlockTypes.BuildingUnlockRequirement:
             const allBuildings = this.buildingSystem.getAllBuildings
 
-            return allBuildings.some((b) => b.definition.id === res.id)
+            return allBuildings.some((b) => b.definition.id === res.id && b.count >= 1)
           case UnlockTypes.TierUnlockRequirement:
             const unlockTier = res.id
             if (typeof unlockTier !== 'number') {
