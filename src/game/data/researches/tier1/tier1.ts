@@ -182,5 +182,9 @@ export const stoneAxe: Research = {
       unlockType: UnlockTypes.TierUnlockRequirement,
       id: Tiers.Tier1,
     },
+    {
+      unlockType: UnlockTypes.BuildingUnlockRequirement,
+      id: BuildingIds.LoggingCamp,
+    },
   ] satisfies UnlockRequirement[],
 }
