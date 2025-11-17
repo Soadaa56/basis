@@ -7,7 +7,6 @@ const gameStore = useGameStore()
 
 <template>
   <div class="building-container">
-    <h2>Buildings Panel</h2>
     <BaseBuildingCard
       v-for="building in gameStore.manager.gameState.buildings"
       :key="building.definition.id"

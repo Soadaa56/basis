@@ -9,7 +9,6 @@ const jobUnlimited = gameStore.manager.gameState.jobs.filter((job) => job.totalJ
 </script>
 <template>
   <div v-if="gameStore" class="worker-panel-container">
-    <h2>Workers Panel</h2>
     <h3>
       {{ gameStore.manager.gameState.workers.unassignedWorkerCount }} /
       {{ gameStore.manager.gameState.workers.maxWorkerCount }} Worker Unassigned
