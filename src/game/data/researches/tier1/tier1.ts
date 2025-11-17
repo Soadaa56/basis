@@ -135,7 +135,7 @@ export const unlockGathererStone: Research = {
   cost: [
     {
       resourceId: ResourceIds.Knowledge,
-      amount: 80,
+      amount: 50,
     },
   ] satisfies ResourceCost[],
   effect: [
