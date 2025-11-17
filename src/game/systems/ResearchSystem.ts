@@ -50,12 +50,12 @@ export class ResearchSystem {
     return research
   }
 
-  unlockResearch(researchId: string) {
+  unlockResearch(researchId: string): void {
     const research = this.getResearchById(researchId)
     research.state = ResearchStates.Unlocked
   }
 
-  completeResearch(researchId: string) {
+  completeResearch(researchId: string): void {
     const research = this.getResearchById(researchId)
     research.state = ResearchStates.Completed
   }
@@ -88,8 +88,12 @@ export class ResearchSystem {
             console.log(research, res, res.unlockType)
             return true
           default:
-            console.log('ResearchSystem: canBeUnlocked? default triggered.')
-            console.log(research, res, res.unlockType)
+            console.log(
+              'ResearchSystem: canBeUnlocked? default triggered.',
+              research,
+              res,
+              res.unlockType,
+            )
             return true
         }
       }) ?? false // if unlockRequirements is underfined
@@ -106,7 +110,7 @@ export class ResearchSystem {
     })
   }
 
-  triggerResearchEffect(researchId: string) {
+  triggerResearchEffect(researchId: string): void {
     const research = this.getResearchById(researchId)
 
     research.effect.forEach((effect) => {
