@@ -17,14 +17,14 @@ const initialResources: Resource[] = [
     currentAmount: 0,
     baseStorage: 100,
     baseStorageFlatBonus: {},
-    baseStorageModifiers: {},
+    baseStorageMults: {},
     calculatedStorage: 100,
     baseIncome: 1,
     incomeSources: {
       jobs: {},
       buildings: {},
     },
-    IncomeMultipliers: {},
+    incomeMultipliers: {},
     totalIncome: 1,
   },
   {
@@ -33,14 +33,14 @@ const initialResources: Resource[] = [
     currentAmount: 0,
     baseStorage: 200,
     baseStorageFlatBonus: {},
-    baseStorageModifiers: {},
+    baseStorageMults: {},
     calculatedStorage: 200,
     baseIncome: 0,
     incomeSources: {
       jobs: {},
       buildings: {},
     },
-    IncomeMultipliers: {},
+    incomeMultipliers: {},
     totalIncome: 0,
   },
   {
@@ -49,14 +49,14 @@ const initialResources: Resource[] = [
     currentAmount: 50,
     baseStorage: 100,
     baseStorageFlatBonus: {},
-    baseStorageModifiers: {},
+    baseStorageMults: {},
     calculatedStorage: 100,
     baseIncome: 1,
     incomeSources: {
       jobs: {},
       buildings: {},
     },
-    IncomeMultipliers: {},
+    incomeMultipliers: {},
     totalIncome: 1,
   },
   {
@@ -65,14 +65,14 @@ const initialResources: Resource[] = [
     currentAmount: 50,
     baseStorage: 200,
     baseStorageFlatBonus: {},
-    baseStorageModifiers: {},
+    baseStorageMults: {},
     calculatedStorage: 200,
     baseIncome: 0,
     incomeSources: {
       jobs: {},
       buildings: {},
     },
-    IncomeMultipliers: {},
+    incomeMultipliers: {},
     totalIncome: 0,
   },
 ]
@@ -85,11 +85,11 @@ const initialBuildings: Building[] = [
 const initialJobs: Job[] = [
   {
     id: JobIds.Gatherer,
-    name: 'Gathrerer',
+    name: 'Gatherer',
     totalJobs: Infinity,
     assignedWorkers: 0,
     baseOutputs: jobDefinitions[JobIds.Gatherer]!.baseOutputs,
-    multipliers: [],
+    multipliers: {},
     resourceMults: {} as Record<ResourceId, number[]>,
   },
 ]
