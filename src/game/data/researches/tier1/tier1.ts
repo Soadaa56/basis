@@ -143,6 +143,7 @@ export const unlockGathererStone: Research = {
       type: ResearchTypes.UnlockJobResource,
       jobId: JobIds.Gatherer,
       resourceId: ResourceIds.Stone,
+      rate: 1,
     },
   ] satisfies ResearchEffect[],
   category: ResearchCategories.Agriculture,
