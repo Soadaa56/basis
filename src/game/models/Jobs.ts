@@ -28,7 +28,7 @@ export interface Job {
     rate: number
     reduceRateMults?: Reduction[]
   }[]
-  multipliers: number[]
+  multipliers: Record<string, number>
   resourceMults: Record<ResourceId, number[]>
 }
 
