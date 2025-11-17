@@ -103,7 +103,7 @@ export class JobSystem {
   }
 
   // If each building gives 5% bonus, 5 building should give a final bonus of 25%
-  addBuildingJobMult(jobId: JobId, buildingId: BuildingId, mult: number, count: number): void {
+  updateBuildingJobMult(jobId: JobId, buildingId: BuildingId, mult: number, count: number): void {
     const job = this.getJobById(jobId)
     job.multipliers[buildingId] = Math.pow(mult, count)
   }

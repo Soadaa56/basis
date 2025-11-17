@@ -86,7 +86,7 @@ export class BuildingSystem {
           break
         }
         case BuildingTypes.JobOutputMult: {
-          jobSystem.addBuildingJobMult(
+          jobSystem.updateBuildingJobMult(
             effect.jobId,
             building.definition.id,
             effect.multiplier,
