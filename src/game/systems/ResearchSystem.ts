@@ -50,12 +50,12 @@ export class ResearchSystem {
     return research
   }
 
-  unlockResearch(researchId: string) {
+  unlockResearch(researchId: string): void {
     const research = this.getResearchById(researchId)
     research.state = ResearchStates.Unlocked
   }
 
-  completeResearch(researchId: string) {
+  completeResearch(researchId: string): void {
     const research = this.getResearchById(researchId)
     research.state = ResearchStates.Completed
   }
@@ -88,8 +88,12 @@ export class ResearchSystem {
             console.log(research, res, res.unlockType)
             return true
           default:
-            console.log('ResearchSystem: canBeUnlocked? default triggered.')
-            console.log(research, res, res.unlockType)
+            console.log(
+              'ResearchSystem: canBeUnlocked? default triggered.',
+              research,
+              res,
+              res.unlockType,
+            )
             return true
         }
       }) ?? false // if unlockRequirements is underfined
@@ -98,7 +102,6 @@ export class ResearchSystem {
 
   checkLockedResearch(): void {
     const lockedResearch = this.getAllLockedResearch
-    console.log(lockedResearch)
 
     lockedResearch.forEach((res) => {
       if (this.canBeUnlocked(res.id)) {
@@ -107,65 +110,40 @@ export class ResearchSystem {
     })
   }
 
-  triggerResearchEffect(researchId: string) {
+  triggerResearchEffect(researchId: string): void {
     const research = this.getResearchById(researchId)
 
     research.effect.forEach((effect) => {
       switch (effect.type) {
-        case ResearchTypes.BuildingMult: {
-          // Not currently implemented - Needs something similar to JobInput JobOutput system
-          // (assuming I implement resource production on a building)
-          console.log('ResearchSystem: triggerResearchEffect: BuildingMult triggered')
-          console.log(researchId, effect, effect.type)
-          break
-        }
+        // Needs something similar to JobInput JobOutput system (if I implement)
+        // case ResearchTypes.BuildingMult: {
+        //   break
+        // }
         case ResearchTypes.JobMult: {
-          const jobDefinition = this.jobSystem.getJobInfoOrError(effect.targetId)
-          console.log(researchId, effect, jobDefinition)
+          this.jobSystem.updateResearchJobMult(effect.targetId, effect.value)
           break
         }
         case ResearchTypes.ResourceAddFlat: {
-          const resource = this.resourceSystem.getResourceById(effect.targetId)
-          if (!resource) {
-            console.log(researchId, effect, resource)
-            throw new Error('ResearchSystem: triggerResearchEffect: ResourceAddFlat')
-          }
-
-          this.resourceSystem.updateBaseIncome(resource, effect.value)
+          this.resourceSystem.updateBaseIncome(effect.targetId, effect.value)
           break
         }
         case ResearchTypes.ResourceMult: {
-          const resource = this.resourceSystem.getResourceById(effect.targetId)
-          if (!resource) {
-            console.log(researchId, effect, resource)
-            throw new Error('ResearchSystem: triggerResearchEffect: ResourceMult')
-          }
-
-          resource.IncomeMultipliers[research.name] = effect.value
+          this.resourceSystem.updateResearchMult(effect.targetId, effect.value)
           break
         }
         case ResearchTypes.ResourceStorageAddFlat: {
-          const resource = this.resourceSystem.getResourceById(effect.targetId)
-          if (!resource) {
-            console.log(researchId, effect, resource)
-            throw new Error('ResearchSystem: triggerResearchEffect: ResourceStorageAddFlat')
-          }
-
-          this.resourceSystem.updateBaseStorage(resource, effect.value)
+          this.resourceSystem.updateBaseStorage(effect.targetId, effect.value)
           break
         }
-        case ResearchTypes.ResourceStorageMult: {
-          const resource = this.resourceSystem.getResourceById(effect.targetId)
-          if (!resource) {
-            console.log(researchId, effect, resource)
-            throw new Error('ResearchSystem: triggerResearchEffect: ResourceStorageMukt')
-          }
-
-          resource.baseStorageModifiers[research.name] = effect.value
-          break
-        }
+        // case ResearchTypes.ResourceStorageMult: {
+        //   break
+        // }
         case ResearchTypes.UnlockBuilding: {
           this.buildingSystem.unlockBuilding(effect.targetId)
+          break
+        }
+        case ResearchTypes.UnlockJobResource: {
+          this.jobSystem.addResourceToJobOutput(effect.jobId, effect.resourceId, effect.rate)
           break
         }
         case ResearchTypes.UnlockResearchTier: {
@@ -173,7 +151,7 @@ export class ResearchSystem {
           break
         }
         default:
-          console.log('triggerResearchEffect Default case triggered')
+          console.warn('triggerResearchEffect Default case triggered')
           console.log(effect)
           break
       }

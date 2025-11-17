@@ -1,7 +1,10 @@
-import { ResourceIds } from '@/game/models/Resource'
-import { ResearchCategories, ResearchTypes, Tiers, type Research } from '@/game/models/Research'
+import { ResourceIds, type ResourceCost } from '@/game/models/Resource'
 import { UnlockTypes } from '@/game/models/researches/ResearchUnlockable'
 import { BuildingIds } from '../../buildingsId'
+import { ResearchCategories, ResearchTypes, Tiers, type Research } from '@/game/models/Research'
+import type { ResearchEffect } from '@/game/models/Research'
+import type { UnlockRequirement } from '@/game/models/researches/ResearchUnlockable'
+import { JobIds } from '@/game/models/Jobs'
 
 export const discussions: Research = {
   id: 'discussions',
@@ -123,4 +126,61 @@ export const unlockGranary: Research = {
       id: 'unlockFarm',
     },
   ],
+}
+
+export const unlockGathererStone: Research = {
+  id: 'unlockGathererStone',
+  name: 'Gather More Stone',
+  tier: 1,
+  cost: [
+    {
+      resourceId: ResourceIds.Knowledge,
+      amount: 50,
+    },
+  ] satisfies ResourceCost[],
+  effect: [
+    {
+      type: ResearchTypes.UnlockJobResource,
+      jobId: JobIds.Gatherer,
+      resourceId: ResourceIds.Stone,
+      rate: 1,
+    },
+  ] satisfies ResearchEffect[],
+  category: ResearchCategories.Agriculture,
+  description:
+    'Tell your gatherers to be on the look out for rocks in addition to food.\nGatherers now collect stones.',
+  unlockRequirements: [
+    {
+      unlockType: UnlockTypes.TierUnlockRequirement,
+      id: Tiers.Tier1,
+    },
+  ] satisfies UnlockRequirement[],
+}
+
+export const stoneAxe: Research = {
+  id: 'stoneAxe',
+  name: 'Stone Axes',
+  tier: 1,
+  cost: [
+    {
+      resourceId: ResourceIds.Knowledge,
+      amount: 60,
+    },
+    { resourceId: ResourceIds.Stone, amount: 50 },
+  ] satisfies ResourceCost[],
+  effect: [
+    {
+      type: ResearchTypes.JobMult,
+      targetId: JobIds.Lumberjack,
+      value: 1.25,
+    },
+  ] satisfies ResearchEffect[],
+  category: ResearchCategories.Research,
+  description: 'Use stone on tree, not hands.\n+25% Lumberjack Output.',
+  unlockRequirements: [
+    {
+      unlockType: UnlockTypes.TierUnlockRequirement,
+      id: Tiers.Tier1,
+    },
+  ] satisfies UnlockRequirement[],
 }

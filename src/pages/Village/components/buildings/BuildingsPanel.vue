@@ -6,7 +6,6 @@ const gameStore = useGameStore()
 </script>
 
 <template>
-  <h2>Buildings Panel</h2>
   <div class="building-container">
     <BaseBuildingCard
       v-for="building in gameStore.manager.gameState.buildings"
@@ -25,7 +24,7 @@ const gameStore = useGameStore()
 <style scoped lang="scss">
 .building-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
   gap: 1rem;
 }
 </style>

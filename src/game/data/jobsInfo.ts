@@ -1,19 +1,16 @@
 import { type ResourceId } from '@/game/models/Resource'
 
-export interface JobOutput {
+export interface BaseOutput {
   resourceId: ResourceId
   rate: number
-  multipliers?: number[]
 }
 
-export interface JobInput {
+export interface BaseInput {
   resourceId: ResourceId
   rate: number
-  multipliers?: number[]
 }
 
 export type JobInfo = {
-  unlocked: boolean
-  outputs: JobOutput[]
-  inputs?: JobInput[]
+  baseOutputs: BaseOutput[]
+  baseInputs?: BaseInput[]
 }

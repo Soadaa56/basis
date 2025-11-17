@@ -8,7 +8,6 @@ const unlockedReseach = computed(() => gameStore.manager.researchSystem.getAllUn
 </script>
 
 <template>
-  <h2>Research</h2>
   <div class="research-panel">
     <BaseResearchCard
       v-for="research in unlockedReseach"
@@ -22,7 +21,7 @@ const unlockedReseach = computed(() => gameStore.manager.researchSystem.getAllUn
 <style scoped lang="scss">
 .research-panel {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
   gap: 1rem;
 }
 </style>

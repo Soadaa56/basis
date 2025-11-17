@@ -1,13 +1,14 @@
-import type { GameState } from '@/game/systems/GameStateManager'
-import type { Resource } from '@/game/models/Resource'
-import type { Job } from '@/game/models/Jobs'
-import type { WorkerState } from '@/game/systems/WorkerSystem'
 import { Building } from '@/game/models/Buildings'
 import { ResourceIds } from '@/game/models/Resource'
 import { JobIds } from '@/game/models/Jobs'
 import { buildingDefinitions } from './buildings'
 import { allResearch } from './researches/allResearch'
 import { ResearchStates } from '../models/researches/ResearchState'
+import { jobDefinitions } from './jobs'
+import type { GameState } from '@/game/systems/GameStateManager'
+import type { Resource, ResourceId } from '@/game/models/Resource'
+import type { Job } from '@/game/models/Jobs'
+import type { WorkerState } from '@/game/systems/WorkerSystem'
 
 const initialResources: Resource[] = [
   {
@@ -16,62 +17,62 @@ const initialResources: Resource[] = [
     currentAmount: 0,
     baseStorage: 100,
     baseStorageFlatBonus: {},
-    baseStorageModifiers: {},
+    baseStorageMults: {},
     calculatedStorage: 100,
     baseIncome: 1,
     incomeSources: {
       jobs: {},
       buildings: {},
     },
-    IncomeMultipliers: {},
+    incomeMultipliers: {},
     totalIncome: 1,
   },
   {
     id: ResourceIds.Gold,
     name: 'Gold',
     currentAmount: 0,
-    baseStorage: 200,
+    baseStorage: 300,
     baseStorageFlatBonus: {},
-    baseStorageModifiers: {},
-    calculatedStorage: 200,
+    baseStorageMults: {},
+    calculatedStorage: 300,
     baseIncome: 0,
     incomeSources: {
       jobs: {},
       buildings: {},
     },
-    IncomeMultipliers: {},
+    incomeMultipliers: {},
     totalIncome: 0,
   },
   {
     id: ResourceIds.Food,
     name: 'Food',
     currentAmount: 50,
-    baseStorage: 100,
+    baseStorage: 250,
     baseStorageFlatBonus: {},
-    baseStorageModifiers: {},
-    calculatedStorage: 100,
+    baseStorageMults: {},
+    calculatedStorage: 250,
     baseIncome: 1,
     incomeSources: {
       jobs: {},
       buildings: {},
     },
-    IncomeMultipliers: {},
+    incomeMultipliers: {},
     totalIncome: 1,
   },
   {
     id: ResourceIds.Stone,
     name: 'Stone',
-    currentAmount: 50,
+    currentAmount: 40,
     baseStorage: 200,
     baseStorageFlatBonus: {},
-    baseStorageModifiers: {},
+    baseStorageMults: {},
     calculatedStorage: 200,
     baseIncome: 0,
     incomeSources: {
       jobs: {},
       buildings: {},
     },
-    IncomeMultipliers: {},
+    incomeMultipliers: {},
     totalIncome: 0,
   },
 ]
@@ -84,9 +85,12 @@ const initialBuildings: Building[] = [
 const initialJobs: Job[] = [
   {
     id: JobIds.Gatherer,
-    name: 'Gathrerer',
+    name: 'Gatherer',
     totalJobs: Infinity,
     assignedWorkers: 0,
+    baseOutputs: jobDefinitions[JobIds.Gatherer]!.baseOutputs,
+    multipliers: {},
+    resourceMults: {} as Record<ResourceId, number[]>,
   },
 ]
 
