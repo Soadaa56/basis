@@ -9,15 +9,15 @@ export interface GameData {
 }
 
 export function newGameFile(villageName: string): GameData {
-  const newSaveFile: GameData = {
+  const newGameData: GameData = {
     createdAt: Date.now(),
     updatedAt: Date.now(),
     villageName: villageName || 'Basis Village',
     gameState: initialGameState,
   }
 
-  localStorage.setItem('saveFile', JSON.stringify(newSaveFile))
-  return newSaveFile
+  localStorage.setItem('saveFile', JSON.stringify(newGameData))
+  return newGameData
 }
 
 export function saveGameFile(gameData: GameData): void {
