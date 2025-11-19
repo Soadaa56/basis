@@ -16,7 +16,7 @@ function saveGameDataButton(): void {
   const rawData = localStorage.getItem('gameData')
   const jsonGameData = rawData ? JSON.parse(rawData) : {}
   const gameData: GameData = {
-    version: '0.0.0-test',
+    version: '0.0.0-test-save',
     createdAt: jsonGameData.createdAt || Date.now(),
     updatedAt: Date.now(),
     villageName: jsonGameData.villageName || 'Basis Village',
@@ -27,7 +27,6 @@ function saveGameDataButton(): void {
     `Game data saved. Version ${gameData.version} for village ${gameData.villageName} at time ${gameData.updatedAt}.`,
   )
   saveGameData(gameData)
-  router.push('/')
 }
 </script>
 
