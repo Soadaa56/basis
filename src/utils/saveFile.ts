@@ -2,6 +2,7 @@ import type { GameState } from '@/game/systems/GameStateManager'
 import { initialGameState } from '@/game/data/initialGameState'
 
 export interface GameData {
+  version: string
   createdAt: number
   updatedAt: number
   villageName: string
@@ -10,6 +11,7 @@ export interface GameData {
 
 export function newGameData(villageName: string): GameData {
   const newGameData: GameData = {
+    version: 'alpha-v-0.0.1',
     createdAt: Date.now(),
     updatedAt: Date.now(),
     villageName: villageName || 'Basis Village',
