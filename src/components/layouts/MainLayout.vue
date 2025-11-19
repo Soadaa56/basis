@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { markRaw, shallowRef } from 'vue'
 import { useRoute } from 'vue-router'
-import { loadSaveFile } from '@/utils/saveFile'
+import { loadGameData } from '@/utils/saveFile'
 import VillagePage from '@/pages/Village/VillagePage.vue'
 import MagicPage from '@/pages/Magic/MagicPage.vue'
 import SettingsPage from '@/pages/Settings/SettingsPage.vue'
 
 const route = useRoute()
-const currentSaveFile = loadSaveFile()
+const currentSaveFile = loadGameData()
 const villageName = currentSaveFile?.villageName
 
 // Use shallowRed/markRaw for Vue performance warning

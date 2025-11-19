@@ -1,8 +1,8 @@
-import { loadSaveFile } from '@/utils/saveFile'
+import { loadGameData } from '@/utils/saveFile'
 import { GameStateManager } from '@/game/systems/GameStateManager'
 import { initialGameState } from './data/initialGameState'
 
-const saveFile = loadSaveFile()
+const saveFile = loadGameData()
 
 export const gameStateManager = new GameStateManager(
   saveFile ? saveFile.gameState : initialGameState,
