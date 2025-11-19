@@ -21,7 +21,7 @@ async function newGameButton() {
       <FaIcon class="basis-icon" :icon="['fas', 'cube']" size="5x" />
     </div>
     <div class="welcome-buttons">
-      <button>Dark Mode</button>
+      <button id="light-mode">Light Mode</button>
       <router-link to="/"><button @click="newGameButton">New Game</button></router-link>
     </div>
     <div class="load-save-file">
@@ -49,6 +49,10 @@ async function newGameButton() {
     min-height: 100px;
     margin: 0rem 4rem 1rem 4rem;
     outline: 5px solid black;
+  }
+
+  #light-mode {
+    text-decoration: line-through;
   }
 }
 .basis-header {
