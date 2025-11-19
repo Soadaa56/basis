@@ -10,6 +10,9 @@ const gameStore = useGameStore()
 function resetGameDataButton(): void {
   localStorage.removeItem('gameData')
   router.push('/welcome')
+  // removes nav bar (sticks around for some reason). Not ideal solution, more of a 'hack'
+  // cannot be used for live release, should only have to connect to page one time (for low internet users).
+  window.location.reload()
 }
 
 function saveGameDataButton(): void {
