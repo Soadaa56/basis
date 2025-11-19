@@ -1,17 +1,17 @@
 import type { GameState } from '@/game/systems/GameStateManager'
 import { initialGameState } from '@/game/data/initialGameState'
 
-export interface SaveFile {
-  createdAt: string
-  date: number
+export interface GameData {
+  createdAt: number
+  updatedAt: number
   villageName: string
   gameState: GameState
 }
 
-export function newGameFile(villageName: string) {
-  const newSaveFile: SaveFile = {
-    createdAt: new Date().toISOString(),
-    date: Date.now(),
+export function newGameFile(villageName: string): GameData {
+  const newSaveFile: GameData = {
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
     villageName: villageName || 'Basis Village',
     gameState: initialGameState,
   }
@@ -20,13 +20,13 @@ export function newGameFile(villageName: string) {
   return newSaveFile
 }
 
-export function saveGameFile(saveFile: SaveFile): void {
-  localStorage.setItem('saveFile', JSON.stringify(saveFile))
+export function saveGameFile(gameData: GameData): void {
+  localStorage.setItem('saveFile', JSON.stringify(gameData))
 }
 
-export function loadSaveFile(): SaveFile | null {
+export function loadSaveFile(): GameData | null {
   const rawSaveFile = localStorage.getItem('saveFile')
-  return rawSaveFile ? (JSON.parse(rawSaveFile) as SaveFile) : null
+  return rawSaveFile ? (JSON.parse(rawSaveFile) as GameData) : null
 }
 
 export function hasSaveFile(): boolean {
