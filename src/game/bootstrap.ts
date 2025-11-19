@@ -2,10 +2,10 @@ import { loadGameData } from '@/utils/saveFile'
 import { GameStateManager } from '@/game/systems/GameStateManager'
 import { initialGameState } from './data/initialGameState'
 
-const saveFile = loadGameData()
+const gameData = loadGameData()
 
 export const gameStateManager = new GameStateManager(
-  saveFile ? saveFile.gameState : initialGameState,
+  gameData ? gameData.gameState : initialGameState,
 )
 
 if (import.meta.env.DEV) {
