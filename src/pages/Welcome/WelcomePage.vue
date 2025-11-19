@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { newGameFile } from '@/utils/saveFile'
+import { newGameData } from '@/utils/saveFile'
 import { gameStateManager } from '@/game/bootstrap'
 import FooterLayout from '@/components/layouts/FooterLayout.vue'
 
@@ -9,8 +9,8 @@ const router = useRouter()
 async function newGameButton() {
   router.push('/loading')
 
-  const saveFile = newGameFile('Basis')
-  gameStateManager?.loadGameState(saveFile.gameState)
+  const gameData = newGameData('Basis')
+  gameStateManager.loadGameState(gameData.gameState)
 }
 </script>
 

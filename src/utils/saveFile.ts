@@ -8,7 +8,7 @@ export interface GameData {
   gameState: GameState
 }
 
-export function newGameFile(villageName: string): GameData {
+export function newGameData(villageName: string): GameData {
   const newGameData: GameData = {
     createdAt: Date.now(),
     updatedAt: Date.now(),
@@ -16,20 +16,20 @@ export function newGameFile(villageName: string): GameData {
     gameState: initialGameState,
   }
 
-  localStorage.setItem('saveFile', JSON.stringify(newGameData))
+  localStorage.setItem('gameData', JSON.stringify(newGameData))
   return newGameData
 }
 
-export function saveGameFile(gameData: GameData): void {
-  localStorage.setItem('saveFile', JSON.stringify(gameData))
+export function saveGameData(gameData: GameData): void {
+  localStorage.setItem('gameData', JSON.stringify(gameData))
 }
 
-export function loadSaveFile(): GameData | null {
+export function loadGameData(): GameData | null {
   const rawSaveFile = localStorage.getItem('saveFile')
   return rawSaveFile ? (JSON.parse(rawSaveFile) as GameData) : null
 }
 
-export function hasSaveFile(): boolean {
+export function hasGameData(): boolean {
   // returns true if saveFile detected
   return !!localStorage.getItem('saveFile')
 }
