@@ -3,10 +3,15 @@ import { GameStateManager } from '@/game/systems/GameStateManager'
 import { initialGameState } from './data/initialGameState'
 
 const gameData = loadGameData()
+let startingState
 
-export const gameStateManager = new GameStateManager(
-  gameData ? gameData.gameState : initialGameState,
-)
+if (gameData) {
+  startingState = gameData.gameState
+} else {
+  startingState = initialGameState
+}
+
+export const gameStateManager = new GameStateManager(startingState)
 
 if (import.meta.env.DEV) {
   // @ts-expect-error: for debugging only

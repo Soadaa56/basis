@@ -5,7 +5,7 @@ import VillagePage from '@/pages/Village/VillagePage.vue'
 import MagicPage from '@/pages/Magic/MagicPage.vue'
 import SettingsPage from '@/pages/Settings/SettingsPage.vue'
 import NotFound from '@/pages/NotFound.vue'
-import { hasSaveFile } from '@/utils/saveFile'
+import { hasGameData } from '@/utils/saveFile'
 import LoadingPage from '@/pages/LoadingPage.vue'
 import { gameStateManager } from '@/game/bootstrap'
 
@@ -21,7 +21,7 @@ const routes = [
     meta: { headHeader: true },
     beforeEnter: () => {
       // no save file detected
-      if (!hasSaveFile()) {
+      if (!hasGameData()) {
         return { path: '/welcome' }
       } else if (gameStateManager) {
         return { path: '/' }
