@@ -16,4 +16,5 @@ export const gameStateManager = new GameStateManager(startingState)
 if (import.meta.env.DEV) {
   // @ts-expect-error: for debugging only
   window.gameManager = gameStateManager
+  console.log(gameStateManager)
 }
