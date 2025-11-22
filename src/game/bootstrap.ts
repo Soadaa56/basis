@@ -1,17 +1,14 @@
 import { loadGameData } from '@/utils/saveFile'
 import { GameStateManager } from '@/game/systems/GameStateManager'
 import { initialGameState } from './data/initialGameState'
+import { restoreGameState } from '@/utils/restoreGameState'
+
+export const gameStateManager = new GameStateManager(initialGameState)
 
 const gameData = loadGameData()
-let startingState
-
 if (gameData) {
-  startingState = gameData.gameState
-} else {
-  startingState = initialGameState
+  restoreGameState(gameStateManager, gameData.gameState)
 }
-
-export const gameStateManager = new GameStateManager(startingState)
 
 if (import.meta.env.DEV) {
   // @ts-expect-error: for debugging only

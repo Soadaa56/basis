@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import FooterLayout from '@/components/layouts/FooterLayout.vue'
 import { saveGameData, type GameData } from '@/utils/saveFile'
+import { serializeGameState } from '@/utils/seralizeGameState'
 import { useGameStore } from '@/stores/game'
 import router from '@/router'
 
@@ -23,12 +24,14 @@ function saveGameDataButton(): void {
     createdAt: jsonGameData.createdAt || Date.now(),
     updatedAt: Date.now(),
     villageName: jsonGameData.villageName || 'Basis Village',
-    gameState: gameStore.manager.gameState,
+    gameState: serializeGameState(gameStore.manager.gameState),
   }
 
   console.log(
     `Game data saved. Version ${gameData.version} for village ${gameData.villageName} at time ${gameData.updatedAt}.`,
   )
+  console.log(rawData)
+  console.log(jsonGameData)
   saveGameData(gameData)
 }
 </script>
