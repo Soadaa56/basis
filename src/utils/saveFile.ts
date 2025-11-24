@@ -1,6 +1,6 @@
-import type { BuildingId } from '@/game/data/buildingsId'
 import { initialGameState } from '@/game/data/initialGameState'
-import { serializeGameState } from './seralizeGameState'
+import { serializeGameState } from '@/utils/seralizeGameState'
+import type { SerializedGameState } from './seralizeGameState'
 
 export interface GameData {
   version: string
@@ -8,15 +8,6 @@ export interface GameData {
   updatedAt: number
   villageName: string
   gameState: SerializedGameState
-}
-
-export interface SerializedGameState {
-  resources: any[]
-  buildings: { definitionId: BuildingId; count: number }[]
-  magic: any[]
-  jobs: any[]
-  workers: any
-  research: { researchId: string; state: string }[]
 }
 
 export function newGameData(villageName: string): GameData {

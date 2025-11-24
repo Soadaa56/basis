@@ -6,7 +6,7 @@ import { restoreGameState } from '@/utils/restoreGameState'
 export const gameStateManager = new GameStateManager(initialGameState)
 
 const gameData = loadGameData()
-if (gameData) {
+if (gameData != null) {
   restoreGameState(gameStateManager, gameData.gameState)
 }
 
