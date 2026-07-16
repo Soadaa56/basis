@@ -50,13 +50,14 @@ export class GameStateManager {
   }
 
   loadGameState(gameState: GameState): void {
-    this.gameState = gameState
-    this.resourceSystem.loadResources(gameState.resources)
-    this.buildingSystem.loadBuildings(gameState.buildings)
-    this.magicSystem.loadMagic(gameState.magic)
-    this.jobSystem.loadJobs(gameState.jobs)
-    this.workerSystem.loadWorkers(gameState.workers)
-    this.researchSystem.loadResearch(gameState.research)
+    Object.assign(this.gameState, gameState)
+
+    this.resourceSystem.loadResources(this.gameState.resources)
+    this.buildingSystem.loadBuildings(this.gameState.buildings)
+    this.magicSystem.loadMagic(this.gameState.magic)
+    this.jobSystem.loadJobs(this.gameState.jobs)
+    this.workerSystem.loadWorkers(this.gameState.workers)
+    this.researchSystem.loadResearch(this.gameState.research)
   }
 
   startTick(tickInterval: number = this.tickInterval): void {
