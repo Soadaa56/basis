@@ -8,15 +8,12 @@ import type { BuildingId } from '../data/buildingsId'
 export class JobSystem {
   private jobs: Job[] = []
 
-  constructor(
-    jobs: Job[],
-    private resourceSystem: ResourceSystem,
-  ) {
+  constructor(jobs: Job[], private resourceSystem: ResourceSystem,) {
     this.jobs = jobs
   }
 
   loadJobs(jobs: Job[]): void {
-    this.jobs = jobs
+    this.jobs.splice(0, this.jobs.length, ...jobs)
   }
 
   public get getAllJobs(): Job[] {

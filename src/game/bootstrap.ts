@@ -2,13 +2,12 @@ import { loadSaveFile } from '@/utils/saveFile'
 import { GameStateManager } from '@/game/systems/GameStateManager'
 import { initialGameState } from './data/initialGameState'
 
-const saveFile = loadSaveFile()
+export function loadExistingGame(): GameStateManager | null {
+  const saveFile = loadSaveFile()
+  if (!saveFile) return null
+  return new GameStateManager(saveFile.gameState)
+}
 
-export const gameStateManager = new GameStateManager(
-  saveFile ? saveFile.gameState : initialGameState,
-)
-
-if (import.meta.env.DEV) {
-  // @ts-expect-error: for debugging only
-  window.gameManager = gameStateManager
+export function startNewGame(): GameStateManager {
+  return new GameStateManager(structuredClone(initialGameState))
 }

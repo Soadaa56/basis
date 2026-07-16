@@ -1,16 +1,21 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { newGameFile } from '@/utils/saveFile'
-import { gameStateManager } from '@/game/bootstrap'
+import { startNewGame } from '@/game/bootstrap'
+import { useGameStore } from '@/stores/game'
 import FooterLayout from '@/components/layouts/FooterLayout.vue'
 
 const router = useRouter()
+const gameStore = useGameStore()
 
-async function newGameButton() {
-  router.push('/loading')
+function newGameButton() {
+  const manager = startNewGame()
+  gameStore.setManager(manager)
 
-  const saveFile = newGameFile('Basis')
-  gameStateManager?.loadGameState(saveFile.gameState)
+  newGameFile('Basis')
+  manager.startTick()
+
+  router.push('/')
 }
 </script>
 

@@ -4,14 +4,14 @@ import { useGameStore } from '@/stores/game'
 
 const gameStore = useGameStore()
 
-const jobLimited = gameStore.manager.gameState.jobs.filter((job) => job.totalJobs !== Infinity)
-const jobUnlimited = gameStore.manager.gameState.jobs.filter((job) => job.totalJobs === Infinity)
+const jobLimited = gameStore.manager?.jobSystem.getAllJobs.filter((job) => job.totalJobs !== Infinity)
+const jobUnlimited = gameStore.manager?.jobSystem.getAllJobs.filter((job) => job.totalJobs === Infinity)
 </script>
 <template>
   <div v-if="gameStore" class="worker-panel-container">
     <h3>
-      {{ gameStore.manager.gameState.workers.unassignedWorkerCount }} /
-      {{ gameStore.manager.gameState.workers.maxWorkerCount }} Worker Unassigned
+      {{ gameStore.manager?.gameState.workers.unassignedWorkerCount }} /
+      {{ gameStore.manager?.gameState.workers.maxWorkerCount }} Worker Unassigned
     </h3>
     <BaseWorkerText
       v-for="job in jobUnlimited"
@@ -20,8 +20,8 @@ const jobUnlimited = gameStore.manager.gameState.jobs.filter((job) => job.totalJ
       :name="job.name"
       :assigned-workers="job?.assignedWorkers"
       :max-job-slots="job?.totalJobs"
-      @assign="gameStore.manager.addWorkerToJob(job.id)"
-      @unassign="gameStore.manager.removeWorkerFromJob(job.id)"
+      @assign="gameStore.manager?.addWorkerToJob(job.id)"
+      @unassign="gameStore.manager?.removeWorkerFromJob(job.id)"
       class="job-unlimited"
     />
     <BaseWorkerText
@@ -31,8 +31,8 @@ const jobUnlimited = gameStore.manager.gameState.jobs.filter((job) => job.totalJ
       :name="job.name"
       :assigned-workers="job?.assignedWorkers"
       :max-job-slots="job?.totalJobs"
-      @assign="gameStore.manager.addWorkerToJob(job.id)"
-      @unassign="gameStore.manager.removeWorkerFromJob(job.id)"
+      @assign="gameStore.manager?.addWorkerToJob(job.id)"
+      @unassign="gameStore.manager?.removeWorkerFromJob(job.id)"
       class="job-limited"
     />
   </div>

@@ -36,13 +36,13 @@ export class GameStateManager {
   constructor(gameState: GameState) {
     this.gameState = reactive(gameState)
 
-    this.resourceSystem = new ResourceSystem(gameState.resources)
-    this.buildingSystem = new BuildingSystem(gameState.buildings)
-    this.magicSystem = new MagicSystem(gameState.magic)
-    this.jobSystem = new JobSystem(gameState.jobs, this.resourceSystem)
-    this.workerSystem = new WorkerSystem(this.jobSystem, gameState.workers)
+    this.resourceSystem = new ResourceSystem(this.gameState.resources)
+    this.buildingSystem = new BuildingSystem(this.gameState.buildings)
+    this.magicSystem = new MagicSystem(this.gameState.magic)
+    this.jobSystem = new JobSystem(this.gameState.jobs, this.resourceSystem)
+    this.workerSystem = new WorkerSystem(this.jobSystem, this.gameState.workers)
     this.researchSystem = new ResearchSystem(
-      gameState.research,
+      this.gameState.research,
       this.buildingSystem,
       this.jobSystem,
       this.resourceSystem,
@@ -50,7 +50,14 @@ export class GameStateManager {
   }
 
   getGameState(): GameState {
-    return this.gameState
+    return {
+      resources: this.resourceSystem.getAllResources,
+      buildings: this.buildingSystem.getAllBuildings,
+      magic: this.magicSystem.getAllMagic,
+      jobs: this.jobSystem.getAllJobs,
+      workers: this.workerSystem.getAllWorkers(),
+      research: this.researchSystem.getAllResearch,
+    }
   }
 
   loadGameState(gameState: GameState): void {

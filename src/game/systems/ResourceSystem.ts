@@ -12,7 +12,7 @@ export class ResourceSystem {
   }
 
   loadResources(resources: Resource[]) {
-    this.resources = resources
+    this.resources.splice(0, this.resources.length, ...resources)
   }
 
   public get getAllResources(): Resource[] {

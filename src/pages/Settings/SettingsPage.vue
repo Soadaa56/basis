@@ -1,8 +1,29 @@
 <script setup lang="ts">
 import FooterLayout from '@/components/layouts/FooterLayout.vue'
+import { useGameStore } from '@/stores/game'
+import { saveGameFile } from '@/utils/saveFile';
+import { loadSaveFile } from '@/utils/saveFile';
+import type { SaveFile } from '@/utils/saveFile';
 
-// Fast easy way to reset, will be moved and add a confirm
-function resetGameData() {
+const gameStore = useGameStore()
+
+function saveGameButton() {
+  if (!gameStore.manager) return // Satisfy possibly null value on gameState
+
+  const localStorageSaveFile = loadSaveFile()
+    const updatedSaveFile: SaveFile = {
+      version: localStorageSaveFile?.version || 'a.0.0.1', // Create method eventually
+      createdAt: localStorageSaveFile?.createdAt || '',
+      date: Date.now(),
+      villageName: localStorageSaveFile?.villageName || 'Basis Village',
+      gameState: gameStore.manager.getGameState(),
+    }
+
+    saveGameFile(updatedSaveFile)
+}
+
+// Fast easy way to reset, will be moved and confirmation window added
+function resetGameButton() {
   localStorage.removeItem('saveFile')
   window.location.reload()
 }
@@ -11,7 +32,8 @@ function resetGameData() {
 <template>
   <h1>Settings</h1>
 
-  <button id="reset-button" @click="resetGameData">Reset Game Data</button>
+  <button id="save-button" @click="saveGameButton">Save Game</button>
+  <button id="reset-button" @click="resetGameButton">Reset Game Data</button>
 
   <footer-layout />
 </template>

@@ -18,8 +18,8 @@ export class ResearchSystem {
     this.allResearch = gameStateResearch
   }
 
-  loadResearch(saveFileResearch: Research[]) {
-    this.allResearch = saveFileResearch
+  loadResearch(allResearch: Research[]): void {
+    this.allResearch.splice(0, this.allResearch.length, ...allResearch)
   }
 
   public get getAllResearch(): Research[] {

@@ -10,12 +10,14 @@ export class BuildingSystem {
   private buildings: Building[] = []
 
   constructor(buildings: Building[]) {
-    this.buildings = buildings
+    this.buildings = buildings.map(b => new Building(b.definition, b.count))
   }
 
   loadBuildings(buildings: Building[]) {
-    this.buildings = buildings
+    const loaded = buildings.map(b => new Building(b.definition, b.count))
+    this.buildings.splice(0, this.buildings.length, ...loaded)
   }
+
 
   public get getAllBuildings(): Building[] {
     return this.buildings

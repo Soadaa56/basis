@@ -1,22 +1,22 @@
 import type { Magic } from '@/game/models/Magic'
 
 export class MagicSystem {
-  private magics: Magic[] = []
+  private magic: Magic[] = []
 
-  constructor(magics: Magic[]) {
-    this.magics = magics
+  constructor(magic: Magic[]) {
+    this.magic = magic
   }
 
-  loadMagic(magics: Magic[]) {
-    this.magics = magics
+  loadMagic(magic: Magic[]) {
+    this.magic.splice(0, this.magic.length, ...magic)
   }
 
   public get getAllMagic(): Magic[] {
-    return this.magics
+    return this.magic
   }
 
   getMagic(id: string) {
-    return this.magics.find((magic) => magic.id === id)
+    return this.magic.find((magic) => magic.id === id)
   }
 
   updateCalculatedStorage(magic: Magic) {

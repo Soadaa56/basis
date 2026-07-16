@@ -15,8 +15,12 @@ export class WorkerSystem {
     this.workerState = workerState
   }
 
-  loadWorkers(workerState: WorkerState) {
-    this.workerState = workerState
+  loadWorkers(workerState: WorkerState): void {
+    Object.assign(this.workerState, workerState)
+  }
+
+  public getAllWorkers(): WorkerState {
+    return this.workerState
   }
 
   incrementUnassignedWorkerCount() {

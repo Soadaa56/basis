@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useGameStore } from '@/stores/game'
+import { loadExistingGame } from './game/bootstrap'
+import { hasSaveFile } from './utils/saveFile'
 
 const gameStore = useGameStore()
-const saveFileString = localStorage.getItem('saveFile')
 
-// access to save file for debugging in console
-if (saveFileString) {
-  const saveFileJson = JSON.parse(saveFileString)
-  console.log(saveFileJson)
+if (hasSaveFile() && !gameStore.manager) {
+  const manager = loadExistingGame()
+if (manager) gameStore.setManager(manager)
 }
 
 onMounted(() => {
   // ms, default 1000
   if (gameStore.manager) {
-    gameStore.manager.startTick()
+    gameStore.manager?.startTick()
   }
 })
 </script>
