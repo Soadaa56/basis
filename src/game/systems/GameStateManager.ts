@@ -49,6 +49,10 @@ export class GameStateManager {
     )
   }
 
+  getGameState(): GameState {
+    return this.gameState
+  }
+
   loadGameState(gameState: GameState): void {
     Object.assign(this.gameState, gameState)
 
