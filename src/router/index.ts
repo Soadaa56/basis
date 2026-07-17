@@ -17,7 +17,7 @@ const routes = [
   {
     path: '/loading',
     component: LoadingPage,
-    meta: { headHeader: true },
+    meta: { headHeader: false },
     beforeEnter: () => {
       // no save file detected
       if (!hasSaveFile()) {
