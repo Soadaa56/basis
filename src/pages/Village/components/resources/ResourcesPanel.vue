@@ -8,7 +8,7 @@ provide('resourceSystem', gameStore.manager?.resourceSystem)
 </script>
 
 <template>
-  <button @click="gameStore.manager?.fillResources">Fill Resources</button>
+  <button @click="gameStore.manager?.fillResources">Fill Resources [Dev Button]</button>
   <h2>Resources Panel</h2>
   <div v-if="gameStore" class="resource-panel-container">
     <base-resource-text
@@ -27,5 +27,9 @@ provide('resourceSystem', gameStore.manager?.resourceSystem)
 .resource-panel-container {
   display: flex;
   flex-direction: column;
+}
+
+button {
+  font-size: 0.9rem;
 }
 </style>
