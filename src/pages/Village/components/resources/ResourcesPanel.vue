@@ -4,15 +4,15 @@ import { provide } from 'vue'
 import { useGameStore } from '@/stores/game'
 
 const gameStore = useGameStore()
-provide('resourceSystem', gameStore.manager.resourceSystem)
+provide('resourceSystem', gameStore.manager?.resourceSystem)
 </script>
 
 <template>
-  <button @click="gameStore.manager.fillResources">Fill Resources</button>
+  <button @click="gameStore.manager?.fillResources">Fill Resources</button>
+  <h2>Resources Panel</h2>
   <div v-if="gameStore" class="resource-panel-container">
-    <h2>Resources Panel</h2>
     <base-resource-text
-      v-for="resource in gameStore.manager.resourceSystem.getAllResources"
+      v-for="resource in gameStore.manager?.resourceSystem.getAllResources"
       :key="resource.id"
       :resource-id="resource.id"
       :name="resource.name"
