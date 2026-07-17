@@ -1,6 +1,6 @@
 # Basis
 
-A web browser incremental game project to learn more about Vue, SPAs (single page applications), and OOP in regards to game design.
+A web browser incremental game project to learn more about Typescript, Vue, SPAs (single page applications), and OOP in regards to game design.
 
 ## Version - Pre-Alpha
 At this version expect many bugs, imbalanced gameplay, and random oddities left in as I work my way through
