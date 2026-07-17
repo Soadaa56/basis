@@ -9,7 +9,7 @@ const research = inject<Research>('research')
 const costAffordability = computed(() => {
   return research?.cost.map((cost) => ({
     ...cost,
-    affordable: gameStore.manager.resourceSystem.canAffordSingleCost(cost),
+    affordable: gameStore.manager?.resourceSystem.canAffordSingleCost(cost),
   }))
 })
 </script>

@@ -22,6 +22,7 @@ const hover = ref(false)
   white-space: pre-wrap;
   position: absolute;
   padding: 0.5rem;
+  margin: 1rem;
   border: 2px solid black;
   background-color: var(--bg-color);
   color: var(--basic-text-color);

@@ -9,7 +9,7 @@ const gameStore = useGameStore()
 const costAffordability = computed(() => {
   return props.cost.map((cost) => ({
     ...cost,
-    affordable: gameStore.manager.resourceSystem.canAffordSingleCost(cost),
+    affordable: gameStore.manager?.resourceSystem.canAffordSingleCost(cost),
   }))
 })
 
