@@ -39,9 +39,20 @@ function resetGameButton() {
 </template>
 
 <style scoped>
+h1 {
+  margin: 1rem;
+  font-size: 3rem;
+}
 button {
+  font-size: 1.2rem;
   margin: 16px;
   padding: 16px;
+  transition: 0.3s ease-out;
+
+  &:hover {
+    color: var(--main-color);
+    filter: brightness(1.25);
+  }
 }
 
 #reset-button {

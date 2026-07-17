@@ -39,16 +39,18 @@ nav {
   justify-content: space-around;
   outline: 1px solid var(--accent-color);
   padding: 4px;
+  margin: 1rem;
   button {
     background-color: var(--accent-color);
+    font-size: 1.4rem;
     list-style: none;
     padding: 1rem;
     outline: 2px solid black;
-    transition: 0.4s ease;
+    transition: 0.3s ease-out;
 
     &:hover {
-      filter: brightness(1.5);
-      // background: lightgray;
+      filter: brightness(1.25);
+      color: var(--main-color);
     }
   }
 }
