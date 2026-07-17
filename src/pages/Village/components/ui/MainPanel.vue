@@ -41,6 +41,7 @@ const currentTab = ref<TabKey>('BuildingsPanel')
 
 .tabs {
   display: flex;
+  font-size: 1.1rem;
   justify-content: flex-start;
   border-bottom: 2px solid var(--line-divide-color);
   padding-inline-start: 0;

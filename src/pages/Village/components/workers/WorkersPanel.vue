@@ -9,10 +9,10 @@ const jobUnlimited = gameStore.manager?.jobSystem.getAllJobs.filter((job) => job
 </script>
 <template>
   <div v-if="gameStore" class="worker-panel-container">
-    <h3>
+    <h2>
       {{ gameStore.manager?.gameState.workers.unassignedWorkerCount }} /
-      {{ gameStore.manager?.gameState.workers.maxWorkerCount }} Worker Unassigned
-    </h3>
+      {{ gameStore.manager?.gameState.workers.maxWorkerCount }} <span>Workers Idle</span>
+    </h2>
     <BaseWorkerText
       v-for="job in jobUnlimited"
       :key="job.id"
@@ -39,6 +39,12 @@ const jobUnlimited = gameStore.manager?.jobSystem.getAllJobs.filter((job) => job
 </template>
 
 <style scoped lang="scss">
+h2 {
+  font-size: 2rem;
+  span {
+    margin-left: 24px;
+  }
+}
 .job-unlimited {
   color: var(--accent-color);
 }
