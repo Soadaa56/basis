@@ -23,7 +23,7 @@ const emit = defineEmits<{ switchPage: [page: unknown] }>()
 </template>
 
 <style scoped lang="scss">
-nav {
+  nav {
   background-color: var(--bg-color);
   display: flex;
   flex-direction: row;
@@ -44,4 +44,5 @@ nav {
       color: var(--main-color);
     }
   }
-}</style>
+}
+</style>
