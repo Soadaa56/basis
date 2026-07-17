@@ -32,8 +32,10 @@ function resetGameButton() {
 <template>
   <h1>Settings</h1>
 
-  <button id="save-button" @click="saveGameButton">Save Game</button>
-  <button id="reset-button" @click="resetGameButton">Reset Game Data</button>
+  <div class="game-settings">
+    <button id="save-button" @click="saveGameButton">Save Game</button>
+    <button id="reset-button" @click="resetGameButton">Reset Game Data</button>
+  </div>
 
   <footer-layout />
 </template>
@@ -43,6 +45,7 @@ h1 {
   margin: 1rem;
   font-size: 3rem;
 }
+
 button {
   font-size: 1.2rem;
   margin: 16px;
@@ -57,5 +60,9 @@ button {
 
 #reset-button {
   border: 4px dashed darkred;
+}
+
+.game-settings {
+  margin-bottom: 10rem;
 }
 </style>

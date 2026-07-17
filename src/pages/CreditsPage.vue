@@ -1,6 +1,11 @@
 <script setup lang="ts"></script>
 
 <template>
+  <nav>
+    <router-link to="/">
+      <button>Home</button>
+    </router-link>
+  </nav>
   <h1>Credit For Free Assets</h1>
   <div class="font-awesome-credit">
     <p>Credit for all icons (including favicon which is at the top of your tab)</p>
@@ -25,4 +30,12 @@
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+* {
+  margin: 1rem;
+}
+
+button {
+  font-size: 2rem;
+}
+</style>

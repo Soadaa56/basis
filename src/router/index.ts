@@ -7,6 +7,7 @@ import SettingsPage from '@/pages/Settings/SettingsPage.vue'
 import NotFound from '@/pages/NotFound.vue'
 import { hasSaveFile } from '@/utils/saveFile'
 import LoadingPage from '@/pages/LoadingPage.vue'
+import CreditsPage from '@/pages/CreditsPage.vue'
 
 const routes = [
   {
@@ -40,10 +41,16 @@ const routes = [
       { path: 'settings', component: SettingsPage },
     ],
   },
+  {
+    path: '/credits',
+    component: CreditsPage,
+    meta: { headHeader: false },
+  },
   // Catch-all for missing route
   {
     path: '/:pathMatch(.*)*',
     component: NotFound,
+    meta: { headHeader: false },
   },
 ]
 
