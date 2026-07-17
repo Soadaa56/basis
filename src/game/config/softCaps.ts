@@ -1,4 +1,4 @@
-// In use for now until I seperate resources into different soft caps
+// Currently not in use, I don't think I want to use income over storage cap - maybe prestige upgrade.
 export const softCap = [
   { factor: 1, reduction: 0.1 },
   { factor: 2, reduction: 0.25 },
