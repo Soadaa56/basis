@@ -3,7 +3,7 @@
 <template>
   <h1>Credit For Free Assets</h1>
   <div class="font-awesome-credit">
-    <p>Credit for all icons (including favicon - tab of your tab)</p>
+    <p>Credit for all icons (including favicon which is at the top of your tab)</p>
     <a href="https://fontawesome.com/">Font Awesome</a>
     <ul>
       <li>
