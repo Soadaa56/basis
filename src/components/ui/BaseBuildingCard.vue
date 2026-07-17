@@ -7,9 +7,9 @@ import { computed } from 'vue'
 
 const gameStore = useGameStore()
 
-const canAfford = computed(() => gameStore.manager.resourceSystem.canAfford(props.cost))
+const canAfford = computed(() => gameStore.manager?.resourceSystem.canAfford(props.cost))
 const canAffordWithCurrentStorage = computed(() =>
-  gameStore.manager.resourceSystem.canAffordWithCurrentStorage(props.cost),
+  gameStore.manager?.resourceSystem.canAffordWithCurrentStorage(props.cost),
 )
 // function canAffordBuilding(costs: ResourceCost[]): boolean {
 //   return gameStore.manager.resourceSystem.canAfford(costs)
