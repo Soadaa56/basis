@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ResourcesPanel from './components/resources/ResourcesPanel.vue'
-import MainPanel from './components/ui/MainPanel.vue'
+import ResourcesPanel from '@/pages/Village/components/resources/ResourcesPanel.vue'
+import MainPanel from '@/pages/Village/components/ui/MainPanel.vue'
 </script>
 
 <template>
@@ -24,11 +24,9 @@ import MainPanel from './components/ui/MainPanel.vue'
 
 <style scoped lang="scss">
 .village-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 2fr 8fr 1fr;
   margin: 1rem;
-  /* height: 75vh; */
 
   .resource-panel {
     outline: 1px solid var(--accent-color);
@@ -41,13 +39,15 @@ import MainPanel from './components/ui/MainPanel.vue'
 
 .main-panel-container {
   flex-grow: 1;
-  margin: 0 5rem 0 5rem;
+  margin-inline-start: 2rem;
+  margin-inline-end: 5rem;
 }
 
 // Simulate spacing of a log panel for now
 .log-panel {
-  min-width: 200px;
-  max-width: 400px;
+  flex-shrink: 3;
+  min-width: 120px;
+  max-width: 300px;
 
   p {
     text-align: center;

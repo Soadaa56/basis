@@ -29,7 +29,7 @@ nav {
   flex-direction: row;
   justify-content: space-around;
   outline: 1px solid var(--accent-color);
-  padding: 4px;
+  padding: 6px;
   margin: 1rem;
   button {
     background-color: var(--accent-color);

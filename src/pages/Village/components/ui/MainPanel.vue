@@ -34,7 +34,6 @@ const currentTab = ref<TabKey>('BuildingsPanel')
 
 <style scoped lang="scss">
 .main-panel {
-  padding: 0rem 2rem;
   user-select: none;
   overflow-x: auto;
 }
@@ -49,13 +48,13 @@ const currentTab = ref<TabKey>('BuildingsPanel')
 
 .tab {
   list-style-type: none;
-  padding: 0.25rem 2rem;
+  margin: 0.2rem 1rem;
   cursor: pointer;
   color: var(--basic-text-color);
   background: var(--webpage-bg-color);
 
   &:hover {
-    background: var(--bg-color);
+    color: var(--accent-color);
   }
 
   &.active {

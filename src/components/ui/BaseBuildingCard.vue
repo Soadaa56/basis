@@ -65,7 +65,7 @@ const emit = defineEmits<{
   flex-direction: column;
   justify-items: center;
   align-items: center;
-  height: 40px;
+  min-height: 45px;
   background-color: var(--bg-color);
   color: var(--basic-text-color);
   border: 1px solid var(--secondary-color);

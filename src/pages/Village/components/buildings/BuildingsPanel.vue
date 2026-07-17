@@ -24,7 +24,7 @@ const gameStore = useGameStore()
 <style scoped lang="scss">
 .building-container {
   display: grid;
-  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  grid-template-columns: repeat(4, minmax(90px, 0.9fr));
   gap: 1rem;
 }
 </style>
