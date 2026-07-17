@@ -32,7 +32,7 @@ defineProps<{
 <template>
   <div class="resource-text">
     <span class="resource-name">{{ name }}:</span>
-    <tooltip-resource-storage :resource-id="resourceId" class="resource-numbers">
+    <tooltip-resource-storage :resource-id="resourceId" class="resource-storage">
       <span class="storage">{{ value.toFixed(0) }} / {{ max }}</span>
     </tooltip-resource-storage>
     <tooltip-resource-income :resource-id="resourceId" class="resource-income">
@@ -46,7 +46,7 @@ defineProps<{
   display: grid;
   grid-template-columns: repeat(3, minmax(80px, 1fr));
   align-items: start;
-  .resource-numbers {
+  .resource-storage {
     display: flex;
     justify-content: flex-end;
   }
