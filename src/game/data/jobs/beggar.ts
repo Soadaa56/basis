@@ -5,7 +5,7 @@ export const beggar: JobInfo = {
   baseOutputs: [
     {
       resourceId: ResourceIds.Gold,
-      rate: 3,
+      rate: 1,
     },
   ],
 }
